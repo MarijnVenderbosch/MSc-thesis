@@ -234,6 +234,13 @@ The two parameters that we can control are the light intensity $I(\mathbf{r})$ a
 
 In the semi-classical picture, we consider the same classical light field \cref{eq:ClassicalField}, but consider an atom with quantized energy levels. We will consider a two-level atom with eigenstates $\ket{g}$ (ground) with energy $\hbar \omega_g$ and $\ket{e}$ (excited) with $\hbar \omega_e$,see \cref{fig:2LevelAtom}. Then the atomic Hamiltonian in this basis reduces to \cite{Loudon2000}
 
+\begin{figure}
+	\centering
+	\includegraphics[height=4.1cm]{figures/2LevelAtom.pdf}
+	\caption{Energy level scheme for the 2-level case. The two energies are split by $\omega_e - \omega_g = \omega_0$. The detuning is $\delta = \omega-\omega_0$.}
+	\label{fig:2LevelAtom}
+\end{figure}
+
 \begin{equation}\label{eq:AtomHamiltonianMain}
 	\mathcal{H}_A = \hbar \omega_g \ket{g}\bra{g} + \hbar \omega_e \ket{e}\bra{e}
 \end{equation}
@@ -274,16 +281,23 @@ where the coupling between the atomic eigenstates and the radiation field is des
 The Hamiltonian of \cref{eq:MatrixEvolution} has eigenvalues 
 
 \begin{equation}\label{eq:EigenValues}
-	E_{\pm} = 
-	\frac{1}{2} \sqrt{\Omega^2+\delta^2}
+	E_{\pm} = \pm
+	\frac{\hbar}{2} \sqrt{\Omega^2+\delta^2}
 \end{equation}. Assuming $|\delta| \gg \Omega$, the eigenenergies are thus 
 
 \begin{equation}
-	E_g = \frac{\hbar \delta}{2} +\frac{\hbar \Omega^2}{4 \delta}, \quad
-	E_e = \frac{\hbar \delta}{2} -\frac{\hbar \Omega^2}{4 \delta}
+	E_g =  \frac{\hbar \delta}{2} +\frac{\hbar \Omega^2}{4 \delta}, \quad
+	E_e = -\frac{\hbar \delta}{2} -\frac{\hbar \Omega^2}{4 \delta}
 \end{equation}
 
-When turning on the laser, the energies are thus shifted by an amount $\Delta E = E(\Omega)-E(\Omega=0)$ And it turns out the eigenenergies are shifted by an amount known as the light shift or AC stark shift \cite{Vredenbregt2020}
+When turning on the laser, the energies are thus shifted by an amount $\Delta E = E(\Omega)-E(\Omega=0)$ And it turns out the eigenenergies are shifted by an amount known as the light shift or AC stark shift \cite{Vredenbregt2020}. See \cref{fig:DipoleForce}.
+
+\begin{figure}
+    \centering
+	\includegraphics[height=3.8cm]{figures/LightShift.pdf}
+	\caption{Light shift when the off-resonant laser is turned on, as well as the spatially varying light shift for a laser beam profile for $delta<0$.}
+	\label{fig:DipoleForce}
+\end{figure}
 
 \begin{equation}\label{eq:Stark}
 	\Delta E_{e,g} = \pm \frac{\hbar \Omega^2}{4 \delta}.
@@ -316,19 +330,6 @@ The new eigenstates are
 
 where the mixing angle $\theta$ is $\cos{(2\theta)}=-\delta / \sqrt{\delta^2+\Omega^2}$
 
-\begin{figure}
-	\centering
-		\begin{subfigure}{.29\textwidth}
-			\centering
-			\includegraphics[height=4.1cm]{figures/2LevelAtom.pdf}
-			\caption{}
-			\label{fig:2LevelAtom}
-		\end{subfigure}
-		\begin{subfigure}{.69\textwidth}
-			\centering
-			\includegraphics[height=4.1cm]{figures/LightShift.pdf}
-			\caption{}
-			\label{fig:DipoleForce}
-		\end{subfigure}
-		\caption{a) Energy level scheme for the 2-level case. The two energies are split by $\omega_e - \omega_g = \omega_0$. The detuning is $\delta = \omega-\omega_0$.  b) Light shift when the off-resonant laser is turned on, as well as the spatially varying light shift for a laser beam profile. Figure adapted from \cite{Grimm2000}}
-\end{figure}
+
+	
+
