@@ -1,10 +1,11 @@
-For a quantum computer, multiple qubits are needed that are capable of interacting with each other. This is done by making a 2D aray of optical tweezers described in \cref{ch:tweezer}. One of these methods is to let the laser beam refract off a sound wave in a crystal in a acoustic optical deflector. By using 2 of these devices, 2D arrays of Rydberg atoms have been realized in \cite{Madjarov2020}.
+For a quantum computer, multiple qubits are needed that are capable of interacting with each other. Thus, we need to make an array of the tweezers described in \cref{ch:tweezer}, spaced from each other in the order of micrometers. This can be done by sending different laser beams to the objective, all under slightly different angles. Experimentally, this can be realized by an \ac{AOD}: a device that diffracts light off of a sound wave in a crystal, where the degree of diffraction is controlled by a RF signal. By using 2 AODs in an orthogonal configuration, 2D Arrays can be realized \cite{Manuel2016}.
 
-This work will make use of another method, a spatial light modulator. This method was proven to work by several groups, one of which the \textit{Schreck} group.
+This chapter is on another method of making arrays of tweezers: the spatial light modulator. This device prints a hologram onto a laser beam, such that the interference pattern from this hologram in the focal plane of a lens yields any arbitrary array of spots. Spatial light modulators are thought to enable scaling to higher number of tweezers because when correctly used it can improve uniformity. In principle it is even possible to go make 3D arrays. 
 
 \section{The Spatial Light Modulator}
 
-A spatial light modulator (SLM) can manipulate properties of light like amplitude, phase and polarization. The type of SLM we use is a phase-only SLM, so it can not do amplitude modulation. It does this by deploying a large array of pixels, where each individual pixel has a liquid crytal in it. The orientation of the crystal will change the refractive index because of the birefringence effect. The pixelated display is manufactured on a layer of silicon to address the voltage of each cell invididually. Therefore, this type of SLM is said to use liquid crytal on silicon or LCoS technology. A sketch of the SLM pixels is shown in \cref{fig:LCoS}.
+The \ac{SLM} can manipulate properties of light like amplitude, phase and polarization. The type of SLM used is the phase-only SLM, and as the name suggests it can only control the phase of the light field. 
+It does this by deploying a large array of pixels, where each individual pixel has a liquid crytal in it. The orientation of the crystal will change the refractive index because of the birefringence effect. The pixelated display is manufactured on a layer of silicon to address the voltage of each cell invididually. Therefore, this type of SLM is said to use liquid crytal on silicon or LCoS technology. A sketch of the SLM pixels is shown in \cref{fig:LCoS}.
 
 The working principle of this type of SLM has been documented extensively within the CQT group at TU/e, for example by \cite{Dijk2012,Bijnen2013}. A brief review of the working principle of the SLM is presented here.
 
@@ -54,9 +55,7 @@ The superscript $U^f$ is used to indicate the variable is now a discrete array a
 
 The subscript $U_{nm}$ is used to indicate it is defined on the discrete grid in the focal plane. The discrete Fourier transform is implemented on computers in so called fast fourier transform (FFT) algorithms. 
 
-
-
-\section{Finding the Hologram}\label{IFTA}
+\section{Finding the Hologram}\label{sec:IFTA}
 
 $U_f$ and $U_i$ are known in an experiment. Thus if one finds the right phase pattern or hologram $\phi(x,y)$, any intensity distrubution can be found from \cref{FourierLens}. But a single inverse inverse fast Fourier transform (IFFT) will not suffice, because this will not modulate the phase contributions of the invididual pixels $\phi_{kl}$ but also the amplitude contributions, which a phase-only SLM, by far the most commonly used SLM, cannot do. 
 
