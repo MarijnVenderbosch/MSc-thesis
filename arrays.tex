@@ -57,6 +57,43 @@ The subscript $U_{nm}$ is used to indicate it is defined on the discrete grid in
 
 \section{Finding the Hologram}\label{sec:IFTA}
 
+We adapt the following notation, the \ac{SLM} plane, with individual pixels indexed by $j$, such that the coordinates are $x'_j, y'_j,0$ ($z'=0)$ because by defenition the pixels lie in this plane. Next, we place a lens with focal length $f$ one focal length away from the SLM plane. One focal plane further is the focal plane of this Fourier lens, which we call the Fourier plane. See \cref{fig:SLMgeometry}. 
+
+When no phase is applied onto the SLM, the lens will focus all the light down to a diffraction-limited in the Fourier plane origin ($x=y=z=0$). One can derive that the as as result of traveling from the $j$th pixel to the $m$th trap, the light picks up a phase along the way of 
+
+\begin{equation}
+    \Delta_j^m = \frac{\pi z_m}{\lambda f^2}(x_j^2+y_j^2)+\frac{2\pi}{\lambda f}(x_j x_m +y_j y_m)
+\end{equation}
+
+In the slm plane, we assume uniform illumination of the SLM such that the amplitude is the same $|U_i|$ everywhere. The SLM imprints a phase $\phi(x',y') = \phi_j$, such that the complex amplitude in the SLM plane for pixel $j$ is
+
+\begin{equation}
+    U_j(x',y') = |U_j| e^{i \phi_j}
+\end{equation}
+
+The contribution for the $m$th trap can be found by summing over all pixels, also keeping track of a phase factor in what is known as the diffraction formula:
+
+\begin{equation}
+    \nu_m = \exp{\left(
+    \frac{i 2\pi (2f+z_m)}{\lambda}
+    \right)} 
+    \frac{d^2}{i \lambda f} |U_j| \sum_{j} e^{i\phi_j - \Delta_j^m}
+\end{equation}
+
+
+
+
+\begin{equation}
+    \centering
+    \includegraphics[width=0.\linewidth]{figures/SLMgeometry.pdf}
+    %\caption{SLM and Fourier plane, each with their own coordinate labeling.}
+    \label{fig:SLMgeometry}
+\end{equation}
+
+
+
+
+
 $U_f$ and $U_i$ are known in an experiment. Thus if one finds the right phase pattern or hologram $\phi(x,y)$, any intensity distrubution can be found from \cref{FourierLens}. But a single inverse inverse fast Fourier transform (IFFT) will not suffice, because this will not modulate the phase contributions of the invididual pixels $\phi_{kl}$ but also the amplitude contributions, which a phase-only SLM, by far the most commonly used SLM, cannot do. 
 
 Instead, a set of algorithms known as inverse Fourier transform algorithms (IFTA) were pioneered by \cite{Hirsch1971} and adapted by \cite{Gerschberg1972} to tackle this task. The goal of the algorithm is to find a phase pattern for the SLM, such that in the focal plane of the lens, the light intensity $I_m = |V_m|^2$ in invidual spots $m$ is optimized in terms of parameters diffraction efficiency efficiency $e$ and uniformity of the spots $u$ \cite{DiLeonardo2007}:
