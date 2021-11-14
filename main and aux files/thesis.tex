@@ -7,7 +7,7 @@
 
 % essentials
 \usepackage{type1cm}%arbitrary font size
-\usepackage[top = 1in,left = 1.2in, bottom = 1in, right = 1in]{geometry}
+\usepackage[top = 1in, left = 1.1in, bottom = 1in, right = 1in]{geometry}
 \usepackage{graphicx}
 \usepackage{mathtools}
 \usepackage{float}
@@ -89,28 +89,28 @@
 
 \begin{document}
 
-%\input{titlepage.tex}
+%\input{tex files/titlepage.tex}
 
 \pagenumbering{roman}
 
-%\input{abstract.tex}
-%\input{acknowledgments.tex}
+%\input{tex files/abstract.tex}
+%\input{tex files/acknowledgments.tex}
 
 \tableofcontents
 \newpage
 
 % link page containing acronyms
-\input{acronyms.tex}
+\input{tex files/acronyms.tex}
 \newpage
 
 \pagenumbering{arabic}
 
-\chapter{Introduction}\label{ch:introduction}\input{introduction.tex}
-\chapter{Laser Cooling and Trapping}\label{ch:coolingtrapping}\input{coolingtrapping.tex}
-\chapter{Making Optical Tweezers}\label{ch:tweezer}%\input{tweezer.tex}
-\chapter{Generating Tweezer Arrays}\label{ch:arrays}\input{arrays.tex}
-\chapter{Implementation in the Machine}\label{ch:implementation}%\input{implementation.tex}
-\chapter{Conclusions and Outlook}\label{ch:conclusion}%\input{conclusions.tex}
+\chapter{Introduction}\label{ch:introduction}\input{tex files/introduction.tex}
+\chapter{Laser Cooling and Trapping}\label{ch:coolingtrapping}\input{tex files/coolingtrapping.tex}
+\chapter{Making Optical Tweezers}\label{ch:tweezer}%\input{tex files/tweezer.tex}
+\chapter{Generating Tweezer Arrays}\label{ch:arrays}\input{tex files/arrays.tex}
+\chapter{Implementation in the Machine}\label{ch:implementation}%\input{tex files/implementation.tex}
+\chapter{Conclusions and Outlook}\label{ch:conclusion}%\input{tex files/conclusions.tex}
 
 
 \clearpage
@@ -131,8 +131,8 @@
  \setcounter{equation}{0}
  \setcounter{figure}{0}
  
- \input{appendix_VQE.tex}
- \input{appendix_LightMatter.tex}
+ \input{tex files/appendix_VQE.tex}
+ \input{tex files/appendix_LightMatter.tex}
  
 \end{appendices}
 
