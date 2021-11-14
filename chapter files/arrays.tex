@@ -59,10 +59,10 @@ The subscript $U_{nm}$ is used to indicate it is defined on the discrete grid in
 
 We adapt the following notation, the \ac{SLM} plane, with individual pixels indexed by $j$, such that the coordinates are $x'_j, y'_j,0$ ($z'=0)$ because by definition the pixels lie in this plane. Next, we place a lens with focal length $f$ one focal length away from the SLM plane. One focal plane further is the focal plane of this Fourier lens, which we call the Fourier plane. See \cref{fig:SLMgeometry}. 
 
-When no phase is applied onto the SLM, the lens will focus all the light down to a diffraction-limited in the Fourier plane origin ($x=y=z=0$). One can derive that the as as result of traveling from the $j$th pixel to the $m$th trap, the light picks up a phase along the way of 
+When no phase is applied onto the SLM, the lens will focus all the light down to a diffraction-limited in the Fourier plane origin ($x=y=z=0$). As result of traveling from the $j$th pixel to the $m$th trap, under paraxial approximation, the light picks up a phase along the way of 
 
 \begin{equation}
-    \Delta_j^m = \frac{\pi z_m}{\lambda f^2}(x_j^2+y_j^2)+\frac{2\pi}{\lambda f}(x_j x_m +y_j y_m)
+    \Delta_j^m = \frac{2\pi z_m}{\lambdaup f^2}(x_j^2+y_j^2)+\frac{2\pi}{\lambdaup f}(x_j x_m +y_j y_m)
 \end{equation}
 
 In the slm plane, we assume uniform illumination of the SLM such that the amplitude is the same $|U_i|$ everywhere. The SLM imprints a phase $\phi(x',y') = \phi_j$, such that the complex amplitude in the SLM plane for pixel $j$ is
@@ -73,12 +73,35 @@ In the slm plane, we assume uniform illumination of the SLM such that the amplit
 
 The contribution for the $m$th trap can be found by summing over all pixels, also keeping track of a phase factor in what is known as the diffraction formula:
 
-\begin{equation}
-    \nu_m = \exp{\left(
-    \frac{i 2\pi (2f+z_m)}{\lambda}
-    \right)} 
-    \frac{d^2}{i \lambda f} |U_j| \sum_{j} e^{i\phi_j - \Delta_j^m}
+\begin{equation}\label{eq:DiffractionFormula}
+    \nu_m = e^{i k \left(2 f + z_m\right)}
+    \frac{d^2}{i \lambda f} \sum_{j=1}^N e^{i(\phi_j - \Delta_j^m)}
 \end{equation}
+
+We assumed uniform illumination of the \ac{SLM}: $|U_j| =1$ everywhere. Furthermore $d$ is the pixel pitch of the SLM. But we are not interested in the phase of each in every spot, but only in the intensity. We will thus emit the prefactors in \cref{eq:DiffractionFormula} and normalize over $N$ pixels
+
+\begin{equation}\label{eq:Vm}
+    V_m = \frac{1}{N} \sum_{j=1}^N e^{i(\phi_j - \Delta_j^m)}
+\end{equation}
+
+While the algorithm works for 3D spot arrays, in this work we are primarily intersted in 2D arrays. Setting $z=0$ in \cref{eq:Vm} yields 
+
+\begin{equation}
+    V_m = \frac{1}{N} \sum_j \exp{\left(i\phi_j\right)} \exp{\left(
+    - i 2\pi \left[
+    \frac{x_m}{\lambdaup f} x_j + \frac{y_m}{\lambdaup f} y_j
+    \right]
+    \right)}
+\end{equation}
+
+Which is the 2D \ac{DFT} of $e^{i\phi}$ evaluated at spatial frequencies $x_m/\lambdaup f$ and $y_m/\lambdaup f$ in $x$ and $y$ respectively \cite{DiLeonardo2007,Bijnen2015}. The DFT can be efficiently evaluated on a computer using a \ac{FFT}. We stress that the FFT can only be used for 2D arrays. Thus in 2D, we have the following relation:
+
+\begin{equation}
+    V_m \propto \text{DFT}\left\{e^{i\phi(x',y'} \right\} 
+    \left(x_m / \lambdaup f,y_m / \lambdaup f\right)
+\end{equation}                                
+
+
 
 
 
