@@ -4,21 +4,46 @@ This chapter is on another method of making arrays of tweezers: the spatial ligh
 
 \section{The Spatial Light Modulator}
 
-The \ac{SLM} can manipulate properties of light like amplitude, phase and polarization. The type of SLM used is the phase-only SLM, and as the name suggests it can only control the phase of the light field. 
-It does this by deploying a large array of pixels, where each individual pixel has a liquid crytal in it. The orientation of the crystal will change the refractive index because of the birefringence effect. The pixelated display is manufactured on a layer of silicon to address the voltage of each cell invididually. Therefore, this type of SLM is said to use liquid crytal on silicon or LCoS technology. A sketch of the SLM pixels is shown in \cref{fig:LCoS}.
+The \ac{SLM} can manipulate properties of light like amplitude, phase and polarization. The type of SLM used is the phase-only SLM, and as the name suggests it can only control the phase of the light field. It does this by deploying a large array of pixels, where each individual pixel has a liquid crytal in it. The orientation of the crystal will change the refractive index because of the birefringence effect. The pixelated display is manufactured on a layer of silicon to address the voltage of each cell invididually. A sketch of the SLM pixels is shown in \cref{fig:LCoS}.
 
-The working principle of this type of SLM has been documented extensively within the CQT group at TU/e, for example by \cite{Dijk2012,Bijnen2013}. A brief review of the working principle of the SLM is presented here.
+The working principle of this type of SLM has been documented extensively within our group, for example by \cite{Dijk2012,Bijnen2013,Bijnen2015}. 
 
 \begin{figure}
     \centering
-    \includegraphics[width=7cm]{figures/LCoS.png}
+    \includegraphics[width=0.6\linewidth]{figures/LCoS.png}
     \caption{The orientation of the liquid crystal cells changes as a function of the applied electric field $E$.}
     \label{fig:LCoS}
 \end{figure}
 
 \section{Phase Modulation}
 
+In a phase only \ac{SLM}, each pixel can locally retard the field. As a result of diffraction, one can create arbitrary interference patterns in in the focal plane of the lens as shown by \cite{Bijnen2013}. The birefingence effect means the \ac{SLM} has two different refractive indices, somewhat confusingly called the ordinary and extraordinary refractive indeces respectively ($n_o$ and $n_e$). If the liquid crystal has a thickness $t$, the phase retardation will be $\phi_o = k t n_o$ and $\phi_e(V) = k t n_e(V)$ respectively, such that the phase retarder can be represented by the jones matrix
+
+\begin{equation}\label{eq:JonesMatrix}
+    M = e^{i \phi_0} 
+    \begin{pmatrix}
+        e^{i(\phi_e-\phi_o)} & 0\\
+        0 & 1
+    \end{pmatrix}
+\end{equation}
+
+Thus the phase retardance $\phi$ as a function of the applied voltage is
+
+\begin{equation}
+    \phi(V) = \frac{2\pi}{\lambda} (n_e - n_0) t
+\end{equation}
+
+This proces can be done separately for each pixel. Typically an SLM has in the order of 2 million pixels. This is shown in \cref{fig:SLMgeometry}
+
+
+
+
+
+\section{Finding the Hologram}\label{sec:IFTA}
+
 We consider an ensemble consisting of the SLM and a perfect lens with focal length $f$. We define two cartesian coordinate systems: the SLM plane by $\{x',y'\}$ and the focal plane of the lens by $\{x,y\}$. The situation is sketched in \cref{fig:SLMLens}
+
+We adapt the following notation, the \ac{SLM} plane, with individual pixels indexed by $j$, such that the coordinates are $x'_j, y'_j,0$ ($z'=0)$ because by definition the pixels lie in this plane. Next, we place a lens with focal length $f$ one focal length away from the SLM plane. One focal plane further is the focal plane of this Fourier lens, which we call the Fourier plane. See \cref{fig:SLMgeometry}. 
 
 \begin{figure}
     \centering
@@ -26,38 +51,6 @@ We consider an ensemble consisting of the SLM and a perfect lens with focal leng
     \caption{Field with intensity distribution $|U_i|^2$ impinging on the SLM, which due to its finite size acts as an aperture. The lens makes the resulting image $|U_f|^2$ in its focal plane. Also shown: two cartesian coordinate systems in the SLM and focal plane. Not to scale. Adapted from \cite{Labuhn2016}.}
     \label{fig:SLMLens}
 \end{figure}
-
-The SLM imprints a phase pattern $\phi(x',y')$ onto the impinging gaussian laser $U_i(x',y')$ According to Fourier optics, the complex amplitude in the focal plane of the lens $U_f(x,y)$ is given by the 2D spatial fourier transform, with spatial frequencies $x'/\lambdaup f$ and $y'/\lambdaup f$ \cite{Bijnen2015}
-
-\begin{equation}\label{FourierLens}
-    U_f(x,y) = \mathscr{F} \big\{ U_i(x', y')e^{i \phi(x',y')} \big\} \left(\frac{x'}{\lambdaup f},\frac{y'}{\lambdaup f}\right),
-\end{equation}
-
-where $\mathscr{F}\{\cdot\}$ denotes the Fourier transform. A derivation of \cref{FourierLens} can be found in \cite{Dijk2012,Bijnen2013}. In practice, we are interested by the intensity distribution, which we find from the norm of \cref{FourierLens}: $I_f(x,y) = \left|U_f(x,y)\right|^2$
-
-In reality, the SLM has a finite amount of pixels and cannot make continuous holograms $\phi(x,y)$. As long as the pixel size is very small compared to the size of the entire chip, we can approximate the incoming light as a series of delta peaks \cite{Bijnen2013,Labuhn2016}, each having amplitude and phase contributions $U_i$ and $\phi_{kl}$ respectively, where $k,l$ sum over the pixels in $x$ and $y$:
-
-\begin{equation}\label{LightDiscretization}
-    U(x',y') \approx \sum_{k,l} \delta(x-x_k, y-y_l)  U_i(x_k,y_l) e^{i \phi_{kl}}
-\end{equation}
-
-We can use the a nice property of the delta function to compute its fourier transform: \cref{LightDiscretization} 
-
-\begin{equation}\label{DFT}
-    U^f(m \Delta_x, n \Delta_y) = \sum_{k,l} U(k \Delta_x',l \Delta_y') e^{i \phi_{kl}} e^{-i 2\pi (km/N_x+ln/N_y)}
-\end{equation}
-
-The superscript $U^f$ is used to indicate the variable is now a discrete array and no longer a conituous function. \cref{DFT} is the discrete Fourier transform, and it can be evaluated on a computer using a fast fourier transform algorithm. 
-
-\begin{equation}\label{DFTshort}
-    U^f_{nm} = \text{DFT}\{U^i\}_{nm}
-\end{equation}
-
-The subscript $U_{nm}$ is used to indicate it is defined on the discrete grid in the focal plane. The discrete Fourier transform is implemented on computers in so called fast fourier transform (FFT) algorithms. 
-
-\section{Finding the Hologram}\label{sec:IFTA}
-
-We adapt the following notation, the \ac{SLM} plane, with individual pixels indexed by $j$, such that the coordinates are $x'_j, y'_j,0$ ($z'=0)$ because by definition the pixels lie in this plane. Next, we place a lens with focal length $f$ one focal length away from the SLM plane. One focal plane further is the focal plane of this Fourier lens, which we call the Fourier plane. See \cref{fig:SLMgeometry}. 
 
 When no phase is applied onto the SLM, the lens will focus all the light down to a diffraction-limited in the Fourier plane origin ($x=y=z=0$). As result of traveling from the $j$th pixel to the $m$th trap, under paraxial approximation, the light picks up a phase along the way of 
 
