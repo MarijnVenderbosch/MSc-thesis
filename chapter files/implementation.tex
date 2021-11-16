@@ -147,3 +147,13 @@ The EOM\footnote{7Qubig EO-Rb85-3K} was fed a $f = 2915$ MHz signal provided by 
     \label{fig:RbLaserSetup}
 \end{figure}
 
+ 
+ \section{MOT}
+ 
+We estimate the number of captured atoms in the MOT by counting the number of counts on our CCD, substracting background counts by turning off the field. We obtain the counts by integrating over all pixels $\sum_j p_j$, correcting for exposure time $\tau_s$, camera gain $G$ and sensitivity. The camera sensitivity constant $C$ was determined to be $6 \cdot 10^3$ counts per photon and was calibrated using a variety of ND filters and a laser at 780 nm of known intensity. The total number of atoms is now
+ 
+ \begin{equation}
+     N = \frac{2}{2\pi\gamma} \frac{1}{\beta} \frac{4\pi l^2}{R^2} \sum_j \frac{p_j}{\tau_s G C}
+ \end{equation}
+ 
+ where $\gamma$ is the linewidth of the D1 transition of Rb-85, $\beta ~0.6$ is a paramter taking into account photon loss of the glass cell and bandpass filter, $l$ is the distance from the MOT to the collection lens and $R$ is its radius. 
