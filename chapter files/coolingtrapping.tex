@@ -1,4 +1,5 @@
 In assembly, computation, and readout of single atoms, laser cooling and trapping techniques play a central role. This chapter will give some background on how this technique works, and how we intend to apply it onto strontium (Sr).
+%stress difference between near-resonant regime dominated by scattering 2 level and off-resonant
 
 \section{Magneto-Optical Trap}
 
@@ -57,7 +58,9 @@ We have plotted the result of \cref{eq:OpticalMolasses} in \cref{fig:MOTcooling}
 
 Where $\beta$ is the slope of the scattering force around $v=0$. The resulting force has a dampening character on the velocity, which if applied in all 3 dimensions can cool atoms to ultracold temperatures. 
 
-The treatment so far would suggest that this can be used to cool atoms to temperatures of absolute zero. This is not the case, as the random character of the scattering force means the atom fluctuates around the equilibrium velocity according to a Brownian motion. For $\delta=-\gamma/2$, \cref{eq:ForceLinearized} ($\beta$) is at a maximum, yielding the lowest possible temperature achievable using Doppler cooling: the Doppler temperature $T_D$ \cite{Metcalf1999}
+The treatment so far would suggest that this can be used to cool atoms to temperatures of absolute zero. This is not the case, as the random character of the scattering force means the atom fluctuates around the equilibrium velocity according to a Brownian motion. 
+%balance betweeen cooling and recoil heating. For higher s0 it is doppler broadened by a factor 
+For $\delta=-\gamma/2$, \cref{eq:ForceLinearized} ($\beta$) is at a maximum, yielding the lowest possible temperature achievable using Doppler cooling: the Doppler temperature $T_D$ \cite{Metcalf1999}
 
 \begin{equation}\label{eq:DopplerTemperature}
 	T_D = \frac{\hbar}{2k_b} \gamma.
@@ -91,7 +94,7 @@ Where $\mu' = (g_e m_e-g_g m_g)\mu_B$ is the effective magnetic moment for the t
 Expanding \cref{eq:MOTfull} around $(v,z) = (0,0)$, keeping only first order terms finally leaves us with \cite{Kowalski2010}
 
 \begin{equation}\label{eq:ForceMOT}
-	F_{\text{MOT}}(z,v) \approx -\beta v - \kappa z.
+	F_{\text{MOT}}(z,v) \sim -\beta v - \kappa z.
 \end{equation}
 
 Where $\beta$ is the same we found in \cref{eq:ForceLinearized} and $\kappa \equiv \mu' \beta /\hbar k \cdot \partial B/\partial z$. Apart from the dampening force, we now also have a restoring force. When applied in 3 dimensions this can be used to make clouds of ultracold atoms. 

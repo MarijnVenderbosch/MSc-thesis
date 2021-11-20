@@ -11,13 +11,13 @@ The working principle of this type of SLM has been documented extensively within
 \begin{figure}
     \centering
     \includegraphics[width=0.6\linewidth]{figures/LCoS.png}
-    \caption{The orientation of the liquid crystal cells changes as a function of the applied electric field $E$.}
+    \caption{The orientation of the liquid crystal cells changes as a function of the applied electric field $E$. Figure from \cite{Guzman2017}.}
     \label{fig:LCoS}
 \end{figure}
 
 \section{Phase Modulation}
 
-In a phase only \ac{SLM}, each pixel can locally retard the field. As a result of diffraction, one can create arbitrary interference patterns in in the focal plane of the lens as shown by \cite{Bijnen2013}. The birefingence effect means the \ac{SLM} has two different refractive indices, somewhat confusingly called the ordinary and extraordinary refractive indeces respectively ($n_o$ and $n_e$). If the liquid crystal has a thickness $t$, the phase retardation will be $\phi_o = k t n_o$ and $\phi_e(V) = k t n_e(V)$ respectively, such that the phase retarder can be represented by the jones matrix
+In a phase only \ac{SLM}, each pixel can locally retard the field. As a result of diffraction, one can create arbitrary interference patterns in in the focal plane of the lens as shown by \cite{Bijnen2013}. The birefingence effect means the \ac{SLM} has two different refractive indices, somewhat confusingly called the ordinary and extraordinary refractive indeces respectively ($n_o$ and $n_e$). If the liquid crystal has a thickness $t$, the phase retardation will be $\phi_o = k t n_o$ and $\phi_e(V) = k t n_e(V)$ respectively, such that the phase retarder can be represented by the Jones matrix \cite{Guzman2017}
 
 \begin{equation}\label{eq:JonesMatrix}
     M = e^{i \phi_0} 
@@ -27,13 +27,14 @@ In a phase only \ac{SLM}, each pixel can locally retard the field. As a result o
     \end{pmatrix}
 \end{equation}
 
-Thus the phase retardance $\phi$ as a function of the applied voltage is
+Thus the phase retardance $\phi$ as a function of the applied voltage is \cite{Guzman2017}
 
 \begin{equation}
     \phi(V) = \frac{2\pi}{\lambda} (n_e - n_0) t
 \end{equation}
 
-This proces can be done separately for each pixel. Typically an SLM has in the order of 2 million pixels. This is shown in \cref{fig:SLMgeometry}
+This proces can be done separately for each pixel, leading to a phase retardance $
+\phi(x',y')$ where $x',y'$ are the coordinates in the plane of the SLM. When a laser beam with intensity $|U_i|^2$ impinges on the SLM, it will pick up a phase. Thus its field can be described as $U_i e^{i\phi(x',y')}$ this is shown in \cref{fig:SLMgeometry}. The field will interfere with itself, until at infinity (or in the focal plane of a lens) the distribution evolves to $|U_f|^2$.
 
 
 
@@ -58,10 +59,10 @@ When no phase is applied onto the SLM, the lens will focus all the light down to
     \Delta_j^m = \frac{2\pi z_m}{\lambdaup f^2}(x_j^2+y_j^2)+\frac{2\pi}{\lambdaup f}(x_j x_m +y_j y_m)
 \end{equation}
 
-In the slm plane, we assume uniform illumination of the SLM such that the amplitude is the same $|U_i|$ everywhere. The SLM imprints a phase $\phi(x',y') = \phi_j$, such that the complex amplitude in the SLM plane for pixel $j$ is
+In the slm plane, we assume uniform illumination of the SLM such that the amplitude is the same $|U_i|$ everywhere. This may look like an unrealistic assumption considering we use a gaussian input beam, but we will see in a moment that in fact the input beam does not matter for the pattern produced. The SLM imprints a phase $\phi(x',y') = \phi_j$, such that the complex amplitude in the SLM plane for pixel $j$ is
 
 \begin{equation}
-    U_j(x',y') = |U_j| e^{i \phi_j}
+    U_j(x',y') = U_j e^{i \phi_j}
 \end{equation}
 
 The contribution for the $m$th trap can be found by summing over all pixels, also keeping track of a phase factor in what is known as the diffraction formula:
@@ -71,10 +72,10 @@ The contribution for the $m$th trap can be found by summing over all pixels, als
     \frac{d^2}{i \lambda f} \sum_{j=1}^N e^{i(\phi_j - \Delta_j^m)}
 \end{equation}
 
-We assumed uniform illumination of the \ac{SLM}: $|U_j| =1$ everywhere. Furthermore $d$ is the pixel pitch of the SLM. But we are not interested in the phase of each in every spot, but only in the intensity. We will thus emit the prefactors in \cref{eq:DiffractionFormula} and normalize over $N$ pixels
+We assumed uniform illumination of the \ac{SLM}: $U_j =1$ everywhere. Furthermore $d$ is the pixel pitch of the SLM. But we are not interested in the phase of each in every spot, but only in the intensity. We will thus emit the prefactors in \cref{eq:DiffractionFormula} and normalize over $N$ pixels
 
 \begin{equation}\label{eq:Vm}
-    V_m = \frac{1}{N} \sum_{j=1}^N e^{i(\phi_j - \Delta_j^m)}
+    V_m = \frac{1}{N} \sum_{j} e^{i(\phi_j - \Delta_j^m)}
 \end{equation}
 
 While the algorithm works for 3D spot arrays, in this work we are primarily intersted in 2D arrays. Setting $z=0$ in \cref{eq:Vm} yields 
