@@ -1,5 +1,12 @@
 For a quantum computer, multiple qubits are needed that are capable of interacting with each other. Thus, we need to make an array of the tweezers described in \cref{ch:tweezer}, spaced from each other in the order of micrometers. This can be done by sending different laser beams to the objective, all under slightly different angles. Experimentally, this can be realized by an \ac{AOD}: a device that diffracts light off of a sound wave in a crystal, where the degree of diffraction is controlled by a RF signal. By using 2 AODs in an orthogonal configuration, 2D Arrays can be realized \cite{Manuel2016}.
 
+\begin{figure}
+    \centering
+    \includegraphics{figures/crossAOD.pdf}
+    \caption{Two AODs in crossed configuration, used to make a 2D spot array. Figure from \cite{Madjarov2021}.}
+    \label{fig:my_label}
+\end{figure}
+
 This chapter is on another method of making arrays of tweezers: the spatial light modulator. This device prints a hologram onto a laser beam, such that the interference pattern from this hologram in the focal plane of a lens yields any arbitrary array of spots. Spatial light modulators are thought to enable scaling to higher number of tweezers because when correctly used it can improve uniformity. In principle it is even possible to go make 3D arrays. 
 
 \section{The Spatial Light Modulator}
@@ -30,19 +37,21 @@ In a phase only \ac{SLM}, each pixel can locally retard the field. As a result o
 Thus the phase retardance $\phi$ as a function of the applied voltage is \cite{Guzman2017}
 
 \begin{equation}
-    \phi(V) = \frac{2\pi}{\lambda} (n_e - n_0) t
+    \phi(V) = \frac{2\pi}{\lambdaup} (n_e - n_0) t
 \end{equation}
 
 This proces can be done separately for each pixel, leading to a phase retardance $
-\phi(x',y')$ where $x',y'$ are the coordinates in the plane of the SLM. When a laser beam with intensity $|U_i|^2$ impinges on the SLM, it will pick up a phase. Thus its field can be described as $U_i e^{i\phi(x',y')}$ this is shown in \cref{fig:SLMgeometry}. The field will interfere with itself, until at infinity (or in the focal plane of a lens) the distribution evolves to $|U_f|^2$.
+\phi(x',y')$ where $x',y'$ are the coordinates in the plane of the SLM. When a laser beam with intensity $|U_i|^2$ impinges on the SLM, it will pick up a phase. Thus its field can be described as $U_i e^{i\phi(x',y')}$ this is shown in \cref{fig:SLMgeometry}. The field will interfere with itself, until at infinity (or in the focal plane of a lens) the distribution evolves to $|U_f|^2$. \cref{sec:PropagationDerivation,sec:GSW} delve deeper in how this quantitatively works. First we will note that the refractive index is not linear in the applied voltage, we thus need to calibrate the SLM first. 
+
+\subsection{Calibration}
+
+The retardiation is a result of the liquid crystal molecules rotating in their cells. However, the retardation will not be linear as a function of the applied field $E$ and thus the voltage $V$. To linearize this, we need to calibrate the electro-optic response of the \ac{SLM}, which equates to measuring the retardation $\phi$ as a function of the applied voltage. The light field will oscillate with frequencies in the THz regime thus measuring this phase shift directly is not practical. Instead, we use a method that measures the amount of power in the first diffraction order known as the diffractive method. 
 
 
 
+\section{Light Propagation}\label{sec:PropagationDerivation}
 
-
-\section{Finding the Hologram}\label{sec:IFTA}
-
-We consider an ensemble consisting of the SLM and a perfect lens with focal length $f$. We define two cartesian coordinate systems: the SLM plane by $\{x',y'\}$ and the focal plane of the lens by $\{x,y\}$. The situation is sketched in \cref{fig:SLMLens}
+Finding the a\ac{CGH} to be displayed onto the SLM is not trivial. We will now explain how this is done. We consider the general case for 3D spot arrays, but will see that for 2D arrays a faster algorithm can be used. We consider an ensemble consisting of the SLM and a perfect lens with focal length $f$. We define two cartesian coordinate systems: the SLM plane by $\{x',y'\}$ and the focal plane of the lens by $\{x,y\}$. The situation is sketched in \cref{fig:SLMLens}
 
 We adapt the following notation, the \ac{SLM} plane, with individual pixels indexed by $j$, such that the coordinates are $x'_j, y'_j,0$ ($z'=0)$ because by definition the pixels lie in this plane. Next, we place a lens with focal length $f$ one focal length away from the SLM plane. One focal plane further is the focal plane of this Fourier lens, which we call the Fourier plane. See \cref{fig:SLMgeometry}. 
 
@@ -55,11 +64,20 @@ We adapt the following notation, the \ac{SLM} plane, with individual pixels inde
 
 When no phase is applied onto the SLM, the lens will focus all the light down to a diffraction-limited in the Fourier plane origin ($x=y=z=0$). As result of traveling from the $j$th pixel to the $m$th trap, under paraxial approximation, the light picks up a phase along the way of 
 
-\begin{equation}
+\begin{equation}\label{eq:PropagationPhase}
     \Delta_j^m = \frac{2\pi z_m}{\lambdaup f^2}(x_j^2+y_j^2)+\frac{2\pi}{\lambdaup f}(x_j x_m +y_j y_m)
 \end{equation}
 
-In the slm plane, we assume uniform illumination of the SLM such that the amplitude is the same $|U_i|$ everywhere. This may look like an unrealistic assumption considering we use a gaussian input beam, but we will see in a moment that in fact the input beam does not matter for the pattern produced. The SLM imprints a phase $\phi(x',y') = \phi_j$, such that the complex amplitude in the SLM plane for pixel $j$ is
+This situation is sketched in \cref{fig:SLMgeometry}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.65\linewidth]{figures/SLMgeometry.pdf}
+    \caption{SLM plane with phases $\phi_j(x,',y',z=0)$ for pixel $j$, as well as the focal plane or Fourier plane with trap coordinates for trap $m$ of $(x_m,y_m,z_m)$.}
+    \label{fig:SLMgeometry}
+\end{figure}
+
+In the SLM plane, we assume uniform illumination of the SLM such that the amplitude is the same $|U_i|$ everywhere. This may look like an unrealistic assumption considering we use a gaussian input beam, but we will see in a moment that in fact the input beam does not matter for the pattern produced. The SLM imprints a phase $\phi(x',y') = \phi_j$, such that the complex amplitude in the SLM plane for pixel $j$ is
 
 \begin{equation}
     U_j(x',y') = U_j e^{i \phi_j}
@@ -78,9 +96,9 @@ We assumed uniform illumination of the \ac{SLM}: $U_j =1$ everywhere. Furthermor
     V_m = \frac{1}{N} \sum_{j} e^{i(\phi_j - \Delta_j^m)}
 \end{equation}
 
-While the algorithm works for 3D spot arrays, in this work we are primarily intersted in 2D arrays. Setting $z=0$ in \cref{eq:Vm} yields 
+A subset of 3D spot arrays are to make 2D arrays. Setting $z=0$ in \cref{eq:Vm} yields 
 
-\begin{equation}
+\begin{equation}\label{eq:2Dcase}
     V_m = \frac{1}{N} \sum_j \exp{\left(i\phi_j\right)} \exp{\left(
     - i 2\pi \left[
     \frac{x_m}{\lambdaup f} x_j + \frac{y_m}{\lambdaup f} y_j
@@ -88,45 +106,58 @@ While the algorithm works for 3D spot arrays, in this work we are primarily inte
     \right)}
 \end{equation}
 
-Which is the 2D \ac{DFT} of $e^{i\phi}$ evaluated at spatial frequencies $x_m/\lambdaup f$ and $y_m/\lambdaup f$ in $x$ and $y$ respectively \cite{DiLeonardo2007,Bijnen2015}. The DFT can be efficiently evaluated on a computer using a \ac{FFT}. We stress that the FFT can only be used for 2D arrays. Thus in 2D, we have the following relation:
+Which is the 2D \ac{DFT} of $e^{i\phi}$ evaluated at spatial frequencies $x_m/\lambdaup f$ and $y_m/\lambdaup f$ in $x$ and $y$ respectively \cite{DiLeonardo2007,Bijnen2015}. The DFT can be efficiently evaluated on a computer using a \ac{FFT}. We stress that the FFT can only be used for 2D arrays. In this work, we only use 2D arrays and could in principle use \cref{eq:DFT} to speed up calculation. We did not do this however, as we only have to calculate the \ac{CGH} once so we do not mind it taking some more time. Making any arbitrary pattern in 2D, so not only spot arrays, is treated in detail in \cite{Bijnen2013}.  
+
+
+
+
+\section{Finding the Hologram}\label{sec:GSW}
+
+\cref{eq:Vm} gives the amplitudes of an array of spots given an array of phases $\phi_j$, but we are interested in the reverse problem: what phase $\phi_j$ should we apply, such that we have the spot intensities $|V_m|^2$? Because the equations describing light progagation are time-symmetric, this phase will be the result of $N$ coherent light sources radiating with $w_m e^{i \theta_m}$, picking up a propagation phase described by \cref{eq:PropagationPhase}, leading to a complex amplitude in the \ac{SLM} plane of 
+
+\begin{equation}\label{eq:InterferencePattern}
+    U_j (x',y') = \sum_m w_m \exp{
+    i\left(\Delta_j^m + \theta_j\right)
+    }
+\end{equation}
+
+But requires doing phase as well as amplitude modulation, when the SLM can only do phase, which is to take the argument of \cref{eq:InterferencePattern}
+
+\begin{equation}\label{eq:Argument}
+    \phi_j = \text{arg}\left\{
+     \sum_m w_m \exp{
+    i\left(\Delta_j^m + \theta_j\right)
+    }
+    \right\}
+\end{equation}
+
+This problem was solved by \cite{Gerschberg1972} and extended to 3D spot arrays by \cite{DiLeonardo2007}. The idea is to make use of an algorithm that virtually propagates light back and forth between the SLM and focal planes. For spot arrays, we are interested in the target intensities. Summing all of them yields the real part of the interference pattern, or the diffraction efficiency $e$ as well as the uniformity $u$
 
 \begin{equation}
-    V_m \propto \text{DFT}\left\{e^{i\phi(x',y'} \right\} 
-    \left(x_m / \lambdaup f,y_m / \lambdaup f\right)
-\end{equation}                                
+    e = \sum_m I_m = \sum_m |V_m|^2, 
+    \quad 
+    u = 1-\frac{\text{max}(I_m)-\text{min}(I_m)}{\text{max}(I_m)+\text{min}(I_m)}
+\end{equation}
 
+The algorithm should converge yielding a set $\{w_m, \phi_j\}$. The iteration counter is $k$
 
+\begin{itemize}
+    \item Starting out with an initial guess $\phi_0$ using random phases for each pixel $\theta_j$ and uniform $w_m$, calculate $V_m$ according to \cref{eq:Vm}. 
+    
+    \item For In the focal plane, replace the calculated $V_m^k$ array by the target $V_m$ array, and using updated $w_m^k = w_m^{k-1} V_m^k / |V_m^k|$ find the new phase mask $\phi_j^k$ according to \cref{eq:InterferencePattern}.
+\end{itemize}
 
+This type of algorithm typically converges after a couple tens of steps. The algorithm was implemented in Python by Ivo Knottnerus as part of his PhD research. Because the SLM has some $\sim 2$ million pixels, evaluating \cref{eq:Vm,eq:Argument} can be time consuming depending on the desired pattern and is therefore executed on a graphics card using the \textit{PyOpenCL} library. 
 
+The hologram is sketched in \cref{fig:GerschbergSaxton}
 
-
-\begin{equation}
+\begin{figure}
     \centering
-    \includegraphics[width=0.\linewidth]{figures/SLMgeometry.pdf}
-    %\caption{SLM and Fourier plane, each with their own coordinate labeling.}
-    \label{fig:SLMgeometry}
-\end{equation}
+    \includegraphics[width=0.5\textwidth]{figures/WeightedGerschbergSaxton.pdf}
+    \caption{The GSW algorithm visualized.}
+    \label{fig:GerschbergSaxton}
+\end{figure}
 
-
-
-
-
-$U_f$ and $U_i$ are known in an experiment. Thus if one finds the right phase pattern or hologram $\phi(x,y)$, any intensity distrubution can be found from \cref{FourierLens}. But a single inverse inverse fast Fourier transform (IFFT) will not suffice, because this will not modulate the phase contributions of the invididual pixels $\phi_{kl}$ but also the amplitude contributions, which a phase-only SLM, by far the most commonly used SLM, cannot do. 
-
-Instead, a set of algorithms known as inverse Fourier transform algorithms (IFTA) were pioneered by \cite{Hirsch1971} and adapted by \cite{Gerschberg1972} to tackle this task. The goal of the algorithm is to find a phase pattern for the SLM, such that in the focal plane of the lens, the light intensity $I_m = |V_m|^2$ in invidual spots $m$ is optimized in terms of parameters diffraction efficiency efficiency $e$ and uniformity of the spots $u$ \cite{DiLeonardo2007}:
-
-\begin{equation}\label{EfficiencyUniformity}
-    e = \sum_m |V_m|^2, \quad u= 1-\frac{\text{max}(|V_m|^2)-\text{min}(|V_m|^2)}{\text{max}(|V_m|^2)+\text{min}(|V_m|^2)}
-\end{equation}
-
-These are theorical quantities and not actually measured. The algorithm works essentially by virtually propagating light back and forward in iterations acoording by computing FFT and IFFT's, applying constraints in the focal and SLM plane in each iteration. 
-
-
-
-
-In order to overcome this issue, after the inverse FFT we replace the computed complex amplitude by our incident amplitude $PU_0$ and we compute its FFT, returning again to the focal plane. Here, we replace the obtained obtained complex amplitude for the desired amplitude $|U(x,y)|^2$. This process is iterated several times until convergence is reached. This family of algorithms is refered to as an inverse Fourier transform algorithm (IFTA) and essentially consists of virtually propagating light back and forward between the input and focal planes. 
-
-IFTA algorithms were pioneered in\cite{Hirsch1971} and adapted for phase retrieval by \cite{Gerschberg1972}. The implementation of the IFTA algorithm was done by \cite{Bijnen2013,Bijnen2015}. It was adapted to achieve better convergence by defining a signal window, within it the desired pattern is made. Outside of this window, the amplitude is unconstrained. This relaxiation of constraints allows for better convergence of the desired pattern, at the cost of energy lost outside of the window \cite{Bijnen2013,Bijnen2015}.
 
 \section{Operating the SLM}
 
