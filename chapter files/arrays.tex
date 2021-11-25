@@ -1,11 +1,6 @@
 For a quantum computer, multiple qubits are needed that are capable of interacting with each other. Thus, we need to make an array of the tweezers described in \cref{ch:tweezer}, spaced from each other in the order of micrometers. This can be done by sending different laser beams to the objective, all under slightly different angles. Experimentally, this can be realized by an \ac{AOD}: a device that diffracts light off of a sound wave in a crystal, where the degree of diffraction is controlled by a RF signal. By using 2 AODs in an orthogonal configuration, 2D Arrays can be realized \cite{Manuel2016}.
 
-\begin{figure}
-    \centering
-    \includegraphics{figures/crossAOD.pdf}
-    \caption{Two AODs in crossed configuration, used to make a 2D spot array. Figure from \cite{Madjarov2021}.}
-    \label{fig:my_label}
-\end{figure}
+
 
 This chapter is on another method of making arrays of tweezers: the spatial light modulator. This device prints a hologram onto a laser beam, such that the interference pattern from this hologram in the focal plane of a lens yields any arbitrary array of spots. Spatial light modulators are thought to enable scaling to higher number of tweezers because when correctly used it can improve uniformity. In principle it is even possible to go make 3D arrays. 
 
@@ -16,11 +11,23 @@ The \ac{SLM} can manipulate properties of light like amplitude, phase and polari
 The working principle of this type of SLM has been documented extensively within our group, for example by \cite{Dijk2012,Bijnen2013,Bijnen2015}. 
 
 \begin{figure}
-    \centering
-    \includegraphics[width=0.6\linewidth]{figures/LCoS.png}
-    \caption{The orientation of the liquid crystal cells changes as a function of the applied electric field $E$. Figure from \cite{Guzman2017}.}
-    \label{fig:LCoS}
+\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[height=3.8cm]{figures/crossAOD.pdf}
+		\caption{}
+		\label{fig:CrossAOD}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[height=3.8cm]{figures/LCoS.png}
+		\caption{}
+		\label{fig:LCoS}
+	\end{subfigure}
+	\caption{a) Two AODs in crossed configuration, used to make a 2D spot array. Figure from \cite{Madjarov2021}. b) The orientation of the liquid crystal cells changes as a function of the applied electric field $E$. Figure from \cite{Guzman2017}.}
+	\label{fig:GerschbergSaxton}
 \end{figure}
+
 
 \section{Phase Modulation}
 
@@ -37,9 +44,10 @@ In a phase only \ac{SLM}, each pixel can locally retard the field. As a result o
 Thus the phase retardance $\phi$ as a function of the applied voltage is \cite{Guzman2017}
 
 \begin{equation}
-    \phi(V) = \frac{2\pi}{\lambdaup} (n_e - n_0) t
+    \phi(V) = k (n_e - n_0) t = \frac{2\pi}{\lambda} \Delta n t,
 \end{equation}
 
+where we absorbed the difference in refractive index in between the ordinary and extraordinary refractive indices in the paramter $\Delta n$.
 This proces can be done separately for each pixel, leading to a phase retardance $
 \phi(x',y')$ where $x',y'$ are the coordinates in the plane of the SLM. When a laser beam with intensity $|U_i|^2$ impinges on the SLM, it will pick up a phase. Thus its field can be described as $U_i e^{i\phi(x',y')}$ this is shown in \cref{fig:SLMgeometry}. The field will interfere with itself, until at infinity (or in the focal plane of a lens) the distribution evolves to $|U_f|^2$. \cref{sec:PropagationDerivation,sec:GSW} delve deeper in how this quantitatively works. First we will note that the refractive index is not linear in the applied voltage, we thus need to calibrate the SLM first. 
 
@@ -47,7 +55,50 @@ This proces can be done separately for each pixel, leading to a phase retardance
 
 The retardiation is a result of the liquid crystal molecules rotating in their cells. However, the retardation will not be linear as a function of the applied field $E$ and thus the voltage $V$. To linearize this, we need to calibrate the electro-optic response of the \ac{SLM}, which equates to measuring the retardation $\phi$ as a function of the applied voltage. The light field will oscillate with frequencies in the THz regime thus measuring this phase shift directly is not practical. Instead, we use a method that measures the amount of power in the first diffraction order known as the diffractive method. 
 
+There are a variety of methods to calibrate a phase-only \ac{SLM} \cite{Li2019}. We chose the diffractive calibration method, originally proposed by \cite{Zhang1994}. We imprint a Ronchi grating onto the SLM, see \cref{fig:RonchiGrating}. Consisting of alternating grey values $L_1$ and $L_2$. This grating consists of $M$ periods $w$ in the horizontal direction and a vertical height $H$. Assuming amplitude modulation between different grey levels is negilible and the SLM only modulates phase, the electric field just after the SLM is propertional to the phase transmittance given by
 
+\begin{equation}\label{eq:FieldAfterSLM}
+    f(x,y) = \sum_{m=0}^{M-1} \left\{
+    \operatorname{rect}\left(\frac{x-m w - w/4}{w/2}\right) + e^{i \phi(L)} \operatorname{rect}\left(\frac{x - m w - 3 w/4}{w/2}\right)
+    \right\}
+\end{equation}
+
+According to Fourier optics, if we place a lens after the SLM, the field in the \textit{Fourier} plane of the lens is the Fourier transform of the field after the SLM, as derived in \cref{eq:2Dcase}. The intensity is thus for $y=0$
+
+\begin{equation}\label{eq:FourierIntensity}
+    |F(p,0)|^2=
+    \frac{M^2 w^2}{2}\operatorname{sinc}^2\left(\frac{M f_x w}{2}\right) \cdot
+    \frac{1 + \cos{\left[\phi(L)+f_x w/2\right]}}{\cos^2(f_x w/4)}
+\end{equation}
+
+Such that the intensity in the first diffraction order is
+
+\begin{equation}\label{eq:IntensityFirstOrder}
+    I_1(\phi) =
+    \frac{8M^2w^2}{\pi^2} \left( 
+    1-\cos{(\phi(L))}
+    \right)
+\end{equation}
+
+\begin{figure}
+	\begin{subfigure}{.54\linewidth}
+		\includegraphics[height=4cm]{figures/LUTcalibrationSetup.pdf}
+		\caption{}
+		\label{fig:RonchiGrating}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{.44\linewidth}
+		\includegraphics[height=4cm]{figures/lut_plot.pdf}
+		\caption{}
+		\label{fig:LUTcalibration}
+	\end{subfigure}
+	\caption{a) We put a Ronchi grating onto the SLM with grey values $L_1$ and $L_2$ We seperate the diffraction orders using a $f=400$ mm lens and block all orders other than the $+1$ order using an iris. b) Normalized power in the first order as a (\textcolor{red}{red}) and the fitted voltage response (\textcolor{blue}{blue}) as a function of the applied grey level $L_1 \in (0-255)$.}
+	\label{fig:GerschbergSaxton}
+\end{figure}
+
+Experimentally, we load a sequence of Ronchi gratings onto the SLM, looping $L_1$ from the minumum to the maximum grey value, while keeping $L_2$ consant. For our 8-bit SLM, this is 0-255. For each hologram, seperate the multiple diffraction orders using a longer focal length lens (such that the spacing between the various orders is sufficient) and an aperture and record the power in the first order using a power meter. The results are shown in \cref{eq:LUTcalibration}. Also shown is the result of fitting \cref{eq:IntensityFirstOrder}: the voltage response as a fuction of grey level. This is also called the gamma curve or \ac{LUT}. The LUT is the 8-bit grey level to 10-bit voltage levels of the SLM, such that the electro-optic response is linear. As can be seen from \cref{fig:LUTcalibration}, the obtained LUT is rather non-linear.
+
+The LUT calibration has to be performed because each individual SLM has a slightly different electro-optic response. Also, it is wavelength specific, which is why we performed it for the wavelenghts that we want to use for our optical tweezers. 
 
 \section{Light Propagation}\label{sec:PropagationDerivation}
 
@@ -68,16 +119,7 @@ When no phase is applied onto the SLM, the lens will focus all the light down to
     \Delta_j^m = \frac{2\pi z_m}{\lambdaup f^2}(x_j^2+y_j^2)+\frac{2\pi}{\lambdaup f}(x_j x_m +y_j y_m)
 \end{equation}
 
-This situation is sketched in \cref{fig:SLMgeometry}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=.65\linewidth]{figures/SLMgeometry.pdf}
-    \caption{SLM plane with phases $\phi_j(x,',y',z=0)$ for pixel $j$, as well as the focal plane or Fourier plane with trap coordinates for trap $m$ of $(x_m,y_m,z_m)$.}
-    \label{fig:SLMgeometry}
-\end{figure}
-
-In the SLM plane, we assume uniform illumination of the SLM such that the amplitude is the same $|U_i|$ everywhere. This may look like an unrealistic assumption considering we use a gaussian input beam, but we will see in a moment that in fact the input beam does not matter for the pattern produced. The SLM imprints a phase $\phi(x',y') = \phi_j$, such that the complex amplitude in the SLM plane for pixel $j$ is
+This situation is sketched in \cref{fig:SLMgeometry}. In the SLM plane, we assume uniform illumination of the SLM such that the amplitude is the same $|U_i|$ everywhere. This may look like an unrealistic assumption considering we use a gaussian input beam, but we will see in a moment that in fact the input beam does not matter for the pattern produced. The SLM imprints a phase $\phi(x',y') = \phi_j$, such that the complex amplitude in the SLM plane for pixel $j$ is
 
 \begin{equation}
     U_j(x',y') = U_j e^{i \phi_j}
@@ -107,9 +149,6 @@ A subset of 3D spot arrays are to make 2D arrays. Setting $z=0$ in \cref{eq:Vm} 
 \end{equation}
 
 Which is the 2D \ac{DFT} of $e^{i\phi}$ evaluated at spatial frequencies $x_m/\lambdaup f$ and $y_m/\lambdaup f$ in $x$ and $y$ respectively \cite{DiLeonardo2007,Bijnen2015}. The DFT can be efficiently evaluated on a computer using a \ac{FFT}. We stress that the FFT can only be used for 2D arrays. In this work, we only use 2D arrays and could in principle use \cref{eq:DFT} to speed up calculation. We did not do this however, as we only have to calculate the \ac{CGH} once so we do not mind it taking some more time. Making any arbitrary pattern in 2D, so not only spot arrays, is treated in detail in \cite{Bijnen2013}.  
-
-
-
 
 \section{Finding the Hologram}\label{sec:GSW}
 
@@ -147,15 +186,26 @@ The algorithm should converge yielding a set $\{w_m, \phi_j\}$. The iteration co
     \item For In the focal plane, replace the calculated $V_m^k$ array by the target $V_m$ array, and using updated $w_m^k = w_m^{k-1} V_m^k / |V_m^k|$ find the new phase mask $\phi_j^k$ according to \cref{eq:InterferencePattern}.
 \end{itemize}
 
-This type of algorithm typically converges after a couple tens of steps. The algorithm was implemented in Python by Ivo Knottnerus as part of his PhD research. Because the SLM has some $\sim 2$ million pixels, evaluating \cref{eq:Vm,eq:Argument} can be time consuming depending on the desired pattern and is therefore executed on a graphics card using the \textit{PyOpenCL} library. 
+This sequence is sketched in \cref{fig:GerschbergSaxton}. Starting with phase mask $\phi_j^k$ we use the diffraction equation \cref{eq:DiffractionFormula} to compute the complex amplitudes of the spot array $V_m^{k+1}$. From the amplitudes, we find new weight factors $w_m$ and pixel values $\theta_m$, which are used to compute the new phase mask using the interference equation \cref{eq:InterferencePattern}. Then, the iteration counter $k$ is increased, the phase mask is updated and the procedure repeats. 
 
-The hologram is sketched in \cref{fig:GerschbergSaxton}
+This type of algorithm typically converges after a couple tens of steps. The algorithm was implemented in Python by Ivo Knottnerus as part of his PhD research. Because the SLM has some $\sim 2$ million pixels, converting to and from the SLM plane, so performing equations  \cref{eq:Vm,eq:Argument} can be time consuming depending on the desired pattern. Therefore, these computations are performed onto the GPU using the \textit{PyOpenCL} library. 
 
 \begin{figure}
-    \centering
-    \includegraphics[width=0.5\textwidth]{figures/WeightedGerschbergSaxton.pdf}
-    \caption{The GSW algorithm visualized.}
-    \label{fig:GerschbergSaxton}
+\centering
+	\begin{subfigure}{.56\textwidth}
+		\centering
+		\includegraphics[height=5cm]{figures/SLMgeometry.pdf}
+		\caption{}
+		\label{fig:SLMgeometry}
+	\end{subfigure}
+	\begin{subfigure}{.43\textwidth}
+		\centering
+		\includegraphics[height=5cm]{figures/WeightedGerschbergSaxton.pdf}
+		\caption{}
+		\label{fig:MOTconcept}
+	\end{subfigure}
+	\caption{a) SLM plane with phases $\phi_j(x,',y',z=0)$ for pixel $j$, as well as the focal plane or Fourier plane with trap coordinates for trap $m$ of $(x_m,y_m,z_m)$. Figure from \cite{DiLeonardo2007}. b) The \ac{GSW} algorithm visualized. The light field is virtually propagated between the SLM and focal planes using \cref{eq:Vm,eq:Argument}. Each iteration, the weight factors $w_m$ and SLM phases $\theta_m$ are updated. }
+	\label{fig:GerschbergSaxton}
 \end{figure}
 
 

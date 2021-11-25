@@ -35,16 +35,14 @@ We can reflect the laser beam using a mirror, such that the force works in both 
 We have plotted the result of \cref{eq:OpticalMolasses} in \cref{fig:MOTcooling} as a function of velocity in units of $\hbar / k$, such that it is dimensionless. Contributions of both beams, as well as their total force, are shown in units of $\hbar k \gamma$. Doing a series expansion to first order around $v = 0$. For $\delta<0$ we find we can linearize the force $F$ as \cite{Metcalf1999}
 
 \begin{figure}
-\centering
-	\begin{subfigure}{.38\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{figures/MOTplot.pdf}
+	\begin{subfigure}{.42\textwidth}
+		\includegraphics[height=4.5cm]{figures/MOTplot.pdf}
 		\caption{}
 		\label{fig:MOTcooling}
 	\end{subfigure}
-	\begin{subfigure}{.52\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{figures/OpticalMolasses.pdf}
+	\hfill
+	\begin{subfigure}{.55\textwidth}
+		\includegraphics[height=4.5cm]{figures/OpticalMolasses.pdf}
 		\caption{}
 		\label{fig:MOTconcept}
 	\end{subfigure}
@@ -278,19 +276,11 @@ Note the similarity to \cref{eq:SemiClassicalEigenvalues}. From \cref{eq:Cunning
     \end{align}
 \end{subequations}
 
-Which are sketched in \cref{fig:DipoleForce} as well. In \cref{eq:CummingsEigenstates} the mixing angle $\theta_n$ for $n$ photons in the system is
-
-\begin{equation}
-    \theta_n = \arctan{\left(
-        \frac{\Omega\sqrt{n+1}}{\delta}
-    \right)}
-\end{equation}
-
-Here, \cref{eq:CummingsEigenstates} are known as the \emph{dressed} states. The \emph{bare} atomic states in \cref{fig:2LevelAtom} are shifted by the light shift because the light field energy is admixed with the atomic eigenstates, leading to the new mixed (dressed) eigenstates of \cref{eq:CummingsEigenstates}. The bevavior pictured in \cref{fig:DipoleForce} still applies, but if the eigenenergies of the light field are included, the splitted energies of \cref{fig:DipoleForce} are situated along an infinite ladder of photon energies. This is presented in \cref{fig:DressedStatePicture}. The light space eigenenergies \cref{eq:RadiationModes}, spaced by $\hbar \omega$ is superimposed on the light shift eigenenergies. 
+Which are sketched in \cref{fig:DipoleForce} as well. In \cref{eq:CummingsEigenstates} the mixing angle $\theta_n$ for $n$ photons in the system is $\theta_n = \arctan{(\Omega\sqrt{n+1} / \delta})$. Here, \cref{eq:CummingsEigenstates} are known as the \emph{dressed} states. The \emph{bare} atomic states in \cref{fig:2LevelAtom} are shifted by the light shift because the light field energy is admixed with the atomic eigenstates, leading to the new mixed (dressed) eigenstates of \cref{eq:CummingsEigenstates}. The bevavior pictured in \cref{fig:DipoleForce} still applies, but if the eigenenergies of the light field are included, the splitted energies of \cref{fig:DipoleForce} are situated along an infinite ladder of photon energies. This is presented in \cref{fig:DressedStatePicture}. The light space eigenenergies \cref{eq:RadiationModes}, spaced by $\hbar \omega$ is superimposed on the light shift eigenenergies. 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.31\linewidth]{figures/DressedStates.pdf}
+    \includegraphics[width=0.3\linewidth]{figures/DressedStates.pdf}
     \caption{Dressed States. The same shift as shown in \cref{fig:DipoleForce} is shown, superimposed on the  eigenenergies spaced by $\hbar \omega$. Figue not to scale. }
     \label{fig:DressedStatePicture}
 \end{figure}
@@ -320,7 +310,7 @@ There will also be a 813 nm laser used for the dipole trapping. This is also the
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.51\linewidth]{figures/SrLevel.pdf}
+	\includegraphics[width=0.55\linewidth]{figures/SrLevel.pdf}
 	\caption{Simplified level scheme for \textsuperscript{88}Sr. Shown: blue transition for initial slowing and cooling. Narrower 689 nm transition of the red \ac{MOT}, and the \textsuperscript{1}S\textsubscript{0} - \textsuperscript{3}P\textsubscript{0} clock transition, which we will be used to drive the qubits. To increase density and trap lifetime 3 repump lasers are used. Not shown: 813 nm dipole trapping laser because it is driven far-off-resonant. Energies not to scale. Figure made by Ivo Knottnerus.}
 	\label{fig:SrLevel}
 \end{figure}
@@ -369,10 +359,21 @@ Other qubit implementations than the one above are possible as well. For example
 \subsubsection*{Magic Trapping of Strontium}\label{sec:Magic}
 
 \begin{figure}
-    \centering
-    \includegraphics[width=0.38\linewidth]{figures/Magic.pdf}
-    \caption{Atomic polarizabilities of ${}^1S_0$ and ${}^3P_0$ showing a magic crossing around 813 nm. Grey line: experimental result. Figure adapted from \cite{Boyd2007}.} 
-    \label{fig:BoydMagic}
+\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[height=5cm]{figures/2groundTweezer.pdf}
+		\caption{}
+		\label{fig:2LevelTweezer}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[height=5cm]{figures/Magic.pdf}
+		\caption{}
+		\label{fig:BoydMagic}
+	\end{subfigure}
+	\caption{a) Both clock states, here denoted $\ket{g_1}, \ket{g_2}$ are coupled to a different excited state: $\ket{e_1}, \ket{e_2}$ using the same trapping laser at 813 nm. b) Atomic polarizabilities of ${}^1S_0$ and ${}^3P_0$ showing a magic crossing around 813 nm. Grey line: experimental result. Figure adapted from \cite{Boyd2007}.}
+	\label{fig:GerschbergSaxton}
 \end{figure}
 
 To use the states in \cref{eq:QubitManifold} in a quantum processing unit, they should both be trapped. Because the trapping potential is wavelength dependent, in general, the trapping potential will not be the same for both qubit states when using the same trapping wavelength (\cref{eq:DipoleForce}: $U_{\text{dip}} \propto - \operatorname{Re}\{\alpha(\omega)\} I(\mathbf{r})$, meaning that the transition frequency between the qubit states would change as a function of the position within the potential which is unfavorable. Instead, \cite{Katori2003} proposed to use a wavelength where the polarizability $\alpha(\omega)$ or $\alpha(\lambdaup)$ is identical for both clock states as measured by \cite{Takamoto2005,Jun2008}.
@@ -386,12 +387,7 @@ Both qubit states coupled far-off-resonantly to a different excited states using
     \operatorname{Re}\left\{\alpha(\lambdaup-\lambdaup_{\ket{g_2})})\right\}
 \end{equation}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=.38\linewidth]{figures/2groundTweezer.pdf}
-    \caption{Both clock states, here denoted $\ket{g_1}, \ket{g_2}$ are coupled to a different excited state: $\ket{e_1}, \ket{e_2}$ using the same trapping laser at 813 nm.}
-    \label{fig:2LevelTweezer}
-\end{figure}
+
 
 
 
