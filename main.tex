@@ -28,6 +28,7 @@
 \DeclarePairedDelimiter\bra{\langle}{\rvert}
 \DeclarePairedDelimiter\ket{\lvert}{\rangle}
 \DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
+
 % unit vector
 \usepackage{bm}
 
@@ -75,7 +76,7 @@
 
 % bibliography
 \usepackage[backend = bibtex8, , giveninits = true, sorting = none, url = false, isbn = false, maxnames = 3]{biblatex}
-\addbibresource{bibliography/Marijn_bib_file.bib}
+\addbibresource{bibliography.bib}
 
 % table of contents
 \setcounter{tocdepth}{2}
@@ -86,6 +87,9 @@
 % section numbering depth
 \setcounter{secnumdepth}{3}
 
+
+
+%DOCUMENT%
 
 \begin{document}
 
@@ -108,12 +112,23 @@
 
 \pagenumbering{arabic}
 
-\chapter{Introduction}\label{ch:introduction}\input{chapter files/1introduction.tex}
-\chapter{Laser Cooling and Trapping}\label{ch:coolingtrapping}\input{chapter files/2cooling_trapping}
-\chapter{Making Optical Tweezers}\label{ch:tweezer}\input{chapter files/3tweezer.tex}
-\chapter{Generating Tweezer Arrays}\label{ch:arrays}\input{chapter files/4arrays.tex}
-\chapter{Implementation in the Machine}\label{ch:implementation}%\input{chapter files/5implementation.tex}
-\chapter{Conclusions and Outlook}\label{ch:conclusion}%\input{chapter files/6conclusions.tex}
+\chapter{Introduction}\label{ch:introduction}
+    \input{chapter files/1introduction.tex}
+
+\chapter{Laser Cooling and Trapping}\label{ch:coolingtrapping}
+    \input{chapter files/2cooling_trapping}
+
+\chapter{Making Optical Tweezers}\label{ch:tweezer}
+    \input{chapter files/3tweezer.tex}
+
+\chapter{Generating Tweezer Arrays}\label{ch:arrays}
+    \input{chapter files/4arrays.tex}
+    
+\chapter{Implementation in the Machine}\label{ch:implementation}
+    %\input{chapter files/5implementation.tex}
+
+\chapter{Conclusions and Outlook}\label{ch:conclusion}
+    %\input{chapter files/6conclusions.tex}
 
 
 \clearpage
@@ -124,6 +139,8 @@
 
 
 
+%APPENDICES%
+
 \begin{appendices}
 
  %appendix nummering sections, equations, figures5
@@ -131,11 +148,11 @@
 \renewcommand\thefigure{\thechapter.\arabic{figure}}
 \renewcommand\theequation{\thechapter.\arabic{equation}}
  
- \setcounter{equation}{0}
- \setcounter{figure}{0}
+\setcounter{equation}{0}
+\setcounter{figure}{0}
  
- \input{chapter files/appendices/appendix_VQE.tex}
- \input{chapter files/appendices/appendix_LightMatter}
+\input{chapter files/appendices/appendix_VQE.tex}
+\input{chapter files/appendices/appendix_LightMatter}
  
 \end{appendices}
 
