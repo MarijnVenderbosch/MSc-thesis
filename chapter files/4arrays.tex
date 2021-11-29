@@ -232,7 +232,7 @@ Because the SLM has a lot of individual pixels with constant pitch $d$, the devi
 
 for incident angle $\theta_i$. The $l=0$ order contains the most power and is the only order that is used, the other orders are blocked using an aperture. 
 
-But even if the higher diffraction orders are removed, there will always be a fraction of light that is not modulated. This is for example light coming from the space between the pixels as a result of the filling factor that is always lower than unity. This undiffracted light is separated from the modulated light by imposing a linear phase on top of the pattern (tilt phase) which translate the pattern away from the undiffracted light. Subsequently the undiffracted light is blocked in an intermediate focus point using an iris. 
+But even if the higher diffraction orders are removed, there will always be a fraction of light that is not modulated. This is for example light coming from the space between the pixels as a result of the filling factor that is always lower than unity. This undiffracted light is separated from the modulated light by imposing a linear phase on top of the pattern (tilt phase) which translate the pattern away from the undiffracted light. Subsequently the undiffracted light is blocked in an intermediate focus point using an iris. The type of linear phase used is shown in \cref{fig:Linear}. Because the phase retardance is capped at $2\pi$, a sawtooth-like pattern emerges. In reality, we use a period of just 8 pixels, but for the sake of visibililty we show a mask with a bigger period. 
 
 \subsection{Finite Aperture Size}\label{subsec:ApertureSize}
 
@@ -248,9 +248,13 @@ We can estimate this power loss by shining a Gaussian beam $G(x,y)$ of width $w(
 
 where erf($\cdot$) denotes the error function. The optimum incident beam size $w(z)$ is thus a compromize between drawing area and power efficiency. We have decied to use $w(z) = 4.8$ mm, which is about the size of the short axis $S_x = 4.9$ mm, such that we illuminate the entire \ac{SLM} and the power transmission as a result of the finite rectangular aperture is $\sim 95$\%.
 
+\subsection{Demagnification}
+
+The $w = 4.8$ mm beam needs to be adapted to the $R = 2$ mm radius of the microscope objective, in order to not lose almost all of the power. As discussed in \cref{ch:tweezer}, we use a 2 mm waist at the microscope objective, so the magnification should be $M = 2.0 / 4.8 \sim 0.42$. We do this by applying a lens phase onto the SLM shown in \cref{fig:Lens}. Finally, \cref{fig:Zernike} shows the Zernike correction pattern as found in \cref{ch:tweezer}.
+
 \subsection{Optical Flatness}\label{subsec:Flatness}
 
-Because of manufacturing imperfections, the SLM chip will not be perfectly flat on the scale of light wavelengths. This error is different for invididual SLM units. The flatness of our chip was measured by manufacterer Meadowlark to have a RMS flatness of $\sim 0.18\lambdaup$. The shape of the flatness was measured as well, so we can correct for the error by subtracting this phase pattern. 
+Because of manufacturing imperfections, the SLM chip will not be perfectly flat on the scale of light wavelengths. This error is different for invididual SLM units. The flatness of our chip was measured by manufacterer Meadowlark to have a RMS flatness of $\sim 0.18\lambdaup$. The shape of the flatness was measured as well, so we can correct for the error by subtracting this phase pattern. The correction used is shown in \cref{fig:Flatness}.
 
 \subsection{Total Phase Mask}
 
