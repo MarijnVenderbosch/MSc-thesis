@@ -1,74 +1,136 @@
-We will make our quantum array out of neutral strontium atoms. The tool to cool, trap and move these atoms is light. We need individual control for this. In 2001, a group from Paris showed for the first time, that if you tune your tweezer in the right way, it's possible to trap single atoms.         
+The tool used in this work to achieve single-atom control is optical tweezers: by focussing a laser beam to a small enough spot it has been shown that under the right conditions, this trap can house at most one atom. 
+
+\section{Loading Single Atoms}\label{sec:LoadingAtoms}
+
+Assuming we have tweezer. Call the number of atoms in this tweezer $N$. For the dynamics of $N$ we write \cite{Schlosser2002}
+
+\begin{equation}\label{LoadingTweezer}
+	\frac{\text{d}N}{\text{d}t} = \alpha - \gamma N - \beta N(N-1)
+\end{equation}
+
+where the first term $\alpha$ is the loading rate or the amount of atoms entering the tweezer per second. Next, $\gamma$ is the atom loss as a result of collisions with the background gas. Lastly, $\gamma$ is a measure for the mainly 2 body loss as a result of light-assisted collisions. In order to load single atoms, we must satisfy $\beta \gg \gamma$: the two-body collisions are dominant. We can now look at two distinct scenarios:
+
+\begin{itemize}
+	\item Starting from 0 atoms in the tweezer: an additional atom entering will now load the tweezer to $N=1$. 
+	
+	\item Starting from $N=1$: when an additional atom is loaded, the atoms will immediately kick out each other because of the tiny tweezer volume and strong light intensity from the MOT beams. 
+\end{itemize}
+
+If the number of atoms at $t=0$ is larger than $N$, atoms will be lost in pairs until $N$ is either 0 or 1, after which the events above apply. Apparently, a loading event can lead to either 0 or 1 atom in the tweezer, both with $50\%$ probability. This is known as the collisional blockade effect. Experimentally demonstrated by \cite{Schlosser2001} and \cite{Schlosser2002} showed this effect to exits for 3 orders of magnitude in the loading rate $\alpha$. Satisfying $\beta \gg \gamma$ can be done by keeping $\gamma$ to a minimum by going to the ultra high vacuum regime. We intent to go to a pressure of the order of $10^{-10}$ mbar. In addition $\beta$ is maximized by going to high light-intensities and small trapping volumes. The remainder of this chapter is dedicated on how to minimize this trapping volume.
+
+\section{Diffraction Limit}
+
+The smallest achievable spot size is governed by the diffraction limit, which states that because light is a wave, it is impossible to focus down to an infinitely small spot even in the absence of aberrations. Diffraction is elegantly described by Fourier optics \cite{Goodman2005}. We derive a result used throughout this work here.
+
+\begin{mdframed}
+    \subsection*{Intermezzo Fourier Optics}
+    
+    As we use the objective to make a tweezer, light is impinging on its back aperture. We call its complex amplitude $U(x',y')$ and define the aperture at $z = 0$ on the optical axis. After the aperture, light will show diffraction. An elegant description is provided by scalar diffraction theory. We will not repeat a full derivation here but we can refer the reader to \cite{Goodman2005}.Consider the Fresnel diffracion integral in cartesian coordinates. After the aperture, the complex amplitude $U$ distribution is:
+    
+    \begin{equation}\label{eq:FresnelDiffraction}
+        U(x,y,z) = 
+        \frac{e^{ikz}}{i \lambda z} \iint_{-\infty}^{\infty} U(x',y',0) \exp{\frac{ik}{2z}} \exp{\left[(x-x')^2+(y-y')^2\right]} dx'dy'.
+    \end{equation}
+    
+    In \cref{eq:FresnelDiffraction}, $\lambda$ is the wavelength, $k=2\pi/\lambda$ the wavenumber. In this thesis, we are usually not immediately interested in describing the light in the the near field of the aperture, but in the far-field. More formally, the following needs to apply:
+    
+    \begin{equation}\label{eq:FraunhoferCriterion}
+        z \gg k R^2/2,
+    \end{equation}
+    
+    where $R$ is the maximum distance from the aperture to the optical axis. While this criterion is in practice not met, it does hold in the focal point of a lens, because a lens projects an image in infinity to its focal length $f$. Inserting \cref{eq:FraunhoferCriterion} in \cref{eq:FresnelDiffraction} yields:
+    
+    \begin{equation}\label{eq:FraunhoferDiffraction}
+        U(x, y, z)=\frac{e^{i k z} e^{i k\left(x^{2}+y^{2}\right)/2}}{i \lambda z} \iint_{-\infty}^{\infty} U(x', y') \exp \left[\frac{-ik}{z}(x x'+y y')\right] dx' dy'
+    \end{equation}. 
+    
+    This equation relates the field in the focus point point of the lens $U(x,y)$ to the field at the lens $U(x',y')$. Contributins outside of the apeture can be discarded, and in practice we are not too intersted in the phase factor in front, such that we have
+    
+    \begin{equation}\label{eq:FraunhoferSimplified}
+        U(x,y,z) \propto 
+        \iint_{\text{aperture}} U(x',y') \exp{\left[- \frac{ik}{z}(xx'+yy')\right]}dx'dy'
+    \end{equation}
+    
+    We recognize in \cref{eq:FraunhoferDiffraction} the spatial Fourier transform, in both $x$ and $y$ with respectively the frequencies $f_x = x/\lambda z$ and $f_y = y/\lambda z$, which is a result we will use later in this work. \cref{eq:FraunhoferDiffraction} is the Fraunhofer diffraction integral.
+\end{mdframed}
+
+ In this work, we are mostly concerned with circularly shaped apertures, for which a description in cylindrical coordinates is more natural. Ignoring the phase factor in front of the integral:
+
+\begin{equation}\label{eq:FraunhoferRTheta}
+    U(r,\theta, z) \propto \iint_{\text{aperture}} U(r') \exp{\left[
+    -\frac{i k r r'}{z} \cos{(\theta-\theta')} 
+    \right]}r'dr'd\theta'
+\end{equation}
+
+Using the integral definition of the Bessel function of the first kind\footnote{$J_0(x) = \frac{1}{2\pi} \int_0^{2\pi} \exp{(i x \cos{\alpha})} d\alpha$} we write \cref{eq:FraunhoferRTheta} as 
+
+\begin{equation}\label{eq:FourierBessel}
+    U(r,z) \propto 2\pi \int_0^{\infty} U(r') J_0\left( \frac{k r r'}{z}\right) r'dr'
+\end{equation}
+
+\cref{eq:FourierBessel} is the Fourier-Bessel or Hankel transform. Now that the general formula has been derived, will make the problem more specific by introducing some parameters. In practice, we are interested in the focus point of the lens around $z \approx f$. We send a Gausian beam through the lens with aperture radius $R$ such that for $r' <R$ we have $U(r')=e^{-r'^2/w_i^2}$ and $U(r'>R)=0$. Substituting in \cref{eq:FourierBessel} yields
+
+\begin{equation}\label{eq:FourierBesselAperture}
+    U(r) \propto \int_0^R e^{-r'^2/w_i^2} J_0\left(\frac{k r r'}{f}\right)r'dr'
+\end{equation}
+
+\cref{eq:FourierBesselAperture} is analytically solvable for specific cases. Letting $w_i/R$ go to infinity, which is to treat the incident Gaussian beam as a plane wave, we can neglect the exponential term in \cref{eq:FourierBesselAperture}. The integral is now tractable, yielding for the field amplitude
+
+\begin{equation}\label{eq:AiryField}
+    U(r) \propto \frac{f}{kRr} J_1\left(\frac{k R r}{f}\right)
+\end{equation}
+
+Taking the absolute value squared and normalizing yields the \ac{PSF}:
+
+\begin{equation}
+    \frac{I}{I_0} = \left[
+    \frac{2J_1(k r R/f)}{k r R/f}
+    \right]^2
+\end{equation}
+
+The point spread function of a circular aperture is shown in 
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width = 0.8\linewidth]{figures/AiryDisk.pdf}
+    \caption{\textbf{a)} Normalized intensity of the perfect \ac{PSF} as a function of the azimuthal coordinate $r$ normalized in terms of units $f / kR$ \textbf{b) }2D plot of the Airy disk.  }
+    \label{fig:AiryPlots}
+\end{figure}
+
+
+
+
+
+
+
+% This integral has no analytical solution. We can however find an expression for the power transmission of a Gaussian beam with width $w_i$ sent through a circular aperture with radius $R$, the fraction of power transmitted issue
+
+% \begin{equation}\label{eq:FracPowerCircular}
+%     P/P_0 = 1 - e^{-w_i^2/R^2}
+% \end{equation}
+
+% We follow \cite{Madjarov2021} and look at two extreme cases for \cref{eq:FourierBesselAperture,eq:FracPowerCircular}
+
+% \begin{enumerate}
+%     \item $w_i \gg R$. \cref{FracPowerCircular} tells us we lose almost all of our power. The aperture function can be approximated by a plane wave and dropping the exponential term in \cref{FourierBesselAperture} we find
+%     \begin{equation}\label{Airy}
+%         U(r) \propto \frac{f}{k r} J_1\left(\frac{k r R}{f}\right)
+%     \end{equation}
+%     which is the equation for an Airy pattern. It is the smallest feature a lens can produce. 
+
+%     \item $w_i \ll R$. The waist is much smaller than the aperture, according to \cref{FracPowerCircular} we have maximum power efficiency. We let the integration boundary run to infinity and using a Hankel tranform pair\footnote{$F_0(k) = \int_0^{\infty} e^{-1/2 a^2 r^2} J_0(k r)r dr = \frac{1}{a^2} e^{-\frac{k^2}{2a^2}}$} find 
+%         \begin{equation}
+%         U(r) \propto \frac{w_i^2}{2} \exp{\left(\frac{-k^2w_i^2 r^2}{2f^2}\right)}.
+%     \end{equation}
+%     The result is a Gaussian, but with a modified waist of $\lambdaup f / \pi w_0$.  The result is similar to Gaussian apodization, where the size lobes of the Airy function are gone. 
+% \end{enumerate}
+
 \section{High NA objective}
 
 In order to trap single atoms, we need to make the smallest possible spot size, the diffraction-limited spot. Fourier optics tells us that in order to make the smallest possible spot, we want to focus the light using the largest possible cone of light, so we need high NA. Apart from high NA we also need ultralong working distance, because the lens will be positioned outside of the vacuum. 
 
 We chose the G Plan Apo 50X microscope objective from Mitutoyo. It has a fairly high NA of 0.5 and is corrected for spherical aberrations as a result of imaging through a 3.5 mm glass plate, which we will use for our vacuum. The exact glass material is not specified but we have assumed it to be N-KB7. It is designed for a finite conjugate and has a back aperture of 4 mm. We will now estimate how we use this objective in our setup. 
-
-\subsection{Intermezzo Fourier Optics}
-
-As we use the objective to make a tweezer, light is impinging on its back aperture. We call its complex amplitude $U(x',y')$ and define the aperture at $z = 0$ on the optical axis. After the aperture, light will show diffraction. An elegant description is provided by scalar diffraction theory. We will not repeat a full derivation here but we can refer the reader to \cite{Goodman2005}.Consider the Fresnel diffracion integral in cartesian coordinates. After the aperture, the complex amplitude $U$ distribution is:
-
-\begin{equation}\label{FresnelDiffraction}
-    U(x,y,z) = 
-    \frac{e^{ikz}}{i \lambda z} \iint_{-\infty}^{\infty} U(x',y',0) \exp{\frac{ik}{2z}} \exp{\left[(x-x')^2+(y-y')^2\right]} dx'dy'.
-\end{equation}
-
-In \cref{FresnelDiffraction}, $\lambda$ is the wavelength, $k=2\pi/\lambda$ the wavenumber. In this thesis, we are usually not immediately interested in describing the light in the the near field of the aperture, but in the far-field. More formally, the following needs to apply:
-
-\begin{equation}\label{FraunhoferCriterion}
-    z \gg k R^2/2,
-\end{equation}
-
-where $R$ is the maximum distance from the aperture to the optical axis. While this criterion is in practice not met, it does hold in the focal point of a lens, because a lens projects an image in infinity to its focal length $f$. Inserting \cref{FraunhoferCriterion} in \cref{FraunhoferDiffraction} yields:
-
-\begin{equation}\label{FraunhoferDiffraction}
-    U(x, y, z)=\frac{e^{i k z} e^{i k\left(x^{2}+y^{2}\right)/2}}{i \lambda z} \iint_{-\infty}^{\infty} U(x', y') \exp \left[\frac{-ik}{z}(x x'+y y')\right] dx' dy'
-\end{equation}. 
-
-We recognize in \cref{FraunhoferDiffraction} the spatial Fourier transform, in both $x$ and $y$ with respectively the frequencies $f_x = x/\lambda z$ and $f_y = y/\lambda z$. \cref{FraunhoferDiffraction} is the Fraunhofer diffraction integral, it will be used later in this work as well. Returning back to our aperture, we are concerned with a circular aperture so a switch to cylindrical coordinates seems natural. Ignoring the phase factor in front of the integral:
-
-\begin{equation}\label{FraunhoferRTheta}
-    U(r,\theta, z) \propto \iint U(r') \exp{(\frac{- i k rr'}{z})} \exp{\left(\cos{(\theta-\theta')}\right)} r'dr'd\theta'.
-\end{equation}
-
-Using the integral definition of the Bessel function of the first kind\footnote{$J_0(x) = \frac{1}{2\pi} \int_0^{2\pi} \exp{(i x \cos{\alpha})} d\alpha$} we write \cref{FraunhoferRTheta} as 
-
-\begin{equation}\label{FourierBessel}
-    U(r,z) \propto 2\pi \int_0^{\infty} U(r') J_0\left( \frac{k r r'}{z}\right) r'dr'
-\end{equation}
-
-\cref{FourierBessel} is the Fourier-Bessel or Hankel transform. 
-
-\subsection{Circular aperture}
-
-Returning to initial problem: we send a Gaussian beam with width $w_i$ through an aperture of radius $R$ and are interested in what happens in the focal plane of a lens $z\approx f$
-
-\begin{equation}\label{FourierBesselAperture}
-    U(r) \propto \int_0^R e^{-r'^2/w_i^2} J_0\left(\frac{k r r'}{f}\right)r'dr'
-\end{equation}
-
-This integral has no analytical solution. We can however find an expression for the power transmission of a Gaussian beam with width $w_i$ sent through a circular aperture with radius $R$, the fraction of power transmitted issue
-
-\begin{equation}\label{FracPowerCircular}
-    P/P_0 = 1 - e^{-w_i^2/R^2}
-\end{equation}
-
-We follow \cite{Madjarov2021} and look at two extreme cases for \cref{FourierBesselAperture,FracPowerCircular}
-
-\begin{enumerate}
-    \item $w_i \gg R$. \cref{FracPowerCircular} tells us we lose almost all of our power. The aperture function can be approximated by a plane wave and dropping the exponential term in \cref{FourierBesselAperture} we find
-    \begin{equation}\label{Airy}
-        U(r) \propto \frac{f}{k r} J_1\left(\frac{k r R}{f}\right)
-    \end{equation}
-    which is the equation for an Airy pattern. It is the smallest feature a lens can produce. 
-
-    \item $w_i \ll R$. The waist is much smaller than the aperture, according to \cref{FracPowerCircular} we have maximum power efficiency. We let the integration boundary run to infinity and using a Hankel tranform pair\footnote{$F_0(k) = \int_0^{\infty} e^{-1/2 a^2 r^2} J_0(k r)r dr = \frac{1}{a^2} e^{-\frac{k^2}{2a^2}}$} find 
-        \begin{equation}
-        U(r) \propto \frac{w_i^2}{2} \exp{\left(\frac{-k^2w_i^2 r^2}{2f^2}\right)}.
-    \end{equation}
-    The result is a Gaussian, but with a modified waist of $\lambdaup f / \pi w_0$.  The result is similar to Gaussian apodization, where the size lobes of the Airy function are gone. 
-\end{enumerate}
 
 \section{Tweezer potential}
 
@@ -185,25 +247,3 @@ A sketch of a Gaussian beam profile is given in \cref{fig:GaussianBeam}, showing
 	\label{fig:GaussianBeam}
 \end{figure}
 
-
-\section{Loading Single Atoms}\label{sec:LoadingAtoms}
-
-For the quantum register, an array of single atoms is needed. In order to do this, individual atoms from the cold atom cloud are loaded in optical tweezers, or tightly focused laser beams. We can write the dynamics of the number of atoms $N$ in the tweezer as \cite{Schlosser2002}
-
-\begin{equation}\label{LoadingTweezer}
-	\frac{\text{d}N}{\text{d}t} = \alpha - \gamma N - \beta N(N-1)
-\end{equation}
-
-where the first term $\alpha$ is the loading rate or the amount of Rb atoms entering the tweezer per second. Next, $\gamma$ is the atom loss as a result of collisions with the background gas. Lastly, $\gamma$ is a measure for the mainly 2 body loss as a result of light-assisted collisions. No additional laser is required for this, the MOT beams can be used for this purpose.  
-
-We are interested in the case $\beta \gg \gamma$: the two-body collisions are dominant. We can now look at two distinct scenarios:
-
-\begin{itemize}
-	\item Starting from 0 atoms in the tweezer: an additional atom entering will now load the tweezer to $N=1$. 
-	
-	\item Starting from $N=1$: when an additional atom is loaded, the atoms will immediately kick out each other because of the tiny tweezer volume and strong light intensity from the MOT beams. 
-\end{itemize}
-
-Apparently, a loading event can lead to either 0 or 1 atom in the tweezer, both with $50\%$ probability. This is known as the collisional blockade effect. Experimentally demonstrated by \cite{Schlosser2001} and \cite{Schlosser2002} showed this effect to exits for 3 orders of magnitude in the loading rate $\alpha$.
-
-Experimentally, $\beta \gg \gamma$ can be keeping $\gamma$ to a minimum by going to the ultra high vacuum regime. We intent to go to a pressure of the order of $10^{-10}$ mbar. In addition $\beta$ is maximized by going to high light-intensities and small trapping volumes. 
