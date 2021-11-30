@@ -224,11 +224,24 @@ But this is not the only source of laser power loss: in producing the Airy patte
 As a result, when working with a beam significantly larger than the back aperture this excess power is lost. 
 Assuming the beam is aligned with the center of the aperture, the power tranmission $P/P_0$ as a function of the incident waist $w_i$ is
 
-\begin{equation}\label{eq:FracPowerCircular}
+\begin{equation}\label{eq:fracPowerCircular}
     P/P_0 = 1 - e^{-2w_i^2/R^2}
 \end{equation}
 
-which tends to zero for very wide beams (plane waves). To find the optimum waist we will have a look at what the theoretical potential will be as a result from the tweezer beam, but a priori we know the resulting potential will be something in between a Gaussian beam and an Airy pattern. 
+which tends to zero for very wide beams (plane waves). Clearly there is an optimum sommewhere.
+To illustrate this, we will look at the other extreme case of $w_i \ll R$. 
+The waist is much smaller than the aperture, according to \cref{eq:fracPowerCircular} all of the power is transmitted through the aperture.
+We let the integration boundary run to infinity and using a Hankel tranform pair\footnote{$F_0(k) = \int_0^{\infty} e^{-1/2 a^2 r^2} J_0(k r)r dr = \frac{1}{a^2} e^{-\frac{k^2}{2a^2}}$} find 
+
+\begin{equation}\label{eq:GaussianCase}
+    U(r) \propto \frac{w_i^2}{2} \exp{\left(\frac{-k^2w_i^2 r^2}{2f^2}\right)}.
+\end{equation}
+
+The result is a Gaussian, but with a modified waist of $\lambdaup f / \pi w_0$.
+This modified waist will go up for smaller $w_0$ (Fourier transform property). 
+Clearly, this is not ideal either. 
+To understand the optimum a bit better, we will define the concept of trap frequencies. 
+But a priori we know the resulting potential will be something in between a Gaussian beam and an Airy pattern. 
 
 \section{Tweezer Potential}
 
@@ -257,38 +270,14 @@ Taylor expanding \cref{eq:GaussianPotential} around $(r,z)=(0,0)$ to second orde
 
 For this harmonic potential, one can compute the harmonic oscillation frequencies 
 
-\begin{equation}
+\begin{equation}\label{eq:TrapFrequencies}
     \omega_r = 2\left(\frac{U_0}{m w_0^2}\right)^{1/2}, \quad
     \omega_z= \left(\frac{2 U_0}{m z_R^2}\right)^{1/2}
 \end{equation}
 
-Because $z_R > w_0$, the longitudinal oscillation frequency is lower than the radial frequency.
-
-% We follow \cite{Madjarov2021} and look at two extreme cases for \cref{eq:FourierBesselAperture,eq:FracPowerCircular}
-
-
-%     \item $w_i \ll R$. The waist is much smaller than the aperture, according to \cref{FracPowerCircular} we have maximum power efficiency. We let the integration boundary run to infinity and using a Hankel tranform pair\footnote{$F_0(k) = \int_0^{\infty} e^{-1/2 a^2 r^2} J_0(k r)r dr = \frac{1}{a^2} e^{-\frac{k^2}{2a^2}}$} find 
-
-% \begin{equation}
-%     U(r) \propto \frac{w_i^2}{2} \exp{\left(\frac{-k^2w_i^2 r^2}{2f^2}\right)}.
-% \end{equation}
-%         
-%     The result is a Gaussian, but with a modified waist of $\lambdaup f / \pi w_0$.  The result is similar to Gaussian apodization, where the size lobes of the Airy function are gone. 
-% \end{enumerate}
-
-
-
-
-
-We can discuss the two extreme cases again:
-
-\begin{enumerate}
-    \item For the case $w_i \gg R$, the power transmission will be low and therefore also the trap depth $-U_0$.
-    \item For $w_i \ll R$, the waist of the resulting Gaussian in radial and longitudal directions $w_0$ and $z_R$ will increase, which is undesired. Because the total amount of power in the trap is fixed, because of normalization the trap depth is lower as well. 
-\end{enumerate}
-
-
-
+Because $z_R > w_0$, the longitudinal oscillation frequency is lower than the radial frequency. 
+Trap frequencies are a nice property to optimize, because from the definition, higher trap frequencies translate to deeper as well as sharper tweezers. 
+\cite{Madjarov2021} optimized \cref{eq:TrapFrequencies} for the $w_i/R$ ratio and found an optimum around $w_i\sim R$, which we will use in this work. 
 
 
 \section{Measuring the Tweezer potential}
@@ -300,7 +289,11 @@ We would like to measure tweezer potential of our high NA objective. We could us
     \item The tweezer waist will be slightly broader: $\approx 9\%$.
 \end{itemize}
 
-In order to experimentally determine these effects, we send a Gaussian beam with a waist equal to the aperture radius through the microscope objective. We follow \cite{Baumgaertner2017}: we use another microscope objective to look into the tweezer waist of the Mitutoyo. But in order to avoid further convolution with the point spread function of the second objective, we use a higher NA for the second objective \footnote{Newport M-60X 0.85 NA objective}. Because there is no glass cell, this objective does not need ultra-long working distance so this higher NA is no problem. In order to record the 3D PSF, the tweezer is moved using a picomotor attenuator. 
+In order to experimentally determine these effects, we send a Gaussian beam with a waist equal to the aperture radius through the microscope objective. 
+We follow \cite{Baumgaertner2017}: we use another microscope objective to look into the tweezer waist of the Mitutoyo.
+But in order to avoid further convolution with the point spread function of the second objective, we use a higher NA for the second objective \footnote{Newport M-60X 0.85 NA objective}. 
+Because there is no glass cell, this objective does not need ultra-long working distance so this higher NA is no problem. 
+In order to record the 3D PSF, the tweezer is moved using a picomotor attenuator. 
 
 \subsection{Calibration Imaging System}
 
