@@ -47,7 +47,7 @@ We derive a result used throughout this work here.
     After the aperture, the complex amplitude $U$ distribution is:
     
     \begin{equation}\label{eq:FresnelDiffraction}
-        U(x,y,z) = 
+        E(x,y,z) = 
         \frac{e^{ikz}}{i \lambda z} \iint_{-\infty}^{\infty} U(x',y',0) \exp{\frac{ik}{2z}} \exp{\left[(x-x')^2+(y-y')^2\right]} dx'dy'.
     \end{equation}
     
@@ -64,14 +64,14 @@ We derive a result used throughout this work here.
     Inserting \cref{eq:FraunhoferCriterion} in \cref{eq:FresnelDiffraction} yields:
     
     \begin{equation}\label{eq:FraunhoferDiffraction}
-        U(x, y, z)=\frac{e^{i k z} e^{i k\left(x^{2}+y^{2}\right)/2}}{i \lambda z} \iint_{-\infty}^{\infty} U(x', y') \exp \left[\frac{-ik}{z}(x x'+y y')\right] dx' dy'
+        E(x, y, z)=\frac{e^{i k z} e^{i k\left(x^{2}+y^{2}\right)/2}}{i \lambda z} \iint_{-\infty}^{\infty} U(x', y') \exp \left[\frac{-ik}{z}(x x'+y y')\right] dx' dy'
     \end{equation}. 
     
     This equation relates the field in the focus point point of the lens $U(x,y)$ to the field at the lens $U(x',y')$. 
     Contributins outside of the apeture can be discarded, and in practice we are not too intersted in the phase factor in front, such that we have
     
     \begin{equation}\label{eq:FraunhoferSimplified}
-        U(x,y,z) \propto 
+        E(x,y,z) \propto 
         \iint_{\text{aperture}} U(x',y') \exp{\left[- \frac{ik}{z}(xx'+yy')\right]}dx'dy'
     \end{equation}
     
@@ -82,7 +82,7 @@ We derive a result used throughout this work here.
  Ignoring the phase factor in front of the integral:
 
 \begin{equation}\label{eq:FraunhoferRTheta}
-    U(r,\theta, z) \propto \iint_{\text{aperture}} U(r') \exp{\left[
+    E(r,\theta, z) \propto \iint_{\text{aperture}} U(r') \exp{\left[
     -\frac{i k r r'}{z} \cos{(\theta-\theta')} 
     \right]}r'dr'd\theta'
 \end{equation}
@@ -90,17 +90,26 @@ We derive a result used throughout this work here.
 Using the integral definition of the Bessel function of the first kind\footnote{$J_0(x) = \frac{1}{2\pi} \int_0^{2\pi} \exp{(i x \cos{\alpha})} d\alpha$} we write \cref{eq:FraunhoferRTheta} as 
 
 \begin{equation}\label{eq:FourierBessel}
-    U(r,z) \propto 2\pi \int_0^{\infty} U(r') J_0\left( \frac{k r r'}{z}\right) r'dr'
+    E(r,z) \propto 2\pi \int_0^{\infty} U(r') J_0\left( \frac{k r r'}{z}\right) r'dr'
 \end{equation}
 
 \cref{eq:FourierBessel} is the Fourier-Bessel or Hankel transform.
 Now that the general formula has been derived, will make the problem more specific by introducing some parameters. 
 In practice, we are interested in the focus point of the lens around $z \approx f$. 
-We send a Gausian beam through the lens with aperture radius $R$ such that for $r' <R$ we have $U(r')=e^{-r'^2/w_i^2}$ and $U(r'>R)=0$.
-Substituting in \cref{eq:FourierBessel} yields
+We send a Gausian beam through the lens with an circular aperture function $U(r')$ with radius $R$, such that the input $E_i$ is
+
+\begin{equation}\label{eq:GaussianAperture}
+    E(r')=
+    \begin{cases}
+        e^{- w_i^2/R^2},& \text{if } r' < R\\
+        0,               & \text{otherwise}
+    \end{cases}
+\end{equation}
+
+Substituting \cref{eq:GaussianAperture} in \cref{eq:FourierBessel} yields
 
 \begin{equation}\label{eq:FourierBesselAperture}
-    U(r) \propto \int_0^R e^{-r'^2/w_i^2} J_0\left(\frac{k r r'}{f}\right)r'dr'
+    E(r) \propto \int_0^R e^{-r'^2/w_i^2} J_0\left(\frac{k r r'}{f}\right)r'dr'
 \end{equation}
 
 \cref{eq:FourierBesselAperture} is analytically solvable for specific cases.
@@ -108,7 +117,7 @@ Letting $w_i/R$ go to infinity, which is to treat the incident Gaussian beam as 
 The integral is now tractable, yielding for the field amplitude
 
 \begin{equation}\label{eq:AiryField}
-    U(r) \propto \frac{f}{kRr} J_1\left(\frac{k R r}{f}\right)
+    E(r) \propto \frac{f}{kRr} J_1\left(\frac{k R r}{f}\right)
 \end{equation}
 
 Taking the absolute value squared and normalizing yields the \ac{PSF}:
@@ -178,14 +187,13 @@ In practice, often the side-rings of the Airy feature are not that clearly visib
 
 Fitting this Gaussian as closesly as possible to an Airy pattern, it can be shown that the waist is \cite{Zhang2007}
 
-\begin{equation}\label{GaussianAiryFit}
+\begin{equation}\label{eq:GaussianAiryFit}
     w = 0.42 \frac{\lambdaup}{\text{NA}}
 \end{equation}
  
-If our waist is at this limit, we say the system is diffraction-limited, that is limited by the wave nature of light and not by aberrations or imperfections in the system. 
-In practice, this is unachievable and other definitions like the Strehl ratio are used \cite{Sortais2007}, but that definition will not be used in this work. 
+If our waist is at this limit, we say the system is diffraction-limited, that is limited by the wave nature of light and not by aberrations or imperfections in the system\footnote{In practice, this is unachievable and other definitions like the Strehl ratio are used \cite{Sortais2007}. But this will will not be used in this work.}.
 
-\section{Making the Tweezer}
+\section{Optical Tweezers in Practice}\label{sec:TweezersPractice}
 
 So to minimize the trapping volume, we need the highest possible numerical aperture. But there are more demands our lens should satisfy: the \ac{MOT} and subsequent \ac{ODT} are made in a vacuum chamber so the beam traverse a vacuum viewport. This requires
 
@@ -243,9 +251,10 @@ Clearly, this is not ideal either.
 To understand the optimum a bit better, we will define the concept of trap frequencies. 
 But a priori we know the resulting potential will be something in between a Gaussian beam and an Airy pattern. 
 
-\section{Tweezer Potential}
+\subsection{Tweezer Potential}
 
-From \cref{eq:Stark} we know that the potential of the tweezer is proportional to the light intensity. Assuming a Gaussian tweezer beam, the potential $U$ in cylindrical coordinates will be roughly (\cref{eq:GaussianBeam,eq:GaussianBeamParameters}).
+From \cref{eq:Stark} we know that the potential of the tweezer is proportional to the light intensity. 
+Assuming a Gaussian tweezer beam, the potential $U$ in cylindrical coordinates will be roughly (\cref{eq:GaussianBeam,eq:GaussianBeamParameters}).
 
 \begin{equation}\label{eq:GaussianPotential}
     U(r,z)=\frac{-U_{0}}{1+z^{2} / z_{R}^{2}} \exp \left(\frac{-2 r^{2}}{w_{0}^{2}\left(1+z^{2} / z_{R}^{2}\right)}\right)
@@ -277,29 +286,45 @@ For this harmonic potential, one can compute the harmonic oscillation frequencie
 
 Because $z_R > w_0$, the longitudinal oscillation frequency is lower than the radial frequency. 
 Trap frequencies are a nice property to optimize, because from the definition, higher trap frequencies translate to deeper as well as sharper tweezers. 
-\cite{Madjarov2021} optimized \cref{eq:TrapFrequencies} for the $w_i/R$ ratio and found an optimum around $w_i\sim R$, which we will use in this work. 
-
+\cite{Madjarov2021} optimized \cref{eq:TrapFrequencies} for the $w_i/R$ ratio and found an optimum around $w_i\sim R$, which we will use in this work\footnote{Because trap frequencies can be probed exprimentally, they can be used to perform post-corrections on tweezer arrays as well as shown by \cite{Ebadi2021}.}.
 
 \section{Measuring the Tweezer potential}
 
-We would like to measure tweezer potential of our high NA objective. We could use the objective to look at a pinhole and record its point spread function. However, in practice we don not send a plane wave but a Gaussian beam through the objective. As a result of this, two things are different \cite{Sortais2007}
+We would like to measure tweezer potential made by our microscope objective. 
+We could use time symmetry and look at the reverse direction: using the objective to look at a pinhole, retrieving its \acf{PSF} \cite{Knottnerus2018,Sortais2007}
+However, using this method the objective will produce a plane wave, when we know that in practice we do not send a plane wave to the objective as discussed in \cref{sec:TweezersPractice}
+function. 
 
-\begin{itemize}
-    \item As a result of apodization, the Airy rings will be damped. 
-    \item The tweezer waist will be slightly broader: $\approx 9\%$.
-\end{itemize}
+Instead, we used another microscope objective, to look into produced tweezer potential by the \textit{Mitutoyo}. 
+In doing this, the tweezer potential will be convolved with the \ac{PSF} of the second microscope objective\cite{Baumgaertner2017}.
+Therefore we used a second microscope objective\footnote{Newport M-60X 0.85 NA objective.} with significantly higher \ac{NA}, minimizing this effect. 
 
-In order to experimentally determine these effects, we send a Gaussian beam with a waist equal to the aperture radius through the microscope objective. 
-We follow \cite{Baumgaertner2017}: we use another microscope objective to look into the tweezer waist of the Mitutoyo.
-But in order to avoid further convolution with the point spread function of the second objective, we use a higher NA for the second objective \footnote{Newport M-60X 0.85 NA objective}. 
-Because there is no glass cell, this objective does not need ultra-long working distance so this higher NA is no problem. 
-In order to record the 3D PSF, the tweezer is moved using a picomotor attenuator. 
+\subsection{Optical Setup}
+
+In the actual machine, we use an optically contacted glass cell as our vacuum chamber. Because no objective exists that has significantly higher NA than 0.5 as well as ultra-long working distance, we can not look into the glass cell using this method. Therefore, we use a piece of glass with the same thickness and material (quartz glass, $d = 4.0$) mm to imitate the glass cell. The second objective will produce an image onto a linear CCD camera\footnote{Point Grey FLEA2 FL2-08S2M.}. Because alignment of the Mitutoyo objective with the incident beam, as well as alignment of the two objectives with respect to each other is crucial, both objectives are mounted on piezo-controlled 5 axis translation stages. 
+This is drawn in the lower-right corner of \cref{fig:TiSandSLMsetup}.
+
+On top we show the laser source used.
+This laser is positioned on a separate table and its output is brought to the main table using a \ac{PM} optical fiber. 
+The laser source is a \ac{Ti:S} ring laser\footnote{\textit{Coherent} 899-21 ring laser} (linewidth $\sim 1$ Mhz, output power max. $\sim 1$ W.). The crystal is pumped using a pump laser\footnote{\textit{Coherent} Verdi V18} (18W power, 532 nm). The \ac{Ti:S} is eaily tunable in wavelength over a wide range. For Sr 813 will be used, but for the experiments for Rb we used 820 nm. In between the laser source and the objective, there is a \ac{SLM}. But the SLM has its own \cref{ch:arrays}, so will not get into that now. In day to day tuning of the mirrors inside the Ti:S ring laser, the output angle and therefore the fiber coupling efficiency is slightly changed. To ease the coupling, we run a coax cable from a power meter on the main table to a multimeter on the Ti:S table. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/TiSandSLM.pdf}
+    \caption{Optical setup for making an optical tweezer and imaging this tweezer onto a CCD camera. 
+    Laser source decribed int the text and \ac{SLM} more thoroughly in \cref{ch:arrays}.
+    The titanium sapphire laser is positioned on a separate table. 
+    All cubes are polarizing.}
+    \label{fig:TiSandSLMsetup}
+\end{figure}
 
 \subsection{Calibration Imaging System}
 
-The magnification of the Newport objective of 60X is only specified when used in a microscope with standard tube length distance, because it is finite conjugate corrected. Because our CCD is not exactly at the distance where normally the eyepiece of the microscope would be, we have to calibrate its magnification. We do this using a high resolution target \footnote{Edmund Optics high resolution microscope target.} 
+The 60X magnification of the 0.85 NA objective is only specified when used in a microscope with standard tube length distance, because it is finite conjugate corrected.
+Because our CCD is not exactly at the distance where normally the eyepiece of the microscope would be, we have to calibrate its magnification.
+We do this using a high resolution target\footnote{Edmund Optics high resolution microscope target.} .
 
-We illuminate the target with an incoherent light source (LED) because the laser would cause interference from the different lines. We neglect the slightly different focus point from the Newport objective for our laser frequency compared to white light. 
+This target is illuminated with incoherent light from a \ac{LED} because we noted that using a coherent source from a laser caused too much interference from the different lines. We neglect the slightly different focus point from the Newport objective for our laser frequency compared to white light. 
 
 \begin{figure}
     \centering
@@ -308,13 +333,76 @@ We illuminate the target with an incoherent light source (LED) because the laser
     \label{fig:resolutionTarget}
 \end{figure}
 
-To detect the edges in \cref{fig:resolutionTarget}, we use an edge detection algorithm script that averages over all vertical pixels, blurs using a Gaussian to surpress noise and computes the derivative. When the derivative surpasses a set threshhold we define it as an edge. The magnification was found to be $(50.3\pm0.5)$X. This is smaller than the specified 60X, which we attribute to an incorrect tube length distance. 
+To detect the edges in \cref{fig:resolutionTarget}, we use an edge detection algorithm script that averages over all vertical pixels, blurs using a Gaussian to surpress noise and computes the derivative. 
+When the derivative surpasses a set threshhold we define it as an edge.
+The magnification was found to be $(50.3\pm0.5)$X.
+This is smaller than the specified 60X, which we attribute to an incorrect tube length distance. 
 
 \subsection{Picomotor Attenuators}
 
-The target was also used to calibrate the picomotor attenuator. We measured over the maximum available amount of lines of similar spacing of 5 using 4000 picomotor steps, and correcting for the shift in camera found a step size of $20.3\pm0.1$ nm, which matched exactly with the specifications of the piezo-attenuator for the given load. This result will be used in the 3D scanning of the tweezers. 
+The target was also used to calibrate the picomotor attenuator. 
+We measured over the maximum available amount of lines of similar spacing of 5 using 4000 picomotor steps, and correcting for the shift in camera found a step size of $20.3\pm0.1$ nm, which matched exactly with the specifications of the piezo-attenuator for the given load. 
+This result will be used in the 3D scanning of the tweezers. 
 
-The stage we used is 8081-M 5-axis motorized tilt aligner from Newport. There is no reason here to use a 5-axis stage because we only need translation in one direction, but we will use this stage later to mount the objective in the final setup. To drive this stage, we used a set of Newport 8742 controllers in daisy-chain configuration. 
+The stage we used is 8081-M 5-axis motorized tilt aligner from Newport.
+There is no reason here to use a 5-axis stage because we only need translation in one direction, but we will use this stage later to mount the objective in the final setup. 
+To drive this stage, we used a set of Newport 8742 controllers in daisy-chain configuration. 
+
+
+\section{Tweezer Images}
+
+An image of the CCD camera is shown in \cref{fig:SingleSpotZoomed}. 
+There seems to be a small tilt aberration present as the side ring is more clearly visible on the right side. 
+We found aberrations of this magnitude almost impossible to get rid of, as it could originate from anywhere between the input beam and the camera.
+
+In \cref{fig:AzimuthalAverage} we have integrated the intensity in rings around the maximum with a width of 1 pixel, effectively computing an azimuthal average. 
+This result is compared against the \ac{PSF} of the objective (\cref{eq:NormalizedPSF}), as well as the result from scalar diffraction theory using a Gaussian input beam equal to the aperture $w_i \sim R$, which was obtained by computing \cref{eq:FourierBesselAperture} for a sample of radial coordinates $r$. 
+\begin{figure}
+\centering
+    \centering
+	\begin{subfigure}{.49\textwidth}
+		\includegraphics[height=4.9cm]{figures/SingleSpotZoomed.pdf}
+		\caption{}
+		\label{fig:SingleSpotZoomed}
+	\end{subfigure}
+	\begin{subfigure}{.49\textwidth}
+		\centering
+		\includegraphics[height=4.9cm]{figures/AzimuthalAverage.pdf}
+		\caption{}
+		\label{fig:AzimuthalAverage}
+	\end{subfigure}
+	\caption{\textbf{a)} Tweezer as imaged by the second objective onto the CCD camera. 
+	\textbf{ b)} Azimuthal average (red) plotted against the \ac{PSF}, \cref{eq:NormalizedPSF} of the objective as well as the Gaussian input beam formula \cref{eq:FourierBesselAperture}.}
+	\label{fig:2Dresults}
+\end{figure}
+
+This plot is convenient for showing the general behavior, but is not accurate enough to extract data like the waist. For example: in this binning method, distance to the center pixel are calculated, but the center could be anywhere on this pixel. Therefore we also perform a two-dimensional Gaussian fit using \cref{eq:2DGaussian}
+
+\begin{equation}\label{eq:2DGaussian}
+    \frac{G(x,y)}{G_0} =  
+    \exp{\left[ -\frac{(x-x_0)^2}{2\sigma_x^2}\right]}
+    \exp{\left[ -\frac{(y-x_0)^2}{2\sigma_y^2}\right]}
+\end{equation}
+
+The result of this fit is shown in \cref{fig:3DFitShowing}. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{figures/3DSpotFitGaussian.pdf}
+    \caption{Plot showing quality of the Gaussian fit. $R^2 \sim 0.99$}
+    \label{fig:3DFitShowing}
+\end{figure}
+
+
+
+% However, in practice we don not send a plane wave but a Gaussian beam through the objective. 
+% As a result of this, two things are different \cite{Sortais2007}
+
+% \begin{itemize}
+%     \item As a result of apodization, the Airy rings will be damped. 
+%     \item The tweezer waist will be slightly broader: $\approx 9\%$.
+% \end{itemize}
+
 
 
 
