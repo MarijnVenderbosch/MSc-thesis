@@ -117,7 +117,7 @@ Such that the intensity in the first diffraction order is
 \begin{equation}\label{eq:IntensityFirstOrder}
     I_1(\phi) =
     \frac{8M^2w^2}{\pi^2} \left( 
-    1-\cos{(\phi(L))}
+    1-\cos{\phi(L)}
     \right)
 \end{equation}
 
@@ -149,7 +149,7 @@ Also, it is wavelength specific, which is why we performed it for the wavelenght
 
 \section{Light Propagation}\label{sec:PropagationDerivation}
 
-Finding the a\ac{CGH} to be displayed onto the SLM is not trivial. We will now explain how this is done.
+Finding the \ac{CGH} to be displayed onto the SLM is not trivial. We will now explain how this is done.
 We consider the general case for 3D spot arrays, but will see that for 2D arrays a faster algorithm can be used. 
 We consider an ensemble consisting of the SLM and a perfect lens with focal length $f$. We define two cartesian coordinate systems: the SLM plane by $\{x',y'\}$ and the focal plane of the lens by $\{x,y\}$. 
 The situation is sketched in \cref{fig:SLMLens}
@@ -177,7 +177,7 @@ As result of traveling from the $j$th pixel to the $m$th trap, under paraxial ap
 \end{equation}
 
 This situation is sketched in \cref{fig:SLMgeometry}.
-In the SLM plane, we assume uniform illumination of the SLM such that the amplitude is the same $|U_i|$ everywhere.
+In the SLM plane, we assume uniform illumination of the SLM such that the amplitude is the same everywhere: $|E_i| = 1$.
 This may look like an unrealistic assumption considering we use a gaussian input beam, but we will see in a moment that in fact the input beam does not matter for the pattern produced. 
 The SLM imprints a phase $\phi(x',y') = \phi_j$, such that the complex amplitude in the SLM plane for pixel $j$ is
 
@@ -192,7 +192,6 @@ The contribution for the $m$th trap can be found by summing over all pixels, als
     \frac{d^2}{i \lambda f} \sum_{j=1}^N e^{i(\phi_j - \Delta_j^m)}
 \end{equation}
 
-We assumed uniform illumination of the \ac{SLM}: $U_j =1$ everywhere. 
 Furthermore $d$ is the pixel pitch of the SLM. 
 But we are not interested in the phase of each in every spot, but only in the intensity. 
 We will thus emit the prefactors in \cref{eq:DiffractionFormula} and normalize over $N$ pixels
@@ -214,9 +213,12 @@ Setting $z=0$ in \cref{eq:Vm} yields
 
 Which is the 2D \ac{DFT} of $e^{i\phi}$ evaluated at spatial frequencies $x_m/\lambdaup f$ and $y_m/\lambdaup f$ in $x$ and $y$ respectively \cite{DiLeonardo2007,Bijnen2015}. 
 The DFT can be efficiently evaluated on a computer using a \ac{FFT}. We stress that the FFT can only be used for 2D arrays. 
-In this work, we only use 2D arrays and could in principle use \cref{eq:DFT} to speed up calculation. 
+In this work, we only use 2D arrays and could in principle use \cref{eq:2Dcase} to speed up calculation. 
 We did not do this however, as we only have to calculate the \ac{CGH} once so we do not mind it taking some more time.
 Making any arbitrary pattern in 2D, so not only spot arrays, is treated in detail in \cite{Bijnen2013}.  
+
+This type of algorithm is very robust because as can be seen from \cref{eq:DiffractionFormula,eq:2Dcase}, the contribution for each spot $m$ really comes from all pixels $j$. 
+This means that we do not need to know details about the exact input field used, which is really an advantage of this type of algorithm.
 
 \section{Finding the Hologram}\label{sec:GSW}
 
@@ -244,7 +246,7 @@ The idea is to make use of an algorithm that virtually propagates light back and
 For spot arrays, we are interested in the target intensities.
 Summing all of them yields the real part of the interference pattern, or the diffraction efficiency $e$ as well as the uniformity $u$
 
-\begin{equation}
+\begin{equation}\label{eq:EfficiencyUniformity}
     e = \sum_m I_m = \sum_m |V_m|^2, 
     \quad 
     u = 1-\frac{\text{max}(I_m)-\text{min}(I_m)}{\text{max}(I_m)+\text{min}(I_m)}
@@ -256,7 +258,7 @@ The algorithm should converge yielding a set $\{w_m, \phi_j\}$.
 \begin{itemize}
     \item Starting out with an initial guess $\phi_0$ using random phases for each pixel $\theta_j$ and uniform $w_m$, calculate $V_m$ according to \cref{eq:Vm}. 
     
-    \item For In the focal plane, replace the calculated $V_m^k$ array by the target $V_m$ array, and using updated $w_m^k = w_m^{k-1} V_m^k / |V_m^k|$ find the new phase mask $\phi_j^k$ according to \cref{eq:InterferencePattern}.
+    \item For In the focal plane, replace the calculated $V_m^k$ array by the target $V_m$ array and use this to calculate updated weight factors $w_m^k = w_m^{k-1} V_m^k / |V_m^k|$ find the new phase mask $\phi_j^k$ according to \cref{eq:InterferencePattern}.
 \end{itemize}
 
 This sequence is sketched in \cref{fig:GerschbergSaxton}. 
@@ -323,9 +325,9 @@ However, because the incident beam is described by a gaussian, this will lead to
 The ideal incident waist size is thus a compromise between power tranmission and degrees of freedom on the other.
     
 We can estimate this power loss by shining a Gaussian beam $G(x,y)$ of width $w(z)$ and power $P_0$ onto a rectangular aperture of dimensions $(2S_x, 2S_y)$ where $S_{x,y}$ are the semi-widths of the aperture. 
-The relative power transmission $P/P_0$ can be found by integrating the intensity of the beam \cref{GaussianBeamIntensity} in cartesian coordinates over the aperture
+The relative power transmission $P/P_0$ can be found by integrating the intensity of the beam \cref{eq:GaussianBeamIntensity} in cartesian coordinates over the aperture
 
-\begin{equation}\label{RectAperturePower}
+\begin{equation}\label{eq:RectAperturePower}
     \frac{P}{P_0} =
     \iint G(x,y) dA=
     \text{erf}\left(\frac{\sqrt{2}S_x}{w(z)}\right) \text{erf}\left(\frac{\sqrt{2}S_y}{w(z)}\right)
@@ -404,9 +406,30 @@ Here, we show the various phase masks that we have put onto the SLM:
 
 \section{Arrays of tweezers}
 
-\subsection{Array Spacing}
+Using holography and the SLM, we can make arbitrary arrays of spot using the algorithm discussed in \cref{sec:GSW}. 
+We limited ourself to arrays of $n \times n \times 1$ pixels in the $x$, $y$ and $z$-directions respectively, where $n \in (1,2\ldots10)$. 
+Phase masks were made using the algorithm implemented by Ivo Knottnerus running it for several hundred iterations, to get uniformities $>0.9999$ (In the \ac{GSW} algorithm, uniformities will get arbitrarily high for more iterations). 
+In we show a result, where we plot the calculated diffraction pattern in the focal plane. The theoretical diffraction efficiency: the real part of the interference in the focal plane from the light propagation equation was found to be on the order of $e \sim 0.92$ (\cref{eq:EfficiencyUniformity}, irrespective of the amount of spots made, similar to the original publication of this algorithm \cite{DiLeonardo2007}.
+In ... we show the theoretical diffraction result as found by the program, the computed hologram, as well as the measured pattern from the camera. 
 
-Because of the properties of the Fourier transform, the smallest possible 
+\begin{mdframed}
+    \subsection*{About the Units in the Fourier Plane}
+    
+    It is not nesessary necessary for the algorithm to take the exact optical setup into account.
+    For the purposes of producing phase masks, we discard the telescope and treat the microscope objective as an ideal lens with focal length $f = 4$ mm, as also shown in \cref{fig:SLMgeometry}.
+    In this case, smallest feature that can be produced in the Fourier plane is the diffraction-limited spot from the size of the SLM dimenions which can be considered a rectangualar aperture \cite{Bijnen2013,Bijnen2015}:
+    
+    \begin{equation}\label{eq:FocalUnit}
+        \Delta x \times \Delta y = \frac{2\lambdaup f}{S_x} \times \frac{2 \lambdaup f}{S_y}
+    \end{equation}
+    
+    \cref{eq:FocalUnit} are known as focal units and they are a natural unit to use in the Fourier plane.
+    However, this will not fully apply to us, because we conjugate the short axis of the SLM to the aperture radius of the lens (objective), such that the extra pixels in the long axis of the SLM are effectively not used. 
+    Therefore, we can set $S_x = S_y$ and the focal units will be the same in $x$ and $y$.
+\end{mdframed}
+    
+
+
 
 \subsection{Spot Detection}
 
@@ -416,11 +439,11 @@ To combat this, we first convolute the image with a Laplacian of Gaussian filter
 
 \subsection{Spot Fitting}
 
-Our tweezers should be described by \cref{FourierBesselAperture}. However, because of a lack of an analytic expression this is not the most convenient. \cref{FourierBesselAperture} can closely be resembled by a Gaussian. We will therefore use the following function for fitting spots numbered $k$
+We fitted the tweezer arrays using the same Gaussian used in the previous chapter (\cref{eq:2DGaussian}, with for each spot, numbered $k$, 5 fit parameters: the amplitude ('trap depth') $U_0$, the peak center $(x_0, y_0)$ as well as the sigmas in both cartesian coordinates $\sigma_x$ and $\sigma_y$:
 
-\begin{equation}\label{2DGaussian}
-    G_k(x,y) = U_k \exp{\left(-\frac{(x_k-x_{k,0})^2}{2\sigma_{k,x}^2}\right)}
+\begin{equation}\label{eq:2DGaussianNumberK}
+    U_k(x,y) = U_{0,k}\exp{\left(\frac{-(x_k-x_{0,k})^2}{2\sigma_{x,k}^2}\right)}
     \exp{\left( \frac{-(y_k-y_{k,0})^2}{2\sigma_{k,y}^2} \right)}
 \end{equation}
 
-Here $U$ is the 'trap depth', $x,y$ are the cartesian coordinates in the camera frame and $x_0,y_0$ is the center of the spot. Lastly $\sigma_{x,y}$ are standard deviations in $x$ and $y$. In principle, because the limiting aperture in the system is a circular aperture, the spots should be more or less symmetric and $\sigma_x\approx \sigma_y$ which we confirmed. We find the $1/e^2$ waist $w_k=\sigma_{k,x}+\sigma_{k,y}$. 
+So in principle we allow non circular spots, but we extract the waist $w_k$ of each spot as $w_k = \sigma_{x,k} + \sigma_{y,k}$
