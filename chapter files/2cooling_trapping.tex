@@ -1,33 +1,35 @@
 In assembly, computation, and readout of single atoms, laser cooling and trapping techniques play a central role. 
-This chapter will give some background on how this technique works, and how we intend to apply it onto strontium (Sr).
+This chapter will give some background on how this technique works, and how we intend to apply it to strontium (Sr). Herein we distuingish two cases: the near-resonant regime, when the laser is detuned only slightly from an atomic transition as well as the off-resonant regime, when the laser is detuned much further. 
+We will see the two regimes lead to very different behavior and consequently to different applications.
 %stress difference between near-resonant regime dominated by scattering 2 level and off-resonant
 
 \section{Magneto-Optical Trap}
 
 The workhorse for producing clouds of ultracold atoms is the 3D \ac{MOT}. 
-In essence, it consists of three sets of counter-propagating beams as well as a magnetic field gradient, together providing a dampening as well as a confining force. 
+In essence, it consists of three sets of counter-propagating beams as well as a magnetic field gradient, together providing a damping as well as a confining force. 
 
-\subsection{Doppler Cooling}
+\subsection{Scattering Force}
 
 Consider an atom with ground state $\ket{g}$ and excited state $\ket{e}$ separated by energy splitting $\hbar \omega_0$.
 This convention will be used for the remainder of this work.
-We drive a laser with omega $\omega$ that is near-resonant, but \emph{detuned} slightly from the transition by an amount $\delta$:
+We drive a laser with angular frequency $\omega$ that is near-resonant, but \emph{detuned} slightly from the transition by an amount $\delta$:
 
 \begin{equation}\label{detuning}
-	\delta = \omega - \omega_0
+	\delta = \omega - \omega_0.
 \end{equation}
 
 It will turn out that detuning is one of the most important parameters in laser cooling. 
 In this work we will always have $\delta <0$. Because of the Doppler effect, the atom 'sees' a slightly different light frequency depending on its velocity $v$ according to $\delta'=\delta+kv$ and the laser may become resonant: $\delta' = \omega_0$, causing the atom to absorb a photon absorbing momentum $\hbar k$ and promoting an electron to the excited state $\ket{e}$.
-When spontaneous emission causes the atom to fall back in a time $\tau = 1/\gamma$ where $\gamma$ is the linewidth of the transition, the electron is decayed back to the ground state, but the emitted photon is emitted in a random direction. 
-]This can be repeated many times per second at a scattering rate $\Gamma_{\text{sc}}$ \cite{Metcalf1999}
+When spontaneous emission causes the atom to fall back in a time $\tau = 1/\gamma$ where $\gamma$ is the linewidth of the transition, the electron decays back to the ground state, but the emitted photon is emitted in a random direction. 
+This can be repeated many times per second at a scattering rate $\Gamma_{\text{sc}}$ \cite{Metcalf1999}
 
 \begin{equation}\label{eq:ScatteringFrequency}
 	\Gamma_{\text{sc}} = \frac{ \gamma s_0 /2}{1+s_0+\left[2(\delta+ k v)/\gamma\right]^2},
 \end{equation}
 
-where $s_0 = I/I_{sat}$ is the saturation parameter as a function of the light intensity $I$ for saturation intensity $I_{sat} = \hbar c \gamma \pi/3\lambdaup^3$ for wavelength $\lambda$ and linewidth $\gamma$.
-Because the absorption occurs in a fixed direction and the emission is a random event, the atom will experience a net force scattering force $F = \hbar k \Gamma_{sc}$.
+where $s_0 = I/I_{\text{sat}}$ is the saturation parameter as a function of the light intensity $I$ for saturation intensity $I_{\text{sat}} = \hbar c \gamma \pi/3\lambdaup^3$. 
+Here, $\lambdaup$ is the wavelength of the laser light.
+Because the absorption occurs in a fixed direction and the corresponding emission happens in a random direction, the atom will experience a net \textit{scattering} force $F = \hbar k \Gamma_{sc}$.
 
 \subsection{Optical Molasses}
 
@@ -37,7 +39,7 @@ The total force from both contributions from \cref{eq:ScatteringFrequency} is \c
 
 \begin{equation}\label{eq:OpticalMolasses}
 	F = \frac{\hbar k \gamma s_0}{2}\left\{\
-	\left[1 + s_0 + 4\frac{(\delta+kv)^2}{\gamma^2}\right]^{-1}+
+	\left[1 + s_0 + 4\frac{(\delta+kv)^2}{\gamma^2}\right]^{-1}-
 	\left[1 + s_0 + 4\frac{(\delta-kv)^2}{\gamma^2}\right]^{-1}
 	\right\}
 \end{equation}
@@ -60,7 +62,7 @@ For $\delta<0$ we find we can linearize the force $F$ as \cite{Metcalf1999}
 	\end{subfigure}
 	\caption{\textbf{a)} Cooling force from a magneto-optical trap. 
 	Contributions from the $F^+$, $F^-$ and the total force are shown for $\delta = -\gamma$ and $I/I_0 = 2.$ 
-	\textbf{b} Concept of optical molasses in 1D. 
+	\textbf{b)} Concept of optical molasses in 1D. 
 	Atomic frequency is detuned from the atomic transition by $\delta<0$.
 	Because of the linear magnetic field, for $z>0$, the $m_j=-1$ atoms become resonant with only $\sigma^+$ light because of selection rules, and vice versa.}
 	\label{fig:MOTPlots}

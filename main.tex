@@ -1,4 +1,4 @@
-\documentclass[a4paper,twoside]{report}
+\documentclass[a4paper, twoside, notitlepage]{report}
 
 % admin
 \title{MSc project thesis optical tweezers}
@@ -38,7 +38,7 @@
 \setlist[enumerate]{itemsep = 2pt, topsep = 4pt}
 
 % appearance
-\usepackage[labelfont = {bf, sf}, font = sf, width=0.9\textwidth]{caption}
+\usepackage[labelfont = {bf, sf}, font = sf, width=\textwidth]{caption}
 \captionsetup{font = {sf, stretch = 0.92}}
 \usepackage[bf, sf]{titlesec}
 \usepackage{microtype}
@@ -86,6 +86,8 @@
 
 % section numbering depth
 \setcounter{secnumdepth}{3}
+% start with roman numbering for frontmatter
+\pagenumbering{roman}
 
 % boxes/frames
 \usepackage{mdframed}
@@ -96,15 +98,30 @@
 
 \begin{document}
 
-%\input{chapter files/front matter/titlepage.tex}
 
-\pagenumbering{roman}
+\input{chapter files/front matter/titlepage.tex}
+\clearpage
 
-%\input{chapter files/front matter/abstract.tex}
+\newgeometry{left = 3cm, top = 4cm, right = 3cm, bottom = 4cm}
+    \renewcommand{\abstractname}{\Large{Abstract}}
+    \begin{abstract}
+        \thispagestyle{plain}
+        \vspace*{0.5cm}
+        \normalsize
+        %\input{chapter files/front matter/abstract.tex}
+    \end{abstract}
+    
+    \clearpage
+    
+    \renewcommand{\abstractname}{\Large{Acknowledgements}}
+    \begin{abstract}
+        \thispagestyle{plain}
+        \vspace*{0.5cm}
+        \normalsize
+        %\input{chapter files/front matter/acknowledgments.tex}
+    \end{abstract}
+\restoregeometry
 
-%\newgeometry{left = 1.5in,right = 1.5in, top = 1.5in, bottom=1.5in}
-%\input{chapter files/front matter/acknowledgments.tex}
-%\restoregeometry
 
 \tableofcontents
 \newpage
@@ -153,8 +170,7 @@
  
 \setcounter{equation}{0}
 \setcounter{figure}{0}
- 
-\input{chapter files/appendices/appendix_VQE.tex}
+
 \input{chapter files/appendices/appendix_LightMatter}
  
 \end{appendices}
