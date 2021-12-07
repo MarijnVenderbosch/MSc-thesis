@@ -336,7 +336,7 @@ This target is illuminated with incoherent light from a \ac{LED} because we note
 
 \begin{figure}
     \centering
-    \includegraphics[width = 0.45\linewidth]{figures/linespacing.pdf}
+    \includegraphics[width = 0.45\linewidth]{figures/LineSpacingCalibration.pdf}
     \caption{Image from the resolution target illuminated showing lines spaced by 45 lines per mm.}
     \label{fig:resolutionTarget}
 \end{figure}
@@ -390,9 +390,28 @@ Cleary, the obtained tweezer potential fits very well to a Gaussian, which justi
 This is confirmed by the coefficient of determination $R^2 > 0.99$.
 
 \begin{figure}
+\centering
+    \centering
+	\begin{subfigure}{.49\textwidth}
+		\includegraphics[width=0.9\linewidth]{figures/3DSpotFitGaussian.pdf}
+		\caption{}
+		\label{fig:3Dshowing}
+	\end{subfigure}
+	\begin{subfigure}{.49\textwidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/3DSpotFitGaussianSmaller.pdf}
+		\caption{}
+		\label{fig:3Dwaistfit}
+	\end{subfigure}
+	\caption{\textbf{a)} Plot showing quality of the Gaussian fit. $R^2 > 0.99$.
+	\textbf{ b)} }
+	\label{fig:3Dfits}
+\end{figure}
+
+\begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{figures/3DSpotFitGaussian.pdf}
-    \caption{Plot showing quality of the Gaussian fit. $R^2 > 0.99$}
+    \caption{}
     \label{fig:3DFitShowing}
 \end{figure}
 
@@ -417,7 +436,6 @@ In the end, all images are stiched together to make a single image that would gi
 This is done in figure.
 Also plotted in this figure is the result from diffraction theory. 
 To calibrate the amount of translation we calibrated the step size of the motor.
-
 
 \subsection{Picomotor Attenuator Calibration}
 

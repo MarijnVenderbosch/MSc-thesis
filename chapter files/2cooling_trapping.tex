@@ -54,23 +54,12 @@ Doing a series expansion to first order around $v = 0$, it can be shown the forc
 \end{equation}
 
 \begin{figure}
-	\begin{subfigure}{.44\textwidth}
-		\includegraphics[height=4.5cm]{figures/MOTplot.pdf}
-		\caption{}
-		\label{fig:MOTcooling}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{.55\textwidth}
-		\includegraphics[height=4.5cm]{figures/OpticalMolasses.pdf}
-		\caption{}
-		\label{fig:MOTconcept}
-	\end{subfigure}
-	\caption{\textbf{a)} Cooling force from a magneto-optical trap. 
-	Contributions from the $F^+$, $F^-$ and the total force are shown for $\delta = -\gamma$ and $I/I_0 = 2.$ 
-	\textbf{b)} Concept of optical molasses in 1D. 
+    \centering
+	\includegraphics[height=4.5cm]{figures/Molasses.pdf}
+    \caption{Concept of optical molasses in 1D. 
 	Atomic frequency is detuned from the atomic transition by $\delta<0$.
 	Because of the linear magnetic field, for $z>0$, the $m_j=-1$ atoms become resonant with only $\sigma^+$ light because of selection rules, and vice versa.}
-	\label{fig:MOTPlots}
+    \label{fig:MOTPlots}
 \end{figure}
 
 Where $-\beta$ is the slope of the scattering force around $v=0$. 
@@ -147,10 +136,9 @@ Herein $\mathbf{p}$, $\alpha$ and $\mathbf{E}$ are all defined as complex variab
 \end{equation}
 
 where the $\left\langle\right\rangle$ brackets denote the time average.
-We average over this radidly varying phase term, yielding a factor $1/2$.
+We average over this rapidly varying phase term, yielding a factor $1/2$ \cite{Grimm2000}.
 Furthermore we used $I(\mathbf{r}) = 2 \epsilon_0 c |\mathbf{E}(\mathbf{r})|^2$ where $\epsilon_0$ is the electric constant. 
 The dipole force thus scales with the part of the polarizability that is in phase with the light field.
-An additional factor $1/2$ comes in because the dipole moment is induced and not permanent \cite{Grimm2000}. 
 The gradient of \cref{eq:DipolePotential} gives rise to the dipole force:
 
 \begin{equation}\label{eq:DipoleForce}
@@ -162,7 +150,7 @@ To maximize the dipole force \cref{eq:DipoleForce},
 we have to maximize the gradient of the light intensity profile.
 This can be done by focussing the laser to the smallest possible spot.
 How this can be done is explained in \cref{ch:tweezer}. 
-The scattering rate from the ODT can be found by averaging over the derivative of the dipole moment with the electric field \cite{Grimm2000}
+The scattering rate from the ODT can be found by averaging over the product of the temporal derivative of the dipole moment with the electric field \cite{Grimm2000}
 
 \begin{equation}\label{eq:ScatteringRate}
 	\Gamma_{\text{sc}}(\mathbf{r}) = \frac{\left\langle \mathbf{p} \mathbf{E} \right\rangle}{\hbar \omega}
