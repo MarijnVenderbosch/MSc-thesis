@@ -12,6 +12,7 @@ In essence, it consists of three sets of counter-propagating beams as well as a 
 
 Consider an atom with ground state $\ket{g}$ and excited state $\ket{e}$ separated by energy splitting $\hbar \omega_0$.
 This convention will be used for the remainder of this work.
+The energy levels are shown schematically in \cref{fig:2LevelAtom}.
 The laser will output at an angular frequency $\omega$ that is near-resonant, but \emph{detuned} slightly from the transition by an amount $\delta$:
 
 \begin{equation}\label{detuning}
@@ -54,13 +55,28 @@ Doing a series expansion to first order around $v = 0$, it can be shown the forc
 \end{equation}
 
 \begin{figure}
-    \centering
-	\includegraphics[height=4.5cm]{figures/Molasses.pdf}
-    \caption{Concept of optical molasses in 1D. 
+\centering
+	\begin{subfigure}{.38\textwidth}
+		\centering
+		\includegraphics[height=4.5cm]{figures/2LevelAtom.pdf}
+		\caption{}
+		\label{fig:2LevelAtom}
+	\end{subfigure}
+	\begin{subfigure}{.61\textwidth}
+		\centering
+		\includegraphics[height=4.5cm]{figures/Molasses.pdf}
+		\caption{}
+		\label{fig:MOTPlots}
+	\end{subfigure}
+	\caption{\textbf{a)} Energy level scheme for the 2-level case. 
+	The two energies are split by $\omega_e - \omega_g = \omega_0$.
+	The detuning is $\delta = \omega-\omega_0<0$ is shown as well.
+	\textbf{b)} Concept of optical molasses in 1D. 
 	Atomic frequency is detuned from the atomic transition by $\delta<0$.
 	Because of the linear magnetic field, for $z>0$, the $m_j=-1$ atoms become resonant with only $\sigma^+$ light because of selection rules, and vice versa.}
-    \label{fig:MOTPlots}
 \end{figure}
+
+
 
 Where $-\beta$ is the slope of the scattering force around $v=0$. 
 For $\delta<0$ the resulting force has a damping effect on the velocity, which if applied in all 3 dimensions can cool atoms to ultracold temperatures. 
@@ -75,7 +91,7 @@ For $\delta=-\gamma/2$ and $s_0 =2$, \cref{eq:ForceLinearized} ($\beta$) is at a
 	T_D = \frac{\hbar}{2k_b} \gamma.
 \end{equation}
 
-where $k_b$ is Boltzmann's constant. Apparently, this cooling limit is only dependent on the linewidth of the transition $\gamma$, apart from physical constants. This result will be used later in \cref{sec:Sr}.
+where $k_b$ is Boltzmann's constant. Apparently, this cooling limit is only dependent on the linewidth of the transition $\gamma$, apart from physical constants. This result will be used later in \cref{sec:Sr}. For Rb-85 the Doppler temperature is $146$ $\mu$K. Sr MOTs are typically orders of magnitude colder.
 
 \subsection{Magneto-Optical Trapping}
 
@@ -160,30 +176,10 @@ The scattering rate from the ODT can be found by averaging over the product of t
 \Cref{eq:DipoleForce,eq:ScatteringRate} are expressions that are valid for arbitrary light fields.
 The fact that $\alpha(\omega)$ is complex means there is a phase delay between the electric field and the dipole response.
 The task that remains is finding the polarizability $\alpha(\omega)$. 
-As a starting point, we will consider the electron as a (classical) damped harmonic oscillator, which is for Alkali species already fairly accurate \cite{Grimm2000}.
 
 \subsection{Classical}
 
-In the classical picture, we assume a classical light field, as well as a classical electron (harmonic oscillator). 
-We can write down a general expression for the the light field propagating in the $z$-direction polarized in the $\bm{\hat{\epsilon}}$ direction perpendicular to it:
-
-\begin{equation}\label{eq:ClassicalField}
-	\mathbf{E}(z,t) = \mathbf{E}_0 \cos{(k z - \omega t)} 	\bm{\hat{\epsilon}}
-\end{equation}
-	 
-The electron is modeled as a damped harmonic oscillator (Lorentz oscillator). Integrating the equation of motion for the electron, assuming a dipole moment $\mathbf{p} = e \mathbf{r}$ where $r$ is the position yields after equating to \cref{eq:DipoleMoment} for the polarizability \cite{Grimm2000}
-
-\begin{equation}\label{eq:LorentzOscillator}
-	\alpha(\omega)=6 \pi \epsilon_{0} c^{3} \frac{\Gamma / \omega_{0}^{2}}{\omega_{0}^{2}-\omega^{2}-\mathrm{i}\omega^3\Gamma/\omega_0^2}
-\end{equation},
-
-Where $\Gamma$ is the on-resonant damping rate
-
-\begin{equation}\label{eq:ResonantDampingRate}
-	\Gamma = \frac{e^2 \omega_0^2}{6\pi \epsilon_0 m_e c^3}
-\end{equation}
-
-and $m_e$ is the electron mass. Inserting \cref{eq:LorentzOscillator} in \cref{eq:DipolePotential,eq:ScatteringRate} yields, after assuming $\delta \ll \omega, \Gamma \ll \omega$
+The polarizatibility was derived classicaly in \cite{Grimm2000}, resulting in the following trap depths and scattering rates.
 
 \begin{equation}\label{eq:DipoleClassicalResult} 
 	U_{\text{dip}}(\mathbf{r}) = 
@@ -192,26 +188,36 @@ and $m_e$ is the electron mass. Inserting \cref{eq:LorentzOscillator} in \cref{e
 	\Gamma_{\text{sc}}(\mathbf{r}) = 
 	\frac{3\pi c^2}{2\hbar\omega_0^3}\left(\frac{\Gamma}{\delta}\right)^2 I(\mathbf{r})
 \end{equation}
+	 
+Where $\Gamma$ is the on-resonant damping rate
 
-From \cref{eq:DipoleClassicalResult} the relation these two quantities is $\hbar \Gamma_{sc} =\Gamma U_{\text{dip}}/\delta$. 
+\begin{equation}\label{eq:ResonantDampingRate}
+	\Gamma = \frac{e^2 \omega_0^2}{6\pi \epsilon_0 m_e c^3}
+\end{equation}
+
+and $m_e$ is the electron mass. \Cref{eq:DipoleClassicalResult} is valid for the case $\delta \ll \omega, \Gamma \ll \omega$.
+From \cref{eq:DipoleClassicalResult} the relation these two quantities is:
+
+\begin{equation}\label{eq:RelationUG}
+    \hbar \Gamma_{sc} =\Gamma U_{\text{dip}}/\delta
+\end{equation}
+
 Thus, to keep scattering events to a minimum a large detuning should be used.
 To still have sufficiently deep traps, high light intensities are used. 
-
+While the classical treatment is fairly accurate for alkali-metals like Rb \cite{Grimm2000}, we show a more general semi-classical treatment below as well.
 
 \subsection{Semi-Classical}
 
-In the semi-classical picture, we consider the same classical light field \cref{eq:ClassicalField}, but consider an atom with quantized energy levels. 
-We will consider a two-level atom with eigenstates $\ket{g}$ (ground) with energy $\hbar \omega_g$ and $\ket{e}$ (excited) with $\hbar \omega_e$, see \cref{fig:2LevelAtom}. 
+In the semi-classical treatment a classical light field is considered.
+We can write down a general expression for the the light field propagating in the $z$-direction polarized in the $\bm{\hat{\epsilon}}$ direction perpendicular to it:
+
+\begin{equation}\label{eq:ClassicalField}
+	\mathbf{E}(z,t) = \mathbf{E}_0 \cos{(k z - \omega t)} 	\bm{\hat{\epsilon}}
+\end{equation}
+
+The atom has two quantized eigenstates: $\ket{g}$ (ground) with energy $\hbar \omega_g$ and $\ket{e}$ (excited) with $\hbar \omega_e$, see \cref{fig:2LevelAtom}. 
 Then the atomic Hamiltonian in this basis reduces to \cite{Loudon2000}
 
-\begin{figure}
-	\centering
-	\includegraphics[height=4.1cm]{figures/2LevelAtom.pdf}
-	\caption{Energy level scheme for the 2-level case. 
-	The two energies are split by $\omega_e - \omega_g = \omega_0$.
-	The detuning is $\delta = \omega-\omega_0<0$ is shown as well.}
-	\label{fig:2LevelAtom}
-\end{figure}
 
 \begin{equation}\label{eq:AtomHamiltonianMain}
 	\mathcal{H}_A = \hbar \omega_g \ket{g}\bra{g} + \hbar \omega_e \ket{e}\bra{e}
@@ -280,68 +286,16 @@ This is called the light shift or AC Stark shift \cite{Metcalf1999}, sketched in
 	\Delta E_{e,g} \sim \pm \frac{\hbar \Omega^2}{4 \delta}.
 \end{equation}
 
-The light shift is proportional to the light intensity over the detuning: $\Omega^2 / \delta \propto I / \delta$, which we already found for the classical treatment in \cref{eq:DipoleClassicalResult}. 
+Similar to the classical result, the light shift is proportional to the light intensity over the detuning: $\Omega^2 / \delta \propto I / \delta$.
+So for a spatially varying detuning, the light shift will also vary locally.
 This behavior of \cref{eq:Stark} is shown in \cref{fig:DipoleForce}. Because the field is off-resonant, atoms only occupy the ground state. 
 For $\delta <0$ ('red detuned'), the ground state light state is negative. 
-To calculate the new eigenstates, we repeat the treatment for a quantized light field.
-This is known as the dressed atom picture.
+Because of the light shift, the eigenstates of the system are shifted, the new eigenstates can be found in appendix \ref{ch:DressedApproach}.
 
-\subsection{Dressed Atom Picture}\label{sec:DressedApproach}
 
-To calculate the new shifted eigenstates, the full Hamiltonian has to be considered, included a quantized light field with Hamiltonian $\mathcal{H}_L$ \cite{Dalibard1985}
+\subsection{Laser cooling in Practice}\label{sec:Practice}
 
-\begin{equation}
-	\mathcal{H} = \mathcal{H}_A + \mathcal{H}_L + \mathcal{H}_I(t)
-\end{equation}
-
-where the light field has eigenenergies separated by the photon energy and eigenstates of $n$ photons: $\ket{n}$ \cite{Vredenbregt2020}
-
-\begin{equation}\label{eq:RadiationModes}
-	\mathcal{H}_L = \sum_n \hbar \omega \left(n+\frac{1}{2}\right) \ket{n}\bra{n}
-\end{equation}
-
-The eigenmodes of the light field can only couple to one energy pair of the $\mathcal{H}_A + \mathcal{H}_I$ part, such that the Hamiltonian can be written down as a direct product of 2 x 2-matrix Hamiltonians \cite{Vredenbregt2020,Hussin2005} $\mathcal{H}_n$:
-
-\begin{equation}\label{eq:CunningsHamiltonian}
-    \mathcal{H}_n = \hbar 
-    \begin{pmatrix}
-        (n + 1)\omega -\omega_0 / 2                     & -\frac{1}{2}\sqrt{\Omega^2+\delta^2(n+1)} \\
-        -\frac{1}{2}\sqrt{\Omega^2 + \delta^2(n+1)}  & n\omega + \omega_0/2
-    \end{pmatrix}
-\end{equation}
-
-This is known as the Jaynes-Cummings Hamiltonian, which is one of the few problems in quantum optics analytically solvable.
-It has eigenvalues \cite{Hussin2005}
-
-\begin{equation}\label{eq:CunningsEigenvalues}
-    E_{\pm} = \hbar\omega\left(n+\frac{1}{2}\right) \pm \frac{\hbar}{2} \sqrt{\delta^2 + \Omega^2(n+1)}.
-\end{equation}
-
-Note the similarity to \cref{eq:SemiClassicalEigenvalues}. From \cref{eq:CunningsEigenvalues} the new eigenstates can be found to be \cite{Hussin2005}
-
-\begin{subequations}\label{eq:CummingsEigenstates}
-    \begin{align}
-        \ket{+,n} &= \cos{({\theta_n}/2)} \ket{n+1,g} -\sin{(\theta_n/2)} \ket{n,e}, \\
-        \ket{-,n} &= \sin{(\theta_n/2)}\ket{n+1,g} + \cos{(\theta_n/2)} \ket{n,e}.
-    \end{align}
-\end{subequations}
-
-Which are sketched in \cref{fig:DipoleForce} as well. 
-In \cref{eq:CummingsEigenstates} the mixing angle $\theta_n$ for $n$ photons in the system is $\theta_n = \arctan{(\Omega\sqrt{n+1} / \delta})$.
-Here, \cref{eq:CummingsEigenstates} are known as the \emph{dressed} states.
-The \emph{bare} atomic states in \cref{fig:2LevelAtom} are shifted by the light shift because the light field energy is admixed with the atomic eigenstates, leading to the new mixed (dressed) eigenstates of \cref{eq:CummingsEigenstates}. 
-The bevavior pictured in \cref{fig:DipoleForce} still applies, but if the eigenenergies of the light field are included, the splitted energies of \cref{fig:DipoleForce} are situated along an infinite ladder of photon energies. 
-This is presented in \cref{fig:DressedStatePicture}. 
-The light space eigenenergies \cref{eq:RadiationModes}, spaced by $\hbar \omega$ is superimposed on the light shift eigenenergies. 
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.3\linewidth]{figures/DressedStates.pdf}
-    \caption{Dressed States. The same shift as shown in \cref{fig:DipoleForce} is shown, superimposed on the  eigenenergies spaced by $\hbar \omega$. 
-    Figure not to scale. }
-    \label{fig:DressedStatePicture}
-\end{figure}
-
+In order to reliably trap atoms near the bottom of the tweezer, the dipole potential should be significatly deeper 
 
 \section{Strontium}\label{sec:Sr}
 

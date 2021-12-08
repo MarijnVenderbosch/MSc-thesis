@@ -143,8 +143,11 @@ Solving for the first zero of \cref{eq:NormalizedPSF}, and introducing the defin
     d_1 = 0.61 \frac{\lambdaup}{\text{NA}}
 \end{equation}
 
-This result is known as the Abbe limit or diffraction limit \cite{Hecht2002} and it is the smallest feature the imaging system can produce. 
+This result is known as the Abbe limit or diffraction limit \cite{Abbe1882} and it is the smallest feature the imaging system can produce. 
 To minimize the \ac{PSF} we can thus increase the \ac{NA} of our imaging system. In this work we will use $\text{NA} = 0.5$. 
+For high NA imaging systems however, the paraxial approximation which was used to simplify the diffraction integral is no longer a priori true. 
+Still, \cite{Chon2007} showed a derivation of \cref{eq:Abbe} using a different diffraction theory that does not require paraxial approximation and showed that for collimated laser beams \cref{eq:Abbe} has neglibible error even for $\text{NA} = 1$. 
+We will assume we can still apply \cref{eq:Abbe} for $\text{NA} = 0.5$.
 
 In practice, it is not convenient to use \cref{eq:FourierBesselAperture} to fit data and it is more convenient to use a simpler function. 
 A Gaussian function is commonly used, and can even fit better than \cref{eq:FourierBesselAperture} because the rings of the Airy disk are easily deformed becauese of aberrations \cite{Knottnerus2018}. 
@@ -328,23 +331,34 @@ To ease the coupling, we run a coax cable from a power meter on the main table t
 
 \subsection{Calibration Imaging System}
 
-The 60X magnification of the 0.85 NA objective is only specified when used in a microscope with standard tube length distance, because it is finite conjugate corrected.
-Because our CCD is not exactly at the distance where normally the eyepiece of the microscope would be, we have to calibrate its magnification.
-We do this using a high resolution target\footnote{Edmund Optics high resolution microscope target.}.
+\begin{figure}
+    \centering
+    \includegraphics[width = 0.5\linewidth]{figures/LEDcalibration.pdf}
+    \caption{Illumination of the calibration target by an LED, imaged by the 0.85 NA objective and camera at fixed distance.}
+    \label{fig:resolutionTarget}
+\end{figure}
 
-This target is illuminated with incoherent light from a \ac{LED} because we noted that using a coherent source from a laser caused too much interference from the different lines. We neglect the slightly different focus point from the Newport objective for our laser frequency compared to white light. 
+The 60X magnification of the 0.85 NA objective is only specified when used in a microscope with standard tube length distance, because it is finite conjugate corrected.
+Outside of a standard microscope, we have to calibrate its exact magnification.
+We do this using a high resolution target\footnote{Technologie Manufaktur TC-RT01}, featuring groups of lines with variable spacing between them. 
+The way this was done is shown in \cref{fig:resolutionTarget}.
+Initially, we tried to use laser light to illuminate the target, but we did not get a clear image. 
+Most likely this is because of the diffracting beams interfering with each other. 
+To combat this we used light from an incoherent light source (\ac{LED}). We neglect the slightly different focus point from the Newport objective for our laser frequency compared to white light. 
 
 \begin{figure}
     \centering
-    \includegraphics[width = 0.45\linewidth]{figures/LineSpacingCalibration.pdf}
+    \includegraphics[width = 0.42\linewidth]{figures/LineSpacingCalibration.pdf}
     \caption{Image from the resolution target illuminated showing lines spaced by 45 lines per mm.}
     \label{fig:resolutionTarget}
 \end{figure}
 
-To detect the edges in \cref{fig:resolutionTarget}, we use an edge detection algorithm script that averages over all vertical pixels, blurs using a Gaussian to surpress noise and computes the derivative. 
+To detect the edges in \cref{fig:resolutionTarget}, we use an edge detection algorithm script.
+For several 1D row slices of the image, it blurs the edge using a Gaussian to surpress noise and subsequently computes the spatial derivative. 
 When the derivative surpasses a set threshhold we define it as an edge.
-The magnification was found to be $(50.3\pm0.5)$X.
-This is smaller than the specified 60X, which we attribute to an incorrect tube length distance. 
+Deviding the pixel spacing of the lines by the pixel pitch of the camera ($4.65$ $\mu$m) we find a magnification of ($67 \pm 3$)X, which is larger than the 60X specified by Newport. 
+We attribute this to a slightly longer objective-camera distance that was used. 
+After the calibration was performed, the objetive-camera distance was left untouched. 
 
 \section{Tweezer Images: Radial}
 
@@ -354,24 +368,15 @@ We found aberrations of this magnitude almost impossible to get rid of, as it co
 
 In \cref{fig:AzimuthalAverage} we have integrated the intensity in rings around the maximum with a width of 1 pixel, effectively computing an azimuthal average. 
 This result is compared against the \ac{PSF} of the objective (\cref{eq:NormalizedPSF}), as well as the result from scalar diffraction theory using a Gaussian input beam equal to the aperture $w_i \sim R$, which was obtained by computing \cref{eq:FourierBesselAperture} for a sample of radial coordinates $r$. 
+
 \begin{figure}
-\centering
     \centering
-	\begin{subfigure}{.49\textwidth}
-		\includegraphics[height=4.9cm]{figures/SingleSpotZoomed.pdf}
-		\caption{}
-		\label{fig:SingleSpotZoomed}
-	\end{subfigure}
-	\begin{subfigure}{.49\textwidth}
-		\centering
-		\includegraphics[height=4.9cm]{figures/AzimuthalAverage.pdf}
-		\caption{}
-		\label{fig:AzimuthalAverage}
-	\end{subfigure}
-	\caption{\textbf{a)} Tweezer as imaged by the second objective onto the CCD camera. 
+    \includegraphics[width=\linewidth]{figures/AzimuthalAverageSpotZoomed.pdf}
+    \caption{\textbf{a)} Tweezer as imaged by the second objective onto the CCD camera. 
 	\textbf{ b)} Azimuthal average (red) plotted against the \ac{PSF}, \cref{eq:NormalizedPSF} of the objective as well as the Gaussian input beam formula \cref{eq:FourierBesselAperture}.}
-	\label{fig:2Dresults}
+    \label{fig:2Dresults}
 \end{figure}
+
 
 So, if a Gaussian input beam used, the resulting spot will be slightly broader.
 Additionally, the rings of the Airy disk will be slightly surpressed, this effect is known as Gaussian apodization.
@@ -385,45 +390,48 @@ Therefore we also perform a two-dimensional Gaussian fit using \cref{eq:2DGaussi
     \exp{\left[ -\frac{(y-x_0)^2}{2\sigma_y^2}\right]}
 \end{equation}
 
-The result of this fit is shown in \cref{fig:3DFitShowing}. 
+The result of this fit is shown in \cref{fig:3Dshowing}. 
 Cleary, the obtained tweezer potential fits very well to a Gaussian, which justifies the assumption of using a Gaussian approximation to estimate the trap frequencies (\cref{eq:GaussianPotential}. 
 This is confirmed by the coefficient of determination $R^2 > 0.99$.
 
 \begin{figure}
 \centering
-    \centering
 	\begin{subfigure}{.49\textwidth}
-		\includegraphics[width=0.9\linewidth]{figures/3DSpotFitGaussian.pdf}
+	    \centering
+		\includegraphics[width=0.96\linewidth]{figures/3DSpotFitGaussian.pdf}
 		\caption{}
 		\label{fig:3Dshowing}
 	\end{subfigure}
 	\begin{subfigure}{.49\textwidth}
 		\centering
-		\includegraphics[width=0.9\linewidth]{figures/3DSpotFitGaussianSmaller.pdf}
+		\includegraphics[width=0.96\linewidth]{figures/3DSpotFitGaussianSmaller.pdf}
 		\caption{}
 		\label{fig:3Dwaistfit}
 	\end{subfigure}
 	\caption{\textbf{a)} Plot showing quality of the Gaussian fit. $R^2 > 0.99$.
-	\textbf{ b)} }
+	\textbf{ b)} Region of interest around the maximum that was used to extract the waist.}
 	\label{fig:3Dfits}
 \end{figure}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{figures/3DSpotFitGaussian.pdf}
-    \caption{}
-    \label{fig:3DFitShowing}
-\end{figure}
+Assuming the $\sigma_x \sim \sigma_y$ which should be the case for a circlar aperture, we find the waist as $w_0 = \sigma_x + \sigma_y = (0.88 \pm 0.04)$ $\mu$m, where the error originates mainly from the calibration of the magnification. 
+In order to find this waist, a smaller, 10 by 10 pixel region of interest was used, see \cref{fig:3Dfits}.
+Despite the 0.85 NA used, there will still be a slight convolution with the imaging point spread function present. 
+Although in deconvolution is non-trivial in general, for a Gaussian it is quite straightforward \cite{Knottnerus2018} in terms of the waists of the image and the diffraction-limited waist of the imaging system:
 
-Assuming the $\sigma_x \sim \sigma_y$ which should be the case for a circlar aperture, we find the waist as $w_0 = \sigma_x + \sigma_y = (0.80 \pm 0.03)$ $\mu$m, where the error originates mainly from the calibration of the magnification. 
-We fitted a region of interest around the spot maximum of 10 x 10 pixels. 
-Comparing to the theory result, for $\lambdaup = 820$ nm and $\text{NA} = 0.5$ (\cref{eq:GaussianAiryFit}) yields $w_0 = 0.689$ $\mu$m. 
+\begin{equation}\label{eq:Deconvolution}
+    w_{\text{object}} = \sqrt{w_{\text{image}}^2-w_{\text{system}}^2}.
+\end{equation}
+
+This gives an object waist of $w_{\text{obj}} = (0.77 \pm 0.05)$ $\mu$m. 
+Comparing to the theory result, for $\lambdaup = 820$ nm and $\text{NA} = 0.5$ (\cref{eq:Abbe,eq:GaussianAiryFit}) yields $w_0 = 0.689$ $\mu$m. 
 But this result unachievale because of $w_i \sim R$ used. 
-We know that as a result of this, the waist should be $\approx$9\% larger \cite{Sortais2007} which was confirmed by \cref{eq:FourierBesselAperture}, yielding $w_0 = 0.751$ nm. 
-So our tweezer is about 6\% broader than the theoretical minimum, which is to be expected because of aberrations. 
+We know that as a result of this, the waist should be $\approx$9-10\% larger \cite{Sortais2007,Chon2007} which was confirmed by \cref{eq:FourierBesselAperture}, yielding $w_0 \sim 0.75$ $\mu$m, which lies within the error margin.
+We conclude the tweezer is nearly diffraction-limited in size.
+
 We did apply some aberration correction, which is mainly described in the next section \cref{sec:Tweezer3D}.
 The result shown is after this aberration correction, though this this not significantly improve the result. 
 We did note an improvement mainly for the axial direction which the next section is about. 
+
 
 \section{Tweezer: Axial Direction}\label{sec:Tweezer3D}
 
@@ -435,7 +443,33 @@ To study the axial direction, we scan the Mitutoyo objective along the optical (
 In the end, all images are stiched together to make a single image that would give an idea of a sideview of the tweezer.
 This is done in figure.
 Also plotted in this figure is the result from diffraction theory. 
-To calibrate the amount of translation we calibrated the step size of the motor.
+To calibrate the amount of translation we calibrated the step size of the motor. The optical setup is shown in \cref{fig:ZScanSetup}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\linewidth]{figures/ZScanSetup.pdf}
+    \caption{Optical setup}
+    \label{fig:ZScanSetup}
+\end{figure}
+
+\begin{figure}
+\centering
+	\begin{subfigure}{.49\textwidth}
+	    \centering
+		\includegraphics[width=\linewidth]{figures/AxialImageTweezerScanUncorrected.pdf}
+		\caption{}
+		\label{fig:AxialUncorrected}
+	\end{subfigure}
+	\begin{subfigure}{.49\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{figures/AxialImageTweezerScan.pdf}
+		\caption{}
+		\label{fig:AxialZernike}
+	\end{subfigure}
+	\caption{Radial intensity profile \textbf{a)} before aberration correction: $z_R \sim 6.2$ $\mu$m and \textbf{b)} after aberration correction: $z_R \sim 3.5$ $\mu$m.}
+	\label{fig:AxialScans}
+\end{figure}
+
 
 \subsection{Picomotor Attenuator Calibration}
 
@@ -444,11 +478,11 @@ The stage we used is 8081-M 5-axis motorized tilt aligner from Newport.
 Because of the 5 degrees of freedom, it can accurately align the two objectives with each other. 
 To drive this stage, we used a set of Newport 8742 controllers in daisy-chain configuration: both can drive 4 motors so we have 2 of them to address all 5 motors.
 For scanning the axial direction of the tweezer we only use one of the 5 motors inthe stage. 
-
-
 However, to know the exact step size calibration is needed because the step size is dependent on the torque applied, which depends on the direction of travel as well as whether the motor has to counter gravity, etc.
 In order to do this, we repeatedly measured the available translation range of some $\sim$ 3mm, recording the amount of steps this takes as well as the amount moved using a caliper. 
 We found a step calibration of $10.6 \pm 0.05$ $\mu$m/step, which was used to translate amount of steps to distances. 
+
+
 
 
 
