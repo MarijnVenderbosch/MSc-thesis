@@ -354,11 +354,11 @@ To combat this we used light from an incoherent light source (\ac{LED}). We negl
 \end{figure}
 
 To detect the edges in \cref{fig:resolutionTarget}, we use an edge detection algorithm script.
-For several 1D row slices of the image, it blurs the edge using a Gaussian to surpress noise and subsequently computes the spatial derivative. 
-When the derivative surpasses a set threshhold we define it as an edge.
-Deviding the pixel spacing of the lines by the pixel pitch of the camera ($4.65$ $\mu$m) we find a magnification of ($67 \pm 3$)X, which is larger than the 60X specified by Newport. 
+For several 1D row slices of the image, it blurs the edge using a Gaussian to suppress noise and subsequently computes the spatial derivative. 
+When the derivative surpasses a set threshold we define it as an edge.
+Dividing the pixel spacing of the lines by the pixel pitch of the camera ($4.65$ $\mu$m) we find a magnification of ($67 \pm 3$)X, which is larger than the 60X specified by Newport. 
 We attribute this to a slightly longer objective-camera distance that was used. 
-After the calibration was performed, the objetive-camera distance was left untouched. 
+After the calibration was performed, the objective-camera distance was left untouched. 
 
 \section{Tweezer Images: Radial}
 
@@ -408,7 +408,7 @@ This is confirmed by the coefficient of determination $R^2 > 0.99$.
 		\caption{}
 		\label{fig:3Dwaistfit}
 	\end{subfigure}
-	\caption{\textbf{a)} Plot showing quality of the Gaussian fit. $R^2 > 0.99$.
+	\caption{\textbf{a)} Plot showing convergence of the Gaussian fit. $R^2 > 0.99$.
 	\textbf{ b)} Region of interest around the maximum that was used to extract the waist.}
 	\label{fig:3Dfits}
 \end{figure}
@@ -441,8 +441,6 @@ For the radial images shown in \cref{fig:2Dresults} we were intially surprised t
 This might seem insignicant, but because of the high \ac{NA} and consequently large angles under which the light traverses the glass, it is possible the outer (marginal) rays will focus at at a slightly different point than the inner (paraxial) rays. 
 To study the axial direction, we scan the Mitutoyo objective along the optical ($z$) axis and record an image of the tweezer. 
 In the end, all images are stiched together to make a single image that would give an idea of a sideview of the tweezer.
-This is done in figure.
-Also plotted in this figure is the result from diffraction theory. 
 To calibrate the amount of translation we calibrated the step size of the motor. The optical setup is shown in \cref{fig:ZScanSetup}
 
 \begin{figure}
@@ -456,13 +454,13 @@ To calibrate the amount of translation we calibrated the step size of the motor.
 \centering
 	\begin{subfigure}{.49\textwidth}
 	    \centering
-		\includegraphics[width=\linewidth]{figures/AxialImageTweezerScanUncorrected.pdf}
+		\includegraphics[height=9.5cm]{figures/AxialImageTweezerScanUncorrected.pdf}
 		\caption{}
 		\label{fig:AxialUncorrected}
 	\end{subfigure}
 	\begin{subfigure}{.49\textwidth}
 		\centering
-		\includegraphics[width=\linewidth]{figures/AxialImageTweezerScan.pdf}
+		\includegraphics[height=9.5cm]{figures/AxialImageTweezerScan.pdf}
 		\caption{}
 		\label{fig:AxialZernike}
 	\end{subfigure}
@@ -480,7 +478,12 @@ To drive this stage, we used a set of Newport 8742 controllers in daisy-chain co
 For scanning the axial direction of the tweezer we only use one of the 5 motors inthe stage. 
 However, to know the exact step size calibration is needed because the step size is dependent on the torque applied, which depends on the direction of travel as well as whether the motor has to counter gravity, etc.
 In order to do this, we repeatedly measured the available translation range of some $\sim$ 3mm, recording the amount of steps this takes as well as the amount moved using a caliper. 
-We found a step calibration of $10.6 \pm 0.05$ $\mu$m/step, which was used to translate amount of steps to distances. 
+We found a step calibration of $10.6 \pm 0.2$ $\mu$m/step, which was used to translate amount of steps to distances. 
+
+\section{Tweezer Images: Axial}
+
+In \cref{fig:AxialUncorrected} the scanned profile of the tweezer is shown . 
+Also plotted is the result from Fraunhofer diffraction theory.
 
 
 

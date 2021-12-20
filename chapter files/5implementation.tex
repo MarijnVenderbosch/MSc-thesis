@@ -138,7 +138,7 @@ In order to make the sidebands, an EOM was used. An EOM uses phase modulation to
 
 where $t$ is time and $\omega_c$ the carrier frequency. If $\epsilon <1$ most of the power is contained in the zeroth order (unmodulated) beam and a small fraction is contained in the first sidebands. The sidebands are always symmetric from the zeroth order, but we only use one of them, the other is wasted. 
 
-The EOM\footnote{7Qubig EO-Rb85-3K} was fed a $f = 2915$ MHz signal provided by a harmonic synthesizer RF \footnote{DS instruments SG6000PRO} providing a signal of $-6.9$dbm. This signal was amplified by a 45 dB amplifier \footnote{Minicircuits ZHL-16W-43+} which should provide some $\sim 15$\% of power in the first sidebands \cite{Rens2014}, which should be a sufficient amount of power for a repump laser. 
+The EOM\footnote{7Qubig EO-Rb85-3K} was fed a $f = 2915$ MHz signal provided by a harmonic synthesizer RF \footnote{DS instruments SG6000PRO} providing a signal of $-6.9$dbm. This signal was amplified by a 45 dB amplifier \footnote{Minicircuits ZHL-16W-43+} which should provide some $\sim 10$\% of power in the first sidebands \cite{Rens2014}, which should be a sufficient amount of power for a repump laser. 
 
 \begin{figure}
     \centering
@@ -150,10 +150,19 @@ The EOM\footnote{7Qubig EO-Rb85-3K} was fed a $f = 2915$ MHz signal provided by 
  
  \section{MOT}
  
-We estimate the number of captured atoms in the MOT by counting the number of counts on our CCD, substracting background counts by turning off the field. We obtain the counts by integrating over all pixels $\sum_j p_j$, correcting for exposure time $\tau_s$, camera gain $G$ and sensitivity. The camera sensitivity constant $C$ was determined to be $6 \cdot 10^3$ counts per photon and was calibrated using a variety of ND filters and a laser at 780 nm of known intensity. The total number of atoms is now
+We estimate the number of captured atoms in the MOT by counting the number of counts on our \ac{CCD}, subtracting background counts by turning off the field. We obtain the counts by integrating over all pixels $\sum_j p_j$, correcting for exposure time $\tau_s$, camera gain $G$ and sensitivity. The camera sensitivity constant $C$ was determined to be $6 \cdot 10^3$ counts per photon and was calibrated using a variety of ND filters and a laser at 780 nm of known intensity. The total number of atoms is now
  
  \begin{equation}
      N = \frac{2}{2\pi\gamma} \frac{1}{\beta} \frac{4\pi l^2}{R^2} \sum_j \frac{p_j}{\tau_s G C}
  \end{equation}
  
- where $\gamma$ is the linewidth of the D1 transition of Rb-85, $\beta ~0.6$ is a paramter taking into account photon loss of the glass cell and bandpass filter, $l$ is the distance from the MOT to the collection lens and $R$ is its radius. 
+ where $\gamma$ is the linewidth of the D1 transition of Rb-85, $\beta ~0.6$ is a parameter taking into account photon loss of the glass cell and bandpass filter, $l$ is the distance from the MOT to the collection lens and $R$ is its radius. 
+ 
+The collection angle $\eta$ is $2\pi(1-cos{\alpha})/4\pi$ where $\alpha$ is the maximum angle from the optical axis of the imaging system. $\alpha=\arcsin{0.5}$ the collection angle is $\eta = 0.067$
+
+\section{Overlapping the MOT with the tweezer}
+
+\begin{itemize}
+    \item Top camera: get focus more or less right with 50 mm lens, as well as align tweezer
+    \item Scan tweezer over resonance, try to see off balance of MOT from side camera. 
+\end{itemize}
