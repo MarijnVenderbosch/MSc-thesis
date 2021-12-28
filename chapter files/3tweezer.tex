@@ -1,35 +1,38 @@
-The tool used in this work to achieve single-atom control is optical tweezers: by focussing a laser beam to a small enough spot it has been shown that under the right conditions, this trap can house at most one atom. 
+The tool used in this work to achieve single-atom control is optical tweezers: by focusing a laser beam to a small enough spot it has been shown that under the right conditions, this trap can house at most one atom (\cref{sec:LoadingAtoms}).
+Subsequently, \cref{sec:DiffractionLimit} introduces the fundamental limit on the tweezer geometry. 
+In \cref{sec:TweezersPractice} practical constraints of the specific setup used are introduced, after which \cref{sec:MeasuringTweezer} introduces the optical setup used to measure the tweezer potential presented in \cref{sec:TweezerRadial,sec:Tweezer3D}.
 
 \section{Loading Single Atoms}\label{sec:LoadingAtoms}
 
-Single atom loading was first demonstrated by \cite{Schlosser2001}. 
-Call the number of atoms in the tweezer $N$, \cite{Schlosser2002} suggested for the time-derivative of $N$ a model with contributions
+Single atom loading was first demonstrated by \cite{Schlosser2001}.
+In \cite{Schlosser2002} it is described by an elegant model taking into account one-body as well as two-body loss terms. 
+Denoting the average number of atoms in the dipole trap by $N$, we can write for the time evolution of $N$ \cite{Schlosser2002} 
 
 \begin{equation}\label{LoadingTweezer}
-	\frac{\text{d}N}{\text{d}t} = \alpha - \gamma N - \beta N(N-1)
+	\frac{\text{d}N}{\text{d}t} = \alpha - \gamma N - \beta N(N-1),
 \end{equation}
-
-where the first term $\alpha$ is the loading rate or the amount of atoms entering the tweezer per second. 
-Next, $\gamma$ is the atom loss as a result of collisions with the background gas. 
-Lastly, $\gamma$ is a measure for the mainly 2 body loss as a result of light-assisted collisions.
-3-body terms and higher are disregarded. 
-In order to load single atoms, we must satisfy $\beta \gg \gamma$: the two-body collisions are dominant.
-We can now look at two distinct scenarios:
+where the first term $\alpha$ is the loading rate or the amount of atoms entering the trap.
+Next, $\gamma$ is the atom loss as a result of collisions with the background gas, so this is effectively a one-body loss term.
+Lastly, $\gamma$ is a measure for the mainly two-body loss as a result of light-assisted collisions.
+In this model, 3-body terms and higher are omitted.
+In the regime $\beta \gg \gamma$, two-body loss rates are dominant over one-body contributions. 
+We can now look at two distinct scenarios of an additional atom entering the trap:
 
 \begin{itemize}
-	\item Starting from 0 atoms in the tweezer: an additional atom entering will now load the tweezer to $N=1$. 
+	\item Starting from 0 atoms present in the tweezer: an additional atom entering will now load the trap to $N=1$. 
 	
-	\item Starting from $N=1$: when an additional atom is loaded, the atoms will immediately kick out each other because of the tiny tweezer volume and strong light intensity from the MOT beams. 
+	\item Starting from $N=1$: when an additional atom is loaded, the atoms will immediately kick out each other because of the tiny tweezer volume and strong light intensity from the MOT beams leading to $N=0$.
+	
+	\item In the situation that $N>1$, the atoms will be kicked out of the trap in pairs as a result of light-assisted collisions, until either $N=0$ or $N=1$.
 \end{itemize}
-
-If the number of atoms at $t=0$ is larger than $N$, atoms will be lost in pairs until $N$ is either 0 or 1, after which the events above apply. 
-Apparently, a loading event can lead to either 0 or 1 atom in the tweezer, both with $50\%$ probability. 
-This is known as the collisional blockade effect. Experimentally demonstrated by \cite{Schlosser2001} and \cite{Schlosser2002} showed this effect to exits for 3 orders of magnitude in the loading rate $\alpha$.
+Apparently, a loading event can lead to either 0 or 1 atom in the tweezer, both with $\sim 50\%$ probability. 
+This is known as the collisional blockade mechanism and is also known as parity projection.
+Experimentally demonstrated by \cite{Schlosser2001} and \cite{Schlosser2002} showed this effect to exits for 3 orders of magnitude in the loading rate $\alpha$.
 Satisfying $\beta \gg \gamma$ can be done by keeping $\gamma$ to a minimum by going to the ultra high vacuum regime.
 We intent to go to a pressure of the order of $10^{-10}$ mbar. In addition $\beta$ is maximized by going to high light-intensities and small trapping volumes. 
 The remainder of this chapter is dedicated on how to minimize this trapping volume.
 
-\section{Diffraction Limit}
+\section{Diffraction Limit}\label{sec:DiffractionLimit}
 
 The smallest achievable spot size is governed by the diffraction limit, which states that because light is a wave, it is impossible to focus down to an infinitely small spot even in the absence of aberrations.
 Diffraction is elegantly described by Fourier optics \cite{Goodman2005}. 
@@ -39,18 +42,17 @@ We derive a result used throughout this work here.
     \subsection*{Intermezzo Fourier Optics}
     
     As we use the objective to make a tweezer, light is impinging on its back aperture. 
-    We call its complex amplitude $U(x',y')$ and define the aperture at $z = 0$ on the optical axis.
+    We call its complex amplitude $E(x',y')$ and define the aperture at $z = 0$ on the optical axis.
     After the aperture, light will show diffraction. 
     An elegant description is provided by scalar diffraction theory.
     We will not repeat a full derivation here but we can refer the reader to \cite{Goodman2005}.
-    Consider the Fresnel diffracion integral in cartesian coordinates. 
-    After the aperture, the complex amplitude $U$ distribution is:
+    Consider the Fresnel diffraction integral in Cartesian coordinates. 
+    After the aperture, the complex amplitude $E$ distribution is:
     
     \begin{equation}\label{eq:FresnelDiffraction}
         E(x,y,z) = 
-        \frac{e^{ikz}}{i \lambda z} \iint_{-\infty}^{\infty} U(x',y',0) \exp{\frac{ik}{2z}} \exp{\left[(x-x')^2+(y-y')^2\right]} dx'dy'.
+        \frac{e^{ikz}}{i \lambda z} \iint_{-\infty}^{\infty} E(x',y',0) \exp{\frac{ik}{2z}} \exp{\left[(x-x')^2+(y-y')^2\right]} dx'dy'.
     \end{equation}
-    
     In \cref{eq:FresnelDiffraction}, $\lambda$ is the wavelength, $k=2\pi/\lambda$ the wavenumber.
     In this thesis, we are usually not immediately interested in describing the light in the the near field of the aperture, but in the far-field. 
     More formally, the following needs to apply:
@@ -58,91 +60,82 @@ We derive a result used throughout this work here.
     \begin{equation}\label{eq:FraunhoferCriterion}
         z \gg k R^2/2,
     \end{equation}
-    
     where $R$ is the maximum distance from the aperture to the optical axis. 
     While this criterion is in practice not met, it does hold in the focal point of a lens, because a lens projects an image in infinity to its focal length $f$. 
     Inserting \cref{eq:FraunhoferCriterion} in \cref{eq:FresnelDiffraction} yields:
     
     \begin{equation}\label{eq:FraunhoferDiffraction}
-        E(x, y, z)=\frac{e^{i k z} e^{i k\left(x^{2}+y^{2}\right)/2}}{i \lambda z} \iint_{-\infty}^{\infty} U(x', y') \exp \left[\frac{-ik}{z}(x x'+y y')\right] dx' dy'
-    \end{equation}. 
-    
+        E(x, y, z)=\frac{e^{i k z} e^{i k\left(x^{2}+y^{2}\right)/2}}{i \lambda z} \iint_{-\infty}^{\infty} E(x', y') \exp \left[\frac{-ik}{z}(x x'+y y')\right] dx' dy'.
+    \end{equation}
     This equation relates the field in the focus point point of the lens $U(x,y)$ to the field at the lens $U(x',y')$. 
-    Contributins outside of the apeture can be discarded, and in practice we are not too intersted in the phase factor in front, such that we have
+    Contributions outside of the aperture can be discarded, and in practice we are not too interested in the phase factor in front, such that we have
     
     \begin{equation}\label{eq:FraunhoferSimplified}
         E(x,y,z) \propto 
-        \iint_{\text{aperture}} U(x',y') \exp{\left[- \frac{ik}{z}(xx'+yy')\right]}dx'dy'
+        \iint_{\text{aperture}} E(x',y') \exp{\left[- \frac{ik}{z}(xx'+yy')\right]}dx'dy'.
     \end{equation}
-    
-    We recognize in \cref{eq:FraunhoferDiffraction} the spatial Fourier transform, in both $x$ and $y$ with respectively the frequencies $f_x = x/\lambda z$ and $f_y = y/\lambda z$, which is a result we will use later in this work. \cref{eq:FraunhoferDiffraction} is the Fraunhofer diffraction integral.
+    We recognize in \cref{eq:FraunhoferSimplified} the spatial Fourier transform, in both $x$ and $y$ with respectively the frequencies $f_x = x/\lambda z$ and $f_y = y/\lambda z$, which is a result we will use later in this work. \cref{eq:FraunhoferDiffraction} is the Fraunhofer diffraction integral.
 \end{mdframed}
+\vspace*{3mm}
 
- In this work, we are mostly concerned with circularly shaped apertures, for which a description in cylindrical coordinates is more natural.
+\noindent In this work, we are mostly concerned with circularly shaped apertures, for which a description in cylindrical coordinates is more natural.
+Using the standard definitions for cylindrical coordinates, \cref{eq:FraunhoferSimplified} can be written as
  Ignoring the phase factor in front of the integral:
 
 \begin{equation}\label{eq:FraunhoferRTheta}
     E(r,\theta, z) \propto \iint_{\text{aperture}} U(r') \exp{\left[
     -\frac{i k r r'}{z} \cos{(\theta-\theta')} 
-    \right]}r'dr'd\theta'
+    \right]}r'dr'd\theta'.
 \end{equation}
-
 Using the integral definition of the Bessel function of the first kind\footnote{$J_0(x) = \frac{1}{2\pi} \int_0^{2\pi} \exp{(i x \cos{\alpha})} d\alpha$} we write \cref{eq:FraunhoferRTheta} as 
 
 \begin{equation}\label{eq:FourierBessel}
-    E(r,z) \propto 2\pi \int_0^{\infty} U(r') J_0\left( \frac{k r r'}{z}\right) r'dr'
+    E(r,z) \propto 2\pi \int_0^{\infty} U(r') J_0\left( \frac{k r r'}{z}\right) r'dr',
 \end{equation}
-
 \cref{eq:FourierBessel} is the Fourier-Bessel or Hankel transform.
 Now that the general formula has been derived, will make the problem more specific by introducing some parameters. 
 In practice, we are interested in the focus point of the lens around $z \approx f$. 
-We send a Gausian beam through the lens with an circular aperture function $U(r')$ with radius $R$, such that the input $E_i$ is
+We send a Gausian beam through the lens with an circular aperture function $E(r')$ with radius $R$, such that the input $E_i$ is
 
 \begin{equation}\label{eq:GaussianAperture}
     E(r')=
     \begin{cases}
         e^{- w_i^2/R^2},& \text{if } r' < R\\
-        0,               & \text{otherwise}
+        0,               & \text{otherwise}.
     \end{cases}
 \end{equation}
-
 Substituting \cref{eq:GaussianAperture} in \cref{eq:FourierBessel} yields
 
 \begin{equation}\label{eq:FourierBesselAperture}
-    E(r) \propto \int_0^R e^{-r'^2/w_i^2} J_0\left(\frac{k r r'}{f}\right)r'dr'
+    E(r) \propto \int_0^R e^{-r'^2/w_i^2} J_0\left(\frac{k r r'}{f}\right)r'dr',
 \end{equation}
-
-\cref{eq:FourierBesselAperture} is analytically solvable for specific cases.
+\Cref{eq:FourierBesselAperture} is analytically solvable for specific cases.
 Letting $w_i/R$ go to infinity, which is to treat the incident Gaussian beam as a plane wave, we can neglect the exponential term in \cref{eq:FourierBesselAperture}. 
 The integral is now tractable, yielding for the field amplitude
 
 \begin{equation}\label{eq:AiryField}
-    E(r) \propto \frac{f}{kRr} J_1\left(\frac{k R r}{f}\right)
+    E(r) \propto \frac{f}{kRr} J_1\left(\frac{k R r}{f}\right).
 \end{equation}
-
 Taking the absolute value squared and normalizing yields the \ac{PSF}:
 
 \begin{equation}\label{eq:NormalizedPSF}
     \frac{I}{I_0} = \left[
     \frac{2J_1(k r R/f)}{k r R/f}
-    \right]^2
+    \right]^2.
 \end{equation}
-
+The point spread function of a circular aperture is shown in \cref{fig:AiryPlots}. 
+Solving for the first zero of \cref{eq:NormalizedPSF}, and introducing the definition of numerical aperture for a compound microscope \ac{NA}: $R = \text{NA} \times f$ yields for this radius 
 \begin{figure}
     \centering
-    \includegraphics[width = 0.8\linewidth]{figures/AiryDisk.pdf}
+    \includegraphics[width = 0.9\linewidth]{figures/AiryDisk.pdf}
     \caption{\textbf{a)} Normalized intensity of the perfect \ac{PSF} as a function of the azimuthal coordinate $r$ normalized in terms of units $f / kR$.
     \textbf{b) }2D plot of the Airy disk.  }
     \label{fig:AiryPlots}
 \end{figure}
 
-The point spread function of a circular aperture is shown in \cref{fig:AiryPlots}. 
-Solving for the first zero of \cref{eq:NormalizedPSF}, and introducing the definition of numerical aperture for a compound microscope \ac{NA}: $R = \text{NA} \times f$ yields for this radius 
-
 \begin{equation}\label{eq:Abbe}
-    d_1 = 0.61 \frac{\lambdaup}{\text{NA}}
+    d_1 = 0.61 \frac{\lambdaup}{\text{NA}}.
 \end{equation}
-
 This result is known as the Abbe limit or diffraction limit \cite{Abbe1882} and it is the smallest feature the imaging system can produce. 
 To minimize the \ac{PSF} we can thus increase the \ac{NA} of our imaging system. In this work we will use $\text{NA} = 0.5$. 
 For high NA imaging systems however, the paraxial approximation which was used to simplify the diffraction integral is no longer a priori true. 
@@ -163,7 +156,6 @@ A Gaussian function is commonly used, and can even fit better than \cref{eq:Four
     \begin{equation}\label{eq:GaussianBeam}
     	E(r,z) = \frac{w_0}{w(z)} \exp{\left(\frac{-r^2}{w^2(z)}\right)} \exp{\left[-ikz-i\frac{kr^2}{2R(z)} - i\psi(z)\right]},
     \end{equation}
-    
     with parameters
     
     \begin{equation}\label{eq:GaussianBeamParameters}
@@ -171,15 +163,13 @@ A Gaussian function is commonly used, and can even fit better than \cref{eq:Four
     	w(z) = \sqrt{w_0 + \frac{z^2}{z_R^2}}, \quad \text{and} \quad
     	R(z) = z \left(1 + \frac{z^2}{z_R^2}\right).
     \end{equation}
-    
     Respectively, the wave number in terms of the wavelength $\lambdaup$, the beam waist, the radius where the field drops $1/e$ in terms of $w(z)\equiv w_0$ and $R(z)$ is the wavefront curvature. $z_R$ is the Rayleigh range, the distance along the optical axis where the beam waist has increased a factor of $\sqrt{2}$: $w(z=z_R) = \sqrt{2}w_0$.
     Finally $\psi(z)$ is an extra phase term originating from the curvature of the wavefront known as the Gouy phase.
     We find the intensity of the Gaussian beam by taking the absolute value squared:
     
     \begin{equation}\label{eq:GaussianBeamIntensity}
-    	I(r,z) = I_0 \frac{w_0^2}{w^2(z)} \exp{\left(\frac{-2r^2}{w^2(z)}\right)}
+    	I(r,z) = I_0 \frac{w_0^2}{w^2(z)} \exp{\left(\frac{-2r^2}{w^2(z)}\right)}.
     \end{equation}
-    
     A sketch of a Gaussian beam profile is given in \cref{fig:GaussianBeam}, showing the $1/e$ field radius, or $1/e^2$ intensity radius $w_0$ and the Rayleigh range $z_R$. 
     
     \vspace*{3mm}
@@ -195,7 +185,6 @@ Fitting this Gaussian as closesly as possible to an Airy pattern using a least-s
 \begin{equation}\label{eq:GaussianAiryFit}
     w = 0.42 \frac{\lambdaup}{\text{NA}}
 \end{equation}
- 
 If our measured waist is at this limit, the system is said to be diffraction limited, that is: the spot size is limited because of the wave character of light and not because of optical aberrations. 
 
 \section{Optical Tweezers in Practice}\label{sec:TweezersPractice}
@@ -207,14 +196,12 @@ So to minimize the trapping volume, we need the highest possible numerical apert
     
     \item Glass-thickness compensation. The relatively thick vacuum viewport will introduce significant (spherical) aberrations for high NA and therefore big angles. It is possible to correct for this by having an additional lens which will counteract this.
 \end{enumerate}
-
 To achieve this, we chose the G Plan Apo microscope objective from \textit{Mitutoyo}, as also used by \cite{Manuel2016,Ebadi2021}. 
 This is an infinity-corrected objective, meaning light collected in its focussed is imaged at infinity (parallel beam) and an additional field lens is used to focus this image, such that the magnification is 
 
 \begin{equation}\label{eq:InfinityMagnification}
     M = \frac{f_2}{f_1},
 \end{equation}
-
 where $f_2$ is the focal length of the field lens and $f_1$ the equivalent focal length of the objective\footnote{For a compound microscope objective, equivalent focal length means the focal length the objective would have when replaced by a single lens.}.
 Relevant specifications of the objective are shown in \cref{table:MitutoyoSpecs}. 
 From compound objectives, the equivalent focal length $f_1$ is defined in terms of the \ac{NA} and the back aperture radius of $R$ as $R = f_1 \text{NA} = 2$ mm. 
@@ -231,7 +218,6 @@ From compound objectives, the equivalent focal length $f_1$ is defined in terms 
         Working distance             & 15.08 mm      
     \end{tabular}
 \end{table}
-
 Because this objective was designed with visible wavelenghts in mind, it is probable that all of the lenses inside it are coated with a reflection coating that does not work well for the 800 nm regime. 
 This is indeed the case, as we measured the tranmission of the objective to be just $(47 \pm 3)\%$ at 820 nm. We will therefore lose a significant of laser power. 
 But this is not the only source of laser power loss: in producing the Airy pattern we assumed plane wave illumination, but in practice laser beams have Gausian shape. 
@@ -241,7 +227,6 @@ Assuming the beam is aligned with the center of the aperture, the power tranmiss
 \begin{equation}\label{eq:fracPowerCircular}
     P/P_0 = 1 - e^{-2w_i^2/R^2}
 \end{equation}
-
 which tends to zero for very wide beams (plane waves). Clearly there is an optimum sommewhere.
 To illustrate this, we will look at the other extreme case of $w_i \ll R$. 
 The waist is much smaller than the aperture, according to \cref{eq:fracPowerCircular} all of the power is transmitted through the aperture.
@@ -250,7 +235,6 @@ We let the integration boundary run to infinity and using a Hankel tranform pair
 \begin{equation}\label{eq:GaussianCase}
     U(r) \propto \frac{w_i^2}{2} \exp{\left(\frac{-k^2w_i^2 r^2}{2f^2}\right)}.
 \end{equation}
-
 The result is a Gaussian, but with a modified waist of $\lambdaup f / \pi w_0$.
 This modified waist will go up for smaller $w_0$ (Fourier transform property). 
 Clearly, this is not ideal either. 
@@ -265,7 +249,6 @@ Assuming a Gaussian tweezer beam, the potential $U$ in cylindrical coordinates w
 \begin{equation}\label{eq:GaussianPotential}
     U(r,z)=\frac{-U_{0}}{1+z^{2} / z_{R}^{2}} \exp \left(\frac{-2 r^{2}}{w_{0}^{2}\left(1+z^{2} / z_{R}^{2}\right)}\right)
 \end{equation}
-
 \cref{eq:GaussianPotential} is plotted in \cref{fig:GaussianPotential} for normalized radial coordinate $r/w_0$ as well as longitudinal coordinate $z_R$. 
 This is not to scale: the Rayleigh range $z_R$ is typically bigger than the waist $w_0$.
 Assuming a Gaussian is justified because near the center, an Airy disk and Gaussian beam are nearly identical.
@@ -282,19 +265,17 @@ Taylor expanding \cref{eq:GaussianPotential} around $(r,z)=(0,0)$ to second orde
 \begin{equation}\label{eq:ApproximateGaussianPotential}
     U(r,z) \sim -U_0 - 2U_0 \frac{r^2}{w_0^2} - 2U_0 \frac{z^2}{z_R^2}
 \end{equation}
-
 For this harmonic potential, one can compute the harmonic oscillation frequencies 
 
 \begin{equation}\label{eq:TrapFrequencies}
     \omega_r = 2\left(\frac{U_0}{m w_0^2}\right)^{1/2}, \quad
     \omega_z= \left(\frac{2 U_0}{m z_R^2}\right)^{1/2}
 \end{equation}
-
 Because $z_R > w_0$, the longitudinal oscillation frequency is lower than the radial frequency. 
 Trap frequencies are a nice property to optimize, because from the definition, higher trap frequencies translate to deeper as well as sharper tweezers. 
 \cite{Madjarov2021} optimized \cref{eq:TrapFrequencies} for the $w_i/R$ ratio and found an optimum around $w_i\sim R$, which we will use in this work\footnote{Because trap frequencies can be probed exprimentally, they can be used to perform post-corrections on tweezer arrays as well as shown by \cite{Ebadi2021}.}.
 
-\section{Measuring the Tweezer potential}
+\section{Measuring the Tweezer potential}\label{sec:MeasuringTweezer}
 
 We would like to measure tweezer potential made by our microscope objective. 
 We could use time symmetry and look at the reverse direction: using the objective to look at a pinhole, retrieving its \acf{PSF} \cite{Knottnerus2018,Sortais2007}
@@ -321,7 +302,7 @@ To ease the coupling, we run a coax cable from a power meter on the main table t
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\linewidth]{figures/TiSandSLM.pdf}
+    \includegraphics[width=0.9\linewidth]{figures/TiSandSLM.pdf}
     \caption{Optical setup for making an optical tweezer and imaging this tweezer onto a CCD camera. 
     Laser source decribed int the text and \ac{SLM} more thoroughly in \cref{ch:arrays}.
     The titanium sapphire laser is positioned on a separate table. 
@@ -360,7 +341,7 @@ Dividing the pixel spacing of the lines by the pixel pitch of the camera ($4.65$
 We attribute this to a slightly longer objective-camera distance that was used. 
 After the calibration was performed, the objective-camera distance was left untouched. 
 
-\section{Tweezer Images: Radial}
+\section{Tweezer Images: Radial}\label{sec:TweezerRadial}
 
 An image of the CCD camera is shown in \cref{fig:SingleSpotZoomed}. 
 There seems to be a small tilt aberration present as the side ring is more clearly visible on the right side. 
