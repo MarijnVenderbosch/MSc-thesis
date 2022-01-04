@@ -67,11 +67,11 @@ Doing a series expansion to first order around $v = 0$, it can be shown the forc
 		\label{fig:MOTPlots}
 	\end{subfigure}
 	\caption{\textbf{a)} Energy level scheme for the 2-level case. 
-	The two energies are split by $\omega_e - \omega_g = \omega_0$.
-	The detuning is $\delta = \omega-\omega_0<0$ is shown as well.
+	The two energies are split by $\mathsf{\omega_e - \omega_g = \omega_0}$.
+	The detuning is $\mathsf{\delta = \omega-\omega_0<0}$ is shown as well.
 	\textbf{b)} Concept of optical molasses in 1D. 
-	Atomic frequency is detuned from the atomic transition by $\delta<0$.
-	Because of the linear magnetic field, for $z>0$, the $m_j=-1$ atoms become resonant with only $\sigma^+$ light because of selection rules, and vice versa.}
+	Atomic frequency is detuned from the atomic transition by $\mathsf{\delta<0}$.
+	Because of the linear magnetic field, for $z>0$, the $\mathsf{\textit{m}_j=-1}$ atoms become resonant with only $\mathsf{\sigma^+}$ light because of selection rules, and vice versa.}
 \end{figure}
 Where $-\beta$ is the slope of the scattering force around $v=0$. 
 For $\delta<0$ the resulting force has a damping effect on the velocity, which if applied in all 3 dimensions can cool atoms to ultracold temperatures. 
@@ -125,7 +125,7 @@ When applied in 3 dimensions this can be used to make clouds of ultracold atoms.
 \begin{figure}
     \centering
     \includegraphics[width=0.8\linewidth]{figures/SpatialVelocityDependence.pdf}
-    \caption{\textbf{a)} Optical molasses: contributions from the lasers in both directions $F^+$ and $F^ -$ are shown, as well as the total force. Spatial force of the MOT beams and magnetic field gradient. Forces are dimensionless by dividing by $\hbar k \gamma$.}
+    \caption{\textbf{a)} Optical molasses: contributions from the lasers in both directions $\mathsf{\textit{F}^+}$ and $\mathsf{\textit{F}^-}$ are shown, as well as the total force. Spatial force of the MOT beams and magnetic field gradient. Forces are dimensionless by dividing by $\mathsf{\hbar \textit{k} \gamma}$.}
     \label{fig:SpatialDependencePlots}
 \end{figure}
 
@@ -243,8 +243,8 @@ This is called the light shift or AC Stark shift \cite{Metcalf1999}, sketched in
 \begin{figure}
     \centering
 	\includegraphics[height=3.8cm]{figures/LightShift.pdf}
-	\caption{Light shift for a two-level atom when the off-resonant laser is turned on, as well as the spatially varying light shift for a laser beam profile for $\delta<0$. 
-	The gradient of this potential gives rise to the dipole force denoted in the figure as $F_{\text{dip}}$.}
+	\caption{Light shift for a two-level atom when the off-resonant laser is turned on, as well as the spatially varying light shift for a laser beam profile for $\mathsf{\delta<0}$. 
+	The gradient of this potential gives rise to the dipole force denoted in the figure as $\mathsf{\textit{F}_{\text{dip}}}$.}
 	\label{fig:DipoleForce}
 \end{figure}
 
@@ -290,7 +290,7 @@ In \cref{ch:implementation} we elaborate more on how the MOT was realized experi
 \begin{figure}
     \centering
     \includegraphics[width=0.48\linewidth]{figures/D2line.pdf}
-    \caption{(Hyper)-fine level structure of the Rb-85 $5^{2}S_{1/2} \rightarrow 5 ^2P_{3/2}$ (D$_2$) line. Also shown: cooling/trapping transition as well as repump. Figure not to scale}
+    \caption{(Hyper)-fine level structure of the Rb-85 $\mathsf{5^{2}S_{1/2} \rightarrow 5 ^2P_{3/2}}$ (D$\mathsf{_2}$) line. Also shown: cooling/trapping transition as well as repump. Figure not to scale}
     \label{fig:D2line}
 \end{figure}
 
@@ -304,7 +304,7 @@ The current that is run in the coils is opposite in direction, such that the mag
 Typically, a magnetic field gradient of $\partial B/\partial z \sim 10-15$ Gauss is used.
 Because of $\nabla \cdot \mathbf{B}=0$, the field in the $x$ and $y$ directions is a factor 2 weaker. The experimental details are elaborated upon in \cref{ch:implementation}.
 
-\subsection{Rb Optical Dipole Trap}
+\subsection{Optical Trap Depth}
 
 In reality, Rb is not two-level systems, but inhibits a more more complex level structure, e.g. hyperfine splitting.
 Because we are only interested in the ground state Stark shift, we will limit ourselves to excited states $\ket{e_j}$ coupled to the ground state $\ket{g}$, such that the ground state dipole potential is a sum of contributions from \cref{eq:Stark}:

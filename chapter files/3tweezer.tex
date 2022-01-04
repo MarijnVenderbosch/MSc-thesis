@@ -37,7 +37,7 @@ The remainder of this chapter is dedicated on how to minimize this trapping volu
 The smallest achievable spot size is governed by the diffraction limit; because of the wave character of light, there is a fundamental limit to the smallest spot size one can focus this wave, even in the absence of aberrations.
 Diffraction theory is elegantly described by Fourier optics \cite{Goodman2005}. 
 We present a short derivation of an important result from Fourier optics used throughout this work here, for the specific case of circular apertures.
-For a more elaborate derivation, the reader is directed to \cref{Goodman2005}.
+For a more elaborate derivation, the reader is directed to \cite{Goodman2005}.
 
 \begin{mdframed}
     \subsection*{Intermezzo Fourier Optics}
@@ -49,7 +49,7 @@ For a more elaborate derivation, the reader is directed to \cref{Goodman2005}.
 
     \begin{equation}\label{eq:FresnelDiffraction}
         E(x,y,z) = 
-        \frac{e^{ikz}}{i \lambda z} \iint_{-\infty}^{\infty} E(x',y',0) \exp{\left(\frac{ik}{2z}\right)} \exp{\left[(x-x')^2+(y-y')^2\right]} dx'dy'.
+        \frac{e^{ikz}}{i \lambda z} \iint_{-\infty}^{\infty} E(x',y',z=0) \exp{\left(\frac{ik}{2z}\right)} \exp{\left[(x-x')^2+(y-y')^2\right]} dx'dy'.
     \end{equation}
     In \cref{eq:FresnelDiffraction}, $\lambdaup$ is the wavelength, $k=2\pi/\lambdaup$ the wavenumber. The aperture contribution is hidden in the term $E(x',y',0)$, which is zero when the condition $x'^2+y'^2>R^2$ is met, where $R$ is the radius of the circular aperture.
     During this work, we are usually not immediately interested in describing the light shortly after the aperture, but rather in the far field, motivating the use of the following Fraunhofer criterion
@@ -58,34 +58,35 @@ For a more elaborate derivation, the reader is directed to \cref{Goodman2005}.
         z \gg \frac{k R^2}{2},
     \end{equation}
     While \cref{eq:FraunhoferCriterion} is in practice not met, it does near the focal point of a lens because a lens projects an image from infinity in its focal a length $f$ away. 
-    Inserting \cref{eq:FraunhoferCriterion} in \cref{eq:FresnelDiffraction} yields the Fraunhofer diffraction integral:
+    Inserting \cref{eq:FraunhoferCriterion} in \cref{eq:FresnelDiffraction} yields the Fraunhofer diffraction integral, valid for $z=f$:
     
     \begin{equation}\label{eq:FraunhoferDiffraction}
-        E(x, y, z)=\frac{e^{i k z} e^{i k\left(x^{2}+y^{2}\right)/2}}{i \lambda z} \iint_{-\infty}^{\infty} E(x', y',0) \exp \left[\frac{-ik}{z}(x x'+y y')\right] dx' dy'.
+        E(x, y, z=f)=\frac{e^{i k f} e^{i k\left(x^{2}+y^{2}\right)/2}}{i \lambda f} \iint_{-\infty}^{\infty} E(x', y') \exp \left[\frac{-ik}{f}(x x'+y y')\right] dx' dy'.
     \end{equation}
-    Because in this work we will usually compute the intensity as the absolute value squared, which will drop the phase factor in front of \cref{eq:FraunhoferRTheta}. Again, we only have to integrate over contributions within the aperture radius, such that we can write 
+    Because in this work we will usually compute the intensity as the absolute value squared, which will drop the phase factor in front of \cref{eq:FraunhoferRTheta}. 
+    We only consider contributions in the aperture so we can write
     
     \begin{equation}\label{eq:FraunhoferSimplified}
-        E(x,y,z) \propto 
-        \iint_{\text{aperture}} E(x',y') \exp{\left[- \frac{ik}{z}(xx'+yy')\right]}dx'dy'.
+        E(x,y) \propto 
+        \iint_{\text{aperture}} E(x',y') \exp{\left[- \frac{ik}{f}(xx'+yy')\right]}dx'dy'.
     \end{equation}
-    This is the 2D spatial Fourier transform (in $x$ and $y$), with respectively spatial frequencies $f_x = x/\lambdaup z$ and $f_y = y/\lambdaup z$ and will be frequently used in this work.
+     This is the 2D spatial Fourier transform (in $x$ and $y$), with respectively spatial frequencies $f_x = x/\lambdaup f$ and $f_y = y/\lambdaup f$. Again, it is only valid in the focus point of the lens $z=f$.
 \end{mdframed}
 
 \noindent For circular apertures, a description in cylindrical coordinates is more natural. 
-Using the standard definitions for cylindrical coordinates, \cref{eq:FraunhoferSimplified} can be written as
+Using the standard definitions for cylindrical coordinates $\{r,\theta\}$ \cref{eq:FraunhoferSimplified} can be written as
 
 \begin{equation}\label{eq:FraunhoferRTheta}
-    E(r,\theta, z) \propto \iint_{\text{aperture}} E(r') \exp{\left[
-    -\frac{i k r r'}{z} \cos{(\theta-\theta')} 
+    E(r,\theta, z=f) \propto \iint_{\text{aperture}} E(r') \exp{\left[
+    -\frac{i k r r'}{f} \cos{(\theta-\theta')} 
     \right]}r'dr'd\theta'.
 \end{equation}
-Using the integral definition of the Bessel function of the first kind\footnote{$J_0(x) = \frac{1}{2\pi} \int_0^{2\pi} \exp{(i x \cos{\alpha})} d\alpha$}, this simplifies to
+Using the integral definition of the Bessel function of the first kind of order zero $J_0(x)$\footnote{$J_0(x) = \frac{1}{2\pi} \int_0^{2\pi} \exp{(i x \cos{\alpha})} d\alpha$, where $\alpha=\theta-\theta'$.}, this simplifies to
 \begin{equation}\label{eq:FourierBessel}
-    E(r,z) \propto 2\pi \int_0^{\infty} E(r') J_0\left( \frac{k r r'}{z}\right) r'dr',
+    E(r,z) \propto 2\pi \int_0^{\infty} E(r') J_0\left( \frac{k r r'}{f}\right) r'dr',
 \end{equation}
-which is the Fourier-Bessel or Hankel transform.
-Initially, we limit ourselves to potentials in the focus of the lens only, such that $z=f$. Also, for optical tweezers applications a fair assumption is that the incident light field is a Gaussian beam, with 'input' waist $w_i$, such that the light field is up to a normalization constant $A$
+which is the Fourier-Bessel or Hankel transform of the aperture function $E(r')$.
+For optical tweezers applications a fair assumption is that the incident light field is a Gaussian beam, with 'input' waist $w_i$, such that the light field is up to a normalization constant $A$
 
 \begin{equation}\label{eq:GaussianAperture}
     E(r')=
@@ -106,6 +107,7 @@ The integral is now tractable, yielding for the field amplitude
 \begin{equation}\label{eq:AiryField}
     E(r) \propto \frac{f}{kRr} J_1\left(\frac{k R r}{f}\right).
 \end{equation}
+Here, the function $J_1$ is the Bessel function of order 1.
 Taking the absolute value squared and normalizing yields for the intensity the Airy function:
 
 \begin{equation}\label{eq:NormalizedPSF}
@@ -114,13 +116,13 @@ Taking the absolute value squared and normalizing yields for the intensity the A
     \right]^2.
 \end{equation}
 Which is plotted in \cref{fig:AiryPlots}, as well as the circle that results from \cref{eq:NormalizedPSF} known as the Airy disk.
-Including the axial variable $z$ again, the optical response of a perfect lens to this plane wave is known as the \ac{PSF}, which we will use in \cref{sec:Tweezer3D}.
-Solving for the first zero of \cref{eq:NormalizedPSF}, and introducing the definition of \ac{NA}: $\text{NA} = n \sin{\theta} =  R/f$, where $\theta$ is the maximum half angle and $n\approx1$ in air, yields for the radius of this Airy disk:
+In 3D, so also considering defocus, the optical response of a perfect lens to this plane wave is known as the \ac{PSF}, which we will use in \cref{sec:Tweezer3D}.
+Solving for the first zero of \cref{eq:NormalizedPSF}, and introducing the definition of \ac{NA} of a compound microscope objective: $\text{NA} = R/f$, yields for the radius of this Airy disk:
 
 \begin{figure}
     \centering
     \includegraphics[width = 0.9\linewidth]{figures/AiryDisk.pdf}
-    \caption{Normalized plots of the Airy function for \textbf{a)} only the radial coordinate (normalized in units of $f/kR$) as well as \textbf{b)} a 2D plot: the Airy disk.}
+    \caption{Normalized plots of the Airy function for \textbf{a)} only the radial coordinate (normalized in units of \textit{f}/\textit{kR}) as well as \textbf{b)} a 2D plot: the Airy disk.}
     \label{fig:AiryPlots}
 \end{figure}
 
@@ -132,7 +134,6 @@ To minimize $d_1$ in \cref{eq:Abbe} we can thus increase the \ac{NA} of our imag
 In this work we will use $\text{NA} = 0.5$\footnote{For high NA imaging systems however, the paraxial approximation which was used to simplify the diffraction integral is no longer a priori true. 
 Though, \cite{Chon2007} present a derivation of \cref{eq:Abbe} using a different diffraction theory that does not require paraxial approximation and showed that for collimated laser beams \cref{eq:Abbe} has negligible error even for $\text{NA} = 1$. 
 We will assume we can still apply \cref{eq:Abbe} for $\text{NA} = 0.5$.}
-
 In practice, it is not convenient to use \cref{eq:FourierBesselAperture} to fit data and it is more convenient to use a simpler function. 
 A Gaussian function is commonly used, and can sometimes even fit better than \cref{eq:FourierBesselAperture} because the rings of the Airy disk are easily deformed because of aberrations \cite{Knottnerus2018}. 
 
@@ -167,7 +168,7 @@ A Gaussian function is commonly used, and can sometimes even fit better than \cr
     \centering
         \includegraphics[width=0.5\linewidth]{figures/GaussianBeam.pdf}
         \captionsetup{margin=0mm}%somehow this works
-        \captionof{figure}{Gaussian beam profile and some key parameters used in this work, the beam waist $w_0$ and Rayleigh range $z_R$. 
+        \captionof{figure}{Gaussian beam profile and some key parameters used in this work, the beam waist $\mathsf{\textit{w}_0}$ and Rayleigh range $\mathsf{\textit{z}_R}$. 
         Figure adapted from \cite{Hermans2009}.}
         \label{fig:GaussianBeam}
 \end{mdframed}
@@ -190,12 +191,12 @@ Assuming the dipole potential can be described by a Gaussian, which is valid \ci
 where be used \cref{eq:GaussianBeam,eq:GaussianBeamParameters}.
 \Cref{eq:GaussianPotential} is plotted in \cref{fig:GaussianPotential} as function of the normalized radial $r/w_0$ and axial $z/z_R$ coordinates. 
 The figure is not to scale: the Rayleigh range $z_R$ is typically bigger than the waist $w_0$.
-We will use equations of the form \cref{eq:GaussianPotential} to fit opical tweezer potentials.
+We will use equations of the form \cref{eq:GaussianPotential} to fit optical tweezer potentials.
 
 \begin{figure}
     \centering
     \includegraphics[width=.56\linewidth]{figures/GaussianPotential.pdf}
-    \caption{Normalized potential $U/U_0$ for a Gaussian trap shape as a function of the normalized cylindrical coordinates $r/w_0$ and $z/z_R$. Not to scale: typically the Rayleigh range $z_R$ is larger than the beam waist $w_0$.}
+    \caption{Normalized potential $\mathsf{\textit{U}/\textit{U}_0}$ for a Gaussian trap shape as a function of the normalized cylindrical coordinates $\mathsf{\textit{r}/\textit{w}_0}$ and $\mathsf{\textit{z}/\textit{z}_R}$. Not to scale: typically the Rayleigh range $\mathsf{\textit{z}_R}$ is larger than the beam waist $\mathsf{\textit{w}_0}$.}
     \label{fig:GaussianPotential}
 \end{figure}
 
@@ -259,7 +260,7 @@ This modified waist will go up for smaller $w_i$ (Fourier transform property).
 Thus, the input beam size to be used is a compromise between the amount of power transmitted (and thus the depth of the trap), which is maximum for small beam sizes, and the diffraction limit that one can reach and thus the trap dimensions on the other hand. 
 The optimum is better understood in the concept trap frequency, which is the classical oscillation frequency of the atoms trapped in the bottom of the trap. 
 Because the atoms will occupy the bottom of the trap (the potentials are an order of magnitude deeper than their temperature).
-Thus we Taylor expand \cref{eq:GaussianPotential} around $(r,z)=(0,0)$ to second order (the first order vanishes) yielding
+Thus we Taylor expand \cref{eq:GaussianPotential} around $(r,z)=(0,0)$ to second order (the first order vanishes) yielding \cite{Muldoon2012}
 
 \begin{equation}\label{eq:ApproximateGaussianPotential}
     U(r,z) \sim -U_0 - 2U_0 \frac{r^2}{w_0^2} - 2U_0 \frac{z^2}{z_R^2}
@@ -307,7 +308,7 @@ The equivalent focal length of the SLM is $\sim 690$ mm, such that $f_2/f_1 \sim
     \centering
     \includegraphics[width=0.95\linewidth]{figures/TiSandSLM.pdf}
     \caption{Output from a titanium sapphire ring laser is coupled into a polarization-maintaining fiber bringing it to the main table. 
-    After alignment of the polarization direction, a spatial light modulator $f_1$ and achromatic lens $f_2 = 300$ mm feed the light into the Mitutoyo 0.5 NA objective.
+    After alignment of the polarization direction, a spatial light modulator $\mathsf{f_1}$ and achromatic lens $\mathsf{f_2 = 300}$ mm feed the light into the Mitutoyo 0.5 NA objective.
     A glass plate serves to replace the vacuum viewport.
     The tweezer potential is imaged on a camera using a 0.85 NA microscope objective.
     The cubes shown are polarizing.}
@@ -354,7 +355,7 @@ Dividing the pixel spacing of the lines by the pixel pitch of the camera ($4.65$
 We attribute this to a slightly longer objective-camera distance that was used. 
 After the calibration was performed the calibration target was removed and the setup in \cref{fig:TiSandSLMsetup} was used again, the objective-camera distance was kept constant for the remainder of the measurements.
 
-\section{Results: Radial Dependency}\label{sec:TweezerRadial}
+\section{Radial Intensity Distribution}\label{sec:TweezerRadial}
 
 An image of the tweezer at the point of maximum intensity imaged onto a camera through the 0.85 NA objective is shown in fig. \ref{fig:2Dresults}a. 
 The Airy ring is somewhat asymmetric, suggesting a slight tilt aberration is present.
@@ -411,7 +412,7 @@ This is confirmed by the coefficient of determination $R^2 > 0.99$.
 		\label{fig:3Dwaistfit}
 	\end{subfigure}
 	\caption{\textbf{a)} Plot showing convergence of the Gaussian fit.
-	\textbf{b)} Region of interest around the maximum that was used to extract the waist. For both plots: $R^2>0.99$, but it is higher for the fit in \textbf{b}.}
+	\textbf{b)} Region of interest around the maximum that was used to extract the waist. For both plots: $\mathsf{\textit{R}^2>0.99}$, but it is higher for the fit in \textbf{b}.}
 	\label{fig:3Dfits}
 \end{figure}
 
@@ -428,10 +429,10 @@ Although in deconvolution is non-trivial in general, for the specific case of a 
 This yields $w_{\text{object}} = (0.77 \pm 0.05)$ $\mu$m. 
 Comparing to the theory result, for $\lambdaup = 820$ nm and $\text{NA} = 0.5$ (\cref{eq:Abbe,eq:GaussianAiryFit}) yields $w_0 = 0.689$ $\mu$m. 
 But this result not possible because of using input beam size $w_i \sim R$. 
-We know that as a result of this, the waist should be $\approx$9-10\% larger \cite{Sortais2007,Chon2007} which was confirmed by \cref{eq:FourierBesselAperture}, yielding $w_0 \sim 0.75$ $\mu$m, which is in good agreement with the result from diffraction theory.
+We know that as a result of this, the waist should be $\approx$9-10\% larger \cite{Sortais2007,Chon2007} which was confirmed by \cref{eq:FourierBesselAperture}, yielding $w_0 \sim 0.75$ $\mu$m, which is in good agreement with the measured result.
 We conclude the spot size of the tweezer is nearly diffraction-limited.
 
-\section{Results: Axial Dependency}\label{sec:Tweezer3D}
+\section{Axial Intensity Distribution}\label{sec:Tweezer3D}
 
 To obtain tweezers with the smallest possible volume in order to load single atoms, not only the radial dependency on the intensity distribution is important, but the axial distribution as well.
 The relevant parameter here is the Rayleigh range (see \cref{fig:GaussianBeam}).
@@ -458,13 +459,61 @@ However, to know the exact step size calibration is needed because the step size
 In order to do this, we repeatedly measured the available translation range of some $\sim$ 3mm, recording the amount of steps this takes as well as the amount moved using a caliper. 
 We found a step calibration of $10.6 \pm 0.3$ $\mu$m/step.
 
-\subsection{Results}
+\subsection{Diffraction Theory}
 
-In \cref{fig:AxialUncorrected} the scanned profile of the tweezer is shown prior to aberration correction using the \ac{SLM} is shown, as well as the maximum intensity recorded for each tweezer image normalized to the maximum intensity $I_0$ at the center of the tweezer.
-Also plotted is the result from diffraction theory.
-Clearly, there is a discrepancy between the two. 
-We attributed this to the incorrect glass thickness used: the glass cell and corresponding glass plate consists of 4.0 mm thick quartz glass ($n=1.44$), whereas the cover glass correction of the objective was originally designed for 3.5 mm of N-BK7 glass ($n=1.51$).
-The optical thickness $nd$ is thus 0.5 mm too large. 
+We would like to compare the measurement against the theoretical best possible result.
+Again, this is the diffraction limit, but outside of the focus of the lens in $z=f$, we cannot use the Fraunhofer diffraction integral like we did for the radial dependency \cref{eq:FraunhoferSimplified}. 
+Instead, the more general Fresnel diffraction integral \cref{eq:FresnelDiffraction} has to be considered. 
+Ignoring (complex) pre-factors, which will be omitted in normalization, \cref{eq:FresnelDiffraction} can be written in cylindrical coordinates as \cite{Gu2000}
+
+\begin{equation}\label{eq:FresnelCylindrical}
+    E(r,z) \propto 2\pi
+    \int_0^\infty E(r')\exp{\left[\frac{i k r'^2}{2}\left(\frac{1}{f}-\frac{1}{z}\right)\right]}
+    J_0\left(\frac{k r'r}{z}\right)r' dr',
+\end{equation}
+where again $E(r')$ contains the aperture function defined in \cref{eq:GaussianAperture}. 
+The reader can verify that for $z=f$ \cref{eq:FresnelCylindrical} indeed reduces to \cref{eq:FourierBessel}.
+If the amount of focus is $z=f+\delta z$, and $\delta z \ll f$ (the former is on the order of microns while the latter on millimeters), it holds that
+
+\begin{equation}\label{eq:SmallDefocus}
+    \frac{1}{f}-\frac{1}{z}\approx
+    \frac{\delta z}{f^2}.
+\end{equation}
+We are primarily interested in the axial intensity distribution.
+Thus we set $r=0$, omitting the Bessel function contribution.
+While furthermore using \cref{eq:SmallDefocus} \cref{eq:FresnelCylindrical} reduces to
+
+\begin{equation}
+    E(r=0,z) \propto \int_0^R e^{-r'^2/w_i^2} \exp{\left(
+    \frac{i k \delta z}{2f^2}r'^2
+    \right)} r'dr'.
+\end{equation}
+Evaluating the integral and taking the absolute value squared yields for the intensity $I$ distribution in the axial direction:
+
+\begin{equation}\label{eq:IntensityAxial}
+    I(r=0,z) \propto \frac{w_i^4 e^{-R^2/w_i^2}}{2} \left[
+    \cosh\left(\frac{R^2}{w_i^2}\right)-\cos\left(\frac{k \delta z R^2}{2f^2}\right)
+    \right]
+    \left\{
+    1+\left(\frac{k\delta z R^2}{2 f^2}\right)^2
+    \right\}^{-1}.
+\end{equation}
+\Cref{eq:IntensityAxial} is plotted in normalized fashion in \cref{fig:PSFvsLongitudinal} for the case of the Gaussian input beam used: $w_i = R$ as well as the case for the plane wave $w_i \gg R$ (the point spread function. 
+From \cref{fig:PSFvsLongitudinal}, the difference between the two cases is small, especially for small amounts of defocus.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/LongitudinalTweezerField.pdf}
+    \caption{Intensity of the tweezer as a function of defocus $\mathsf{\delta \textit{z}}$ along the optical axis for a Gaussian input beam $\mathsf{\textit{w}_i \sim \textit{R}}$as well as a plane wave input beam.}
+    \label{fig:PSFvsLongitudinal}
+\end{figure}
+
+\subsection{Results: Axial Dependency}
+
+In \cref{fig:AxialUncorrected} the scanned profile of the tweezer is shown, as well as the maximum intensity recorded as a function of the amount of defocus $\delta z$ from the center of the tweezer.
+The scale is the same in $r$ and $z$ directions, so the aspect ratio is unity.
+The error bars are mainly a consequence of fluctuations in laser intensity as well as uncertainty in the piezo stage calibration.
+Also plotted is the result from diffraction theory for the case $w_i =R$ from \cref{eq:IntensityAxial}.
 
 \begin{figure}
 \centering
@@ -480,67 +529,45 @@ The optical thickness $nd$ is thus 0.5 mm too large.
 		\caption{}
 		\label{fig:AxialZernike}
 	\end{subfigure}
-	\caption{Radial intensity profile \textbf{a)} before aberration correction: $z_R \sim 6.2$ $\mu$m and \textbf{b)} after aberration correction: $z_R \sim 3.5$ $\mu$m.}
+	\caption{Radial intensity profile \textbf{a)} prior aberration correction yielding a fit $\mathsf{\textit{z}_R \sim 6.2}$ $\mathsf{\mu}$m and \textbf{b)} after aberration correction: $\mathsf{\textit{z}_R \sim 3.5}$ $\mathsf{\mu}$m. Also shown: axial intensity data as well as the theory result.}
 	\label{fig:AxialScans}
 \end{figure}
-
-We can look at the effect of this material using the sketch in \cref{fig:SphericalSketch}. The extra glass has a thickness $d$ and refractive index $n$. 
-To simplify calculations, the extra material is inserted on the right, but it can be positioned anywhere without effect on the change in focus $\delta z$ and in focus point location $\delta f$. The maximum ray angle is $\sin{\alpha_0} = R/f$. The refractive index of air is $n_0$ which will be assumed to be unity.
-Now, the change of focus point is derived to be \cite{Iwaniuk2011}
+Clearly, there is a discrepancy between the two. 
+This is confirmed by fitting the data to a Gaussian, which was performed for the region -4 $\mu$m to +4 $\mu$m of defocus, yielding $z_R \sim 6.2$ $\mu$m, while the diffraction-limited $z_R$ from \cref{eq:IntensityAxial} is $\sim 3.0$ $\mu$m.
+We initially attributed the difference to the incorrect glass thickness used: the glass cell and corresponding glass plate consists of 4.0 mm thick quartz glass ($n=1.44$), whereas the cover glass correction of the objective was originally designed for 3.5 mm of N-BK7 glass ($n=1.51$).
+The optical thickness $nd$ is thus 0.5 mm larger than the objective is corrected for. 
+As a result, depending on the incoming angle within the glass plate, the exact axial focus location will differ slightly.
+To see how, see \cref{fig:SphericalSketch}.
+The glass the objective is corrected for is omitted and only the excess glass is shown in gray.
+It has thickness $\Delta d$ and refractive index $n$, whereas the surrounding air has $n_0$ which is assumed to be unity.
+To simplify geometry, the extra glass is positioned near the focus, but the results are indifferent with respect to the axial location of the glass.
+The maximum ray angle is $\sin{\alpha_0} = R/f$. 
+Because of the extra glass, the objective has to be moved amount $\delta z$ to be in focus, leading to a change in focus point $\delta f$ that can be derived from geometry \cite{Iwaniuk2011}
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.65\linewidth]{figures/sphericalAberration.pdf}
-    \caption{As a result of extra glass thickness $nd$, the objective will have to move a distance $\delta z$, corresponding to a change in focus distance $\delta f$.
+    \includegraphics[width=0.53\linewidth]{figures/sphericalAberration.pdf}
+    \caption{As a result of extra glass thickness \textit{n$\Delta$d}, the objective will have to move a distance \textit{$\Delta$z}, corresponding to a change in focus distance \textit{$\Delta$f}.
+    The other parameters are explained in the text.
+    Not to scale.
     Figure adapted from from \cite{Iwaniuk2011}.}
     \label{fig:SphericalSketch}
 \end{figure}
 
 
 \begin{equation}\label{eq:SphericalFocus}
-    \delta f = d - \delta z = d \left[
-    1 - \frac{n_r}{\sqrt{1+\tan^2{(\alpha_0)}\cdot(1-n_r^2)}}
+    \delta f = \Delta d - \delta z = \Delta d \left[
+    1 - \frac{n_r}{\sqrt{1+(1-n_r^2)\tan^2{\alpha_0}}}
     \right],
 \end{equation}
-where $n_r=n_0/n=1/n$ is the ratio of refractive indices and $\tan{\alpha_0} = r/f$ is the incident angle. 
+where $n_r=n_0/n\approx1/n$ is the ratio of refractive indices and $\tan{\alpha_0} = r/f$ is the incident angle. 
 So \cref{eq:SphericalFocus} is a function of $r$ and will not be the same for paraxial rays compared to rays having a larger incident angle (marginal rays). 
-For paraxial rays, ($\alpha_0 \rightarrow 0$), \cref{eq:SphericalFocus} reduces to $d(1-n_r)$. 
-Subtracting this from \cref{eq:SphericalFocus} and Taylor expanding up to fourth order in $\alpha_0$ yields 
+In \cref{subsec:AberrationCorrection} we explain how we computed the corresponding phase error of \cref{eq:SphericalFocus}, which we corrected using the \ac{SLM}.
+After correction, we measured a reduced Rayleigh range of $z_R \sim 5.2$ $\mu$m, which is still significantly larger than the result from theory. 
+Subsequently, we applied an extra cylindrical lens to the SLM to correct astigmatism, which is also explained in \cref{subsec:AberrationCorrection}, yielding a fit of $z_R \sim (3.5 \pm 0.3)$ $\mu$m which is much closer to the $\sim 3.0$ $\mu$m theoretically possible.
+This measurement is shown in \cref{fig:AxialZernike}.
 
-\begin{equation}\label{eq:FocusDifference}
-    \delta f_{\text{marginal}} - \delta f_{\text{paraxial}} \approx
-    \frac{d \tan^2{\alpha_0}}{2n} (1-n_r^2) - \frac{3d \tan^4{\alpha_0}}{8n}(1-n_r^2)^2+\mathcal{O}(\tan\alpha_0^6).
-\end{equation}
-Multiplying \cref{eq:FocusDifference} with $2\pi(n-n_0)/\lambdaup$ and converting to a radial dependence as $\tan{\alpha_0}= \text{NA} \times r/R$ yields \cite{Iwaniuk2011}
 
-\begin{equation}\label{eq:ConversionRadial}
-    \phi(r) \approx \frac{\pi d}{\lambdaup}(1-n_r)\left[
-    \left(\text{NA}\frac{r}{R}\right)^2(1-n_r^2)-\frac{3}{4}\left(\text{NA}\frac{r}{ R}\right)^4(1-n_r^2)^2
-    \right].
-\end{equation}
-This is a function that can be decomposed in Zernike polynomials.
-The Zernike polynomials are a set of orthogonal polynomials on the unit disk, related to optical aberrations. 
-They allow for weighted decomposition of a wavefront function $\phi$ using weights $a_j$ and polynomials $Z_j$ according to
-
-\begin{equation}\label{eq:Zernike}
-    \phi(\rho,\theta) = \sum_{j=1}^\infty a_j Z_j(\rho,\theta)
-\end{equation}
-The terms $Z_j(\rho,\theta)$ can be written in terms of the radial Zernike functions $R_n^m(\rho)$ where $\rho=r/R$ is the normalized radial coordinate and double indices $m,n$ are obtained from $j$ as 
-
-\begin{equation}\label{eq:ZernikeRadial}
-    j = \frac{n(n+2)+l}{2}, \quad
-    R_{n}^{m}(\rho)=
-    \sum_{s=0}^{(n-m) / 2}
-    \frac{(-1)^{s}(n-s) !}{s !\left((n+m)/2-s\right) !\left((n-m)/2-s\right) !} \rho^{n-2 s}
-\end{equation}
-for $n-m$ is even, and 0 for $n-m$ odd. Furthermore $n \leq 0$, $|m| \leq n$. But it turns out \cref{eq:ConversionRadial} only has to nonzero $R_n^m$ terms: $R_2^2 = \rho^2$, which is a defocus aberration and $R_4^4 =\rho^4$ which is a third order spherical aberration. It is not needed to correct the defocus aberration with the SLM, leaving only the spherical aberration term. \cref{fig:AberrationTerm}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.4\textwidth]{figures/SphericalAberrationTerm.pdf}
-    \caption{Phase correction applied onto the SLM to correct the third order spherical aberration as a function of the normalized radial coordinate $\rho=r/R$.}
-    \label{fig:AberrationTerm}
-\end{figure}
 
 
 
