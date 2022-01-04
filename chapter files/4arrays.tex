@@ -1,157 +1,171 @@
 For a quantum computer, multiple qubits are needed that are capable of interacting with each other. 
 Thus, we need to make an array of the tweezers described in \cref{ch:tweezer}, spaced from each other in the order of micrometers. 
 This can be done by sending different laser beams to the objective, all under slightly different angles. 
-
 Experimentally, this could be realized using an \ac{AOD}: a device that diffracts light off of a sound wave in a crystal, where the degree of diffraction is controlled by a \ac{RF} signal. 
-By using 2 AODs in an orthogonal configuration, each supplied by a superposition of RF signals, 2D Arrays have been succesfully realized \cite{Manuel2016}. 
+By using 2 AODs in an orthogonal configuration, each supplied by a superposition of RF signals, 2D Arrays have been successfully realized \cite{Manuel2016}. 
 This principle is sketched in \cref{fig:CrossAOD}.
 
-\section{The Spatial Light Modulator}
+Nevertheless, one issue with this method is that there is little flexibility in varying the individual laser spot intensities because of the crossed configuration.
+Therefore, \cite{Bergamini2004} showed a different method could be used to make tweezer arrays, making use of a \acf{SLM}, which was already briefly discussed in the previous chapter. 
+With the SLM, it is in principle even possible to make 3D arrays of tweezers \cite{DiLeonardo2007,Barredo2016}, though we will limit ourselves to arrays in 2D in this work.
 
-One issue with this method is that there is little flexibility in varying the individual laser beam intensities, because of the crossed configuration this is impossible. 
-Therefore, as early as \cite{Bergamini2004} it was proposed that a different method could be used to make tweezer arrays, which is to use a \ac{SLM}. 
-This is effectively a mirror that can imprint a \ac{CGH} onto the impinging laser beam, such that in the focal plane of a lens arbitrary intensity patterns can be made. This technique has the advantage that one can flexibly control the potentials of each invididual tweezer, improving uniformity. 
-In principle, it is even possible to make 3D arrays of tweezers \cite{DiLeonardo2007,Barredo2016}.
-
-\subsection{Working Principle}
-
-The \ac{SLM} can manipulate properties of light like amplitude, phase and polarization.
-The type of SLM used is the phase-only SLM, and as the name suggests it can only control the phase of the light field.
-It does this by deploying a large array of pixels, where each individual pixel has a liquid crytal in it. 
-The orientation of the crystal will change the refractive index because of the birefringence effect. 
-The pixelated display is manufactured on a layer of silicon to address the voltage of each cell invididually.
-A sketch of the SLM pixels is shown in \cref{fig:LCoS}. 
-The possibilities of this type of SLM has been documented extensively within our group, for example by \cite{Dijk2012,Bijnen2013,Bijnen2015}. 
-\begin{figure}
-\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[height=3.8cm]{figures/crossAOD.pdf}
-		\caption{}
-		\label{fig:CrossAOD}
-	\end{subfigure}
-	\begin{subfigure}{.5\textwidth}
-		\centering
-		\includegraphics[height=3.8cm]{figures/LCoS.png}
-		\caption{}
-		\label{fig:LCoS}
-	\end{subfigure}
-	\caption{a) Two AODs in crossed configuration, used to make a 2D spot array. Figure from \cite{Cooper2018}. 
-	b) The orientation of the liquid crystal cells changes as a function of the applied electric field $E$. 
-	Figure from \cite{Guzman2017}.}
-	\label{fig:GerschbergSaxton}
-\end{figure}
+In \cref{sec:SLM} we will introduce the working principle and some measurements on the SLM and in \cref{sec:GSW} we will see how to compute the hologram needed.
+Next, in \cref{sec:SLMoperatoin} we elaborate how we used the SLM in the experiments and in \cref{sec:ArraysResults} we show the measured spot arrays.
 
 
-\section{Phase Modulation}
 
-In a phase only \ac{SLM}, each pixel can locally retard the field. 
-As a result of diffraction, one can create arbitrary interference patterns in in the focal plane of the lens as shown by \cite{Bijnen2013}. 
-The birefingence effect means the \ac{SLM} has two different refractive indices, somewhat confusingly called the ordinary and extraordinary refractive indeces respectively ($n_o$ and $n_e$). 
-If the liquid crystal has a thickness $t$, the phase retardation will be $\phi_o = k t n_o$ and $\phi_e(V) = k t n_e(V)$ respectively, such that the phase retarder can be represented by the Jones matrix \cite{Guzman2017}
+\section{The Spatial Light Modulator}\label{sec:SLM}
+
+A spatial light modulator is in essence a mirror that can imprint a \ac{CGH} onto a beam of light, allowing for spatial light modulation.
+Different types of SLMs can manipulate properties of light like amplitude, phase and polarization.
+In this work a phase-only SLM was used, which as the name suggests can only control local phase of the incoming light field.
+This is done by deploying a pixel array, where each pixel houses a liquid birifringent crystal.
+By applying a voltage (electric field) over the pixel, the orientation of the liquid crystal molecules change, changing their effective refractive index.
+This is shown in \cref{fig:LCoS}.
+
+Because of crystals are birifringent they posses refractive indices among perpendicular axes, commonly referred to as the ordinary and extraordinary refractive indices respectively ($n_o$ and $n_e$). 
+If the light travels a distance $t$ in a crystal unit of the SLM, the phase retardation will be $\phi_o = k t n_o$ and $\phi_e(V) = k t n_e(V)$ respectively (only the extraordinary axis can be modulated), such that the phase retarder can be represented by the Jones matrix \cite{Guzman2017}
 
 \begin{equation}\label{eq:JonesMatrix}
     M = e^{i \phi_0} 
     \begin{pmatrix}
         e^{i(\phi_e-\phi_o)} & 0\\
         0 & 1
-    \end{pmatrix}
+    \end{pmatrix}.
 \end{equation}
+Thus the phase retardance $\phi$ as a function of the applied voltage $V$ is \cite{Guzman2017}, using the birifringence parameter $\Delta n= n_e-n_o$
 
-Thus the phase retardance $\phi$ as a function of the applied voltage is \cite{Guzman2017}
-
-\begin{equation}
-    \phi(V) = k (n_e - n_0) t = \frac{2\pi}{\lambda} \Delta n t,
+\begin{equation}\label{eq:ElectroOpticResponse}
+    \phi(V) = k t(n_e(V) - n_0) t = \frac{2\pi}{\lambdaup}t \Delta n(V).
 \end{equation}
+To obtain voltage control over each individual pixel, the display is manufactured on a layer of silicon, making use of various semiconductor manufacturing technologies.
+A sketch of the SLM pixels is shown in \cref{fig:LCoS}. 
 
-where we absorbed the difference in refractive index in between the ordinary and extraordinary refractive indices in the paramter $\Delta n$.
-This proces can be done separately for each pixel, leading to a phase retardance $
-\phi(x',y')$ where $x',y'$ are the coordinates in the plane of the SLM. When a laser beam with intensity $|U_i|^2$ impinges on the SLM, it will pick up a phase. 
-Thus its field can be described as $U_i e^{i\phi(x',y')}$ this is shown in \cref{fig:SLMgeometry}. 
-The field will interfere with itself, until at infinity (or in the focal plane of a lens) the distribution evolves to $|U_f|^2$.
-\cref{sec:PropagationDerivation,sec:GSW} delve deeper in how this quantitatively works. First we will note that the refractive index is not linear in the applied voltage, we thus need to calibrate the SLM first. 
+As a result of diffraction from the various pixels, one can create arbitrary interference patterns in in the focal plane of a lens, which is sketched in \cref{fig:SLMLens}.
+The use of SLMs has been extensively covered in our group by, for example \cite{Dijk2012,Bijnen2013,Bijnen2015}. 
+Because the SLM used previously in our group suffered from amplitude modulation \cite{Dijk2012,Bijnen2015}, an unwanted effect, we purchased a newer model SLM. 
+The model we use is the Meadowlark E-series 1920 x 1200 SLM.
+Some key parameters of the SLM are presented in \cref{table:SLMspecs}.
 
-\subsection{Calibration}
+\begin{table}[h]
+    \centering
+    \caption{Selection of specifications of the Meadowlark SLM.}
+    \label{table:SLMspecs}
+    \begin{tabular}{l | l}
+        \textbf{Specification}          & \textbf{Value} \\ \hline 
+        Array size                      & 15.4 x 9.6 mm  \\ \hline
+        Resolution                      & 1920 x 1080 pixels    \\ \hline
+        Pixel pitch                     & 8.0 $\mu$m     \\ \hline
+        Diffraction efficiency         & 76-79\%   
+    \end{tabular}
+\end{table}
 
-The retardiation is a result of the liquid crystal molecules rotating in their cells.
-However, the retardation will not be linear as a function of the applied field $E$ and thus the voltage $V$. 
-To linearize this, we need to calibrate the electro-optic response of the \ac{SLM}, which equates to measuring the retardation $\phi$ as a function of the applied voltage. 
+\begin{figure}
+	\begin{subfigure}{.39\textwidth}
+		\flushleft
+		\includegraphics[height=4.25cm]{figures/crossAOD.pdf}
+		\caption{}
+		\label{fig:CrossAOD}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{.59\textwidth}
+		\includegraphics[height=4.25cm]{figures/LCoS.png}
+		\caption{}
+		\label{fig:LCoS}
+	\end{subfigure}
+	\caption{\textbf{a)} Two \ac{AOD}s in crossed configuration, used to make a 2D spot array. Figure from \cite{Cooper2018}. 
+	\textbf{b)} The orientation of the liquid crystal cells changing as a function of the applied electric field \textit{E}. 
+	Figure from \cite{Guzman2017}.}
+\end{figure}
+
+\subsection{Calibrating the Electro-Optic Response}
+
+The the refractive $\Delta n(V)$ and therefore the light retardation $\phi(V)$ (\cref{eq:ElectroOpticResponse}) is not necessarily linear as a function of the applied voltage V. 
+Thus it is needed to calibrate the electro-optic response of the \ac{SLM}, which equates to measuring the retardation $\phi$ as a function of the applied voltage $V$. 
 This calibration serves two purposes:
 
 \begin{enumerate}
     \itemsep=0pt
     
-    \item Ensure the minimum to the maximum grey level corresponds to a $2\pi$ (one wave) phase retardation.
+    \item Ensure the minimum to the maximum phase retardation corresponds to a $2\pi$ (one wave) phase retardation.
     
-    \item Linearize the electro-optic response: that is the phase retardation as a function of grey level. 
+    \item Linearize the electro-optic response. 
 \end{enumerate}
-
-
-The light field will oscillate with frequencies in the THz regime thus measuring this phase shift directly is not practical. 
-Instead, we use a method that measures the amount of power in the first diffraction order known as the diffractive method. 
-
-There are a variety of methods to calibrate a phase-only \ac{SLM} \cite{Li2019}. 
+The calibration has to be performed because each individual SLM has a slightly different electro-optic response. 
+Furthermore, it is wavelength specific, which is why we performed it for the wavelength relevant for Rb experiments at 820 nm. 
+Measuring the electro-optic response is impossible because the light field oscillates with frequencies in th THz regime.
+There are a variety of methods to measure it indirectly for a phase-only \ac{SLM}, however \cite{Li2019}.
 We chose the diffractive calibration method, originally proposed by \cite{Zhang1994}.
-We imprint a Ronchi grating onto the SLM, see \cref{fig:LUTCalibrationSetup}.
-Consisting of alternating grey values $L_1$ and $L_2$.
-This grating consists of $M$ periods $w$ in the horizontal direction and a vertical height $H$. 
-Assuming amplitude modulation between different grey levels is negilible and the SLM only modulates phase, the electric field just after the SLM is propertional to the phase transmittance given by
+
+The method works by imprinting a variety of Ronchi gratings onto the SLM, see \cref{fig:LUTCalibrationSetup}.
+This is a pattern consisting of $M$ periods of width $w$ in the horizontal direction and a vertical height $H$ of alternating gray values $L_1$ and $L_2$.
+A gray value is a 8 bit number representing the degree of modulation where 0 (white) mean no voltage while 255 (black) is maximum voltage. 
+Assuming amplitude modulation between different gray levels is negligible and the SLM only modulates phase, the electric field just after the SLM is proportional to the phase transmittance given by summing over the gratings $m$ \cite{Zhang1994}
 
 \begin{equation}\label{eq:FieldAfterSLM}
-    f(x,y) = \sum_{m=0}^{M-1} \left\{
-    \operatorname{rect}\left(\frac{x-m w - w/4}{w/2}\right) + e^{i \phi(L)} \operatorname{rect}\left(\frac{x - m w - 3 w/4}{w/2}\right)
-    \right\}
+    f(x',y') = \sum_{m=0}^{M-1} \left\{
+    \operatorname{rect}\left(\frac{x'-m w - w/4}{w/2}\right) + e^{i \phi(L)} \operatorname{rect}\left(\frac{x'- m w - 3 w/4}{w/2}\right)
+    \right\},
 \end{equation}
-
-According to Fourier optics, if we place a lens after the SLM, the field in the \textit{Fourier} plane of the lens is the Fourier transform of the field after the SLM, as derived in \cref{eq:2Dcase}.
-The intensity is thus for $y=0$
+where $\operatorname{rect}(\cdot)$ is the rectangular function. 
+According to Fourier optics, if we place a lens after the SLM, the field in the \textit{Fourier} plane of the lens is the Fourier transform of the field after the SLM, as derived in \cref{eq:FraunhoferSimplified} as well as in \cref{eq:2Dcase}.
+The intensity is thus for $y=0$ (we separate the different orders in the $x$-direction around $y=0$) the 2D Fourier transform $F = \mathcal{F}(f)$ \cite{Zhang1994}
 
 \begin{equation}\label{eq:FourierIntensity}
     |F(p,0)|^2=
-    \frac{M^2 w^2}{2}\operatorname{sinc}^2\left(\frac{M f_x w}{2}\right) \cdot
-    \frac{1 + \cos{\left[\phi(L)+f_x w/2\right]}}{\cos^2(f_x w/4)}
+    \frac{M^2 w^2}{2}\operatorname{sinc}^2\left(\frac{M p w}{2}\right) \times
+    \frac{1 + \cos{\left[\phi(L)+p w/2\right]}}{\cos^2(p w/4)}.
 \end{equation}
-
-Such that the intensity in the first diffraction order is
+In \cref{eq:FourierIntensity} $p=2\pi x/\lambdaup f$ is the Fourier transformed spatial coordinate. The intensity in the first order ($p=\pm 2\pi/w$) is
 
 \begin{equation}\label{eq:IntensityFirstOrder}
     I_1(\phi) =
     \frac{8M^2w^2}{\pi^2} \left( 
     1-\cos{\phi(L)}
-    \right)
+    \right),
 \end{equation}
+which we will use to fit the measurement data. Experimentally, we load a sequence of Ronchi gratings onto the SLM, looping $L_1$ from the minimum to the maximum gray value, while keeping $L_2$ constant. 
+For our 8-bit SLM, this amounts to looping over 255 gray values. For each hologram, separate the multiple diffraction orders using a $f=400$ mm lens (such that the spacing between the various orders is sufficient) and an aperture and record the power in the first order using a power meter.
+
+The results are shown in \cref{fig:LUTcalibration}. 
+Also shown is the result of fitting \cref{eq:IntensityFirstOrder}: the voltage response as a function of gray level. 
+This fit was done with a software program provided by the manufacturer.
+This is also called the gamma curve or \ac{LUT}.
+The LUT is the 8-bit gray level to 10-bit voltage levels of the SLM, such that the electro-optic response is linear. 
+As can be seen from \cref{fig:LUTcalibration}, the obtained LUT is rather non-linear, meaning the electro-optic response is also non-linear as expected.
+In the following section 
 
 \begin{figure}
 	\begin{subfigure}{.54\linewidth}
-		\includegraphics[height=4cm]{figures/LUTcalibrationSetup.pdf}
+	    \flushleft
+		\includegraphics[height=4.2cm]{figures/LUTcalibrationSetup.pdf}
 		\caption{}
 		\label{fig:LUTCalibrationSetup}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{.44\linewidth}
-		\includegraphics[height=4cm]{figures/LUTplot.pdf}
+	    \flushright
+		\includegraphics[height=4.2cm]{figures/LUTplot.pdf}
 		\caption{}
 		\label{fig:LUTcalibration}
 	\end{subfigure}
-	\caption{\textbf{a)} We put a Ronchi grating onto the SLM with grey values $L_1$ and $L_2$ We seperate the diffraction orders using a $f=400$ mm lens and block all orders other than the $+1$ order using an iris. 
-	\textbf{b) }Normalized power in the first order as a (\textcolor{red}{red}) and the fitted voltage response (\textcolor{blue}{blue}) as a function of the applied grey level $L_1 \in (0-255)$.}
+	\caption{\textbf{a)} We put a Ronchi grating onto the SLM with gray values $\mathsf{\textit{L}_1}$ and $\mathsf{\textit{L}_2}$ We separate the diffraction orders using a $f=400$ mm lens and block all orders other than the $+1$ order using an iris. 
+	\textbf{b)} Normalized power in the first order as a (\textcolor{red}{red}) and the fitted voltage response (\textcolor{blue}{blue}) as a function of the applied gray level $\mathsf{\textit{L}_1} \in (0-255)$.}
 \end{figure}
 
-Experimentally, we load a sequence of Ronchi gratings onto the SLM, looping $L_1$ from the minumum to the maximum grey value, while keeping $L_2$ consant. 
-For our 8-bit SLM, this is 0-255. For each hologram, seperate the multiple diffraction orders using a longer focal length lens (such that the spacing between the various orders is sufficient) and an aperture and record the power in the first order using a power meter. 
-The results are shown in \cref{fig:LUTcalibration}. Also shown is the result of fitting \cref{eq:IntensityFirstOrder}: the voltage response as a fuction of grey level. 
-This is also called the gamma curve or \ac{LUT}.
-The LUT is the 8-bit grey level to 10-bit voltage levels of the SLM, such that the electro-optic response is linear. 
-As can be seen from \cref{fig:LUTcalibration}, the obtained LUT is rather non-linear.
 
-The LUT calibration has to be performed because each individual SLM has a slightly different electro-optic response. 
-Also, it is wavelength specific, which is why we performed it for the wavelenghts that we want to use for our optical tweezers. 
+\subsection{Light Propagation}\label{sec:PropagationDerivation}
 
-\section{Light Propagation}\label{sec:PropagationDerivation}
+N
+Labeling the pixels $j$, the phase retardance is thus $\phi_j(x_j,y_j)$ where $(x,y)$ are Cartesian coordinates in the plane of the SLM.
+
+Now, consider a laser with intensity distribution $|E_i|^2$ impinging on the SLM, it will pick up a phase factor such that after the SLM, the field is described as $E_i e^{i\phi(x',y')}$ this is shown in \cref{fig:SLMgeometry}. 
+The field will interfere with itself, until at infinity (or in the focal plane of a lens) the distribution evolves to $|E_f|^2$.
+\cref{sec:PropagationDerivation,sec:GSW} delve deeper in how this quantitatively works. First we will note that the refractive index is not linear in the applied voltage, we thus need to calibrate the SLM first. 
 
 Finding the \ac{CGH} to be displayed onto the SLM is not trivial. We will now explain how this is done.
 We consider the general case for 3D spot arrays, but will see that for 2D arrays a faster algorithm can be used. 
-We consider an ensemble consisting of the SLM and a perfect lens with focal length $f$. We define two cartesian coordinate systems: the SLM plane by $\{x',y'\}$ and the focal plane of the lens by $\{x,y\}$. 
+We consider an ensemble consisting of the SLM and a perfect lens with focal length $f$. We define two Cartesian coordinate systems: the SLM plane by $\{x',y'\}$ and the focal plane of the lens by $\{x,y\}$. 
 The situation is sketched in \cref{fig:SLMLens}
 
 We adapt the following notation, the \ac{SLM} plane, with individual pixels indexed by $j$, such that the coordinates are $x'_j, y'_j,0$ ($z'=0)$ because by definition the pixels lie in this plane.
@@ -160,10 +174,10 @@ One focal plane further is the focal plane of this Fourier lens, which we call t
 
 \begin{figure}
     \centering
-    \includegraphics[width = 12cm]{figures/SLMfigure.pdf}
-    \caption{Field with intensity distribution $|U_i|^2$ impinging on the SLM, which due to its finite size acts as an aperture.
-    The lens makes the resulting image $|U_f|^2$ in its focal plane.
-    Also shown: two cartesian coordinate systems in the SLM and focal plane. 
+    \includegraphics[width = 13cm]{figures/SLMfigure.pdf}
+    \caption{Field with intensity distribution $|E_i|^2$ impinging on the SLM, which due to its finite size acts as an aperture.
+    The lens makes the resulting image $|E_f|^2$ in its focal plane.
+    Also shown: two Cartesian coordinate systems in the SLM and focal plane. 
     Not to scale. 
     Adapted from \cite{Labuhn2016}.}
     \label{fig:SLMLens}
@@ -175,10 +189,9 @@ As result of traveling from the $j$th pixel to the $m$th trap, under paraxial ap
 \begin{equation}\label{eq:PropagationPhase}
     \Delta_j^m = \frac{2\pi z_m}{\lambdaup f^2}(x_j^2+y_j^2)+\frac{2\pi}{\lambdaup f}(x_j x_m +y_j y_m)
 \end{equation}
-
 This situation is sketched in \cref{fig:SLMgeometry}.
 In the SLM plane, we assume uniform illumination of the SLM such that the amplitude is the same everywhere: $|E_i| = 1$.
-This may look like an unrealistic assumption considering we use a gaussian input beam, but we will see in a moment that in fact the input beam does not matter for the pattern produced. 
+This may look like an unrealistic assumption considering we use a Gaussian input beam, but we will see in a moment that in fact the input beam does not matter for the pattern produced. 
 The SLM imprints a phase $\phi(x',y') = \phi_j$, such that the complex amplitude in the SLM plane for pixel $j$ is
 
 \begin{equation}
@@ -191,7 +204,6 @@ The contribution for the $m$th trap can be found by summing over all pixels, als
     \nu_m = e^{i k \left(2 f + z_m\right)}
     \frac{d^2}{i \lambda f} \sum_{j=1}^N e^{i(\phi_j - \Delta_j^m)}
 \end{equation}
-
 Furthermore $d$ is the pixel pitch of the SLM. 
 But we are not interested in the phase of each in every spot, but only in the intensity. 
 We will thus emit the prefactors in \cref{eq:DiffractionFormula} and normalize over $N$ pixels
@@ -199,7 +211,6 @@ We will thus emit the prefactors in \cref{eq:DiffractionFormula} and normalize o
 \begin{equation}\label{eq:Vm}
     V_m = \frac{1}{N} \sum_{j} e^{i(\phi_j - \Delta_j^m)}
 \end{equation}
-
 A subset of 3D spot arrays are to make 2D arrays. 
 Setting $z=0$ in \cref{eq:Vm} yields 
 
@@ -210,7 +221,6 @@ Setting $z=0$ in \cref{eq:Vm} yields
     \right]
     \right)}
 \end{equation}
-
 Which is the 2D \ac{DFT} of $e^{i\phi}$ evaluated at spatial frequencies $x_m/\lambdaup f$ and $y_m/\lambdaup f$ in $x$ and $y$ respectively \cite{DiLeonardo2007,Bijnen2015}. 
 The DFT can be efficiently evaluated on a computer using a \ac{FFT}. We stress that the FFT can only be used for 2D arrays. 
 In this work, we only use 2D arrays and could in principle use \cref{eq:2Dcase} to speed up calculation. 
@@ -230,7 +240,6 @@ Because the equations describing light progagation are time-symmetric, this phas
     i\left(\Delta_j^m + \theta_j\right)
     }
 \end{equation}
-
 But requires doing phase as well as amplitude modulation, when the SLM can only do phase, which is to take the argument of \cref{eq:InterferencePattern}
 
 \begin{equation}\label{eq:Argument}
@@ -240,7 +249,6 @@ But requires doing phase as well as amplitude modulation, when the SLM can only 
     }
     \right\}
 \end{equation}
-
 This problem was solved by \cite{Gerschberg1972} and extended to 3D spot arrays by \cite{DiLeonardo2007}. 
 The idea is to make use of an algorithm that virtually propagates light back and forth between the SLM and focal planes.
 For spot arrays, we are interested in the target intensities.
@@ -251,7 +259,6 @@ Summing all of them yields the real part of the interference pattern, or the dif
     \quad 
     u = 1-\frac{\text{max}(I_m)-\text{min}(I_m)}{\text{max}(I_m)+\text{min}(I_m)}
 \end{equation}
-
 The algorithm should converge yielding a set $\{w_m, \phi_j\}$. 
 ]The iteration counter is $k$
 
@@ -260,7 +267,6 @@ The algorithm should converge yielding a set $\{w_m, \phi_j\}$.
     
     \item For In the focal plane, replace the calculated $V_m^k$ array by the target $V_m$ array and use this to calculate updated weight factors $w_m^k = w_m^{k-1} V_m^k / |V_m^k|$ find the new phase mask $\phi_j^k$ according to \cref{eq:InterferencePattern}.
 \end{itemize}
-
 This sequence is sketched in \cref{fig:GerschbergSaxton}. 
 Starting with phase mask $\phi_j^k$ we use the diffraction equation \cref{eq:DiffractionFormula} to compute the complex amplitudes of the spot array $V_m^{k+1}$. 
 From the amplitudes, we find new weight factors $w_m^k$ and pixel values $\theta_m^k$, which are used to compute the new phase mask using the interference equation \cref{eq:InterferencePattern}.
@@ -293,7 +299,7 @@ Therefore, these computations are performed onto the GPU using the \textit{PyOpe
 \end{figure}
 
 
-\section{Operating the SLM}
+\section{Operating the SLM}\label{sec:SLMoperatoin}
 
 There are several practical considerations to be taken into account when operating the SLM. 
 The most important ones will be discussed here. 
@@ -306,7 +312,6 @@ It is well known from diffraction theory that in both $x$ and $y$ these diffract
 \begin{equation}
     \theta_l = \arcsin\left(\sin\theta_i - l\frac{ \lambdaup}{d}\right)
 \end{equation}
-
 for incident angle $\theta_i$. 
 The $l=0$ order contains the most power and is the only order that is used, the other orders are blocked using an aperture. 
 
@@ -332,7 +337,6 @@ The relative power transmission $P/P_0$ can be found by integrating the intensit
     \iint G(x,y) dA=
     \text{erf}\left(\frac{\sqrt{2}S_x}{w(z)}\right) \text{erf}\left(\frac{\sqrt{2}S_y}{w(z)}\right)
 \end{equation}
-
 where erf($\cdot$) denotes the error function. 
 The optimum incident beam size $w(z)$ is thus a compromize between drawing area and power efficiency. 
 We have decied to use $w(z) = 4.8$ mm, which is about the size of the short axis $S_x = 4.9$ mm, such that we illuminate the entire \ac{SLM} and the power transmission as a result of the finite rectangular aperture is $\sim 95$\%.
@@ -441,7 +445,7 @@ Here, we show the various phase masks that we have put onto the SLM:
 
 
 
-\section{Arrays of tweezers}
+\section{Arrays of tweezers}\label{sec:ArraysResults}
 
 Using holography and the SLM, we can make arbitrary arrays of spot using the algorithm discussed in \cref{sec:GSW}. 
 We limited ourself to arrays of $n \times n \times 1$ pixels in the $x$, $y$ and $z$-directions respectively, where $n \in (1,2\ldots10)$. 
@@ -459,7 +463,6 @@ In ... we show the theoretical diffraction result as found by the program, the c
     \begin{equation}\label{eq:FocalUnit}
         \Delta x \times \Delta y = \frac{2\lambdaup f}{S_x} \times \frac{2 \lambdaup f}{S_y}
     \end{equation}
-    
     \cref{eq:FocalUnit} are known as focal units and they are a natural unit to use in the Fourier plane.
     However, this will not fully apply to us, because we conjugate the short axis of the SLM to the aperture radius of the lens (objective), such that the extra pixels in the long axis of the SLM are effectively not used. 
     Therefore, we can set $S_x = S_y$ and the focal units will be the same in $x$ and $y$.
