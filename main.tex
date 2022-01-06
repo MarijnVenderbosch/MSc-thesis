@@ -1,7 +1,7 @@
-\documentclass[a4paper, twoside, notitlepage, 11pt]{report}
+\documentclass[a4paper, twoside, notitlepage, 10pt]{report}
 
 % admin
-\title{MSc project thesis optical tweezers}
+\title{MscThesisVenderbosch}
 \author{Marijn Venderbosch}
 \date{\normalsize \textsf{\today}}
 
@@ -38,12 +38,12 @@
 \setlist[enumerate]{itemsep = 2pt, topsep = 4pt}
 
 % appearance
-\usepackage[labelfont = {bf, sf}, font = sf, width=\textwidth]{caption}
-\captionsetup{font = {sf,stretch = 0.95}, figurename = Fig., tablename = Tab.}
+\usepackage[labelfont = {bf, sf}, width=\textwidth]{caption}
+\captionsetup{font = {stretch = 1}, figurename = Fig., tablename = Tab.}
 \usepackage[bf, sf]{titlesec}
 \usepackage{microtype}
 \renewcommand{\figurename}{Fig.}
-\setstretch{1.0}
+\setstretch{1.03}
 \usepackage{blindtext, color}
 \setlength{\parskip}{0pt}
 
@@ -52,10 +52,10 @@
 
 % font
 \usepackage[T1]{fontenc}
-\usepackage[scaled=0.95]{XCharter}%serif
-\usepackage[scaled=0.9]{helvet} % sans serif
-\usepackage[scaled=0.96]{newtxmath} % math font, options in []. Leave.
-\usepackage[scaled=0.875]{DejaVuSansMono} % mono
+\usepackage[scaled=1.03]{XCharter}%serif
+\usepackage[scaled=0.95]{helvet} % sans serif
+\usepackage[]{newtxmath} % math font, options in []. Leave.
+\usepackage[scaled=0.9]{DejaVuSansMono} % mono
 
 % page header
 \usepackage{fancyhdr}
@@ -120,7 +120,7 @@
     
     \hspace{0pt}
     \vfill
-        \renewcommand{\abstractname}{\Large{Acknowledgements}}
+        \renewcommand{\abstractname}{\Large{Acknowledgments}}
         \begin{abstract}
             \thispagestyle{plain}
             \vspace*{0.5cm}
