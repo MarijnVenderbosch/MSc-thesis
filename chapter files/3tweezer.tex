@@ -122,8 +122,8 @@ Solving for the first zero of \cref{eq:NormalizedPSF}, and introducing the defin
 
 \begin{figure}
     \centering
-    \includegraphics[width = 0.9\linewidth]{figures/AiryDisk.pdf}
-    \caption{Normalized plots of the Airy function for \textbf{a)} only the radial coordinate (normalized in units of \textit{f}/\textit{kR}) as well as \textbf{b)} a 2D plot: the Airy disk.}
+    \includegraphics[width = 0.95\linewidth]{figures/AiryDisk.pdf}
+    \caption{Normalized plots of the Airy function for \textbf{a)} only the radial coordinate (normalized in units of $k/kR$) as well as \textbf{b)} a 2D plot: the Airy disk.}
     \label{fig:AiryPlots}
 \end{figure}
 
@@ -167,9 +167,9 @@ A Gaussian function is commonly used, and can sometimes even fit better than \cr
     
     \vspace*{3mm}
     \centering
-        \includegraphics[width=0.5\linewidth]{figures/GaussianBeam.pdf}
+        \includegraphics[width=0.52\linewidth]{figures/GaussianBeam.pdf}
         \captionsetup{margin=0mm}%somehow this works
-        \captionof{figure}{Gaussian beam profile and some key parameters used in this work, the beam waist $\mathsf{\textit{w}_0}$ and Rayleigh range $\mathsf{\textit{z}_R}$. 
+        \captionof{figure}{Gaussian beam profile and some key parameters used in this work, the beam waist $\mathsf{\textit{w}_0}$ and Rayleigh range $z_R$. 
         Figure adapted from \cite{Hermans2009}.}
         \label{fig:GaussianBeam}
 \end{mdframed}
@@ -195,8 +195,8 @@ We will use equations of the form \cref{eq:GaussianPotential} to fit optical twe
 
 \begin{figure}
     \centering
-    \includegraphics[width=.56\linewidth]{figures/GaussianPotential.pdf}
-    \caption{Normalized potential $\mathsf{\textit{U}/\textit{U}_0}$ for a Gaussian trap shape as a function of the normalized cylindrical coordinates $\mathsf{\textit{r}/\textit{w}_0}$ and $\mathsf{\textit{z}/\textit{z}_R}$. Not to scale: typically the Rayleigh range $\mathsf{\textit{z}_R}$ is larger than the beam waist $\mathsf{\textit{w}_0}$.}
+    \includegraphics[width=.61\linewidth]{figures/GaussianPotential.pdf}
+    \caption{Normalized potential $U/U_0$ for a Gaussian trap shape as a function of the normalized cylindrical coordinates $r/w_0$ and $z/z_R$. Not to scale: typically $z_R > w_0$.}
     \label{fig:GaussianPotential}
 \end{figure}
 
@@ -308,9 +308,9 @@ The equivalent focal length of the SLM is $\sim 690$ mm, such that $f_2/f_1 \sim
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.95\linewidth]{figures/TiSandSLM.pdf}
+    \includegraphics[width=\linewidth]{figures/TiSandSLM.pdf}
     \caption{Output from a titanium sapphire ring laser is coupled into a polarization-maintaining fiber bringing it to the main table. 
-    After alignment of the polarization direction, a spatial light modulator $\mathsf{f_1}$ and achromatic lens $\mathsf{f_2 = 300}$ mm feed the light into the Mitutoyo 0.5 NA objective.
+    After alignment of the polarization direction, a spatial light modulator $f_1$ and achromatic lens $f_2 = 300$ mm feed the light into the Mitutoyo 0.5 NA objective.
     A glass plate serves to replace the vacuum viewport.
     The tweezer potential is imaged on a camera using a 0.85 NA microscope objective.
     The cubes shown are polarizing.}
@@ -415,7 +415,7 @@ This is confirmed by the coefficient of determination $R^2 > 0.99$.
 		\label{fig:3Dwaistfit}
 	\end{subfigure}
 	\caption{\textbf{a)} Plot showing convergence of the Gaussian fit.
-	\textbf{b)} Region of interest around the maximum that was used to extract the waist. For both plots: $\mathsf{\textit{R}^2>0.99}$, but it is higher for the fit in \textbf{b}.}
+	\textbf{b)} Region of interest around the maximum that was used to extract the waist. For both plots: $R^2>0.99$, but it is higher for the fit in \textbf{b}.}
 	\label{fig:3Dfits}
 \end{figure}
 
@@ -507,7 +507,7 @@ From \cref{fig:PSFvsLongitudinal}, the difference between the two cases is small
 \begin{figure}
     \centering
     \includegraphics[width=0.6\textwidth]{figures/LongitudinalTweezerField.pdf}
-    \caption{Intensity of the tweezer as a function of defocus $\mathsf{\delta \textit{z}}$ along the optical axis for a Gaussian input beam $\mathsf{\textit{w}_i \sim \textit{R}}$as well as a plane wave input beam.}
+    \caption{Intensity of the tweezer as a function of defocus $\delta z$ along the optical axis for a Gaussian input beam $w_i \sim R$as well as a plane wave input beam.}
     \label{fig:PSFvsLongitudinal}
 \end{figure}
 
@@ -532,7 +532,7 @@ Also plotted is the result from diffraction theory for the case $w_i =R$ from \c
 		\caption{}
 		\label{fig:AxialZernike}
 	\end{subfigure}
-	\caption{Radial intensity profile \textbf{a)} prior aberration correction yielding a fit $\mathsf{\textit{z}_R \sim 6.2}$ $\mathsf{\mu}$m and \textbf{b)} after aberration correction: $\mathsf{\textit{z}_R \sim 3.5}$ $\mathsf{\mu}$m. Also shown: axial intensity data as well as the theory result.}
+	\caption{Radial intensity profile \textbf{a)} prior aberration correction yielding a fit $z_R \sim 6.2$ $\mu$m and \textbf{b)} after aberration correction: $z_R \sim 3.5$ $\mu$m. Also shown: axial intensity data as well as the theory result.}
 	\label{fig:AxialScans}
 \end{figure}
 Clearly, there is a discrepancy between the theory and measurement results.
@@ -548,9 +548,9 @@ After some geometry \cite{Iwaniuk2011} this leads to a change in focus $\delta f
 \begin{figure}[b]
     \centering
     \includegraphics[width=0.57\linewidth]{figures/sphericalAberration.pdf}
-    \caption{As a result of extra glass thickness \textit{n$\Delta$d}, the objective will have to move a distance \textit{$\Delta$z}, corresponding to a change in focus distance \textit{$\Delta$f}.
-    The other parameters are explained in the text.
-    Not to scale.
+    \caption{As a result of extra glass thickness $n\Delta d$, the objective will have to move a distance $\delta z$, corresponding to a change in focus distance $\delta f$.
+    The other parameters are explained in the text.  
+    Not to scale. 
     Figure adapted from from \cite{Iwaniuk2011}.}
     \label{fig:SphericalSketch}
 \end{figure}
