@@ -20,9 +20,9 @@ Finally, in \cref{sec:ArraysResults} we present the measured spot arrays.
 
 \section{The Spatial Light Modulator}\label{sec:SLM}
 
-A spatial light modulator is in essence a mirror that can imprint a computer generated hologram onto a beam of light, allowing the spatial shaping of this light.
+A spatial light modulator is in essence a device that can imprint a computer generated hologram onto a beam of light, allowing the spatial shaping of this light.
 Different types of SLMs can manipulate properties of light like amplitude, phase and polarization.
-In this work a phase-only SLM was used, which as the name suggests can only control local phase of the incoming light field.
+In this work a phase-only reflective SLM was used, which as the name suggests can only control local phase of the incoming light field.
 The use of phase-only SLMs has been extensively covered in our group by, for example by \cite{Bijnen2015,Dijk2012,Bijnen2013}. 
 
 The modulating works by deploying a pixel array, where each pixel houses a liquid birifringent crystal.
@@ -81,10 +81,11 @@ As result of traveling from the pixel $j$ to the trap $m$, under paraxial approx
 \begin{figure}
 	\centering
 	\includegraphics[width = 13cm]{figures/SLMfigure.pdf}
-	\caption{Field with intensity distribution $|E_i|^2$ reflects off of the SLM, which due to its finite size acts as an aperture.
-		The lens makes the resulting image $|E_f|^2$ in its focal plane.
-		Also shown: two Cartesian coordinate systems in the SLM and focal plane. 
-		Figure adapted from \cite{Labuhn2016}.}
+	\caption{Field with intensity distribution $|E_i|^2$ reflects off of the   rectangular SLM, which due to its finite size acts as an aperture in the short-axis direction.
+	Also the SLM imprints a phase mask $e^{i\phi(x',y')}$ onto the laser.
+	The lens (microscope objective) makes the resulting spot array $|E_f|^2$ in its focal plane.
+	Shown on top: two Cartesian coordinate systems in the SLM and focal plane respectively. 
+	Figure adapted from \cite{Labuhn2016}.}
 	\label{fig:SLMLens}
 \end{figure}
 
@@ -126,7 +127,7 @@ Substituting the latter term of \cref{eq:PropagationPhase} in \cref{eq:Vm} yield
     \right]
     \right)},
 \end{equation}
-Which is the 2D \ac{DFT} of $e^{i\phi}$ evaluated at spatial frequencies $x_m/\lambdaup f$ and $y_m/\lambdaup f$ in $x$ and $y$ respectively \cite{DiLeonardo2007,Bijnen2015}, similar to \cref{eq:FraunhoferSimplified}.
+Which is the 2D \ac{DFT} of $e^{i\phi}$ evaluated at spatial frequencies $x_m/\lambdaup f$ and $y_m/\lambdaup f$ in $x$ and $y$ respectively \cite{DiLeonardo2007,Bijnen2015}, similar to \cref{eq:FraunhoferDiffractionIntegral}.
 This has the advantage that the DFT is much faster to evaluate than the general case of the diffraction formula \cref{eq:Vm} using the \ac{FFT}.
 In this work, we only use 2D arrays and could in principle use \cref{eq:2Dcase} to speed up calculations.
 Because we only have to compute a couple of holograms, we simply used \cref{eq:Vm}.
@@ -164,13 +165,13 @@ This algorithm is called the \ac{GSW} algorithm, which is sketched in \cref{fig:
 	\centering
 	\begin{subfigure}{.56\textwidth}
 		\centering
-		\includegraphics[height=5cm]{figures/SLMgeometry.pdf}
+		\includegraphics[height=5.3cm]{figures/SLMgeometry.pdf}
 		\caption{}
 		\label{fig:SLMgeometry}
 	\end{subfigure}
 	\begin{subfigure}{.43\textwidth}
 		\centering
-		\includegraphics[height=5cm]{figures/WeightedGerschbergSaxton.pdf}
+		\includegraphics[height=5.3cm]{figures/WeightedGerschbergSaxton.pdf}
 		\caption{}
 		\label{fig:GSWalgorithm}
 	\end{subfigure}
@@ -209,21 +210,22 @@ The theoretically computed uniformity will continue to increase indefinitely, bu
 
 \section{Operating the SLM}\label{sec:SLMoperatoin}
 
-Because the SLM used previously in our group suffered from amplitude modulation \cite{Dijk2012,Bijnen2015}, an unwanted effect, we purchased a newer model SLM. 
-Specifically, we purchased the Meadowlark E-series 1920 x 1200 SLM.
-A few specifications of this model SLM are presented in \cref{table:SLMspecs}.
-In the next section, we will elaborate upon practical considerations that have to be taken into account in operating the SLM.
+Because the SLM used previously in our group suffered from amplitude modulation \cite{Bijnen2015,Dijk2012}, an unwanted effect, we purchased a newer model SLM. Specifically, the Meadowlark E-series 1920 x 1200 SLM.
+A few specifications of the device are presented in \cref{table:SLMspecs}.
+The diffraction efficiency varies with the the 'smoothness' of the applied hologram: the SLM can only approximate gradients on the hologram is a discrete fashion, because of the limited bit depth \cite{Labunh
+}.
+In the next section, we will elaborate upon some other practical considerations that have to be taken into account in operating the SLM.
 
 \begin{table}[h]
     \centering
     \caption{Key specifications of the Meadowlark SLM.}
     \label{table:SLMspecs}
     \begin{tabular}{l | l}
-        \textbf{Specification}          & \textbf{Value}        \\ \hline 
-        Array size                      & 15.4 x 9.6 mm         \\ \hline
-        Resolution                      & 1920 x 1200 pixels    \\ \hline
-        Bit depth                       & 8 bit                 \\ \hline
-        Diffraction efficiency          & 76-79\%   
+        \textbf{Specification}              & \textbf{Value}        \\ \hline 
+        Array size                          & 15.4 x 9.6 mm         \\ \hline
+        Resolution                          & 1920 x 1200 pixels    \\ \hline
+        Bit depth                           & 8 bit                 \\ \hline
+        Diffraction efficiency (at 785 nm)  & 76-79\%   
     \end{tabular}
 \end{table}
 
@@ -302,7 +304,7 @@ This fit was done with a software program provided by the manufacturer.
 This is also called the gamma curve or \ac{LUT}.
 The LUT is the 8-bit gray level to 10-bit voltage levels of the SLM, such that the electro-optic response is linear. 
 As can be seen from \cref{fig:LUTcalibration}, the obtained LUT is rather non-linear, meaning the electro-optic response is also non-linear as expected.
-Using our newly acquired LUT, we measured a diffraction efficiency of $\sim75$ \%, which match the specification sheet for this wavelength approximately.
+Using our newly acquired LUT, we measured a diffraction efficiency in agreement with the specifications in \cref{table:SLMspecs}.
 
 \subsection{Finite Aperture Size}\label{subsec:ApertureSize}
 
@@ -330,19 +332,19 @@ Thus the beam should be magnified by a factor $M=0.42$ (demagnified).
 This is commonly done using a Keplerian telescope using two lenses $f_1$ and $f_2$ as shown in the top of \cref{SLMbeampath}.
 However, because we need some $30$ cm between the lens $f_2$ and the objective to accommodate (dichroic) mirrors, polarizing cubes $f_2=30$ cm. 
 Also knowing that $f_1=f_2/M$ and the total length of the telescope is $2f_1+2f_2$, this is already $203$ cm of beam path on the optical table. 
-We borrowed a trick from our collaborators at UvA, where we use the SLM as the first lens of the system. 
+We borrowed a trick from our collaborators at the University of Amsterdam, where we use the SLM as the first lens of the system. 
 This is shown in the bottom of \cref{SLMbeampath}.
-In terms of the ABCD matrix formalism, the transfer matrix $M$ for the latter is:
+In terms of the ABCD matrix formalism, the transfer matrix $\mathbf{M}$ for the latter is:
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.9\textwidth]{figures/BeampathSLM.pdf}
+	\includegraphics[width=0.9\textwidth]{figures/beamPathSLM.pdf}
 	\caption{Top: Keplerian telescope with total length $2f_1+2f_2$. Bottom: Using the SLM as a lens, the total beam path is $x+y$ long. }
 	\label{SLMbeampath}
 \end{figure}
 
 \begin{equation}\label{ABCD}
-	M=
+	\mathbf{M}=
 	\begin{pmatrix}
 		1 & y \\
 		0 & 1
@@ -366,7 +368,7 @@ In terms of the ABCD matrix formalism, the transfer matrix $M$ for the latter is
 For substituting $x= f_2(1+f_1/f_2)$ and $y=f_2(1+f_2/f_1)$, \cref{ABCD} reduces to
 
 \begin{equation}
-	M=
+	\mathbf{M}=
 	\begin{pmatrix}
 		-f_1/f_2 & 0\\
 		0 & -f_2/f_1

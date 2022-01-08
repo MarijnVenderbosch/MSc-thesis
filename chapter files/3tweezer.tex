@@ -18,19 +18,22 @@ Thus we need to maximize the parameter $\beta$ in \cref{eq:LoadingTweezer}, whic
 \Cref{sec:DiffractionLimit} discusses we intend to do this using a microscope objective, as well as the fundamental limit of the smallest achievable spot size: the diffraction limit.
 In \cref{sec:MeasuringTweezer} the setup used to measure the spatial profile of the tweezer is introduced, the results of which are presented along the radial (\cref{sec:TweezerRadial}) and axial(\cref{sec:Tweezer3D}) directions.
 
-\section{Diffraction Theory}\label{sec:DiffractionLimit}
+\section{Diffraction: Thin Lens}\label{sec:DiffractionLimit}
 
-Because of the wave character of light, there is a fundamental limit to the smallest spot size one can focus this wave, even in the absence of aberrations.
+The basic idea of an optical tweezer is to send a laser beam through a lens.
+Because of the wave character of light, there is a fundamental limit to the smallest spot size one can focus this laser beam, even in the absence of aberrations.
 Consider a circular lens with aperture radius $R$ and focal length $f$.
 We assume it is a thin lens positioned at $z=0$.
-The complex light field just before and just after the lens are denoted $E_i(x',y')$ and $E_l(x',y')$ respectively, see \cref{fig:LensAperture}.
+The complex light field just before and just after the lens are denoted $E_i(x',y')$ and $E_l(x',y')$ respectively, both for $z=0$.
+See \cref{fig:LensAperture}.
+The input field $E_i$ used in this work is given in \cref{eq:GaussianAperture}, but can be ignored for now.
 We describe the diffraction of the light in the plane after the lens $E(x,y,z)$ in terms of the Fresnel diffraction integral \cite{Goodman2005}
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.6\textwidth]{figures/lens.pdf}
+	\includegraphics[width=0.7\textwidth]{figures/lens.pdf}
 	\caption{Thin lens with aperture radius $R$ and focal length $f$. 
-	The input field is $E_i(x',y')$ which is only defined on the aperture. }
+	The input field is $E_i(x',y')$ (\cref{eq:GaussianAperture} which is only within the aperture region. Figure adapted from \cite{Leseleuc2018,Gu2000}.}
 	\label{fig:LensAperture}
 \end{figure}
 
@@ -46,7 +49,7 @@ The field after the lens follows from the lens transfer function in terms of the
 		\left[\frac{-i k}{2 f}(x'^2+y'^2)\right].
 	}
 \end{equation}
-Hidden in the term $E_i$ is the aperture function, which is zero for $x'^2+y'^2>R^2$ or in cylindrical coordinates $r>R$.
+Hidden in the term $E_i(x',y')$ is the aperture function, which is zero for $x'^2+y'^2>R^2$, or in cylindrical coordinates $r>R$.
 Inserting \cref{eq:Transfer} in \cref{eq:FresnelDiffractionGeneral} yields after some rearrangement and after omitting the phase-factors in front of the integral, which will disappear when computing the intensity $I=|E|^2$ anyway \cite{Gu2000}
 
 \begin{equation}\label{eq:FresnelDiffracion}
@@ -57,10 +60,10 @@ Inserting \cref{eq:Transfer} in \cref{eq:FresnelDiffractionGeneral} yields after
 	\right]}
 	\exp{\left[\frac{-ik}{z}\left(xx'+y'y'\right)\right]} dx'dy'.
 \end{equation}
-Which might look like an impossible integral to solve, which it is analytically. 
-However, in the next sections it becomes clear that for specific cases the integral simplifies greatly.  
+Which might look like an impossible integral to solve, which it is usually.
+However, in the next sections it will hopefully become clear that for specific cases the integral simplifies greatly.  
 
-\subsection{In the Focus of a Lens}
+\subsection{In the Focus Plane}
 
 A special case of \cref{eq:FresnelDiffracion} is to look only what happens in the focus of the lens, or setting $z=f$.
 The tweezer arrays shown in this work are all in the focus plane of this lens, where this condition applies.
@@ -79,9 +82,7 @@ Using the standard definitions for cylindrical coordinates and assuming spherica
 \end{equation}
 where we used the definition of the  Bessel function of the first kind of order zero\footnote{$J_0(x) = \frac{1}{2\pi} \int_0^{2\pi} \exp{(i x \cos{\alpha})} d\alpha$, where  $\alpha=\theta-\theta'$.} $J_0(x)$. 
 This is the Fourier-Bessel or Hankel transform of the function $E(r')$.
-About this 'input' function.
-For optical tweezers, we shine a laser beam into the lens.
-Assuming the beam is Gaussian with 'input' waist $w_i$, the input light field is up to a normalization constant $A$
+Assuming the beam is Gaussian with 'input' waist $w_i$, the input light field is up to a normalization constant $A$ (see \cref{fig:LensAperture})
 
 \begin{equation}\label{eq:GaussianAperture}
     E(r')=
@@ -95,15 +96,15 @@ Substituting \cref{eq:GaussianAperture} in \cref{eq:FourierBessel} yields
 \begin{equation}\label{eq:FourierBesselAperture}
     E(r) \propto \int_0^R e^{-r'^2/w_i^2} J_0\left(\frac{k r r'}{f}\right)r'dr'.
 \end{equation}
-\Cref{eq:FourierBesselAperture} is analytically solvable for specific cases \cite{Madjarov2020}.
-Letting $w_i/R$ go to infinity, which is to treat the incident Gaussian beam as a plane wave, we can neglect the exponential term in \cref{eq:FourierBesselAperture}. 
-The integral is now tractable, yielding for the field amplitude
+\Cref{eq:FourierBesselAperture} is analytically solvable only for specific cases.
+Letting $w_i/R$ go to infinity \cite{Madjarov2020}, which is to treat the incident Gaussian beam as a plane wave, we can neglect the exponential term in \cref{eq:FourierBesselAperture}. 
+The integral is now tractable, yielding the field amplitude
 
 \begin{equation}\label{eq:AiryField}
     E(r) \propto \frac{f}{kRr} J_1\left(\frac{k R r}{f}\right).
 \end{equation}
 Here, the function $J_1$ is the Bessel function of the first kind (order one).
-Taking the absolute value squared and normalizing yields for the intensity the Airy function:
+Taking the absolute value squared and normalizing yields the intensity distribution described by the Airy function:
 
 \begin{equation}\label{eq:NormalizedPSF}
     \frac{I}{I_0} = \left[
@@ -112,7 +113,7 @@ Taking the absolute value squared and normalizing yields for the intensity the A
 \end{equation}
 Which is plotted in \cref{fig:AiryPlots}.
 In 3D, so also considering defocus, the optical response of a perfect lens to this plane wave is known as the \ac{PSF}, which we will use in \cref{sec:Tweezer3D}.
-Solving for the first zero of \cref{eq:NormalizedPSF}, and introducing the definition of \ac{NA} of a compound microscope objective: $\text{NA} = R/f$, yields for the radius of this Airy disk, which is plotted in \cref{fig:AiryPlots}:
+Solving for the first zero of \cref{eq:NormalizedPSF}, and introducing the definition of \ac{NA} of a compound microscope objective: $\text{NA} = R/f$, yields the radius of this Airy disk, which is plotted in \cref{fig:AiryPlots}:
 
 \begin{figure}
     \centering
@@ -126,7 +127,7 @@ Solving for the first zero of \cref{eq:NormalizedPSF}, and introducing the defin
 \end{equation}
 This result is known as the Abbe limit or diffraction limit \cite{Abbe1882} and it is the smallest feature a lens can produce.
 To minimize $d_1$ in \cref{eq:Abbe} we can thus increase the \ac{NA} of our imaging system. 
-In this work we will use $\text{NA} = 0.5$\footnote{For high NA imaging systems however, the paraxial approximation which was used to simplify the diffraction integral is no longer a priori true. 
+In this work we will use $\text{NA} = 0.5$\footnote{For high NA imaging systems however, the paraxial approximation which was used to simplify the diffraction integral is no longer a priori applicable. 
 Though, \cite{Chon2007} present a derivation of \cref{eq:Abbe} using a different diffraction theory that does not require paraxial approximation and showed that for collimated laser beams \cref{eq:Abbe} has negligible error even for $\text{NA} = 1$. 
 We will assume we can still apply \cref{eq:Abbe} for $\text{NA} = 0.5$.}
 In practice, it is not convenient to use \cref{eq:FourierBesselAperture} to fit data and it is more convenient to use a simpler function. 
@@ -188,21 +189,21 @@ We will use equations of the form \cref{eq:GaussianPotential} to fit optical twe
 
 \begin{figure}
     \centering
-    \includegraphics[width=.61\linewidth]{figures/GaussianPotential.pdf}
+    \includegraphics[width=.67\linewidth]{figures/GaussianPotential.pdf}
     \caption{Normalized potential $U/U_0$ for a Gaussian trap shape as a function of the normalized cylindrical coordinates $r/w_0$ and $z/z_R$. Not to scale: typically $z_R > w_0$.}
     \label{fig:GaussianPotential}
 \end{figure}
 
 \subsection{Input Beam Size}\label{sec:TweezersPractice}
 
-In producing the perfect \ac{PSF} we assumed plane wave illumination ($w_i \gg R$, but in reality this is impractical: assuming the beam is aligned with the center of the aperture, the fraction of optical power $P/P_0$ traversing the aperture as a function of the incident waist $w_i$ is
+In producing the perfect \ac{PSF} we assumed plane wave illumination ($w_i \gg R$, but in reality this is impractical: assuming the beam is aligned with the center of the aperture, the fraction of optical power $P/P_0$ transmitted through the aperture as a function of the incident waist $w_i$ is
 
 \begin{equation}\label{eq:fracPowerCircular}
 	P/P_0 = 1 - e^{-2w_i^2/R^2},
 \end{equation}
 which tends to zero for very wide beams (plane waves), which means low power and shallower traps.
 On the other hand, the other extreme case is $w_i \ll R$: the waist is much smaller than the aperture and according to \cref{eq:fracPowerCircular} all of the power is transmitted through the aperture.
-It can be instructive to have a look at the shape of the resulting light potential: letting the integration boundary of \cref{eq:FourierBesselAperture} run to infinity and using another Hankel transform pair\footnote{$F_0(k) = \int_0^{\infty} e^{-1/2 a^2 r^2} J_0(k r)r dr = \frac{1}{a^2} e^{-\frac{k^2}{2a^2}}$ \cite{Papoulis2981}.} find 
+It can be instructive to have a look at the shape of the resulting light potential: letting the integration boundary of \cref{eq:FourierBesselAperture} run to infinity and using another Hankel transform pair\footnote{$F_0(k) = \int_0^{\infty} e^{-1/2 a^2 r^2} J_0(k r)r dr = \frac{1}{a^2} e^{-\frac{k^2}{2a^2}}$ \cite{Papoulis2981}.} we find 
 
 \begin{equation}\label{eq:GaussianCase}
 	U(r) \propto \frac{w_i^2}{2} \exp{\left(\frac{-k^2w_i^2 r^2}{2f^2}\right)},
@@ -211,7 +212,7 @@ which is another Gaussian, but with a modified waist of $\lambdaup f / \pi w_i$.
 This modified waist will go up for smaller $w_i$ (Fourier transform property). 
 Thus, the input beam size to be used is a compromise between the amount of power transmitted (and thus the depth of the trap), which is maximum for small beam sizes, and the diffraction limit that one can reach and thus the trap dimensions on the other hand. 
 The optimum is better understood using the concept trap frequencies, which are the classical oscillation frequencies when occupying the bottom of the potential. 
-Using this assumption, we Taylor expand \cref{eq:GaussianPotential} around $(r,z)=(0,0)$ to second order (the first order vanishes) yielding \cite{Muldoon2012}
+Using this assumption of only using the center of the potential, we Taylor expand \cref{eq:GaussianPotential} around $(r,z)=(0,0)$ to second order (the first order vanishes) yielding \cite{Muldoon2012}
 
 \begin{equation}\label{eq:ApproximateGaussianPotential}
 	U(r,z) \sim -U_0 - 2U_0 \frac{r^2}{w_0^2} - 2U_0 \frac{z^2}{z_R^2}.
@@ -223,9 +224,9 @@ For this harmonic oscillator potential, one can compute the harmonic oscillation
 \end{equation}
 Because $z_R > w_0$, the longitudinal oscillation frequency is lower than the radial frequency. 
 Optimizing for maximum trap frequencies is useful because from \cref{eq:TrapFrequencies}, higher trap frequencies translate to deeper as well as physically smaller optical dipole potentials.
-\cite{Madjarov2021} optimized \cref{eq:TrapFrequencies} for the $w_i/R$ ratio and found an optimum around $w_i\sim R$, which we will use in this work\footnote{Because trap frequencies can be probed experimentally, they can be used to perform post-corrections on tweezer arrays as well as shown by \cite{Ebadi2021}.}.
+The optimum $w_i/R$ ratio in terms of maximizing \cref{eq:TrapFrequencies} was found by \cite{Madjarov2021} to be $w_i\sim R$, which we will use for the remainder of this work\footnote{Because trap frequencies can be probed experimentally, they can be used to perform post-corrections on tweezer arrays as well as shown by \cite{Ebadi2021}.}.
 
-\subsection{Outside the Focus}
+\subsection{Outside the Focus Plane}
 
 We have done measurements on the intensity profile outside of the focus as well.
 To compare the obtained results to diffraction theory, we have to return to the more general Fresnel diffraction integral \cref{eq:FresnelDiffractionGeneral}, this time in cylindrical coordinates \cite{Gu2000}
@@ -249,7 +250,9 @@ Plugging in \cref{eq:FresnelCylindrical} along with \cref{eq:GaussianAperture,eq
 		\frac{i k \delta z}{2f^2}r'^2
 		\right)} r'dr'.
 \end{equation}
-Evaluating the integral and taking the absolute value squared yields for the intensity $I$ distribution in the axial direction:
+Evaluating the integral and taking the absolute value squared yields the intensity distribution $I$ in the axial direction:
+
+
 
 \begin{equation}\label{eq:IntensityAxial}
 	I(r=0,z) \propto \frac{w_i^4 e^{-R^2/w_i^2}}{2} \left[
@@ -260,15 +263,17 @@ Evaluating the integral and taking the absolute value squared yields for the int
 	\right\}^{-1}.
 \end{equation}
 \Cref{eq:IntensityAxial} is plotted in normalized fashion in \cref{fig:PSFvsLongitudinal} for the case of the Gaussian input beam used: $w_i = R$ as well as the case for the plane wave $w_i \gg R$, yielding the \ac{PSF}.
-In the latter case, the $\cosh(\cdot)$ contribution in \cref{eq:IntensityAxial} vanishes.
-From \cref{fig:PSFvsLongitudinal}, the difference between the two cases is small, especially near the focus of the tweezer.
-
 \begin{figure}
 	\centering
-	\includegraphics[width=0.65\textwidth]{figures/LongitudinalTweezerField.pdf}
-	\caption{Intensity of the tweezer as a function of defocus $\delta z$ along the optical axis for a Gaussian input beam $w_i \sim R$as well as a plane wave input beam.}
+	\includegraphics[width=0.68\textwidth]{figures/LongitudinalTweezerField.pdf}
+	\caption{Intensity of the tweezer as a function of defocus $\delta z$ along the optical axis for a Gaussian input beam $w_i \sim R$ as well as a plane wave input beam.}
 	\label{fig:PSFvsLongitudinal}
 \end{figure}
+In the latter case, the $\cosh(\cdot)$ contribution in \cref{eq:IntensityAxial} vanishes.
+The other numerical values used are the same as in the experiment: $\lambdaup= 820$ nm, $f=4$ mm and $R = \text{NA} \times f = 2$ mm.
+From \cref{fig:PSFvsLongitudinal}, the difference between the two cases is small, especially near the focus of the tweezer.
+
+
 
 
 
@@ -278,7 +283,8 @@ From \cref{eq:Abbe}, smallest spot size achieved for the highest numerical apert
 Apart from high NA, there are other demands on the microscope objective: the \ac{MOT} and subsequent \ac{ODT} are made in a vacuum chamber so the beam traverse a vacuum viewport, requiring:
 
 \begin{enumerate}
-	\item Ultra-long working distance (the distance between the trap and the lens). For a single lens, this is equivalent to the focal length $f$ of course, though for a compound microscope objective this does not have to be the case.
+	\item Ultra-long working distance (the distance between the trap and the lens). For a single lens, this is equivalent to the focal length $f$.
+	For a compound microscope objective however, this does not have to be the case.
 	
 	\item Glass-thickness compensation. The relatively thick vacuum viewport will introduce a significant amount of aberrations for high NA and therefore large angles. It is possible to correct for this by having additional optics inside of the objective which will pre-correct for this error.
 \end{enumerate}
@@ -286,7 +292,8 @@ Apart from high NA, there are other demands on the microscope objective: the \ac
 \subsection{Microscope objective}
 
 To satisfy these demands, we chose the G Plan Apo microscope objective from \textit{Mitutoyo}, as also used by \cite{Manuel2016,Ebadi2021}. 
-This is an infinity-corrected objective, meaning light collected in its focused is imaged at infinity (parallel beam) and an additional field lens is used to focus this image, such that the magnification is 
+This is an infinity-corrected objective, meaning it is designed to image the projection from its focus to infinity, using an additional field lens to produce an image.
+The magnification $M$ the objective and field lens system is in this case 
 
 \begin{equation}\label{eq:InfinityMagnification}
 	M = \frac{
@@ -296,10 +303,10 @@ This is an infinity-corrected objective, meaning light collected in its focused 
 	}
 \end{equation}
 where $f_{\text{FL}}$ is the focal length of the field lens and $f_{\text{obj}}$ the equivalent focal length of the objective\footnote{For a compound microscope objective, equivalent focal length means the focal length the objective would have when replaced by a single lens.}.
-This has the advantage that it is more flexible than a finite-conjugate corrected objective, as it allows to place additional optics between the laser and the objective without as well as optics between the objective and field lens without changing alignment.
+This has the advantage that it is more flexible than a finite-conjugate corrected objective, as it allows to place additional optics between the laser and the objective without change in alignment.
 Additionally, it allows flexible variation of the magnification according to \cref{eq:InfinityMagnification}.
 Relevant specifications of the objective for applications in optical tweezers are shown in \cref{table:MitutoyoSpecs}. 
-From compound objectives, the equivalent focal length $f_{\text{obj}}$ is defined in terms of the \ac{NA} and the back aperture radius $R$ as $f_{\text{obj}} = R / \text{NA}$, meaning the back aperture radius is 2 mm.
+For compound objectives, the equivalent focal length $f_{\text{obj}}$ is defined in terms of the \ac{NA} and the back aperture radius $R$ as $f_{\text{obj}} = R / \text{NA}$, meaning the back aperture radius is 2 mm.
 
 \begin{table}[h]
 	\centering
@@ -313,20 +320,19 @@ From compound objectives, the equivalent focal length $f_{\text{obj}}$ is define
 		Working distance             & 15.08 mm      
 	\end{tabular}
 \end{table}
-\noindent Because this objective was designed for wavelengths in the visible range, it is probable that all of the lenses inside it are coated with a reflection coating that does not work well for the 800 nm regime. 
-This is indeed the case, as we measured the transmission of the objective to be just $(47 \pm 3)\%$ at 820 nm. 
-Significant loss of laser power is therefore unavoidable.
+\noindent We measured the transmission for 820 nm laser light for this objective to be $\sim 47$\%, 
+Thus quite a significant amount of laser power will be lost. 
+We suspect the low transmission is due to the fact that this objective was designed for wavelengths in the visible range, thus all of the lenses inside of it are most likely not anti-reflection coated for 820 nm.
 
 We would like to measure tweezer potential made by our microscope objective. 
 We could use time symmetry and look at the reverse direction: using the objective to look at a pinhole, retrieving its \acf{PSF} \cite{Knottnerus2018,Sortais2007}
-However, using this method the objective will produce a plane wave, when we know that in practice we do not send a plane wave to the objective as discussed in \cref{sec:TweezersPractice}
-function. 
+However, using this method the objective will produce a plane wave, when we know that in practice we do not send a plane wave to the objective(\cref{sec:TweezersPractice}). 
 Instead, we used another microscope objective, to look into produced tweezer potential by the \textit{Mitutoyo}. 
 In doing this, the tweezer potential will be convolved with the \ac{PSF} of the second microscope objective \cite{Baumgaertner2017}.
 Therefore we used a second microscope objective with significantly higher \ac{NA}, minimizing this effect \cite{Baumgaertner2017}. 
-However, the objective is pre-corrected for a piece of glass, e.g. the glass from the glass cell vacuum chamber. 
+However, the Mitutoyo objective is pre-corrected for a piece of glass, e.g. the glass from the glass cell vacuum chamber. 
 But this cell is 30 mm thick on the outside, meaning the second objective would also require $\sim 15$ mm working distance which to our knowledge are not available for $\text{NA}>0.5$.
-Hence, we use a piece of glass with the same thickness and material (quartz glass, $d = 4.0$) mm to imitate the one of the walls of the cell, allowing us to look 'into' the cell while minimizing convolution effects.
+Hence, we use a piece of glass with the same thickness and material (quartz glass, $d = 4.0$) mm to replace one of the walls of the cell, allowing us to look 'into' the cell while minimizing convolution effects.
 
 \subsection{Optical Setup}
 
@@ -338,9 +344,10 @@ Because alignment of the Mitutoyo objective with the incident beam, as well as a
     \centering
     \includegraphics[width=\linewidth]{figures/TiSandSLM.pdf}
     \caption{Output from a titanium sapphire ring laser is coupled into a polarization-maintaining fiber bringing it to the main table. 
-    After alignment of the polarization direction, a spatial light modulator $f_1$ and achromatic lens $f_2 = 300$ mm feed the light into the Mitutoyo 0.5 NA objective.
+    After alignment of the polarization direction, a spatial light modulator $f_1$ and achromatic lens feed the light into the Mitutoyo 0.5 NA objective.
     A glass plate serves to replace the vacuum viewport.
     The tweezer potential is imaged on a camera using a 0.85 NA microscope objective.
+    Both objectives are positioned on (piezo) 5-axis stages.
     The cubes shown are polarizing.}
     \label{fig:TiSandSLMsetup}
 \end{figure}
@@ -349,14 +356,18 @@ This laser is positioned on a separate table.
 The laser source is a \ac{Ti:S} ring laser\footnote{\textit{Coherent} 899-21 ring laser} (linewidth $\sim 1$ MHz, output power max. $\sim 2$ W.). 
 The crystal is pumped using a pump laser\footnote{\textit{Coherent} Verdi V18} (18W power, 532 nm).
 The \ac{Ti:S} is easily tunable in wavelength over a wide range. For Sr: 813 nm will be used, but for the experiments for Rb we used 820 nm. 
+The reason that we use 820 is that we use a dichroic mirror with a cut-off wavelength of 805 nm to separate the atomic fluorescence from the $D_2$ line at 780 nm from the tweezer light. 
+For 820 nm, which is slightly further away from this cut-off than 813 nm, the cut-off performance of this dichroic mirror is better.
+Though, the exact wavelength range for Rb is not that important, as long as it is far red-detuned from the atomic transition.
+
 The laser output is brought to the main table using a \ac{PM} optical fiber.
-By rotating the $\lambdaup/2$ plate before the PM fiber and aligning the slow/fast axes of the fiber correctly, a constant linear polarization is obtained, which is necessary for the \ac{SLM}.
+By rotating the $\lambdaup/2$ plate before the PM fiber and aligning the slow/fast axes of the fiber correctly, a constant linear polarization is obtained at the output of the fiber, which is necessary for the \ac{SLM}.
 Should the polarization out of the fiber be incorrect however, the incorrect component will be filtered out by a polarizing beam splitter cube, such that the beam to the SLM will always be vertically polarized.
-To fully illuminate the SLM, which has dimensions of $\sim 15 \times 8$ mm, a fiber collimator\footnote{S\textit{Schäfter + Kirchhoff} 60FC-L-0-M60-10.} with a clear aperture of 17 mm was used ($f=60$ mm, $M^2 < 1.05$, $1/e^2$ beam radius 4.9 mm).
+To fully illuminate the SLM, which has dimensions of $\sim 15 \times 8$ mm, a fiber collimator\footnote{\textit{Schäfter + Kirchhoff} 60FC-L-0-M60-10.} with a clear aperture of 17 mm was used ($f=60$ mm, $M^2 < 1.05$, $1/e^2$ beam radius 4.9 mm).
 The collimation setting was adjusted for 820 nm by adjusting the lens position in the collimator.
 
 The SLM is more elaborately explained in \cref{ch:arrays}, but a feature worth mentioning here is that the SLM acts as one of the lenses of a telescope, such that the beam traveling to the microscope objective is demagnified by a factor $f_2/f_1$.
-The relay lens, $f_2=300$ mm is a achromatic lens in order to minimize aberrations.
+The relay lens, $f_2=300$ mm is an achromatic lens in order to minimize aberrations.
 The equivalent focal length of the SLM is $\sim 690$ mm, such that $f_2/f_1 \sim 0.42$.
 
 
@@ -397,13 +408,14 @@ To detect the edges in \cref{fig:resolutionTarget}, we use an edge detection alg
 For several 1D row slices of the image, it blurs the edge using a Gaussian to suppress noise and subsequently computes the spatial derivative. 
 When the derivative surpasses a set threshold we define it as an edge.
 Dividing the pixel spacing of the lines by the pixel pitch of the camera ($4.65$ $\mu$m) we find a magnification of ($67 \pm 3$)X, which is larger than the 60X specified by the manufacturer. 
+The error is a width of the lines, which varied quite a lot with the exact focus distance. 
+This is probably because the depth of focus of the 0.85 NA objective is smaller than the thickness of the target. 
 We attribute this to a tube length used (objective - camera distance) that was slightly too long.
 After the calibration was performed the calibration target was removed and the setup in \cref{fig:TiSandSLMsetup} was used again, the objective-camera distance was kept constant for the remainder of the measurements.
 
 \section{Radial Intensity Distribution}\label{sec:TweezerRadial}
 
 An image of the tweezer at the point of maximum intensity imaged onto a camera through the 0.85 NA objective is shown in fig. \ref{fig:2Dresults}a. 
-
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/AzimuthalAverageSpotZoomed.pdf}
@@ -427,7 +439,7 @@ The latter theoretical result was obtained by integrating \cref{eq:FourierBessel
 From \ref{fig:2Dresults}b, the Gaussian input beam results in a slightly ($\sim 9\%$) broader spot.
 Additionally, the rings of the Airy disk will be slightly suppressed, this effect is known as Gaussian apodization.
 This apodization effect is not that clearly visible in the measurements, but again this could be a result of an aberration.
-Comparing the measurement to the theory result, the measurement has a waist which is about $\sim 10\%$ broader. Possibly, this is a result of convolution of the tweezer with the \ac{PSF} of the imaging system. Though the second objective has a significantly higher NA, the convolution effect can have significant contribution.
+Comparing the measurement to the theory result, the measurement has a waist which is about $\sim 10\%$ broader. Possibly, this is a result of convolution of the tweezer with the \ac{PSF} of the imaging system (see \cref{eq:Deconvolution}. Though the second objective has a significantly higher NA, the convolution effect can have significant contribution.
 
 To check if this is indeed the case, a more accurate analysis method is needed.
 For example: in the previous binning method, the exact center location is not determined: it could lie anywhere in the center pixel. 
@@ -457,7 +469,7 @@ This is confirmed by the coefficient of determination $R^2 > 0.99$.
 		\caption{}
 		\label{fig:3Dwaistfit}
 	\end{subfigure}
-	\caption{\textbf{a)} Plot showing convergence of the Gaussian fit.
+	\caption{\textbf{a)} Measured tweezer potential on the CCD camera, as well as the 2D Gaussian fit.
 	\textbf{b)} Region of interest around the maximum that was used to extract the waist. For both plots: $R^2>0.99$, but it is higher for the fit in \textbf{b}.}
 	\label{fig:3Dfits}
 \end{figure}
@@ -497,24 +509,20 @@ In the end, all images are stitched together to make a single image that would g
 \subsection{Piezo Stage Calibration}
 
 The stage we used is 8081-M 5-axis motorized tilt aligner from Newport. 
-Piezo attenuated stages are excellent at producing minuscule ($<30$ mm) step sizes in a repeatable fashion, making them extremely useful for this measurement.
+Nano-positioning piezo actuators are excellent at producing minuscule ($<30$ nm) step sizes in a repeatable fashion, making them extremely useful for this measurement.
 Because of the 5 degrees of freedom, it can accurately align the two objectives with each other. 
 To drive this stage, we used a set of Newport 8742 controllers in daisy-chain configuration: both can drive 4 motors so we have 2 of them to address all 5 motors using a set of 8725 multi-axis adapters.
 For scanning the axial direction of the tweezer we only use one of the five motors in the stage. 
 To know the exact step size calibration is needed because the step size is dependent on the torque applied and the direction of travel.
 In order to do this, we repeatedly measured the available translation range of some $\sim$ 3mm, recording the amount of steps this takes as well as the amount moved using a caliper. 
 We found a step calibration of $10.6 \pm 0.3$ $\mu$m/step.
+The error is a result of uncertainty in the caliper measurements. 
 
 
 
 \subsection{Results: Axial Dependency}
 
-In \cref{fig:AxialUncorrected} the scanned profile of the tweezer is shown, as well as the maximum intensity recorded as a function of the amount of defocus $\delta z$ from the center of the tweezer.
-The scale is the same in $r$ and $z$ directions, so the aspect ratio is unity.
-The error bars are mainly a consequence of fluctuations in laser intensity as well as uncertainty in the piezo stage calibration.
-Also plotted is the result from diffraction theory for the case $w_i =R$ from \cref{eq:IntensityAxial}.
-
-\begin{figure}
+\begin{figure}[t]
 \centering
 	\begin{subfigure}{.49\textwidth}
 	    \flushleft
@@ -528,29 +536,35 @@ Also plotted is the result from diffraction theory for the case $w_i =R$ from \c
 		\caption{}
 		\label{fig:AxialZernike}
 	\end{subfigure}
-	\caption{Radial intensity profile \textbf{a)} prior aberration correction yielding a fit $z_R \sim 6.2$ $\mu$m and \textbf{b)} after aberration correction: $z_R \sim 3.5$ $\mu$m. Also shown: axial intensity data as well as the theory result.}
+	\caption{Radial intensity profile \textbf{a)} prior to aberration correction and \textbf{b)} after aberration correction.
+	Also shown: on-axis intensity data as well as the result from theory \cref{eq:IntensityAxial}.
+	The error bars are relative errors, mainly from fluctuations in laser intensity.}
 	\label{fig:AxialScans}
 \end{figure}
+
+In \cref{fig:AxialUncorrected} the scanned profile of the tweezer is shown, as well as the maximum intensity recorded as a function of the amount of defocus $\delta z$ from the center of the tweezer.
+The scale is the same in $r$ and $z$ directions, so the aspect ratio is unity.
+The error bars are mainly a consequence of fluctuations in laser intensity as well as uncertainty in the piezo stage calibration.
+Also plotted is the result from diffraction theory for the case $w_i =R$ from \cref{eq:IntensityAxial}.
+
 Clearly, there is a discrepancy between the theory and measurement results.
 This is confirmed by fitting the data to a Gaussian, which was done for the region $(-4, 4)$ $\mu$m of defocus, yielding $z_R \sim 6.2$ $\mu$m, while the diffraction-limited $z_R$ from \cref{eq:IntensityAxial} is $\sim 3.0$ $\mu$m.
 We initially attributed the difference to the incorrect glass thickness used: the glass cell and corresponding glass plate consists of 4.0 mm thick quartz glass ($n=1.44$), whereas the cover glass correction of the objective was originally designed for 3.5 mm of N-BK7 glass ($n=1.51$).
 The optical thickness $nd$ is thus 0.5 mm larger than the objective is corrected for. 
-This excess thickness $\Delta d$ is shown in gray in \cref{fig:SphericalSketch} and has refractive index $n$ whereas the surrounding air has $n_0$ which is assumed to be unity.
-To simplify geometry, the extra glass is positioned near the focus, but the results are indifferent with respect to the axial location of the glass.
-The maximum ray angle is $\sin{\alpha_0} = R/f$. 
-Because of the extra glass, the objective is moved an amount $\delta z$ to be in focus.
-After some geometry \cite{Iwaniuk2011} this leads to a change in focus $\delta f$:
-
-\begin{figure}[b]
+\begin{figure}[]
     \centering
     \includegraphics[width=0.57\linewidth]{figures/sphericalAberration.pdf}
     \caption{As a result of extra glass thickness $n\Delta d$, the objective will have to move a distance $\delta z$, corresponding to a change in focus distance $\delta f$.
     The other parameters are explained in the text.  
     Not to scale. 
-    Figure adapted from from \cite{Iwaniuk2011}.}
+    Figure adapted from \cite{Iwaniuk2011}.}
     \label{fig:SphericalSketch}
 \end{figure}
-
+This excess thickness $\Delta d$ is shown in gray in \cref{fig:SphericalSketch} and has refractive index $n$ whereas the surrounding air has $n_0$ which is assumed to be unity.
+To simplify geometry, the extra glass is positioned near the focus, but the results are indifferent with respect to the axial location of the glass.
+The maximum ray angle is $\sin{\alpha_0} = R/f$. 
+Because of the extra glass, the objective is moved an amount $\delta z$ to be in focus.
+After some geometry \cite{Iwaniuk2011} this leads to a change in focus $\delta f$:
 
 \begin{equation}\label{eq:SphericalFocus}
     \delta f = \Delta d - \delta z = \Delta d \left[
@@ -563,6 +577,8 @@ In \cref{subsec:AberrationCorrection} we explain how we computed the correspondi
 After correction, we measured a reduced Rayleigh range of $z_R \sim 5.2$ $\mu$m, which is still significantly larger than the result from theory. 
 Subsequently, we applied an extra cylindrical lens to the SLM to correct astigmatism, which is also explained in \cref{subsec:AberrationCorrection}, yielding a fit of $z_R \sim (3.5 \pm 0.3)$ $\mu$m which is much closer to the $\sim 3.0$ $\mu$m theoretically possible.
 This measurement is shown in \cref{fig:AxialZernike}.
+The axial intensity distribution is thus not diffraction-limited. 
+Most likely, this is caused by an aberration, e.g. a slight tilt in the glass plate or another optical component.
 
 
 
