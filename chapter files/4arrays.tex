@@ -377,46 +377,8 @@ For substituting $x= f_2(1+f_1/f_2)$ and $y=f_2(1+f_2/f_1)$, \cref{ABCD} reduces
 Which is the ABCD matrix for a beam expander. The total length is $x+y = 102 + 42.5 = 145$ cm.
 
 \begin{figure}
-	\begin{subfigure}{.18\linewidth}
-		\centering
-		\includegraphics[height=4cm]{figures/SLMphase/array.jpg}
-		\caption{}
-		\label{fig:Array}
-	\end{subfigure}
-	%
-	\begin{subfigure}{.18\linewidth}
-		\centering
-		\includegraphics[height=4cm]{figures/SLMphase/linear.jpg}
-		\caption{}
-		\label{fig:Linear}
-	\end{subfigure}
-	%
-	\begin{subfigure}{.18\linewidth}
-		\centering
-		\includegraphics[height=4cm]{figures/SLMphase/lens.jpg}
-		\caption{}
-		\label{fig:Lens}
-	\end{subfigure}	
-	%
-	\begin{subfigure}{.18\linewidth}
-		\centering
-		\includegraphics[height=4cm]{figures/SLMphase/flatness.jpg}
-		\caption{}
-		\label{fig:Flatness}
-	\end{subfigure}
-	%
-	\begin{subfigure}{.18\linewidth}
-		\centering
-		\includegraphics[height=4cm]{figures/SLMphase/zernike.jpg}
-		\caption{}
-		\label{fig:Zernike}
-	\end{subfigure}
-	%
-	\begin{subfigure}{0.055\linewidth}
-		\centering
-		\includegraphics[height = 3.5cm]{figures/SLMphase/colorbar.jpg}
-	\end{subfigure}
-	%
+	\centering
+	\includegraphics[width=\textwidth]{figures/hologram.png}
 	\caption{
 		\textbf{a)} Hologram obtained from the \ac{GSW} algorithm.
 		\textbf{b)} Blazed grating, used to move the diffraction pattern away from the optical axis. Zoomed in for the sake of visibility.
@@ -433,7 +395,7 @@ Because of manufacturing imperfections, the SLM chip will not be perfectly flat 
 This error is different for individual SLM units.
 The flatness of our chip was measured by manufacturer Meadowlark to have a RMS flatness of $\sim 0.18\lambdaup$.
 The shape of the flatness was measured as well, so we can correct for the error by subtracting this phase pattern. 
-The correction used is shown in \cref{fig:Flatness}.
+The correction used is shown in \cref{fig:SLMphase}.
 
 
 \subsection{Diffraction Orders}\label{subsec:Diffraction}
@@ -450,7 +412,7 @@ But apart from higher diffraction orders, there will always be a fraction of lig
 For example, there is a tiny amount of unused space between and around the pixels.
 This unmodulated light is separated from the modulated light by imposing a linear phase on top of the pattern (tilt phase) which translate the desired pattern away from the undiffracted light.
 Subsequently the undiffracted light is blocked in an intermediate focus point using an iris, which is also used to block higher diffraction orders.
-The type of linear phase used is shown in \cref{fig:Linear}.
+The type of linear phase used is shown in \cref{fig:SLMphase}.
 Because the phase retardance is capped at $2\pi$, a saw-tooth-like pattern emerges.
 In reality, we use a period of just 8 pixels, so for better visibility we only show a tiny part of the grating in the figure.
 
