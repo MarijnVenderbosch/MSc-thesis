@@ -1,8 +1,8 @@
 \section{Introduction}\label{sec:LoadingAtoms}
 
-After focusing a far-detuned leaser beam to a sufficiently tiny spot (optical tweezer), it was shown that in the presence of resonant light, the atoms in the trap will show pair-wise loss until only 0 or 1 atom remains in the trap \cite{Schlosser2001}.
-It is described by an elegant model taking into account one-body as well as two-body loss terms. 
-Denoting the average number of atoms in the dipole trap by $N$, we can write for the time evolution of $N$ \cite{Schlosser2002} 
+After focusing a far-detuned leaser beam to a sufficiently tiny spot (optical tweezer), it was shown that in the presence of resonant light, it is possibly to non-deterministically load the trap with single atoms \cite{Schlosser2001}.
+This can be described by an elegant model taking into account one-body as well as two-body loss terms. 
+Denoting the average number of atoms in the dipole trap by $N$, time time evolution of $N$ can be described as \cite{Schlosser2002} 
 
 \begin{equation}\label{eq:LoadingTweezer}
 	\frac{\text{d}N}{\text{d}t} = \alpha - \gamma N - \beta N(N-1),
@@ -11,12 +11,15 @@ where the first term $\alpha$ is the loading rate or the amount of atoms enterin
 Furthermore, $\gamma$ is the atom loss as a result of collisions with the background gas, so this is effectively a one-body loss term.
 Lastly, $\gamma$ is a measure for the mainly two-body loss as a result of light-assisted collisions.
 In the regime $\beta \gg \gamma$, two-body loss rates are dominant over one-body contributions. 
-Because of light assisted-collisions with the help of resonant light, atoms are now kicked out of the trap in pairs, until either $N=0$ or $N=1$ with both equal probability. 
+Because of light assisted-collisions with the help of resonant light, atoms are now kicked out of the trap in pairs.
+This will continue until either $N=0$ or $N=1$, where both outcomes have roughly 50\% probability.
 This is known as the collisional blockade mechanism \cite{Schlosser2001} or parity projection.
-Thus we need to maximize the parameter $\beta$ in \cref{eq:LoadingTweezer}, which can be done by minimizing the trapping volume, the physical size of the optical tweezer.
 
-\Cref{sec:DiffractionLimit} discusses we intend to do this using a microscope objective, as well as the fundamental limit of the smallest achievable spot size: the diffraction limit.
-In \cref{sec:MeasuringTweezer} the setup used to measure the spatial profile of the tweezer is introduced, the results of which are presented along the radial (\cref{sec:TweezerRadial}) and axial(\cref{sec:Tweezer3D}) directions.
+Thus we need to maximize the parameter $\beta$ in \cref{eq:LoadingTweezer}, which can be done by minimizing the trapping volume, the physical size of the optical tweezer.
+Additionally, by minimizing the dimensions of the tweezer, less laser power is needed per trap and the traps can be spaced closer together, which is the key to scaling to a higher number of qubits.
+
+There is a fundamental limit to the smallest possible spot size however, which we quantify in \Cref{sec:DiffractionLimit}, where we also elaborate on how to approach this limit in practice.
+In \cref{sec:MeasuringTweezer} the setup used to measure the spatial profile of the tweezer is introduced, the results of which are presented along the radial (\cref{sec:TweezerRadial}) and axial (\cref{sec:Tweezer3D}) directions.
 
 \section{Diffraction: Thin Lens}\label{sec:DiffractionLimit}
 
@@ -31,7 +34,7 @@ We describe the diffraction of the light in the plane after the lens $E(x,y,z)$ 
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.7\textwidth]{figures/lens.pdf}
+	\includegraphics[width=0.6\textwidth]{figures/lens.pdf}
 	\caption{Thin lens with aperture radius $R$ and focal length $f$. 
 	The input field is $E_i(x',y')$ (\cref{eq:GaussianAperture} which is only within the aperture region. Figure adapted from \cite{Leseleuc2018,Gu2000}.}
 	\label{fig:LensAperture}
@@ -117,7 +120,7 @@ Solving for the first zero of \cref{eq:NormalizedPSF}, and introducing the defin
 
 \begin{figure}
     \centering
-    \includegraphics[width = 0.95\linewidth]{figures/AiryDisk.pdf}
+    \includegraphics[width = 0.9\linewidth]{figures/AiryDisk.pdf}
     \caption{Normalized plots of the Airy function for \textbf{a)} only the radial coordinate (normalized in units of $k/kR$) as well as \textbf{b)} a 2D plot: the Airy disk.}
     \label{fig:AiryPlots}
 \end{figure}
@@ -266,7 +269,7 @@ Evaluating the integral and taking the absolute value squared yields the intensi
 \begin{figure}
 	\centering
 	\includegraphics[width=0.68\textwidth]{figures/LongitudinalTweezerField.pdf}
-	\caption{Intensity of the tweezer as a function of defocus $\delta z$ along the optical axis for a Gaussian input beam $w_i \sim R$ as well as a plane wave input beam.}
+	\caption{Intensity of the tweezer as a function of defocus $\delta z$ along the optical axis for a Gaussian input beam $w_i \sim R$ as well as a plane wave input beam $w_i \gg R$.}
 	\label{fig:PSFvsLongitudinal}
 \end{figure}
 In the latter case, the $\cosh(\cdot)$ contribution in \cref{eq:IntensityAxial} vanishes.
@@ -291,7 +294,7 @@ Apart from high NA, there are other demands on the microscope objective: the \ac
 
 \subsection{Microscope objective}
 
-To satisfy these demands, we chose the G Plan Apo microscope objective from \textit{Mitutoyo}, as also used by \cite{Manuel2016,Ebadi2021}. 
+To satisfy these demands, we chose the G Plan Apo microscope objective from \textit{Mitutoyo}, as also used by \cite{Ebadi2021,Manuel2016}. 
 This is an infinity-corrected objective, meaning it is designed to image the projection from its focus to infinity, using an additional field lens to produce an image.
 The magnification $M$ the objective and field lens system is in this case 
 
@@ -299,11 +302,12 @@ The magnification $M$ the objective and field lens system is in this case
 	M = \frac{
 		f_{\text{FL}}
 	}{
-		f_{\text{obj}}
+		f_{\text{obj}},
 	}
 \end{equation}
 where $f_{\text{FL}}$ is the focal length of the field lens and $f_{\text{obj}}$ the equivalent focal length of the objective\footnote{For a compound microscope objective, equivalent focal length means the focal length the objective would have when replaced by a single lens.}.
-This has the advantage that it is more flexible than a finite-conjugate corrected objective, as it allows to place additional optics between the laser and the objective without change in alignment.
+\Cref{eq:InfinityMagnification} is of important when the same lens objective used to produce the optical dipole trap is also used for imaging fluoresence from the same trap.
+The infinity-correction has the advantage that it is more flexible than a finite-conjugate corrected objective, as it allows to place additional optics between the laser and the objective without change in alignment.
 Additionally, it allows flexible variation of the magnification according to \cref{eq:InfinityMagnification}.
 Relevant specifications of the objective for applications in optical tweezers are shown in \cref{table:MitutoyoSpecs}. 
 For compound objectives, the equivalent focal length $f_{\text{obj}}$ is defined in terms of the \ac{NA} and the back aperture radius $R$ as $f_{\text{obj}} = R / \text{NA}$, meaning the back aperture radius is 2 mm.
@@ -313,18 +317,18 @@ For compound objectives, the equivalent focal length $f_{\text{obj}}$ is defined
 	\caption{Key specifications of the objective from manufacturer Mitutoyo.}
 	\label{table:MitutoyoSpecs}
 	\begin{tabular}{l | l}
-		\textbf{Specification}       & \textbf{Value} \\ \hline 
-		NA                           & 0.5            \\ \hline
-		Glass thickness compensation\footnote{We assume 3.5 mm of N-BK7 glass is used here, which has a slightly different refractive index than quartz for example.} & 3.5 mm         \\ \hline
-		Equivalent focal length      & 4 mm           \\ \hline
-		Working distance             & 15.08 mm      
+		\textbf{Specification}          & \textbf{Value} \\ \hline 
+		NA                              & 0.5            \\ \hline
+		Compatible cover glass thickness& 3.5 mm         \\ \hline
+		Equivalent focal length         & 4 mm           \\ \hline
+		Working distance                & 15.08 mm      
 	\end{tabular}
 \end{table}
 \noindent We measured the transmission for 820 nm laser light for this objective to be $\sim 47$\%, 
 Thus quite a significant amount of laser power will be lost. 
 We suspect the low transmission is due to the fact that this objective was designed for wavelengths in the visible range, thus all of the lenses inside of it are most likely not anti-reflection coated for 820 nm.
 
-We would like to measure tweezer potential made by our microscope objective. 
+We would like to measure tweezer potential made by our microscope objective to compare to diffraction-limited performance.
 We could use time symmetry and look at the reverse direction: using the objective to look at a pinhole, retrieving its \acf{PSF} \cite{Knottnerus2018,Sortais2007}
 However, using this method the objective will produce a plane wave, when we know that in practice we do not send a plane wave to the objective(\cref{sec:TweezersPractice}). 
 Instead, we used another microscope objective, to look into produced tweezer potential by the \textit{Mitutoyo}. 
@@ -363,7 +367,7 @@ Though, the exact wavelength range for Rb is not that important, as long as it i
 The laser output is brought to the main table using a \ac{PM} optical fiber.
 By rotating the $\lambdaup/2$ plate before the PM fiber and aligning the slow/fast axes of the fiber correctly, a constant linear polarization is obtained at the output of the fiber, which is necessary for the \ac{SLM}.
 Should the polarization out of the fiber be incorrect however, the incorrect component will be filtered out by a polarizing beam splitter cube, such that the beam to the SLM will always be vertically polarized.
-To fully illuminate the SLM, which has dimensions of $\sim 15 \times 8$ mm, a fiber collimator\footnote{\textit{Schäfter + Kirchhoff} 60FC-L-0-M60-10.} with a clear aperture of 17 mm was used ($f=60$ mm, $M^2 < 1.05$, $1/e^2$ beam radius 4.9 mm).
+To fully illuminate the SLM, which has dimensions of $\sim 15.4 \times 9.6$ mm (\cref{table:SLMspecs}), a fiber collimator\footnote{\textit{Schäfter + Kirchhoff} 60FC-L-0-M60-10.} with a clear aperture of 17 mm was used ($f=60$ mm, $M^2 < 1.05$, $1/e^2$ beam radius 4.9 mm).
 The collimation setting was adjusted for 820 nm by adjusting the lens position in the collimator.
 
 The SLM is more elaborately explained in \cref{ch:arrays}, but a feature worth mentioning here is that the SLM acts as one of the lenses of a telescope, such that the beam traveling to the microscope objective is demagnified by a factor $f_2/f_1$.
@@ -438,8 +442,11 @@ The measurement is compared against the Airy function or the ideal \ac{PSF} of t
 The latter theoretical result was obtained by integrating \cref{eq:FourierBesselAperture} as a function of the radial coordinate $r$.
 From \ref{fig:2Dresults}b, the Gaussian input beam results in a slightly ($\sim 9\%$) broader spot.
 Additionally, the rings of the Airy disk will be slightly suppressed, this effect is known as Gaussian apodization.
-This apodization effect is not that clearly visible in the measurements, but again this could be a result of an aberration.
-Comparing the measurement to the theory result, the measurement has a waist which is about $\sim 10\%$ broader. Possibly, this is a result of convolution of the tweezer with the \ac{PSF} of the imaging system (see \cref{eq:Deconvolution}. Though the second objective has a significantly higher NA, the convolution effect can have significant contribution.
+
+
+Comparing the measurement to the theory result, the measurement has a waist which is about $\sim 10\%$ broader. 
+The apodization effect is not that clearly visible, possibly because of a slight aberration, which the Airy rings are quite sensitive to.
+Possibly, the slightly larger waist is a result of convolution of the tweezer with the \ac{PSF} of the imaging system (see \cref{eq:Deconvolution}. Though the second objective has a significantly higher NA, the convolution effect can have significant contribution.
 
 To check if this is indeed the case, a more accurate analysis method is needed.
 For example: in the previous binning method, the exact center location is not determined: it could lie anywhere in the center pixel. 
@@ -477,18 +484,18 @@ This is confirmed by the coefficient of determination $R^2 > 0.99$.
 In order to extract the waist from \cref{fig:3Dshowing}, only the center $10 \times 10$ pixel area was considered as the Gaussian approximation works best for small $r$. 
 This was confirmed by the correlation coefficient which was indeed higher for smaller for the fit on the smaller region of interest. 
 The result of this fit is shown in \cref{fig:3Dwaistfit}.
-Assuming the $\sigma_x \sim \sigma_y$ which should be valid for a circular aperture, we find the waist as $w_{\text{image}} = 2\sigma = \sigma_x + \sigma_y = (0.88 \pm 0.04)$ $\mu$m, where the error originates mainly from the calibration of the magnification. 
+Assuming the $\sigma_x \sim \sigma_y$ which should be valid for a circular aperture, we find the waist as $w_{\text{image}} = 2\sigma = \sigma_x + \sigma_y = (0.90 \pm 0.04)$ $\mu$m, where the error originates mainly from the calibration of the magnification. 
 Despite the 0.85 NA used, there will still be a slight convolution with the imaging point spread function present. 
 Although in deconvolution is non-trivial in general, for the specific case of a Gaussian function, the deconvolved waist $w_{\text{object}}$ can be found in terms of the waists of the image $w_{\text{image}}$ and the diffraction-limited waist of the imaging system $w_{\text{system}}$ according to \cite{Knottnerus2018}
 
 \begin{equation}\label{eq:Deconvolution}
     w_{\text{object}} = \sqrt{w_{\text{image}}^2-w_{\text{system}}^2}.
 \end{equation}
-This yields $w_{\text{object}} = (0.77 \pm 0.05)$ $\mu$m. 
+This yields $w_{\text{object}} = (0.79 \pm 0.05)$ $\mu$m. 
 Comparing to the theory result, for $\lambdaup = 820$ nm and $\text{NA} = 0.5$ (\cref{eq:Abbe,eq:GaussianAiryFit}) yields $w_0 = 0.689$ $\mu$m. 
 But this result not possible because of using input beam size $w_i \sim R$. 
 We know that as a result of this, the waist should be $\approx$ 9-10\% larger \cite{Chon2007,Sortais2007} which was confirmed by \cref{eq:FourierBesselAperture}, yielding $w_0 \sim 0.75$ $\mu$m, which is in good agreement with the measured result.
-We conclude the spot size of the tweezer is at or nearly at the diffraction-limit.
+We conclude the spot size of the tweezer is nearly diffraction-limited.
 
 \section{Axial Intensity Distribution}\label{sec:Tweezer3D}
 
@@ -553,10 +560,9 @@ We initially attributed the difference to the incorrect glass thickness used: th
 The optical thickness $nd$ is thus 0.5 mm larger than the objective is corrected for. 
 \begin{figure}[]
     \centering
-    \includegraphics[width=0.57\linewidth]{figures/sphericalAberration.pdf}
+    \includegraphics[width=0.55\linewidth]{figures/sphericalAberration.pdf}
     \caption{As a result of extra glass thickness $n\Delta d$, the objective will have to move a distance $\delta z$, corresponding to a change in focus distance $\delta f$.
-    The other parameters are explained in the text.  
-    Not to scale. 
+    The other parameters are explained in the text.
     Figure adapted from \cite{Iwaniuk2011}.}
     \label{fig:SphericalSketch}
 \end{figure}
