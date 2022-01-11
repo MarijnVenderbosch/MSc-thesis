@@ -43,7 +43,7 @@
 \usepackage[bf, sf]{titlesec}
 \usepackage{microtype}
 \renewcommand{\figurename}{Fig.}
-\setstretch{1.09}
+\setstretch{1.08}
 \usepackage{blindtext, color}
 \setlength{\parskip}{0pt}
 
@@ -53,7 +53,7 @@
 % font
 \usepackage[T1]{fontenc}
 \usepackage[scaled=1.03]{XCharter}%serif
-\usepackage[scaled=0.95]{helvet} % sans serif
+\usepackage[scaled=0.96]{helvet} % sans serif
 \usepackage[]{newtxmath} % math font, options in []. Leave.
 \usepackage[scaled=0.9]{DejaVuSansMono} % mono
 
@@ -94,6 +94,9 @@
 
 % metadata pdf
 \hypersetup{pdftitle={MScThesisVenderbosch},pdfsubject={Holographic Optical Tweezers for Arrays of Neutral Atoms},pdfauthor={Marijn Venderbosch}}
+
+% not resetting footnotes
+\counterwithout*{footnote}{chapter}
 
 
 
@@ -154,8 +157,8 @@
 \chapter{Tweezer Arrays}\label{ch:arrays}
     \input{chapter files/4arrays.tex}
     
-\chapter{Implementation in the Machine}\label{ch:implementation}
-    %\input{chapter files/5implementation.tex}
+\chapter{Experimental Implementation}\label{ch:implementation}
+    \input{chapter files/5implementation.tex}
 
 \chapter{Conclusions and Outlook}\label{ch:conclusion}
     %\input{chapter files/6conclusions.tex}

@@ -235,7 +235,7 @@ In the next section, we will elaborate upon some other practical considerations 
 \end{table}
 
 
-\subsection{Calibrating the Electro-Optical Response}
+\subsection{Electro-Optical Response}
 
 The refractive index $\Delta n(V)$ and therefore the light retardation $\phi(V)$ of \cref{eq:ElectroOpticResponse} are not necessarily linear as a function of the applied voltage.
 Thus it is needed to calibrate the electro-optic response of the \ac{SLM}, which equates to measuring the retardation $\phi$ as a function of the applied voltage $V$. 
@@ -334,20 +334,60 @@ So we barely use any power, while still almost using all of the pixels.
 To obtain this waist, we direct the beam on the SLM from the Schäfter fiber collimator (\cref{sec:MeasuringTweezer}).
 This collimator yields a beam with waist $w(z) = 4.8$ mm, about the size of the short semi-width $S_y = 4.9$ mm of the rectangular SLM.
 
-\subsection{Demagnification}
+
+\subsection{Diffraction Efficiency}\label{subsec:Diffraction}
+
+Because the SLM has individual pixels with constant pitch $d$, the device acts effectively as a diffraction grating.
+As a result, there will be light diverted to higher diffraction orders in both horizontal and vertical directions.
+The SLM is calibrated to direct the most power a single the diffraction order (we call this the first order), but a fraction of light will be sent to higher diffraction orders as well.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{figures/hologram.png}
+	\caption{
+		Total phase mask applied on the SLM: \textbf{a)} Hologram obtained from the \ac{GSW} algorithm to generate the spot array.
+		\textbf{b)} Lens phase applied to use the SLM as the first lens of a telescope with magnification $M=0.42$.
+		\textbf{c)} Optical flatness correction pattern as provided by the manufacturer.
+		\textbf{d)} Blazed grating, used to move the diffraction pattern away from the optical axis (zoomed in).
+		\textbf{e)} Aberration correction phase applied onto the SLM, which is a fourth-order polynomial in the distance from the center.
+		\textbf{f)} Cylindrical lens phase to account for aberration introduced by the SLM itself.
+	}
+	\label{fig:SLMphase}
+\end{figure}
+
+In addition, apart from higher diffraction orders, there will always be a fraction of light that is not modulated.
+This light originates from surface reflections, back reflections and unused space between the pixels and is focused to a single spot in the glass cell by the objective \cite{Bijnen2013}.
+To get rid of this undesired light, typically a linear phase is superimposed on top of the hologram (tilt aberration) which translates the desired pattern away from the undiffracted light.
+The type of linear phase used is shown in \cref{fig:SLMphase}d, as well as the hologram producing the spot array in \cref{fig:SLMphase}a.
+Subsequently, in an intermediary focus point, the light can be spatially filtered to remove unwanted light using an iris. 
+The Fresnel lens phase applied onto the SLM is shown in \cref{fig:SLMbeampath}b.
+It is worth noting that this method comes at the cost of a slightly lower diffraction efficiency, because the phase ramp applied can only be approximated by the pixelated SLM.
+
+\subsection{Beam size decrease}
 
 To prevent excess loss of power, the $w = 4.8$ mm beam needs to be adapted to the $R = 2.0$ mm radius of the microscope objective. 
 Thus the beam should be magnified by a factor $M=0.42$ (demagnified).
 This is commonly done using a Keplerian telescope using two lenses $f_1$ and $f_2$ as shown in \ref{fig:SLMbeampath}a.
-However, because we need some $30$ cm between the lens $f_2$ and the objective to accommodate (dichroic) mirrors, polarizing cubes and to leave room for future upgrades, we chose $f_2=30$ cm. 
-Also knowing that $f_1=f_2/M$ and the total length of the telescope is $2f_1+2f_2$, this is already $203$ cm of beam path on the optical table. 
-We borrowed a trick from our collaborators at the University of Amsterdam, where we use the SLM as the first lens of the system. 
+Moreover, apart from adapting the beam size, the telescope serves two more functions:
+
+\begin{itemize}
+    \item Conjugate the SLM plane and objective aperture planes.
+    This means that for any arbitrary angular pattern applied by the SLM, the light field will remain centered on the circular objective aperture \cite{Nogrette2014}. 
+    
+    \item Allow for spatial filtering: the intensity profile is only produced in the focal plane of a lens (\cref{sec:InFocus}).
+    Thus to remove unwanted light from unwanted diffraction orders, an intermediary focus plane is needed which is provided in any case when using a telescope.
+\end{itemize}
+To accommodate room for the objective holder, (dichroic) mirrors, a polarizing beam splitter cube leave room for additional optics in the future, we estimate from a CAD drawing we need $\sim 45$ cm of room between the last relay lens of the telescope and the objective. 
+Using a Keplerian telescope, this distance will be equal to $f_2$ (\cref{fig:SLMbeampath}).
+
+Also knowing that $f_1=f_2/M$ and the total length of the telescope is $2f_1+2f_2$, this is already $\sim 305$ cm of beam path on the optical table. 
+Instead, we borrowed a trick from our collaborators at the University of Amsterdam, where we use the SLM as the first lens of the system. 
 In terms of the ABCD matrix formalism, the transfer matrix $\mathbf{M}$ for the latter is:
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.9\textwidth]{figures/beamPathSLM.pdf}
-	\caption{\textbf{a)}: Keplerian telescope with total length $2f_1+2f_2$. \textbf{b)}: Using the SLM as a lens, the total beam path has length $x+y$.}
+	\caption{\textbf{a)}: Keplerian telescope with total length $2f_1+2f_2$. \textbf{b)}: Using the SLM as a lens, the total beam path has length $x+y$. In the latter case, $y>f_2$.}
 	\label{fig:SLMbeampath}
 \end{figure}
 
@@ -387,19 +427,7 @@ The Fresnel lens hologram used on the SLM (which is a quadratic polynomial) is s
 This pattern is superimposed on the spot array hologram in \ref{fig:SLMphase}a along with the other holograms described in this section. 
 The sum of the hologram is computed modulo $2\pi$, which equals exactly one wave retardation.
 
-\begin{figure}
-	\centering
-	\includegraphics[width=\textwidth]{figures/hologram.png}
-	\caption{
-		Total phase mask applied on the SLM: \textbf{a)} Hologram obtained from the \ac{GSW} algorithm to generate the spot array.
-		\textbf{b)} Lens phase applied to use the SLM as the first lens of a telescope with magnification $M=0.42$.
-		\textbf{c)} Optical flatness correction pattern as provided by the manufacturer.
-		\textbf{d)} Blazed grating, used to move the diffraction pattern away from the optical axis (zoomed in).
-		\textbf{e)} Aberration correction phase applied onto the SLM, which is a fourth-order polynomial in the distance from the center.
-		\textbf{f)} Cylindrical lens phase to account for aberration introduced by the SLM itself.
-	}
-	\label{fig:SLMphase}
-\end{figure}
+
 
 \subsection{Optical Flatness}\label{subsec:Flatness}
 
@@ -409,17 +437,6 @@ The flatness of our chip was measured by manufacturer Meadowlark to have a RMS f
 The shape of the flatness was measured as well and provided to us by the manufacturer, so we can correct for it by subtracting a phase mask corresponding to the same non-flatness.
 This mask is shown in \ref{fig:SLMphase}c.
 
-\subsection{Diffraction Efficiency}\label{subsec:Diffraction}
-
-Because the SLM has individual pixels with constant pitch $d$, the device acts effectively as a diffraction grating.
-As a result, there will be light diverted to higher diffraction orders in both horizontal and vertical directions.
-The SLM is calibrated to direct the most power a single the diffraction order (we call this the first order), but a fraction of light will be sent to higher diffraction orders as well.
-
-In addition, apart from higher diffraction orders, there will always be a fraction of light that is not modulated.
-This light originates from surface reflections, back reflections and unused space between the pixels and is focused to a single spot in the glass cell by the objective \cite{Bijnen2013}.
-To get rid of this undesired light, typically a linear phase is superimposed on top of the hologram (tilt aberration) which translates the desired pattern away from the undiffracted light.
-The type of linear phase used is shown in \cref{fig:SLMphase}.
-This solution comes at the cost of slightly lower diffraction efficiency however. Subsequently, in the focus of the telescope shown in \cref{fig:SLMbeampath}b, this unmodulated light, as well as the higher diffraction orders are blocked by an iris. 
 
 \subsection{Aberration Correction}\label{subsec:AberrationCorrection}
 

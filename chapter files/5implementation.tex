@@ -1,133 +1,71 @@
-\section{Rb Magneto Optical Trap}
+Now that the light potentials have been measured, we elaborate in this chapter how it was implemented in an real-world experiment on ultra-cold atoms, initially using Rb atoms.
+In order to do this, a new setup was constructed.
+The focus of the new machine was to have an optical setup as compact as possible.
+The construction of the vacuum and atom source part can be found in \cref{sec:VacuumAtom}.
+The laser system is explained in \cref{sec:LaserSystem}.
+Images of the MOT are displayed in \cref{sec:MOTresult}.
+We finish up with how overlap this MOT with our tweezer array (\cref{sec:Tweezers}) and how to image the tweezers (\cref{sec:TweezerImaging}).
 
-Our journey starts with a cloud of ultracold atoms, because the tweezers are not deep enough to load room temperature atoms. Also, we need ultracold temperatures to avoid decoherence. The gas cloud is prepared using a 3D magneto optical trap (MOT). The MOT consists of 3 circularly polarized laser slightly detuned from the 780 nm D2 line of Rb-87, as well as a repump laser. The magnetic field gradient is provided by a set of coils in the standard anti-Helmholtz configuration. 
+\section{Vacuum and Atom Source}\label{sec:VacuumAtom}
 
-\subsection{Atom Source}
+The core of the experiment is the glass cell (30 mm outer and 4.0 mm wall thickness, optically contacted)\footnote{The glass cell was provided to us by our collaborators from the University of Amsterdam.}.
+The glass cell can be seen in a CAD drawing and in real life in \cref{fig:VacuumSetup,fig:CoilsSetup}.
+It is pumped down to the ultra-high vacuum regime, which is need to minimize collisions with the background gas and improve the lifetime of the atoms in the tweezers.
+To pump the cell down, the glass cell is connected to a vacuum chamber (\cref{fig:VacuumSetup}, left).
+We attach a turbomolecular pump to the chamber using a valve (not shown in the figure) and pump down to $\sim 10^{8}$ mbar.
+This pressure was measured using a gauge attached on 
+To reach a better vacuum, the system was baked for a duration of two weeks at 130${}^{\circ}$C by Rik van Herk \cite{Herk2022}.
+Next, we activate the non-evaporative getter\footnote{NEXTorr Z 100 NEG - ion combination pump.} by heating it to 500${}^{\circ}$C while pumping away its outgassing using the turbo pump
+Finally, after closing the turbo valve and turning on the ion pump we reached a pressure of $\sim 2\times 10^{-10}$ mbar.
 
-For our atom source we use a rubium dispenser. Atoms are released when the power supply is turned on. 
 
-Here, a detailed overview will be given of the setup built for the optical tweezers experiment. The overview is split in three parts, each with their own section. 
+As atom source, a triplet of Rubidium dispensers are used, powered by a power supply typically running at 5 ampères
 
-\section{Glass Cell}
+The vacuum vessel and pump connections were performed by Rik van Herk and Deon Janse van Renseburg.
+This is described in the thesis of Rik van Herk \cite{Herk2022}.
 
-Light from a 780 Toptica laser diode is coupled in and out of a Thorlabs FC780 fiber. As it comes out of the fiber, it is sent through a polarizing beam splitter cube. To ensure maximum power transmission through the cube, the polarization of the light is rotated using a half wave plate. 
 
-The fiber outcoupler yields a beam waist of 1.05 mm. The light is matched to the dimensions of the SLM using a Keplarian telescope consisting of a set of lenses with focal lengths $f_1=150$ mm and $f_2=500$ mm. This yields a beam waist of 1.05 mm $(f_2/f_1) \approx 3.5$ mm.
+\begin{figure}
+	\begin{subfigure}{.54\linewidth}
+		\centering
+		\includegraphics[height=6cm]{figures/Vacuum.pdf}
+		\caption{}
+		\label{fig:VacuumSetup}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{.44\linewidth}
+		\centering
+		\includegraphics[height=6cm]{figures/Coils.jpg}
+		\caption{}
+		\label{fig:CoilsSetup}
+	\end{subfigure}
+	\caption{\textbf{a)} CAD drawing of the vacuum vessel connected to the glass cell on the right. 
+	Around the glass cell, 4 out of 6 MOT beams are shown along with the magnetic field coils and a single microscope objective on the bottom. 
+	CAD drawing by Eddy Rietman.
+	\textbf{b)} Housing for the magnetic field coils, as well as a microscope on a 5-axis stage on bottom and top.}
+\end{figure}
 
-The SLM has dimensions $8$ by $15$ mm. Because this is larger than the beam waist, the power loss as a result of its aperture is limited. test
 
-\section{Imaging Tweezer Arrays}
 
-\section{Detecting Atoms}
+\section{Laser System}\label{sec:LaserSystem}
 
-The beamsize from the SLM is sent to a high numerical aperture (NA) infinity-corrected microscope objective. Additionally, it has a long working distance of 15.08 mm because it is aberration-corrected for use with a 3.5 mm cover glass. We chose the Mitutoyo G Plan Apo 50X. It's specifications are shown in \cref{table:MitutoyoSpecs}.      
+The atomic species that we selected to cool is \textsuperscript{85}Rb because it is the most abundant.
+A \textsuperscript{85}Rb requires a cooling laser detuned from the D-2 line of Rb, as well as a repump laser to cycle back atoms in the cooling transition that end up in the wrong ground state.
+The laser system was already in the lab, built primarily by \cite{Reijnders2010}.
+It used a separate repump laser (Toptica DL100, $P \sim 100$mW) from the trapping/cooling laser (Toptica DLX100, $P \sim 500$mW). 
 
-\begin{table}[h]
-    \caption{Mitutoyo specifications.}
-    \label{table:MitutoyoSpecs}
-    \centering
-    \begin{tabular}{l | l}
-        \textbf{Metric}                  & \textbf{Specification} \\ \hline
-        NA                               & 0.5                    \\ \hline
-        working distance                 & 15.08 mm               \\ \hline
-        Equivalent focal length          & 4 mm                   \\ \hline
-        Compatible cover glass thickness & 3.5 mm                
-    \end{tabular}
-\end{table}
+After numerous components from the repump laser system broke, we decided to omit the seperate repump laser and put sidebands on the trapping laser using an electro optic modulator (EOM) instead, as the small amount of power lost in the trapping laser is not of critical importance for us.
+The laser system is sketched in \cref{fig:RbLaserSetup}. 
+The fiber on the lower left is where previously both the trapping and repump laser would be fiber coupled for a frequency offset lock system, which we replaced by a (fiber coupled) wavemeter. 
 
-From this we can deduct a back pupil radius $d/2 = 2 f_{\text{eff}} \text{NA} = 2$ mm. where $f_\text{{eff}}$ is the equivalent focal length. The beam from the SLM is steered to the Mitutoyo while meanwhile passing a lens relay system, mapping the SLM plane onto the back input plane of the high NA objective. 
+The system consists of a laser detuned by an acousto-optic modulator. For long term stability, the laser is frequency locked using a modulation transfer spectroscopy setup \cite{McCarron2008,Reijnders2010}.
+In order for the laser to be in resonance with the Rb spectroscpopy cell, an AOM is used with the same frequency as the AOM going to the MOT. 
 
-\subsection{Relay Lenses}
 
-The relay system serves several functions
-
-\begin{enumerate}
-    \item Avoid clipping. The SLM prints an angular phase pattern. When the distance between SLM and the objective becomes too large, the beam will clip on the pupil. The telescope is designed such that the planes at SLM and the Mitutoyo are conjugated, meaning that for any field the output is centered on the Mitutoyo. 
-     
-    \item Decrease beam waist. If the 3.5 mm waist from the SLM is directed to the Mitutoyo, we would lose a significant amount of power. The transmission $P/P_0 = 1- \exp{(w_i^2/R^2)} \approx 87.5\%$ for $w_i/R = 1$. Where $w_i$ is the input beam waist and $R$ the pupil radius. Therefore, the beam size is decreased by a second telescope to $w_i \approx 2$ mm.
-    
-    \item In an intermediate focus point in the telescope, the spot image is produced. This allows filering out unwanted diffraction orders and undiffracted light. 
-\end{enumerate}
-
-To ensure no clipping \cite{Nogrette2014}, the lenses should be placed in a 4f configuration. Additionally, the distance from the second relay to the objective should accomodate sufficient distance for the optics needed to fit in between: a polarizing beam splitter to recombine the moving beam from the acousto-optical deflectors, a dicroic mirror to split off fluoresence and a mirror to steer the beam into the vertical direction. A CAD drawing puts a conservative estimate of $f_2 \approx 400$ mm here.
-
-Concerning the second point, the magnification $m$ should be 
-
-\begin{equation}\label{magnification}
-    m = \frac{f_2}{f_1}= \frac{R}{w(z)} \approx 0.42
-\end{equation}
-
-where $f_2$ and $f_1$ are the focal lengths of the second an first relay lenses, $R = 2$ mm is the aperture radius of the objective and $w(z) = 4.7$ mm is the beam waist from the fiber collimator. \cref{magnification} puts the total length of a full 4f relay telescope at $2f_1+2f_2 \approx 2.7$ m. 
-
-To shorten this beam size, our partner group at University of Amsterdam make use of the versatility of the SLM to program the first relay lens in the SLM itself. However, to still satisfy all of the requirements some of the lens spacings will have to be adapted. This can be understood in terms of the ABCD matrix formalism. Consider the matrix $M$ describing a telescope with spacings according to the 4f configuration: 
-
-\begin{equation}\label{ABCD_telescope}
-    M_{4\text{f}} = 
-    \begin{bmatrix}
-        1 & f_2\\
-        0 & 1
-    \end{bmatrix}
-    \begin{bmatrix}
-        1 & 0\\
-        -1/f_2 & 1
-    \end{bmatrix}
-    \begin{bmatrix}
-        1 & f_1+f_2\\
-        0 & 1
-    \end{bmatrix}
-    \begin{bmatrix}
-        1 & 0 \\
-        -1/f_1 & 1
-    \end{bmatrix}
-    \begin{bmatrix}
-        1 & f_1 \\
-        0 & 1
-    \end{bmatrix} 
-\end{equation}
-
-Now, consider the situation where the SLM acts directly as the first lens with focal length $f_1$. Then it can be shown we have the following matrix:
-
-\begin{equation}\label{LensSLM}
-    M_{\text{SLM}} = 
-    \begin{bmatrix}
-        1 & L_{23}\\
-        0 & 1
-    \end{bmatrix}
-    \begin{bmatrix}
-        1 & 0\\
-        -1/f_2& 1
-    \end{bmatrix}
-    \begin{bmatrix}
-        1 & L_{12} \\
-        0 & 1
-    \end{bmatrix}
-    \begin{bmatrix}
-        1 & 0\\
-        -1/f_1& 1\\
-    \end{bmatrix}
-\end{equation}
-
-Solving $M_{\text{4f}} = M_{\text{SLM}}$ yields: a focal length for the second lens of $f_2 = 285$ mm, which is hard to find. However, we can enforce $f_2 = 300$ mm, relaxing requirement 1. and this will only slightly change the other parameters. Final result: $f_1 = 714$ mm, $L_{12} = 1014$ mm and $L_{23} = 426$ mm. 
-
-\section{Rb System}
-
-The laser system and optical frequency reference for Sr is set to arrive after this thesis was written. Additionally the atom source consisting of an oven, Zeeman slower and deflection stage was only in the design stage at the time of writing (\cref{fig:SrLoading}). Therefore, we resorted to using rubidium as an ultra cold atom source first. This allows us to test our arrays of optical tweezers. The only adjustment that needs to be done for this is the wavelength, which as it turns out happens to be minor and well within the tuning range of our titanium sapphire crystal. 
-
-\subsection{Vacuum System and Atom Source}
-
-The rubidium vacuum system was built by Deon Janse van Rensburg and Rik van Herk. It consists of an optically contacted glass cell (out diameter 30 mm, glass thickness 4 mm) kindly supplied by collaborators from UvA. As atom source, a triplet of Rubidium dispensers are used, powered by a power supply typically running at 5 ampères. As for pumps, a turbo pump was used for initial pumpdown to $p\sim 10^{-8}$ mbar after which an combination sputter ion pump and a non evaporative getter\footnote{NEXTorr Z 100} take over. We reached a some $p \sim 2 \cdot 10^{-10}$ mbar, after baking the system at 130${}^{\circ}$C for two weeks. This is described in the thesis of Rik van Herk \cite{Herk2022}.
-
-\subsection{Laser System}
-
-The atomic species that we selected to cool is \textsuperscript{85}Rb because it is the most abundant. A \textsuperscript{85}Rb requires a cooling laser detuned from the D-2 line of Rb, as well as a repump laser to cycle back atoms in the cooling transition that end up in the wrong ground state. The laser system was already in the lab, built primarily by \cite{Reijnders2010}. It used a separate repump laser (Toptica DL100, $P \sim 100$mW) from the trapping/cooling laser (Toptica DLX100, $P \sim 500$mW). 
-
-After numerous components from the repump laser system broke, we decided to omit the seperate repump laser and put sidebands on the trapping laser using an electro optic modulator (EOM) instead, as the small amount of power lost in the trapping laser is not of critical importance for us. The laser system is sketched in \cref{fig:RbLaserSetup}. The fiber on the lower left is where previously both the trapping and repump laser would be fiber coupled for a frequency offset lock system, which we replaced by a (fiber coupled) wavemeter. 
-
-The system consists of a laser detuned by an acousto-optic modulator. For long term stability, the laser is frequency locked using a modulation transfer spectroscopy setup \cite{McCarron2008,Reijnders2010}. In order for the laser to be in resonance with the Rb spectroscpopy cell, an AOM is used with the same frequency as the AOM going to the MOT. 
-
-\subsection{Repump Sidebands}
-
-In order to make the sidebands, an EOM was used. An EOM uses phase modulation to create sidebands with shifted frequencies. The amount of sidebands is determines by the modulation depth. The power in the various sidebands as a function of the modulation index $\epsilon$ is described by \cite{McCarron2008}
+In order to make the sidebands, an EOM was used. 
+An EOM uses phase modulation to create sidebands with shifted frequencies. 
+The amount of sidebands is determines by the modulation depth.
+The power in the various sidebands as a function of the modulation index $\epsilon$ is described by \cite{McCarron2008}
 
 \begin{equation}
     E = E_0 \left[
@@ -136,9 +74,11 @@ In order to make the sidebands, an EOM was used. An EOM uses phase modulation to
     \right]
 \end{equation}
 
-where $t$ is time and $\omega_c$ the carrier frequency. If $\epsilon <1$ most of the power is contained in the zeroth order (unmodulated) beam and a small fraction is contained in the first sidebands. The sidebands are always symmetric from the zeroth order, but we only use one of them, the other is wasted. 
+where $t$ is time and $\omega_c$ the carrier frequency. If $\epsilon <1$ most of the power is contained in the zeroth order (unmodulated) beam and a small fraction is contained in the first sidebands.
+The sidebands are always symmetric from the zeroth order, but we only use one of them, the other is wasted. 
 
-The EOM\footnote{7Qubig EO-Rb85-3K} was fed a $f = 2915$ MHz signal provided by a harmonic synthesizer RF \footnote{DS instruments SG6000PRO} providing a signal of $-6.9$dbm. This signal was amplified by a 45 dB amplifier \footnote{Minicircuits ZHL-16W-43+} which should provide some $\sim 10$\% of power in the first sidebands \cite{Rens2014}, which should be a sufficient amount of power for a repump laser. 
+The EOM\footnote{7Qubig EO-Rb85-3K} was fed a $f = 2915$ MHz signal provided by a harmonic synthesizer RF \footnote{DS instruments SG6000PRO} providing a signal of $-6.9$dbm.
+This signal was amplified by a 45 dB amplifier \footnote{Minicircuits ZHL-16W-43+} which should provide some $\sim 10$\% of power in the first sidebands \cite{Rens2014}, which should be a sufficient amount of power for a repump laser. 
 
 \begin{figure}
     \centering
@@ -147,10 +87,12 @@ The EOM\footnote{7Qubig EO-Rb85-3K} was fed a $f = 2915$ MHz signal provided by 
     \label{fig:RbLaserSetup}
 \end{figure}
 
- 
- \section{MOT}
- 
-We estimate the number of captured atoms in the MOT by counting the number of counts on our \ac{CCD}, subtracting background counts by turning off the field. We obtain the counts by integrating over all pixels $\sum_j p_j$, correcting for exposure time $\tau_s$, camera gain $G$ and sensitivity. The camera sensitivity constant $C$ was determined to be $6 \cdot 10^3$ counts per photon and was calibrated using a variety of ND filters and a laser at 780 nm of known intensity. The total number of atoms is now
+
+\section{Characterizing the MOT}\label{sec:MOTresult}
+   
+We estimate the number of captured atoms in the MOT by counting the number of counts on our \ac{CCD}, subtracting background counts by turning off the field. 
+We obtain the counts by integrating over all pixels $\sum_j p_j$, correcting for exposure time $\tau_s$, camera gain $G$ and sensitivity.
+The camera sensitivity constant $C$ was determined to be $6 \cdot 10^3$ counts per photon and was calibrated using a variety of ND filters and a laser at 780 nm of known intensity. The total number of atoms is now
  
  \begin{equation}
      N = \frac{2}{2\pi\gamma} \frac{1}{\beta} \frac{4\pi l^2}{R^2} \sum_j \frac{p_j}{\tau_s G C}
@@ -160,9 +102,23 @@ We estimate the number of captured atoms in the MOT by counting the number of co
  
 The collection angle $\eta$ is $2\pi(1-cos{\alpha})/4\pi$ where $\alpha$ is the maximum angle from the optical axis of the imaging system. $\alpha=\arcsin{0.5}$ the collection angle is $\eta = 0.067$
 
-\section{Overlapping the MOT with the tweezer}
+\section{Tweezer Arrays}\label{sec:Tweezers}
+
+\begin{figure}
+    \centering
+    \includegraphics{figures/Coils.jpg}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
+
+\subsection{Overlapping the MOT with the tweezer}
 
 \begin{itemize}
     \item Top camera: get focus more or less right with 50 mm lens, as well as align tweezer
     \item Scan tweezer over resonance, try to see off balance of MOT from side camera. 
 \end{itemize}
+
+\section{Imaging Tweezer Arrays}\label{sec:TweezerImaging}
+
+
+
