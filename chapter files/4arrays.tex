@@ -386,7 +386,7 @@ In terms of the ABCD matrix formalism, the transfer matrix $\mathbf{M}$ for the 
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.9\textwidth]{figures/beamPathSLM.pdf}
+	\includegraphics[width=0.9\textwidth]{figures/beampathSLM.pdf}
 	\caption{\textbf{a)}: Keplerian telescope with total length $2f_1+2f_2$. \textbf{b)}: Using the SLM as a lens, the total beam path has length $x+y$. In the latter case, $y>f_2$.}
 	\label{fig:SLMbeampath}
 \end{figure}
@@ -447,13 +447,14 @@ Subtracting this paraxial result from the case for general ray angles, which may
 
 \begin{equation}\label{eq:FocusDifference}
     \delta f_{\text{general}} - \delta f_{\text{paraxial}} \approx
-    \frac{d \tan^2{\alpha_0}}{2n} (1-n_r^2) - \frac{3d \tan^4{\alpha_0}}{8n}(1-n_r^2)^2+\mathcal{O}(\tan\alpha_0^6).
+    -\frac{d \tan^2{\alpha_0}}{2n} (1-n_r^2) 
+    +\frac{3d \tan^4{\alpha_0}}{8n}(1-n_r^2)^2+\mathcal{O}(\tan\alpha_0^6).
 \end{equation}
 Multiplying \cref{eq:FocusDifference} with $2\pi(n-n_0)/\lambdaup$ and converting to a radial dependence as $\tan{\alpha_0}= \text{NA} \times r/R$ yields 
 
 \begin{equation}\label{eq:ConversionRadial}
-    \phi(r) \approx \frac{\pi d}{n\lambdaup}(1-n_r)\left[
-    \left(\text{NA}\frac{r}{R}\right)^2(1-n_r^2)-\frac{3}{4}\left(\text{NA}\frac{r}{ R}\right)^4(1-n_r^2)^2
+    \phi(r) \approx \frac{\pi d}{\lambdaup}(1-n_r)\left[
+    -\left(\text{NA}\frac{r}{R}\right)^2(1-n_r^2)+\frac{3}{4}\left(\text{NA}\frac{r}{ R}\right)^4(1-n_r^2)^2
     \right].
 \end{equation}
 This is a function that can be decomposed in Zernike polynomials.
@@ -465,15 +466,26 @@ The coordinates on the unit disk can be denoted as $\rho = r/R$ and $\theta \in 
     \sum_{s=0}^{(n-m) / 2}
     \frac{(-1)^{s}(n-s) !}{s !\left((n+m)/2-s\right) !\left((n-m)/2-s\right) !} \rho^{n-2 s}
 \end{equation}
-is the radial Zernike polynomial set \cite{Mahajan94}. But it turns out \cref{eq:ConversionRadial} only has to nonzero $R_n^m$ terms: $R_2^2 \propto \rho^2$, which is a defocus aberration and $R_4^4 \propto \rho^4$ which is a third order spherical aberration. 
-It is not needed to correct for the defocus (we do not care if the tweezer itself moves a micron in the axial direction, as long as we adjust the focus of the imaging system), leaving only the $\rho^4$ contribution, which is plotted in as a function of the radial coordinate on the SLM\footnote{Because the pupil of the microscope objective is conjugated with the short axis of the SLM, the radial coordinate $\rho =r/R$ also happens to apply on the SLM surface, if one substitutes $R=S_y$ (the short axis of the rectangular aperture).} in \cref{fig:AberrationTerm} and its corresponding hologram is presented in \cref{fig:SLMphase}e.
+is the radial Zernike polynomial set \cite{Mahajan94}. 
+Expanding \cref{eq:ZernikeRadial} in radial Zernike terms yields
 
+\begin{equation}\label{eq:ZernikeExpansion}
+    \phi(\rho) \approx 0.254 \cdot Z_0^0 - 12.9 \cdot Z_2^2 + 0.254\cdot Z_4^0.
+\end{equation}
 \begin{figure}
     \centering
-    \includegraphics[width=0.45\textwidth]{figures/SphericalAberrationTerm.pdf}
+    \includegraphics[width=0.9\textwidth]{figures/SphericalAberrationTerms.pdf}
     \caption{Phase correction in waves applied onto the SLM to correct the third order spherical aberration as a function of the normalized radial coordinate $\rho=r/R$.}
     \label{fig:AberrationTerm}
 \end{figure}
+Which is plotted in \cref{fig:AberrationTerm}a.
+But we do not need to correct for the full wave error: the $Z_0^0$ is a constant offset phase term. 
+Adding a constant has no effect so we can omit it. 
+The $Z_2^2 = \rho^2$ term is a defocus aberration, which we can also omit: it is unnecessary to correct for the shift in focus of the glass, we can do this by moving the objective. 
+That leaves the $Z_4^0 = 1 - 6\rho^2+6\rho^4$ term (primary spherical aberration) plotted in \cref{fig:AberrationTerm}b \footnote{Because the pupil of the microscope objective is conjugated with the short axis of the SLM, the radial coordinate $\rho =r/R$ also happens to apply on the SLM surface, if one substitutes $R=S_y$ (the short axis of the rectangular aperture).}.
+This primary spherical aberration was applied onto the SLM, its corresponding hologram is shown in \cref{fig:SLMphase}e.
+Note: the primary spherical aberration term can again be expanded if one wishes to do so: only its $\rho^4$ term is relevant for us, which is plotted in \cref{fig:AberrationTerm}c. 
+
 
 Even after the spherical aberration correction, we still noted unsatisfactory performance in the axial direction as discussed in \cref{sec:Tweezer3D}. 
 We think this is due to the lens phase on the SLM (\cref{fig:SLMLens}b): because the laser reflects off of the device, it effectively travels through a biconvex lens under this same angle (astigmatism aberration). 
@@ -511,7 +523,7 @@ To do this, we performed 2D Gaussian least-square fits (\cref{eq:2DGaussian}) as
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.9\textwidth]{figures/CamImgLoGSpots.pdf}
+    \includegraphics[width=0.95\textwidth]{figures/CamImgLoGSpots.pdf}
     \caption{\textbf{a)} $7\times7$ spot array as obtained from the Flea2 CCD chip.
     \textbf{b)} Spot locations marked with the red crosses, as obtained from the edge-detection algorithm. }
     \label{fig:CameraLoG}
@@ -539,7 +551,7 @@ We fitted the data in the histograms to a normal distribution, yielding a waist 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\textwidth]{figures/SpotsCropped_range12.pdf}
+    \includegraphics[width=0.6\textwidth]{figures/SpotsCropped_range12.pdf}
     \caption{Region of interest in pixels around the first 3 spots, as extracted by the Laplacian of Gaussian. 
     The centers $(x_{m,0},y_{m,0})$ as found by the 2D is shown by the red dot. 
     The obtained $1/e^2$ radius $w_{m,0}$ is denoted by the circles is drawn for each peak $m$ as well.}
@@ -550,7 +562,7 @@ We fitted the data in the histograms to a normal distribution, yielding a waist 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/FittedHistograms.pdf}
+    \includegraphics[width=0.85\textwidth]{figures/FittedHistograms.pdf}
     \caption{\textbf{a)} Distribution of the $1/e^2$ radius as measured from the spot array in \cref{fig:CameraLoG}a.
     \textbf{b)} Spread in the fitted depth of the potential $U_0$, normalized by the average trap depth $\left\langle U_0 \right\rangle$.
     Both are fit to a normal distribution.
