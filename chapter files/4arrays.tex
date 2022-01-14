@@ -260,16 +260,16 @@ Gray values are 8 bit number representing the degree of modulation where 0 (whit
 Assuming amplitude modulation between different gray levels is negligible (a fair assumption for phase-only SLMs), the electric field just after the SLM is proportional to the phase transmittance given by summing over the gratings $m$ \cite{Zhang1994}
 
 \begin{figure}
-	\begin{subfigure}{.54\linewidth}
+	\begin{subfigure}{.49\linewidth}
 		\flushleft
-		\includegraphics[height=4.1cm]{figures/LUTcalibrationSetup.pdf}
+		\includegraphics[height=5.1cm]{figures/LUTcalibrationSetup.pdf}
 		\caption{}
 		\label{fig:LUTCalibrationSetup}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}{.45\linewidth}
+	\begin{subfigure}{.49\linewidth}
 		\flushright
-		\includegraphics[height=4.1cm]{figures/LUTplot.pdf}
+		\includegraphics[height=5.1cm]{figures/LUTplot.pdf}
 		\caption{}
 		\label{fig:LUTcalibration}
 	\end{subfigure}
@@ -547,7 +547,7 @@ In \cref{fig:SpotsRoI}, the extracted \ac{RoI} by the \ac{LoG} algorithm is show
 Subsequently, the center of the peaks as found by the 2D fit $(x_{0,m},y_{0,m})$ is marked with the red dot, where the $1/e^2$ radii are marked by circles. 
 Subsequently, the extracted fit parameters can be used to perform some statistics.
 Histograms of the obtained waist (left) as well as trap depths (right) for the same $7\times7$ array are presented in \cref{fig:Histograms}.
-We fitted the data in the histograms to a normal distribution, yielding a waist of $w_0 = (0.89 \pm 0.03)$ $\mu$m, where the error denotes the standard deviation.
+We fitted the data in the histograms to a normal distribution, yielding a waist of $w_0 = (0.89 \pm 0.03)$ $\mu$m, where the error denotes the standard deviation, and not the uncertainty in the calibration of the magnification. 
 
 \begin{figure}
     \centering

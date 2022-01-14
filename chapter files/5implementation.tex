@@ -1,5 +1,5 @@
 Now that the light potentials have been measured, we elaborate in this chapter how it was implemented in an real-world experiment on ultra-cold atoms, initially using Rb atoms.
-In order to do this, a new setup was constructed.
+While our group has experience on Rb magneto-optical traps, because of the use of a glass cell and microscope objectives, we built a novel apparatus. 
 The construction of the vacuum and atom source part can be found in \cref{sec:VacuumAtom}.
 The laser system is explained in \cref{sec:LaserSystem}.
 Images of the MOT are displayed in \cref{sec:MOTresult}.
@@ -9,7 +9,19 @@ We finish up with how overlap this MOT with our tweezer array (\cref{sec:Tweezer
 
 The vacuum and atom source of the setup was designed with compactness in mind. 
 The core of the experiment is the glass cell (30 mm outer and 4.0 mm wall thickness, optically contacted)\footnote{The glass cell was provided to us by our collaborators from the University of Amsterdam.}.
-The glass cell can be seen in a CAD drawing and in real life in \cref{fig:VacuumSetup,fig:Chamber}.
+
+The microscope objectives are place in the vertical direction.
+The coils producing the magnetic field gradient should also be placed near the cell. 
+To still have room for all 6 MOT beams, we use a design similar to the \textit{Endres} group.
+The idea is that two MOT beams and their retro-reflection pass the cell under a 60 degree angle, leaving room for the microscope objectives. 
+The last MOT beam is sent through the hole of the anti-Helmholtz magnetic field coils.
+To allow for placement of optics in the vertical direction, a vertical was used. 
+In \cref{fig:VacuumSetup} the vertical breadboard is shown along with the vertical MOT beams and the magnetic field coils. 
+Also the bottom objective is shown. 
+The center of the glass cell is positioned 110 mm away from the vertical breadboard and 300 mm from the optical table. 
+The housing for the magnetic field coils was designed by Deon Janse van Renseburg and Rick van Herk and is shown in \cref{fig:Coils} in \cref{subsec:Overlap}.
+
+A real life picture of the glass cell is shown in \cref{fig:Chamber}.
 It is pumped down to the ultra-high vacuum regime, which is need to minimize collisions with the background gas and improve the lifetime of the atoms in the tweezers.
 To pump the cell down, the glass cell is connected to a vacuum chamber (\cref{fig:VacuumSetup}, left).
 To allow for more room around the glass cell, in between the vacuum vessel and the glass cell an extension tube is added.
@@ -17,20 +29,16 @@ We attach a turbomolecular pump to the chamber using a valve (not shown in the f
 This pressure was measured using a pressure Gauge (\cref{fig:Chamber}).
 To reach a better vacuum, the system was baked for a duration of two weeks at 130${}^{\circ}$C by Rik van Herk \cite{Herk2022}.
 
-As atom source, a triplet of Rb dispensers\footnote{SAES Getters Alkali Metal Dispensers.} is used.
+As atom source, a Rb dispensers\footnote{SAES Getters Alkali Metal Dispensers.} is used.
+Only one dispenser is connected at a time, but we installed a triplet for redundancy.
 The amount of Rb released can be controlled by the current running through the dispensers.
 We typically run the dispensers at $\sim$ 5A.
 The dispensers are mounted to the vacuum chamber using a CF40 adapter made by Eddy Rietman.
 We first ran the dispensers for 30 minutes while leaving the turbo pump on to get rid of the oxidation layer on the dispenser.
 This lead to a brief but significant increase in pressure, while we say no atomic fluorescence from Rb in the chamber.  
-
 Next, we activate the non-evaporative getter\footnote{NEXTorr Z 100 NEG - ion combination pump.} by heating it to 500${}^{\circ}$C while pumping away its out gassing using the turbo pump. Finally, after closing the turbo valve and turning on the ion pump we reached a pressure of $\sim 2\times 10^{-10}$ mbar, as measured using the ion pump (the pressure gauge is not designed for pressures this low).
 When turning on the dispensers, the pressure briefly spikes to the $10^{-9}$ region but quickly returns back to the $10^{-10}$ regime.
-
 One note: if this Rb machine is to be used for a longer time in the future, it would probably be wise to add a valve between the dispensers and the vacuum vessel, which allows for replacement of the dispensers without venting the entire chamber. 
-
-
-
 
 
 \begin{figure}
@@ -57,7 +65,7 @@ One note: if this Rb machine is to be used for a longer time in the future, it w
 
 For the laser system we recycled a significant part of the previous setup \cite{Reijnders2010}.
 The atomic species we selected is Rb-85 because it is the most abundant isotope. 
-a Rb-85 MOT requires two lasers: one to cool and trap the atoms and one to recycle back atoms that end up in the wrong ground state (\cref{sec:PracticeRb}.
+a Rb-85 MOT requires two lasers: one to cool and trap the atoms and one to recycle back atoms that end up in the wrong ground state (\cref{sec:PracticeRb}.)
 
 \subsection{Cooling/Trapping}
 
@@ -65,23 +73,33 @@ For the laser cooling and trapping beams we used the Toptica DLX110.
 This laser should be able to produce $\sim 1$ W of power, but in current condition we typically output $\sim 500$ mW, which is already plenty of power for what we need. 
 The repump light is produced by applying sidebands of fixed frequency spacing on the main trapping laser, more on this later.
 
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{figures/RbLaserSetup.pdf}
+    \caption{Laser system for the trapping and repump laser system for \textsuperscript{85}Rb.
+    This system was built by \cite{Reijnders2010}.
+    A section of laser light is split off to the modulation transfer spectroscopy (bottom left), after first double passing the lock \ac{AOM} (right). 
+    Top: set of AOMs for the MOT and probe light.
+    }
+    \label{fig:RbLaserSetup}
+\end{figure}
+
 The laser is shown in \cref{fig:RbLaserSetup}.
 After passing an optical isolator, a fraction of laser power is split off to the modulation transfer spectroscopy section after being offset-locked using the lock \ac{AOM} (right) set to $2\pi \times  84.5$ MHz\footnote{From now on, all frequencies are assumed to be angular and we omit the $2\pi$ term.}
 Modulation transfer spectroscopy is described elsewhere \cite{McCarron2008,Reijnders2010}, but very briefly: the working principle is that by scanning the probe pulse using the \ac{EOM}, the absorption peak of $D_2$ is found using the Rb cell, which the laser is locked to.  
 Contrary, the MOT AOM (top) is set to 80 MHz, which is $2 \times (80 - 84.5) = -9$ MHz from the resonance frequency, which is roughly equivalent to a detuning of $\delta = -1.5 \gamma$.
-After passing through the AOMs, the lasers are directed further to the glass cell. 
-This is shown in 
+We typically use about $80$ mW of power for the MOT beams as measured after the \ac{AOM} in \cref{fig:RbLaserSetup}.
+We have another AOM, which we use to make probe light, the light to induce fluorescence of the atoms when they are trapped in the optical tweezers.
+The probe light is better described in \cref{sec:TweezerImaging}.
 
-\begin{figure}
+\begin{figure}[t]
     \centering
-    \includegraphics[width=\linewidth]{figures/RbLaserSetup.pdf}
-    \caption{Laser system for the trapping and repump laser system for \textsuperscript{85}Rb.
-    The bulk was built by \cite{Reijnders2010}.
-    A section of laser light is split off to the modulation transfer spectroscopy (bottom left), after first double passing the lock \ac{AOM} (right). 
-    Top: set of AOMs for the MOT and probe light.
-    All beam splitter cubes shown are polarizing.
+    \includegraphics[width=0.9\textwidth]{figures/MOTupview.pdf}
+    \caption{The laser for the MOT beams and probe beam are split to a vertical beam section (see \cref{fig:GlassCellSide}) as well as one horizontal beam, which travels through the anti-Helmholtz coil as shown here. 
+    Both beams are expanded using a beam expander.
+    This horizontal beam also contains the repump light using the \ac{EOM}.
     }
-    \label{fig:RbLaserSetup}
+    \label{fig:GlassCellTop}
 \end{figure}
 
 \subsection{Repump}
@@ -97,11 +115,38 @@ If the laser beam is described by amplitude $A$ and frequency 'carrier' frequenc
 \end{equation}
 where we assumed $\epsilon < 0$. In this case ($\epsilon <0$), most of the power is still contained in the carrier frequency component $\omega_c$, but a small fraction of power is contained in two first-order sidebands at $\omega_c \pm \Omega$.
 We can use one of the sidebands as our repump laser. 
-The other sideband is unused. 
-Now turning our attention to how this was implemented.
+The other side-band is unused. 
+
+As for the experimental details.
 The EOM\footnote{7Qubig EO-Rb85-3K} was fed a $\Omega = 2915$ MHz signal provided by a harmonic synthesizer RF\footnote{DS instruments SG6000PRO} providing a signal of $-6.9$dbm.
 This signal was amplified by a 45 dB amplifier\footnote{Minicircuits ZHL-16W-43+} which should provide some $\sim 10$\% of power in the first sidebands \cite{Rens2014}, which should be a sufficient amount of power for a repump laser. 
 We did not measure the exact fraction of power in the sidebands because we do not have a sufficiently high-finesse wavemeter available, but the current parameters seemed to work satisfactory. 
+
+\subsection{Distribution the Beams}
+
+After passing through the AOMs, the MOT and probe light beams are directed further to the glass cell. 
+This is shown in \cref{fig:GlassCellTop}.
+Both beams are combined in a polarizing beam splitter cube, which also serves to split the MOT beams: one branch going to the horizontal section as shown in \cref{fig:GlassCellTop} as well as a beam that serves as the angled vertical MOT beams, as shown in \cref{fig:GlassCellSide}. 
+Both beam paths are expanded to increase the overlap volume of the resulting MOT beams.
+This was done using Galilean beam expanders. 
+The lenses used for the horizontal beam are $f=-75$ mm and $f=400$ mm, which for a $\sim 0.9$ mm initial beam comes down to $\sim 0.9 \times 400/75 \sim 4.8$ mm.
+The beam expander for the horizontal beam expands the $\sim0.9$ mm beam waist a factor of $400/75$ to $\sim5.5$ mm.
+The angles beams are slightly bigger: because they are angled they need to be to still have a sufficiently big overlap volume. 
+This beam size is $0.9 \times 300/50 \sim 5.4$ mm. 
+
+The half wave plates in front of the cube are set to only have probe light in the horizontal beam, while about 2/3 of the power for the MOT beams will travel to the vertical section. 
+The repump light is only present in the horizontal beam: as a result of hitting the glass cell perpendicularly this beam has only a few per cent reflection losses, contrary to the vertical MOT beams. 
+Because we only need repump light in one of the beams, it thus makes sense to do in this horizontal beam. 
+The horizontal beam travels through the anti-Helmholtz coils as shown in \cref{fig:GlassCellTop}.
+The mirror and $\lambdaup/4$ plate for retro-reflection are mounted directly on the vertical breadboard. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.65\textwidth]{figures/MOTsideview.pdf}
+    \caption{Side view on the glass cell, showing vertical MOT beams under a 60 degree angle, as well as the bottom microscope objective. 
+    The top and side view MOT cameras are shown as well.}
+    \label{fig:GlassCellSide}
+\end{figure}
 
 
 \section{Characterizing the MOT}\label{sec:MOTresult}
@@ -112,6 +157,29 @@ The first camera is positioned above the MOT and is also brought in focus with t
 The MOT is imaged onto this camera using a $f=50$ mm lens positioned 110 mm from the MOT and 91 mm from the CCD for a magnification of $\sim 0.83$.
 The horizontal camera has a larger field of view, which makes it easier to initially find the MOT. 
 This camera has a magnification of $0.5$ and has a $f=100$ mm lens. 
+Having camera images from two perpendicular axes allows for spatial overlapping in three dimensional space, more about this in \cref{subsec:Overlap}.
+
+A picture showing the laser-induced fluorescence from the MOT is shown in \cref{fig:LiF}.
+A Lorentzian fit of the spatial profile in $x$ and $y$-directions is shown in \cref{fig:TopFit}.
+When moving the MOT with the compensation coils, we see the MOT seem to change shape. 
+Probably, this is due to the compensation coils not being perfectly Helmholtz (their spacing is unequal to their radius). 
+As a result, the Helmholtz pair that makes a field in the $y$-direction could also have $x$ and $z$ components, for example. We think that for us this is not really a problem, however.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/MOTfluoresenceTop.pdf}
+    \caption{A picture of laser-induced fluorescence from the magneto-optical trap as imaged onto the top camera. 
+    The colors denote the relative intensity. }
+    \label{fig:LiF}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/FitTop.pdf}
+    \caption{Lorentzian fits of the spatial profile of the magneto-optical trap. 
+    The FWHM in $x$ and $y$ are $\sim 0.16$ mm and $\sim 0.15$ mm respectively. }
+    \label{fig:TopFit}
+\end{figure}
    
 We estimate the number of captured atoms in the MOT by counting the number of counts on our side camera, subtracting background counts by turning off the field by summing over all pixels in a region of interest around the MOT $\sum_j p_j$.
 We keep in mind the exposure time $\tau_s$, which varied but was typically $10$ ms, camera gain $G = 1$ and sensitivity $C$.
@@ -123,29 +191,39 @@ The camera sensitivity constant $C$ for this particular camera was determined to
      \sum_j \frac{p_j}{\tau_s G C}.
  \end{equation}
 In \cref{eq:AtomNumber} $\gamma = 2\pi \cdot 6.0 \cdot 10^6$ is the aforementioned linewidth of the D2 transition of Rb-85, $\beta \sim 0.6$ is a parameter taking into account photon loss of the glass cell and band-pass filter, $l = 20$ cm is the distance from the MOT to the collection lens and $R = 25$ mm is its radius. 
+An additional factor of 2 comes in to account for the atoms occupying the excited state half of the time on average. 
 We typically find a an atom number $\sim 10^5$.
-This is a relatively small number of atoms, but still orders of magnitude more than we need for loading them in arrays of optical tweezers. 
+This is a relatively small number of atoms for a Rb magneto-optical trap, but still orders of magnitude more than we need for loading them in arrays of optical tweezers. 
 A possible explanation for the rather small number of atoms is that the unbalance in the various MOT beams: as a result of the rather large angle the vertical MOT beams make with the glass cell to make room for the microscope objective(s), there is significant loss of power in the retro-reflected beam, which has to pass the glass cell twice. 
 In a next iteration of this Rb machine or a Sr equivalent, it would be useful to have 6 independent laser beams instead of 3 retro-reflected ones, though this comes at a cost of requiring more power. 
 But the quantity that is of more relevance for optical tweezers is the MOT temperature, which was measured by Rik van Herk to be $200$ $\mu$K \cite{Herk2022}, which is slightly above the Doppler temperature. 
  
- 
-
 
 \section{Tweezer Arrays}\label{sec:Tweezers}
+
+The next step in the optical setup is the optical tweezer array. 
+The optical setup used for the optical tweezer array was already introduced in \cref{fig:TiSandSLMsetup,fig:SLMbeampath}b.
+The implementation of this setup in the machine was already shown in \cref{fig:GlassCellTop}.
+Using two sets of relay-mirrors, the beam from the \ac{SLM} is steered to the mirror sending the beam in vertical direction to the microscope objective (see \cref{fig:GlassCellSide}. 
+In reality, from the top view in\cref{fig:GlassCellTop} the horizontal MOT beam and tweezer beam overlap which each other, therefore the tweezer beam is shown under a slight angle here.
+A polarizing beam splitter cube is added which can be used to add additional laser beams to send into the objective, e.g. Rydberg lasers or laser beams for re-arrangement of the optical tweezer array. 
+At the moment, this cube is unused, but we added it because it will change the optical path length of the SLM-objective path.
+
+The microscope objective is again positioned on a 
+
 
 \begin{figure}
     \centering
     \includegraphics[width=0.5\textwidth]{figures/Coils.jpg}
-    \caption{Housing for the magnetic field coils, as well as a microscope on a 5-axis stage on bottom and top. 
-    For placement on arbitrary locations on the breadboard, the stages are not directly fixed in the table but in a set of base plates. 
-    The microscope objective is mounted on the stage using a custom holder.}
+    \caption{Housing for the magnetic field coils. The glass cell is moved into the coils. 
+    The hole on the right is for the horizontal MOT beam, while th angled beams travel into the section with the large holes. The microscope objectives are positioned on 5-axis piezo controlled picomotor stages using a custom aluminium mount.}
     \label{fig:Coils}
 \end{figure}
 
 
 
-\subsection{Overlapping the MOT with the tweezer}
+
+\subsection{Overlapping the MOT with the tweezer}\label{subsec:Overlap}
 
 \begin{itemize}
     \item Top camera: get focus more or less right with 50 mm lens, as well as align tweezer
@@ -156,18 +234,8 @@ But the quantity that is of more relevance for optical tweezers is the MOT tempe
 
 The collection angle $\eta$ is $2\pi(1-cos{\alpha})/4\pi$ where $\alpha$ is the maximum angle from the optical axis of the imaging system. $\alpha=\arcsin{0.5}$ the collection angle is $\eta = 0.067$
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{figures/MOTsideview.pdf}
-    \caption{Caption}
-    \label{fig:my_label}
-\end{figure}
+Laser induced fluorescence from the same microscope objective can be separated from the laser using a dichroic mirror\footnote{Thorlabs DMLP805, 1 inch, 45${}^{0}$ operating angle}.
+This dichroic mirror has a 805 cut-off, which is why 820 nm was chosen for the dipole traps. 
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.6\textwidth]{figures/MOTupview.pdf}
-    \caption{Caption}
-    \label{fig:my_label}
-\end{figure}
 
 
