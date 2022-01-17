@@ -8,7 +8,7 @@ If this would be possible, we can simulate new molecules and chemical reaction m
 
 \subsection{Superposition}\label{sub:Superposition}
 
-The first reason why quantum computation is fundamentally different its classical equivalent is superposition.
+The first reason why quantum computation is fundamentally different from its classical equivalent is superposition.
 Consider a single two-level quantum system, quantum bit or 'qubit' represented by the normalized wave function $\ket{\psi}$, for example, the spin of an electron, which we can define as a basis with basis states $\ket{0}$ (spin-up) and $\ket{1}$ (spin-down). 
 According to quantum mechanics, this qubit can be in a superposition state \cite{Griffiths2004}:
 
@@ -48,7 +48,7 @@ Quantum physics teaches us this system can be in a superposition of all its basi
 	\ket{\psi_{2q}} = 
 	\alpha_{00} \ket{00} + \alpha_{01} \ket{01} + \alpha_{10} \ket{10} + \alpha_{11} \ket{11}.
 \end{equation}
-Where $\ket{00}$ is a shorthand notation for both qubits being in the spin-up state, etc.
+Here, $\ket{00}$ is a shorthand notation for both qubits being in the spin-up state, etc.
 In general, the size of the Hilbert space will grow as $2^N$ for $N$ qubits \cite{Nielsen2011,Henriet2020}. 
 For $N=300$, this is already larger than the estimated amount of particles in the observable universe at some $\sim 10^{80}$. 
 Clearly, the number of possible states a realistic atom or molecule can occupy is too large to keep track of for a classical computer.
@@ -82,7 +82,7 @@ Essentially, VQE tries to find approximately the ground state energy of an atom 
 \end{equation}
 Basically, to solve this problem we need to find the lowest eigenvalue of the (large) matrix $\mathcal{H}$. 
 Even for relatively simple molecules, $\mathcal{H}$ quickly becomes large and the task of diagonalizing it intractable, at least for a classical computer.
-In \ac{VQE}, $\mathcal{H}$ is not directly diagonalized but the Hamiltonian is prepared in a quantum co-processor or \ac{QPU} \cite{Henriet2020,Peruzzo2014}, taking advantage of the large Hilbert state of the quantum hardware.
+In \ac{VQE}, $\mathcal{H}$ is not directly diagonalized but the Hamiltonian is prepared in a quantum co-processor or \ac{QPU} \cite{Henriet2020,Peruzzo2014}, taking advantage of the large Hilbert space of the quantum hardware.
 Given an ansatz $\theta$, a trial state $\ket{\Psi(\theta)}$ is prepared.
 The Hamiltonian is written in the form of a sum of Pauli strings: $P_{\alpha}$ with weights $h_{\alpha}$ \cite{McClean2016,Moll2018}
 
@@ -97,7 +97,7 @@ A Pauli string is a tensor product of Pauli spin matrices $\sigma_j^{\alpha} \in
 	\bigotimes_{j=1}^N \sigma_j^{\alpha_j}.
 \end{equation}
 We will not delve further in theoretical details. 
-But what it boils down to is that because of this decomposition, estimating the various terms of the Hamiltonian $\bra{\Psi} P_{\alpha} \ket{\Psi}$ boils down to measuring populations of individual qubits.
+But what it boils down to is that because of this decomposition, estimating the various terms of the Hamiltonian $\bra{\Psi} P_{\alpha} \ket{\Psi}$ corresponds to measuring populations of individual qubits.
 The total expectation value of the Hamiltonian is obtained by summing over contributions of the Pauli strings.
 This is done on classical hardware.
 Subsequently, a non-linear optimizer is run to minimize the energy using a new trial state, which is fed back into the \ac{QPU}.
@@ -147,7 +147,7 @@ Additionally, the technique is thought to easily scale to a higher number of qub
 
 \section{This Thesis}
 
-In a collaboration with the \textit{Schreck} group, we aim to realize a \ac{QPU} based on neutral atoms, which was recently shown to achieve high-fidelity quantum gates and measurements \cite{Madjarov2020}. 
+In a collaboration with the \textit{Schreck} group at the University of Amsterdam, we aim to realize a \ac{QPU} based on neutral atoms, which was recently shown to achieve high-fidelity quantum gates and measurements \cite{Madjarov2020}. 
 The purpose of this thesis is to give an update of the first steps carried out in our group towards this goal.
 Therefore, this work is mostly about the first two steps in \cref{fig:ComputingSteps}: specifically on how to cool the atoms to ultracold temperatures and how to load them in an array of optical traps known as optical tweezers.
 As an atom source, we initially used \ac{Rb}, but plan to move to \ac{Sr} because the energy level structure of Sr is suitable to use as a qubit. 

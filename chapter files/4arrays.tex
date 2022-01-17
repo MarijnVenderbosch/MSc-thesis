@@ -387,7 +387,7 @@ In terms of the ABCD matrix formalism, the transfer matrix $\mathbf{M}$ for the 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.9\textwidth]{figures/beampathSLM.pdf}
-	\caption{\textsf{\textbf{a)}}: Keplerian telescope with total length $2f_1+2f_2$. \textsf{\textbf{b)}} Using the SLM as a lens, the total beam path has length $x+y$. In the latter case, $y>f_2$.}
+	\caption{\textsf{\textbf{a)}}: Keplerian telescope with total length $2f_1+2f_2$. \textsf{\textbf{b)}} Using the SLM as a lens, the total beam path has length $x+y$. In the latter case, $y>f_r$.}
 	\label{fig:SLMbeampath}
 \end{figure}
 
@@ -565,17 +565,27 @@ We fitted the data in the histograms to a normal distribution, yielding a waist 
     \label{fig:SpotsRoI}
 \end{figure}
 
-
-
 \begin{figure}
-    \centering
-    \includegraphics[width=0.85\textwidth]{figures/FittedHistograms.pdf}
-    \caption{\textsf{\textbf{a)}} Distribution of the $1/e^2$ radius as measured from the spot array in \cref{fig:CameraLoG}a.
-   \textsf{\textbf{b)}} Spread in the fitted depth of the potential $U_0$, normalized by the average trap depth $\left\langle U_0 \right\rangle$.
+	\begin{subfigure}{.49\linewidth}
+		\centering
+		\includegraphics[height=5.8cm]{figures/WaistHistogram.pdf}
+		\caption{}
+		\label{fig:WaistHistogram}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{.49\linewidth}
+		\centering
+		\includegraphics[height=5.8cm]{figures/DepthHistogram.pdf}
+		\caption{}
+		\label{fig:DepthHistogram}
+	\end{subfigure}
+	\caption{
+	\textsf{\textbf{a)}} Distribution of the $1/e^2$ radius as measured from the spot array in \cref{fig:CameraLoG}a.
+   \textsf{\textbf{b)}} Spread in the fitted depth of the potential $U_0$, normalized by the     average trap depth $\left\langle U_0 \right\rangle$.
     Both are fit to a normal distribution.
     }
-    \label{fig:Histograms}
 \end{figure}
+
 
 \subsubsection*{Homogeneity}
 

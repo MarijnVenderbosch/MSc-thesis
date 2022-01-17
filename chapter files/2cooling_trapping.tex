@@ -1,7 +1,7 @@
 In assembly, computation, and readout of ultracold atoms, laser cooling and trapping techniques play a key role. 
 We will give an overview of some techniques, distinguishing the case of a laser close to resonance in \cref{sec:MOT} as well as a laser detuned far away from atomic resonance in \cref{sec:ODT}.
-Hopefully, it will become clear that the two cases lead to different behavior as well as applications.
-\Cref{sec:PracticeRb} discusses laser cooling on a more practical level for Rb, the element that we mainly used on for this work. 
+We will try to convince the reader that the two cases lead to different behavior as well as applications.
+\Cref{sec:PracticeRb} discusses laser cooling on a more practical level for Rb, the element that we mainly used for this work. 
 Finally \cref{sec:Sr}, is on the aspects coming into play for Sr specifically, the element we want to use as a qubit.
 
 
@@ -73,7 +73,7 @@ Doing a series expansion to first order around $v = 0$, it can be shown the forc
 	Atomic frequency is detuned from the atomic transition by $\delta<0$.
 	Because of the linear magnetic field, for $z>0$, the $m_j=-1$ atoms become resonant with only $\sigma^+$ light because of selection rules, and vice versa.}
 \end{figure}
-Where $-\beta$ is the slope of the scattering force around $v=0$. 
+Here, $-\beta$ is the slope of the scattering force around $v=0$. 
 For $\delta<0$ the resulting force has a damping effect on the velocity, which if applied in all 3 dimensions can cool atoms to ultracold temperatures. 
 Because of the Taylor expansion, \cref{eq:ForceLinearized} is only valid for small velocities $|kv| \ll \gamma$ \cite{Kowalski2010}.
 
@@ -86,7 +86,7 @@ For $\delta=-\gamma/2$ and $s_0 =2$, \cref{eq:ForceLinearized} ($\beta$) is at a
 	T_D = \frac{\hbar}{2k_b} \gamma.
 \end{equation}
 where $k_b$ is Boltzmann's constant. Apparently, this cooling limit is only dependent on the linewidth of the transition $\gamma$, apart from physical constants. 
-For the D$_2$ line of Rb-85 the Doppler temperature is $146$ $\mu$K, whereas for Sr this is about an order of magnitude lower for the red transition.
+For the D$_2$ line of Rb-85 the Doppler temperature is $146$ $\mu$K.
 
 \subsection{Magneto-Optical Trapping}
 
@@ -96,15 +96,16 @@ We can use the Zeeman effect for this, which tells us the atomic energy levels w
 \begin{equation}\label{eq:Zeeman}
 	\Delta E = \mu_{\emph{B}} g_J m_j B,
 \end{equation}
-where $\mu_{\emph{B}}$ Bohr magneton, $g_J$ the Landé g-factor, $m_j$ is the magnetic quantum number and $B$ the applied magnetic field. 
+where $\mu_{\emph{B}}$ is the Bohr magneton, $g_J$ the Landé g-factor, $m_j$ is the magnetic quantum number and $B$ the applied magnetic field. 
 The magnetic field is tuned in such a way that it is linear in all 3 dimensions and zero magnitude at the center of the \ac{MOT}.
-Because of the Zeeman splitting, the chance of the atom transition being resonant with the laser varies with the position from the origin and the detuning as \cite{Kowalski2010}
+Because of the Zeeman splitting, the chance of the atomic transition being resonant with the the detuning of the laser varies with the position from the origin and the detuning as \cite{Kowalski2010}
 
 \begin{equation}\label{eq:DetuningFull}
 	\delta' = \delta + k v + \frac{\mu'B}{\hbar}
 \end{equation}
 Where $\mu' = (g_e m_e-g_g m_g)\mu_B$ is the effective magnetic moment for the transition \cite{Kowalski2010}. 
-To ensure that atoms only absorb momentum kicks opposite to their direction of travel, the laser beams are circularly polarized: $\sigma^+$ from the left and $\sigma^-$ from the right. Because the sign of the Zeeman shift is dependent on the magnetic quantum number $m_j$, selection rules prescribe that atoms displaced by $z>0$ are only resonant with $\sigma^-$-light and vice versa.
+To ensure that atoms only absorb momentum kicks opposite to their displacement from the center of the trap, the laser beams are circularly polarized: $\sigma^+$ from the left and $\sigma^-$ from the right. 
+Because the sign of the Zeeman shift is dependent on the magnetic quantum number $m_j$, selection rules prescribe that atoms displaced by $z>0$ are only resonant with $\sigma^-$-light and vice versa.
 This is sketched in \cref{fig:MOTPlots}. Inserting \cref{eq:DetuningFull} in \cref{eq:OpticalMolasses} yields
 
 \begin{equation}\label{eq:MOTfull}
@@ -120,7 +121,8 @@ Expanding \cref{eq:MOTfull} around $(v,z) = (0,0)$, keeping only first order ter
 \end{equation}
 Where $\beta$ is the same we found in \cref{eq:ForceLinearized} and $\kappa \equiv \mu' \beta /\hbar k \cdot \partial B/\partial z$. 
 Apart from the dampening force, we now also have a restoring force. 
-When applied in 3 dimensions this can be used to make clouds of ultracold atoms. The behavior of \cref{eq:ForceMOT} is shown in \cref{fig:SpatialDependencePlots}.
+When applied in 3 dimensions this can be used to make clouds of ultracold atoms.
+The behavior of \cref{eq:ForceMOT} is shown in \cref{fig:SpatialDependencePlots}.
 
 \begin{figure}
     \centering
@@ -142,7 +144,7 @@ This field will induce a dipole moment $\mathbf{p}$ in the atom according to
 \begin{equation}\label{eq:DipoleMoment}
 	\mathbf{p} = \alpha \mathbf{E}.
 \end{equation}
-Herein $\mathbf{p}$, $\alpha$ and $\mathbf{E}$ are all defined as complex variables. Consequently, the dipole potential will interact with the electric field leading to and an interaction dipole potential $U_{\text{dip}}$ as a function of the position vector $\mathbf{r}$ \cite{Grimm2000}:
+Herein $\mathbf{p}$, $\alpha$ and $\mathbf{E}$ are all defined as complex variables. Consequently, the dipole moment will interact with the electric field leading to and an interaction dipole potential $U_{\text{dip}}$ as a function of the position vector $\mathbf{r}$ \cite{Grimm2000}:
 
 \begin{equation}\label{eq:DipolePotential}
 	U_{\text{dip}}(\mathbf{r}) = 
@@ -152,11 +154,13 @@ Herein $\mathbf{p}$, $\alpha$ and $\mathbf{E}$ are all defined as complex variab
 where the $\left\langle\right\rangle$ brackets denote the time average.
 We average over this rapidly varying phase term, yielding a factor $1/2$ \cite{Grimm2000}.
 Furthermore we used $I(\mathbf{r}) = \epsilon_0 c |\mathbf{E}(\mathbf{r})|^2/2$ where $\epsilon_0$ is the electric constant. 
-The dipole force thus scales with the part of the polarizability that is in phase with the light field.
+The dipole potential thus scales with the part of the polarizability that is in phase with the light field.
 The gradient of \cref{eq:DipolePotential} gives rise to the dipole force:
 
 \begin{equation}\label{eq:DipoleForce}
-	\mathbf{F}_{\text{dip}}(\mathbf{r}) = - \frac{\operatorname{Re}(\alpha)}{2\epsilon_0c}\nabla I(\mathbf{r})
+	\mathbf{F}_{\text{dip}}(\mathbf{r}) 
+	= - \nabla U_{\text{dip}}
+	= - \frac{\operatorname{Re}(\alpha)}{2\epsilon_0c}\nabla I(\mathbf{r})
 \end{equation}
 The dipole force can be used to coherently trap our qubits. 
 To maximize the dipole force \cref{eq:DipoleForce}, 
@@ -167,7 +171,7 @@ Another quantity of interest is the scattering rate.
 The scattering rate from the ODT can be found by averaging over the product of the temporal derivative of the dipole moment with the electric field \cite{Grimm2000}
 
 \begin{equation}\label{eq:ScatteringRate}
-	\Gamma_{\text{sc}}(\mathbf{r}) = \frac{\left\langle \mathbf{p} \mathbf{E} \right\rangle}{\hbar \omega}
+	\Gamma_{\text{sc}}(\mathbf{r}) = \frac{\left\langle \mathbf{\dot{p}} \cdot \mathbf{E} \right\rangle}{\hbar \omega}
 	 = \frac{\operatorname{Im}(\alpha)}{\hbar \epsilon_0 c} I(\mathbf{r}).
 \end{equation}
 \Cref{eq:DipoleForce,eq:ScatteringRate} are expressions that are valid for arbitrary light fields $I(\mathbf{r})$ and polarizabilities $\alpha$.
@@ -206,7 +210,7 @@ We can write down the combined wave function in the basis of the unperturbed eig
 \begin{equation}\label{eq:TwoLevelMain}
 	\ket{\psi(t)} = c_g(t) e^{-i \omega_g t} \ket{g} + c_e(t) e^{-i \omega_e t} \ket{e}.
 \end{equation}
-In appendix \ref{ch:LightMatter} the Schrodinger equation is solved for the 2-level atom using the dipole approximation as well as the \acf*{RWA}. 
+In appendix \ref{ch:LightMatter} the Schrodinger equation is solved for the 2-level atom using the dipole approximation as well as the \ac{RWA}. 
 This leads to the following matrix equation for the situation of a 2-level atom of \cref{fig:2LevelAtom} \cite{Foot2005}
 
 \begin{equation}\label{eq:MatrixEvolution}
@@ -299,15 +303,15 @@ In \cref{ch:implementation} we elaborate more on how the MOT was realized experi
 \subsection{Magnetic Field}
 
 As is clear from \cref{fig:SpatialDependencePlots}, a magnetic field gradient is needed.
-To produce this gradient in 3 dimensions, typically an Anti-Holmholtz configuration is used. 
+To produce this gradient in 3 dimensions, typically an Anti-Helmholtz configuration is used. 
 This consists of two concentric coils with radius $R$, spaced a distance $R$ from each other. 
 The current that is run in the coils is opposite in direction, such that the magnetic fields cancel but their gradients are additive.
-Typically, a magnetic field gradient of $\partial B/\partial z \sim 10-15$ Gauss is used.
+Typically, a magnetic field gradient of $\partial B/\partial z \sim 10-15$ Gauss/cm is used.
 Because of $\nabla \cdot \mathbf{B}=0$, the field in the $x$ and $y$ directions is a factor 2 weaker. The experimental details are elaborated upon in \cref{ch:implementation}.
 
 \subsection{Optical Trap Depth}
 
-In reality, Rb is not two-level systems, but inhibits a more more complex level structure, e.g. hyperfine splitting.
+In reality, Rb is not a two-level system, but inhibits a more more complex level structure, e.g. hyperfine splitting.
 Because we are only interested in the ground state Stark shift, we will limit ourselves to excited states $\ket{e_j}$ coupled to the ground state $\ket{g}$, such that the ground state dipole potential is a sum of contributions from \cref{eq:Stark}:
 
 \begin{equation}\label{eq:MultiStark}
@@ -355,9 +359,20 @@ Though, in principle, one can use all isotopes in the same machine as the energy
 \subsection{Relevant Transitions}
 
 A simplified version of the level diagram of \textsuperscript{88}Sr is shown in \cref{fig:SrLevel}. 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.76\linewidth]{figures/SrLevelRydberg.pdf}
+	\caption{Simplified level scheme for \textsuperscript{88}Sr. 
+	Shown: blue transition for initial slowing and cooling.
+	Narrower 689 nm transition of the red \ac{MOT}, and the \textsuperscript{1}S\textsubscript{0} - \textsuperscript{3}P\textsubscript{0} clock transition, which we will be used to drive the qubits. 
+	To increase density and trap lifetime 3 repump lasers are used. 
+	Finally, a ultra-violet Rydberg laser is used.
+	Not shown: 813 nm dipole trapping laser because it is driven far-off-resonant from atomic transitions. Energies not to scale. Figure made by Ivo Knottnerus.}
+	\label{fig:SrLevel}
+\end{figure}
 The notation is $(n_1l_1 n_2l_2)^{2S+1}L_J$ where $n_{1,2}$ is the principal and $l_{1,2} = s, p, d, \ldots$ the azimuthal quantum number. 
 Furthermore $S$, $L$ and $J$ are the total spin, orbital angular momentum, and total angular momentum quantum numbers respectively \cite{Cowan1981}. 
-This level scheme shows 6 out of 7 lasers to be used in this experiment. 
+This level scheme shows 7 out of 8 lasers to be used in this experiment:
 
 \begin{itemize}
 	\item 461 nm. Broad transition, meaning a strong scattering force (\cref{eq:ScatteringFrequency} and high absorption-emission cycling frequency.
@@ -372,22 +387,13 @@ This level scheme shows 6 out of 7 lasers to be used in this experiment.
 	
 	\item 679, 688, and 707 nm. 
 	All repump lasers. 707 and 688 are used to cycle back atoms from ending up in ${}^3P_2$ from the decay channel shown by the grey dotted line in \cref{fig:SrLevel}. The 679 nm laser is used to prevent repump leaks to ${}^3P_0$ \cite{Stellmer2013,Xu2003}.
+	
+	\item Rydberg laser (exact Rydberg state to be used to be determined). More about Rydberg states in \cref{sec:Magic}.
+	
 \end{itemize}
-
 There will also be a 813 nm laser used for producing the optical dipole trap potentials.
 This is also the most powerful laser, as it determines the limit of qubits (optical tweezers) one can make. 
-One can find more about this laser in \cref{sec:Magic}.
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.6\linewidth]{figures/SrLevel.pdf}
-	\caption{Simplified level scheme for \textsuperscript{88}Sr. 
-	Shown: blue transition for initial slowing and cooling.
-	Narrower 689 nm transition of the red \ac{MOT}, and the \textsuperscript{1}S\textsubscript{0} - \textsuperscript{3}P\textsubscript{0} clock transition, which we will be used to drive the qubits. 
-	To increase density and trap lifetime 3 repump lasers are used. 
-	Not shown: 813 nm dipole trapping laser because it is driven far-off-resonant from atomic transitions. Energies not to scale. Figure made by Ivo Knottnerus.}
-	\label{fig:SrLevel}
-\end{figure}
+For this laser, also see \cref{sec:Magic}.
 
 \subsection{Laser Cooling and Trapping of Sr}
 
@@ -410,7 +416,7 @@ To allow for longer trap survival times, the glass cell has \ac{UHV} which is se
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.9\linewidth]{figures/SrLoading.pdf}
+	\includegraphics[width=0.92\linewidth]{figures/SrLoading.pdf}
 	\caption{Sketch of the vacuum atom source design and vacuum chambers. 
 	Starting from the oven, the atomic beam traverses a Zeeman slower, deflection stage, and differential pumping stage before ending in the glass cell (MOT, right). 
 	Figure by Patrick de Laat.}
