@@ -55,10 +55,10 @@ One note: if this Rb machine is to be used for a longer time in the future, it w
 		\caption{}
 		\label{fig:Chamber}
 	\end{subfigure}
-	\caption{\textbf{a)} CAD drawing of the vacuum vessel connected to the glass cell on the right. 
+	\caption{\textsf{\textbf{a)}} CAD drawing of the vacuum vessel connected to the glass cell on the right. 
 	Around the glass cell, 4 out of 6 MOT beams are shown along with the magnetic field coils and a single microscope objective on the bottom. 
 	CAD drawing by Eddy Rietman.
-	\textbf{b)} Picture of the vacuum components: top: ion/getter pump. Right: glass cell. Also connected to the chamber rom left to right: valve for turbo pump, triplet of Rb dispensers and pressure gauge.}
+    \textsf{\textbf{b)}} Picture of the vacuum components: top: ion/getter pump. Right: glass cell. Also connected to the chamber rom left to right: valve for turbo pump, triplet of Rb dispensers and pressure gauge.}
 \end{figure}
 
 \section{Laser System}\label{sec:LaserSystem}
@@ -130,9 +130,8 @@ Both beams are combined in a polarizing beam splitter cube, which also serves to
 Both beam paths are expanded to increase the overlap volume of the resulting MOT beams.
 This was done using Galilean beam expanders. 
 The lenses used for the horizontal beam are $f=-75$ mm and $f=400$ mm, which for a $\sim 0.9$ mm initial beam comes down to $\sim 0.9 \times 400/75 \sim 4.8$ mm.
-The beam expander for the horizontal beam expands the $\sim0.9$ mm beam waist a factor of $400/75$ to $\sim5.5$ mm.
+The beam expander for the horizontal beam expands the $\sim0.9$ mm beam waist a factor of $400/75$ to $\sim5.4$ mm.
 The angles beams are slightly bigger: because they are angled they need to be to still have a sufficiently big overlap volume. 
-This beam size is $0.9 \times 300/50 \sim 5.4$ mm. 
 
 The half wave plates in front of the cube are set to only have probe light in the horizontal beam, while about 2/3 of the power for the MOT beams will travel to the vertical section. 
 The repump light is only present in the horizontal beam: as a result of hitting the glass cell perpendicularly this beam has only a few per cent reflection losses, contrary to the vertical MOT beams. 
@@ -209,33 +208,107 @@ In reality, from the top view in\cref{fig:GlassCellTop} the horizontal MOT beam 
 A polarizing beam splitter cube is added which can be used to add additional laser beams to send into the objective, e.g. Rydberg lasers or laser beams for re-arrangement of the optical tweezer array. 
 At the moment, this cube is unused, but we added it because it will change the optical path length of the SLM-objective path.
 
-The microscope objective is again positioned on a 
-
+The microscope objective is again positioned on the same 5-axis piezo stage, using a custom aluminum holder.
+To allow for arbitrary positioning of the stage with respect to the glass cell, it is not mounted directly into the vertical breadboard but in a set of base-plates that in turn screw into the table.
+The holder is shown in \cref{fig:Coils}.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\textwidth]{figures/Coils.jpg}
+    \includegraphics[width=0.4\textwidth]{figures/Coils.jpg}
     \caption{Housing for the magnetic field coils. The glass cell is moved into the coils. 
     The hole on the right is for the horizontal MOT beam, while th angled beams travel into the section with the large holes. The microscope objectives are positioned on 5-axis piezo controlled picomotor stages using a custom aluminium mount.}
     \label{fig:Coils}
 \end{figure}
 
+\subsection{Overlap with MOT}\label{subsec:Overlap}
 
+To load the tweezers with ultra-cold atoms, it is to be overlapped with the magneto-optical trap.
+The most straightforward method is to move the MOT in 3D-space using additional bias coils.
+To this end, a magnetic field coil holder was designed by Deon Janse van Renseburg and Rik van Herk. 
+It is shown in \cref{fig:Coils} and features a set of Anti-Helmholtz field coils producing a quadrupole magnetic as well as a set of coils in the directions perpendicular to it.
+The coils perpendicular to the anti-Helmholtz coils are not exactly Helmholtz because of space limitations, more about this in the thesis of Rik van Herk \cite{Herk2022}.
+We found moving the MOT to work very nicely over a range of $\sim 1$ cm, which is more than plenty in overlapping with the \ac{ODT}.
+We did notice however, the MOT changing shape for larger bias fields. 
+Probably, the magnetic field gradient is not fully linear.
+This should pose no issue, however.
 
+To ensure we are overlapped with the ODT, we bring the \ac{Ti:S} laser producing the tweezer pattern to the resonance frequency of \ac{Rb}.
+This will make the tweezer visible on the top camera as it no longer blocked by the band-pass filter.
+On this top camera, we can overlap the \ac{MOT} in the horizontal direction, and move the MOT vertically until we are in focus. 
+Because the frequency is now resonant, and the scattering force becomes important, we can also verify we are destroying the MOT by off-balancing it, which we can see on the horizontal camera in \cref{fig:GlassCellSide}.
+Using this method: one camera for 2D overlap and one camera for the vertical overlap, we verify we are overlapped in 3D space. 
 
-\subsection{Overlapping the MOT with the tweezer}\label{subsec:Overlap}
+The power supply used to drive the coils\footnote{KORAD KC3405 programmable DC power supply} as well as the \ac{AOM}s are controlled by a custom Python control program written by Deon Janse van Renseburg, with a graphical user interface in \textit{PyQt}.
 
-\begin{itemize}
-    \item Top camera: get focus more or less right with 50 mm lens, as well as align tweezer
-    \item Scan tweezer over resonance, try to see off balance of MOT from side camera. 
-\end{itemize}
 
 \section{Imaging Tweezer Arrays}\label{sec:TweezerImaging}
 
-The collection angle $\eta$ is $2\pi(1-cos{\alpha})/4\pi$ where $\alpha$ is the maximum angle from the optical axis of the imaging system. $\alpha=\arcsin{0.5}$ the collection angle is $\eta = 0.067$
+As discussed in \cref{sec:ArraysResults}, we have two methods of seeing our tweezers.
+Both methods should be possible with our current setup and we plan to use them both, combining the best of both worlds.
+Contrary to the method in \cref{ch:tweezer}, information will be lost because the imaging resolution will be similar to the resolution limit of the tweezers. 
 
-Laser induced fluorescence from the same microscope objective can be separated from the laser using a dichroic mirror\footnote{Thorlabs DMLP805, 1 inch, 45${}^{0}$ operating angle}.
-This dichroic mirror has a 805 cut-off, which is why 820 nm was chosen for the dipole traps. 
+\subsection{Direct Imaging}
+
+This is similar to the method in \cref{ch:tweezer}. 
+But, because the glass cell has a outer thickness of 30 mm, we need an additional ultra-long working distance glass-thickness compensated objective.
+The microscope objective has a working distance when imaging through 3.5 mm N-BK7 glass of 15.08 mm, but we know that the glass cell has 4 mm thick quartz glass.
+As a result, the paraxial rays focus a distance $d(1-1/n)$ further, where $d$ is the excess thickness and $n$ the refractive index of NBK-7.
+Marginal rays focus further, but are corrected for using the spherical aberration pattern. 
+Thus, we estimate the working distance in conjunction with this glass is $15.18$ mm. 
+Thus, it should be possible to get a second objective in focus, but this requires positioning the objective less than $0.2$ mm close to the glass cell.
+The tweezer beam coming out of the second objective can be focused onto a linear CCD camera. 
+The direct tweezer image can be used to verify the array remains aberration-free during the experiment. 
+Additionally, it can be used to dynamically adapt the weight factors in the \ac{GSW} algorithm. 
+
+\subsection{Fluorescence Imaging}
+
+For actual useful cold-atom experiments, we want to see if we have actual atoms in the tweezer. 
+The way to do this is to use atomic fluorescence.
+If the atom in the tweezer sees near-resonant light, it can scatter light releases atomic fluorescence. 
+Because this fluorescence is typically fairly weak, we should maximize the amount of scattered photons that we can actually collect. 
+The fraction $\eta$ of fluorescence that can be captured by our imaging system is 
+
+\begin{equation}\label{eq:Collection}
+    \eta = \frac{\Omega}{4\pi} = 
+    \frac{1}{2}\left(1-\sqrt{1-\frac{\text{NA}^2}{n^2}}\right)
+\end{equation}
+For $\textsf{NA}=0.5$ and $n=1$, this collection fraction is $\eta =6.7$\%. 
+Because the amount of photons that can be collected from an atom in a tweezer is limited, it is important to maximize \cref{eq:Collection}.
+We collect the laser-induced fluorescence using the same microscope objective as used for producing the tweezer, separating it from the tweezer beam using a \ac{DM} \footnote{Thorlabs DMLP805, 1 inch}.
+This is shown in \cref{fig:GlassCellTop}.
+This dichroic mirror has a 805 cut-off, which is why 820 nm was chosen for the dipole traps.
+
+The fluorescence is steered onto a Andor Zyla 5.5 sCMOS camera chip.
+The pixel size is 6.5 $\mu$m, or 13 $\mu$m using $2\times2$ binning, 
+It is focused onto the chip using a $f= 55$ mm lens\footnote{Nkon Micro-NIKKOR 55 mm f/2.8}.
+Using \cref{eq:InfinityMagnification} this comes down to a magnification factor of $13.75$.
+Assuming our spots are $0.8$ $\mu$m in $1/e^2$ radius, which is in terms of the \ac{FWHM} of roughly 1 $\mu$m. 
+Thus, the spots are imaged onto one $2\times2$ binned chip when aligned with the center of the spot.
+By trying to map the tweezer spots one to one on the camera, the signal to noise ratio is maximized. 
+Because the quantum-efficiency and readout noise of this camera is sub-optimal for single-atom detection, we will upgrade to the Andor iXon Ultra 888 in the future. 
+
+The near-resonant light we will refer to as the probe light. 
+In principle, the MOT beams could be used for this, as they should be near-resonant as well. 
+However, we were worried using the MOT beams would cause too much noise, as they have fairly high power we say quite a large amount of scattering in the vacuum chamber on the camera, especially from the angled beams, which can internally reflect in the glass cell.
+To also control over the exact power, detuning as well as in which beam the probe light goes, we used a seperate laser path for this. 
+As shown in \cref{fig:RbLaserSetup}, we split off a tiny amount of power to a separate AOM, denoted as probe AOM. 
+The probe is recombined with the MOT beams in \cref{fig:GlassCellTop}, but we have full control over which beam it will go because of the $\lambdaup/2$ plate.
+We typically run the probe with a larger detuning of $\delta \sim -3\gamma$ and intensity $I = 0.5 I_{\text{sat}}$, which for our beam diameters comes down to $\sim0.$5 mW per beam. 
+
+\subsection{Experimental Sequence}
+
+After letting the MOT build up for about 800 ms, we overlap the tweezer with it for about 100 ms.
+This is done by a mechanical shutter, positioned on the \ac{Ti:S} laser table.
+The delay of the shutter is in the order of a couple ms. 
+During imaging, the MOT should be turned off, because its scattering will make the dipole traps impossible to see. 
+The MOT beams can be shuttered off using the AOMs in a matter of micro seconds. 
+The MOT magnetic field will take longer to shut off due to Eddy currents in the coils. 
+Rik van Herk measured a $1/e$ decay time of 8 ms, so we typically wait about 20 ms after turning off the MOT with the imaging. 
+The imaging consists of triggering the probe beam as well as triggering the sCMOS camera at the same time. 
+The triggering sequences are controlled using a programmable timing delay unit.
+
+
+
 
 
 

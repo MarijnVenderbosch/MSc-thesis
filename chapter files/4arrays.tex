@@ -60,8 +60,8 @@ This concept is sketched in \cref{fig:SLMLens} and further explained in the next
 		\caption{}
 		\label{fig:LCoS}
 	\end{subfigure}
-	\caption{\textbf{a)} Two \ac{AOD}s in crossed configuration, used to make a 2D spot array. Figure from \cite{Cooper2018}. 
-	\textbf{b)} The orientation of the liquid crystal cells changing as a function of the applied electric field \textit{E}. 
+	\caption{\textsf{\textbf{a)}} Two \ac{AOD}s in crossed configuration, used to make a 2D spot array. Figure from \cite{Cooper2018}. 
+	\textsf{\textbf{b)}} The orientation of the liquid crystal cells changing as a function of the applied electric field \textit{E}. 
 	Figure from \cite{Guzman2017}.}
 \end{figure}
 
@@ -177,9 +177,9 @@ This algorithm is called the \ac{GSW} algorithm, which is sketched in \cref{fig:
 		\caption{}
 		\label{fig:GSWalgorithm}
 	\end{subfigure}
-	\caption{\textbf{a)} SLM plane with phases $\phi_j(x,',y',z=0)$ for pixel $j$, as well as the focal plane or Fourier plane with trap coordinates for trap $m$ of $(x_m,y_m,z_m)$. 
+	\caption{\textsf{\textbf{a)}}SLM plane with phases $\phi_j(x,',y',z=0)$ for pixel $j$, as well as the focal plane or Fourier plane with trap coordinates for trap $m$ of $(x_m,y_m,z_m)$. 
 		Figure from \cite{DiLeonardo2007}. 
-		\textbf{b)} The \ac{GSW} algorithm visualized.
+		\textsf{\textbf{b)}} The \ac{GSW} algorithm visualized.
 		The light field is virtually propagated between the SLM and focal planes using \cref{eq:Vm,eq:Argument}, continuously updating the weight factors $w_m^k$ as well as the hologram $\phi_m^k$.}
 	\label{fig:GerschbergSaxton}
 \end{figure}
@@ -273,10 +273,10 @@ Assuming amplitude modulation between different gray levels is negligible (a fai
 		\caption{}
 		\label{fig:LUTcalibration}
 	\end{subfigure}
-	\caption{\textbf{a)} Ronchi grating on the SLM with gray values $L_1$ and $L_2$. 
+	\caption{\textsf{\textbf{a)}} Ronchi grating on the SLM with gray values $L_1$ and $L_2$. 
 	The diffraction order are separated using a $f=400$ mm lens. 
 	Other diffraction orders than $+1$ are blocked using an iris. 
-	\textbf{b)} Normalized power in the first order as a (\textcolor{red}{red}) and the fitted voltage response (\textcolor{blue}{blue}) as a function of the applied gray level $L_1 \in (0-255)$.}
+	\textsf{\textbf{b)}} Normalized power in the first order as a (\textcolor{red}{red}) and the fitted voltage response (\textcolor{blue}{blue}) as a function of the applied gray level $L_1 \in (0-255)$.}
 \end{figure}
 
 \begin{equation}\label{eq:FieldAfterSLM}
@@ -345,12 +345,12 @@ The SLM is calibrated to direct the most power a single the diffraction order (w
 	\centering
 	\includegraphics[width=\textwidth]{figures/hologram.png}
 	\caption{
-		Total phase mask applied on the SLM: \textbf{a)} Hologram obtained from the \ac{GSW} algorithm to generate the spot array.
-		\textbf{b)} Lens phase applied to use the SLM as the first lens of a telescope with magnification $M=0.42$.
-		\textbf{c)} Optical flatness correction pattern as provided by the manufacturer.
-		\textbf{d)} Blazed grating, used to move the diffraction pattern away from the optical axis (zoomed in).
-		\textbf{e)} Aberration correction phase applied onto the SLM, which is a fourth-order polynomial in the distance from the center.
-		\textbf{f)} Cylindrical lens phase to account for aberration introduced by the SLM itself.
+		Total phase mask applied on the SLM: \textsf{\textbf{a)}} Hologram obtained from the \ac{GSW} algorithm to generate the spot array.
+		\textsf{\textbf{b)}} Lens phase applied to use the SLM as the first lens of a telescope with magnification $M=0.42$.
+		\textsf{\textbf{c}} Optical flatness correction pattern as provided by the manufacturer.
+		\textsf{\textbf{d)}} Blazed grating, used to move the diffraction pattern away from the optical axis (zoomed in).
+		\textsf{\textbf{e)}} Aberration correction phase applied onto the SLM, which is a fourth-order polynomial in the distance from the center.
+		\textsf{\textbf{f)}} Cylindrical lens phase to account for aberration introduced by the SLM itself.
 	}
 	\label{fig:SLMphase}
 \end{figure}
@@ -387,7 +387,7 @@ In terms of the ABCD matrix formalism, the transfer matrix $\mathbf{M}$ for the 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.9\textwidth]{figures/beampathSLM.pdf}
-	\caption{\textbf{a)}: Keplerian telescope with total length $2f_1+2f_2$. \textbf{b)}: Using the SLM as a lens, the total beam path has length $x+y$. In the latter case, $y>f_2$.}
+	\caption{\textsf{\textbf{a)}}: Keplerian telescope with total length $2f_1+2f_2$. \textsf{\textbf{b)}} Using the SLM as a lens, the total beam path has length $x+y$. In the latter case, $y>f_2$.}
 	\label{fig:SLMbeampath}
 \end{figure}
 
@@ -474,8 +474,13 @@ Expanding \cref{eq:ZernikeRadial} in radial Zernike terms yields
 \end{equation}
 \begin{figure}
     \centering
-    \includegraphics[width=0.9\textwidth]{figures/SphericalAberrationTerms.pdf}
-    \caption{Phase correction in waves applied onto the SLM to correct the third order spherical aberration as a function of the normalized radial coordinate $\rho=r/R$.}
+    \includegraphics[width=\textwidth]{figures/SphericalAberrationTerms.pdf}
+    \caption{
+    Radial Zernike polynomials in terms of the normalized radial coordinate $\rho = r/R$.
+    \textsf{\textbf{a)}} Total phase error from \cref{eq:ZernikeRadial}.
+    \textsf{\textbf{b)}} Only the spherical aberration component of \cref{eq:ZernikeRadial} $z_0^4$, which is actually applied onto the SLM.
+    \textsf{\textbf{c)}} Only the $\rho^4$ component, which in terms of Zernike is actually a $Z_4^4$ polynomial.
+    }
     \label{fig:AberrationTerm}
 \end{figure}
 Which is plotted in \cref{fig:AberrationTerm}a.
@@ -502,11 +507,13 @@ Here, an example for a $7 \times 7$ array was used.
 In \cref{fig:SLMphase}b, the simulated diffraction pattern from this phase mask is shown. 
 The units in this Fourier plane are so-called focal units, which are the Fourier transformed coordinates \cite{Bijnen2015}
 
+
+
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/MaskAndComputedPattern.pdf}
-    \caption{\textbf{a)} Hologram computed by the \ac{GSW} algorithm to compute a $7\times7$ spot array.
-    \textbf{b)} Diffraction pattern as computed from the algorithm using the hologram in \textbf{a)} in focal units (\cref{eq:FocalUnit}.}
+    \caption{\textsf{\textbf{a)}} Hologram computed by the \ac{GSW} algorithm to compute a $7\times7$ spot array.
+    \textsf{\textbf{b)}} Diffraction pattern as computed from the algorithm using the hologram in \textsf{\textbf{(a)}} in focal units (\cref{eq:FocalUnit}.}
     \label{fig:HologramPattern}
 \end{figure}
 
@@ -524,8 +531,8 @@ To do this, we performed 2D Gaussian least-square fits (\cref{eq:2DGaussian}) as
 \begin{figure}
     \centering
     \includegraphics[width=0.95\textwidth]{figures/CamImgLoGSpots.pdf}
-    \caption{\textbf{a)} $7\times7$ spot array as obtained from the Flea2 CCD chip.
-    \textbf{b)} Spot locations marked with the red crosses, as obtained from the edge-detection algorithm. }
+    \caption{\textsf{\textbf{a)}} $7\times7$ spot array as obtained from the Flea2 CCD chip.
+    \textsf{\textbf{b)}} Spot locations marked with the red crosses, as obtained from the edge-detection algorithm. }
     \label{fig:CameraLoG}
 \end{figure}
 
@@ -563,8 +570,8 @@ We fitted the data in the histograms to a normal distribution, yielding a waist 
 \begin{figure}
     \centering
     \includegraphics[width=0.85\textwidth]{figures/FittedHistograms.pdf}
-    \caption{\textbf{a)} Distribution of the $1/e^2$ radius as measured from the spot array in \cref{fig:CameraLoG}a.
-    \textbf{b)} Spread in the fitted depth of the potential $U_0$, normalized by the average trap depth $\left\langle U_0 \right\rangle$.
+    \caption{\textsf{\textbf{a)}} Distribution of the $1/e^2$ radius as measured from the spot array in \cref{fig:CameraLoG}a.
+   \textsf{\textbf{b)}} Spread in the fitted depth of the potential $U_0$, normalized by the average trap depth $\left\langle U_0 \right\rangle$.
     Both are fit to a normal distribution.
     }
     \label{fig:Histograms}
