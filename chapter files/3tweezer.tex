@@ -422,7 +422,7 @@ An image of the tweezer at the point of maximum intensity imaged onto a camera t
     \centering
     \includegraphics[width=\linewidth]{figures/AzimuthalAverageSpotZoomed.pdf}
     \caption{\textsf{\textbf{a)}} Tweezer as imaged by the second objective onto the CCD camera. 
-	\textsf{\textbf{b)}} Azimuthal average (red) plotted against the ideal \ac{PSF}, \cref{eq:NormalizedPSF} of the objective as well as the result from diffraction theory \cref{eq:FourierBesselAperture} for the input waist used.}
+	\textsf{\textbf{b)}} Radial average (red) plotted against the ideal \ac{PSF}, \cref{eq:NormalizedPSF} of the objective as well as the result from diffraction theory \cref{eq:FourierBesselAperture} for the input waist used.}
     \label{fig:2Dresults}
 \end{figure}
 The Airy ring is somewhat asymmetric, suggesting a slight tilt aberration is present.
@@ -432,23 +432,19 @@ In \cref{fig:2Dresults}, an aberration correction using the \ac{SLM} was already
 Though, this correction did not have a noticeable effect on the radial distributions shown in \cref{fig:2Dresults}.
 There was an effect on the axial distribution however, which is elaborated upon in \cref{sec:Tweezer3D}.
 
-Returning our attention back to fig. \ref{fig:2Dresults}a, we computed an azimuthal average of the radial intensity distribution which is shown in fig. \ref{fig:2Dresults}b.
-This was done by integrating the amount of pixel counts in 'rings' around the center pixel.
-The rings have a width of 1 pixel, such that the intensity as a function of the distance to the center in pixels can be computed using this binning method.
-Distances in pixels were converted to microns using the calibration as described in \cref{subsec:CameraCalibration}.
-The measurement is compared against the Airy function or the ideal \ac{PSF} of the objective \cref{eq:NormalizedPSF} when using a uniform input beam, as well as the result from scalar diffraction theory using a Gaussian input beam equal to the aperture $w_i \sim R$, which was used to obtain the measurements.
+Returning our attention back to fig. \ref{fig:2Dresults}a, we computed the radial intensity distribution which is shown in fig. \ref{fig:2Dresults}b.
+This was done by integrating the amount of pixel counts in 'rings' (because of the pixelated nature, the rings can only approximate the discrete pixel grid) around the center pixel.
+The rings have a width of 1 pixel.
+The pixels are binned in these rings as a function of distance to the center pixel, obtaining a radial average. 
+Subsequently, the distances in pixels are converted to microns using the calibration as described in \cref{subsec:CameraCalibration}.
+The measurement is compared against the Airy function or the ideal \ac{PSF} of the objective \cref{eq:NormalizedPSF} when using a uniform input beam, as well as the result from scalar diffraction theory using a Gaussian input beam equal to the aperture $w_i = R$, which was used to obtain the measurements.
 The latter theoretical result was obtained by integrating \cref{eq:FourierBesselAperture} as a function of the radial coordinate $r$.
 From \ref{fig:2Dresults}b, the Gaussian input beam results in a slightly ($\sim 9\%$) broader spot.
-Additionally, the rings of the Airy disk will be slightly suppressed, this effect is known as Gaussian apodization.
-
+Additionally, the rings of the Airy disk will be suppressed, this effect is known as Gaussian apodization.
 
 Comparing the measurement to the theory result, the measurement has a waist which is about $\sim 10\%$ broader. 
-The apodization effect is not that clearly visible, possibly because of a slight aberration, which the Airy rings are quite sensitive to.
 Possibly, the slightly larger waist is a result of convolution of the tweezer with the \ac{PSF} of the imaging system (see \cref{eq:Deconvolution}. Though the second objective has a significantly higher NA, the convolution effect can have significant contribution.
-
 To check if this is indeed the case, a more accurate analysis method is needed.
-For example: in the previous binning method, the exact center location is not determined: it could lie anywhere in the center pixel. 
-Also, information is lost during the binning. 
 Therefore we also perform a two-dimensional fit using a normalized Gaussian $G/G_0$ in Cartesian coordinates (eq. \ref{eq:GaussianBeamIntensity})
 
 \begin{equation}\label{eq:2DGaussian}
@@ -480,11 +476,11 @@ This is confirmed by the coefficient of determination $R^2 > 0.99$.
 \end{figure}
 
 In order to extract the waist from \cref{fig:3Dshowing}, only the center $10 \times 10$ pixel area was considered as the Gaussian approximation works best for small $r$. 
-This was confirmed by the correlation coefficient which was indeed higher for smaller for the fit on the smaller region of interest. 
+This was confirmed by the correlation coefficient which was indeed higher for the fit on the smaller region of interest. 
 The result of this fit is shown in \cref{fig:3Dwaistfit}.
 Assuming the $\sigma_x \sim \sigma_y$ which should be valid for a circular aperture, we find the waist as $w_{\text{image}} = 2\sigma = \sigma_x + \sigma_y = (0.90 \pm 0.04)$ $\mu$m, where the error originates mainly from the calibration of the magnification. 
 Despite the 0.85 NA used, there will still be a slight convolution with the imaging point spread function present. 
-Although in deconvolution is non-trivial in general, for the specific case of a Gaussian function, the deconvolved waist $w_{\text{object}}$ can be found in terms of the waists of the image $w_{\text{image}}$ and the diffraction-limited waist of the imaging system $w_{\text{system}}$ according to \cite{Knottnerus2018}
+Although deconvolving the result is non-trivial in general, for the specific case of a Gaussian function, the deconvolved waist $w_{\text{object}}$ can be found in terms of the waists of the image $w_{\text{image}}$ and the diffraction-limited waist of the imaging system $w_{\text{system}}$ according to \cite{Knottnerus2018}
 
 \begin{equation}\label{eq:Deconvolution}
     w_{\text{object}} = \sqrt{w_{\text{image}}^2-w_{\text{system}}^2}.
@@ -492,7 +488,7 @@ Although in deconvolution is non-trivial in general, for the specific case of a 
 This yields $w_{\text{object}} = (0.79 \pm 0.05)$ $\mu$m. 
 Comparing to the theory result, for $\lambdaup = 820$ nm and $\text{NA} = 0.5$ (\cref{eq:Abbe,eq:GaussianAiryFit}) yields $w_0 = 0.689$ $\mu$m. 
 But this result not possible because of using input beam size $w_i \approx R$. 
-We know that as a result of this, the waist should be $\approx$ 9-10\% larger \cite{Chon2007,Sortais2007} which was confirmed by \cref{eq:FourierBesselAperture}, yielding $w_0 \sim 0.75$ $\mu$m, which is in good agreement with the measured result.
+We know that as a result of this, the waist should be $\approx$ 9-10\% larger \cite{Chon2007,Sortais2007} which was confirmed by \cref{eq:FourierBesselAperture}, yielding $w_0 \approx 0.75$ $\mu$m, which is in good agreement with the measured result.
 We conclude the spot size of the tweezer is nearly diffraction-limited.
 
 \section{Axial Intensity Distribution}\label{sec:Tweezer3D}
@@ -505,7 +501,7 @@ In the end, all images are stitched together to make a single image that would g
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.6\linewidth]{figures/ZScanSetup.pdf}
+    \includegraphics[width=0.6\linewidth]{figures/Zscan.pdf}
     \caption{Optical setup for determining the axial dimension of the tweezer potential. The first objective was scanned along the optical axis using a piezo linear translation stage.}
     \label{fig:ZScanSetup}
 \end{figure}
@@ -550,38 +546,41 @@ The error is a result of uncertainty in the caliper measurements.
 In \cref{fig:AxialUncorrected} the scanned profile of the tweezer is shown, as well as the maximum intensity recorded as a function of the amount of defocus $\delta z$ from the center of the tweezer.
 The scale is the same in $r$ and $z$ directions, so the aspect ratio is unity.
 The error bars are mainly a consequence of fluctuations in laser intensity as well as uncertainty in the piezo stage calibration.
-Also plotted is the result from diffraction theory for the case $w_i =R$ from \cref{eq:IntensityAxial}.
+Also plotted is the result from diffraction theory for the case $w_i =R$ in \textcolor{blue}{blue} from \cref{eq:IntensityAxial}.
 
 Clearly, there is a discrepancy between the theory and measurement results.
-This is confirmed by fitting the data to a Gaussian, which was done for the region $(-4, 4)$ $\mu$m of defocus, yielding $z_R \sim 6.2$ $\mu$m, while the diffraction-limited $z_R$ from \cref{eq:IntensityAxial} is $\sim 3.0$ $\mu$m.
-We initially attributed the difference to the incorrect glass thickness used: the glass cell and corresponding glass plate consists of 4.0 mm thick quartz glass ($n=1.44$), whereas the cover glass correction of the objective was originally designed for 3.5 mm of N-BK7 glass ($n=1.51$).
+This is confirmed by fitting the data to the axial distribution of a Gaussian potential $\propto [1+(z/z_R)^2]^{-1}$ (\cref{eq:GaussianPotential}, $r=0)$, which was done for a defocus region of $(-4, 4)$ $\mu$m, yielding $z_R \sim (6.2\pm0.5)$ $\mu$m, while the diffraction-limited $z_R$ from \cref{eq:IntensityAxial} is $\sim 3.0$ $\mu$m.
+We initially attributed the difference to the incorrect glass thickness used: the glass cell and corresponding glass plate consists of 4.0 mm thick quartz glass ($n=1.453$ at 820 nm), whereas the cover glass correction of the objective was originally designed for 3.5 mm of N-BK7 glass ($n=1.510$).
 The optical thickness $nd$ is thus 0.5 mm larger than the objective is corrected for. 
 \begin{figure}[]
     \centering
-    \includegraphics[width=0.55\linewidth]{figures/sphericalAberration.pdf}
+    \includegraphics[width=0.61\linewidth]{figures/sphericalAberration.pdf}
     \caption{As a result of extra glass thickness $n\Delta d$, the objective will have to move a distance $\delta z$, corresponding to a change in focus distance $\delta f$.
     The other parameters are explained in the text.
     Figure adapted from \cite{Iwaniuk2011}.}
     \label{fig:SphericalSketch}
 \end{figure}
-This excess thickness $\Delta d$ is shown in gray in \cref{fig:SphericalSketch} and has refractive index $n$ whereas the surrounding air has $n_0$ which is assumed to be unity.
+To understand the resulting effect, we place a piece of glass with thickness $d$ and refractive index $n$ between the objective and its focus point, see \cref{fig:SphericalSketch}, the piece of glass is highlighted in gray.
 To simplify geometry, the extra glass is positioned near the focus, but the results are indifferent with respect to the axial location of the glass.
-The maximum ray angle is $\sin{\alpha_0} = R/f$. 
 Because of the extra glass, the objective is moved an amount $\delta z$ to be in focus.
-After some geometry \cite{Iwaniuk2011} this leads to a change in focus $\delta f$:
+The light rays $\alpha$ will to $\alpha_0$ described by Snell's law, where we assume $n_0$ to be unity:
+
+\begin{equation}\label{eq:Snell}
+    \sin{\alpha_0} = n \sin{\alpha}
+\end{equation}
+After some geometry for the line segment $\delta f$ and applying \cref{eq:Snell} this leads to a change in focus in the position of the focus $\delta f$:
 
 \begin{equation}\label{eq:SphericalFocus}
-    \delta f = \Delta d - \delta z = \Delta d \left[
-    1 - \frac{n_r}{\sqrt{1+(1-n_r^2)\tan^2{\alpha_0}}}
-    \right],
+   \delta f = d - \delta z =
+   d\left(1-\frac{\cos{\alpha_0}}{\sqrt{n^2-\cos^2{\alpha_0}}}\right),
 \end{equation}
-where $n_r=n_0/n\approx1/n$ is the ratio of refractive indices and $\tan{\alpha_0} = r/f$ is the incident angle. 
-So \cref{eq:SphericalFocus} is a function of $r$ and will not be the same for paraxial rays compared to rays having a larger incident angle (marginal rays). 
+So \cref{eq:SphericalFocus} is a function of the angle $\alpha$ and will not be the same for paraxial rays compared to rays having a larger incident angle (marginal rays). 
+The $n$ and $d$ the objective is corrected for are slightly different, meaning $\delta f$ will be nonzero. 
 In \cref{subsec:AberrationCorrection} we explain how we computed the corresponding phase error of \cref{eq:SphericalFocus}, which we corrected using the \ac{SLM}.
 After correction, we measured a reduced Rayleigh range of $z_R \sim 5.2$ $\mu$m, which is still significantly larger than the result from theory. 
-Subsequently, we applied an extra cylindrical lens to the SLM to correct astigmatism, which is also explained in \cref{subsec:AberrationCorrection}, yielding a fit of $z_R \sim (3.5 \pm 0.3)$ $\mu$m which is much closer to the $\sim 3.0$ $\mu$m theoretically possible.
+Subsequently, we applied an extra cylindrical lens to the SLM to correct astigmatism, which is also explained in \cref{subsec:AberrationCorrection}, yielding a fit of $z_R \sim (3.6 \pm 0.5)$ $\mu$m which is much closer to the $\sim 3.0$ $\mu$m theoretically possible.
 This measurement is shown in \cref{fig:AxialZernike}.
-The axial intensity distribution is thus not diffraction-limited. 
+The axial intensity distribution is thus not diffraction-limited, but not far from it. 
 Most likely, this is caused by an aberration, e.g. a slight tilt in the glass plate or another optical component.
 
 

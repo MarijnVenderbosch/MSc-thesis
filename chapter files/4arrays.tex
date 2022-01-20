@@ -22,29 +22,31 @@ Finally, in \cref{sec:ArraysResults} we present the measured spot arrays.
 
 A spatial light modulator is in essence a device that can imprint a computer generated hologram onto a beam of light, allowing the spatial shaping of this light.
 Different types of SLMs can manipulate properties of light like amplitude, phase and polarization.
-In this work a phase-only reflective SLM was used, which as the name suggests can only control local phase of the incoming light field.
+In this work a phase-only reflective SLM was used, which as the name suggests can only control the local phase of the incoming light field.
 The use of phase-only SLMs has been extensively covered in our group by, for example by \cite{Bijnen2015,Dijk2012,Bijnen2013}. 
 
 The modulating works by deploying a pixel array, where each pixel houses a liquid birifringent crystal.
 By applying a voltage (electric field) over the pixel, the orientation of the liquid crystal molecules change, changing their effective refractive index.
 This principle is sketched in \cref{fig:LCoS}.
-Because of crystals are birifringent they posses refractive indices among perpendicular axes, commonly referred to as the ordinary and extraordinary refractive indices respectively ($n_o$ and $n_e$). 
+Because the crystals are birifringent they posses refractive indices along perpendicular axes, commonly referred to as the ordinary and extraordinary refractive indices respectively ($n_o$ and $n_e$). 
 If the light travels a distance $t$ in a crystal unit of the SLM, the phase retardation will be $\phi_o = k t n_o$ and $\phi_e(V) = k t n_e(V)$ respectively (only the extraordinary axis can be modulated), such that the phase retarder can be represented by the Jones matrix \cite{Guzman2017}
 
 \begin{equation}\label{eq:JonesMatrix}
-    M = e^{i \phi_0} 
+    \mathbf{M} = e^{i \phi_0} 
     \begin{pmatrix}
         e^{i(\phi_e-\phi_o)} & 0\\
         0 & 1
     \end{pmatrix}.
 \end{equation}
-Thus the phase retardance $\phi$ as a function of the applied voltage $V$ is \cite{Guzman2017}, using the birifringence parameter $\Delta n= n_e-n_o$
+After multiplying \cref{eq:JonesMatrix} with an input electric field with components along the ordinary and extraordinary axes $\mathbf{E}_{\text{in}} = (E_e, E_o)$, it becomes clear only the component along the extraordinary axis picks up a phase retardation $\phi$ which is as a function of the voltage \cite{Guzman2017}
 
 \begin{equation}\label{eq:ElectroOpticResponse}
-    \phi(V) = k t(n_e(V) - n_0) t = \frac{2\pi}{\lambdaup}t \Delta n(V).
+    \phi(V) = \phi_e(V) - \phi_o =  k t[n_e(V) - n_0]  = \frac{2\pi}{\lambdaup}t \Delta n(V).
 \end{equation}
+In \cref{eq:ElectroOpticResponse} we used the birefringence parameter $\Delta n$.
+The ordinary polarization axis does not pick up phase modulation, which is why typically the incident field is aligned with the extraordinary axis.
 To obtain voltage control over each individual pixel, the display is manufactured on a layer of silicon, making use of various semiconductor manufacturing technologies.
-As a result of diffraction from the various pixels, one can create arbitrary intensity patterns in in the focal plane of a lens.
+As a result of diffraction from the various pixels, one can create arbitrary intensity patterns in the focal plane of a lens.
 This concept is sketched in \cref{fig:SLMLens} and further explained in the next section.
 
 
@@ -69,14 +71,14 @@ This concept is sketched in \cref{fig:SLMLens} and further explained in the next
 \subsection{Diffraction for Spot Arrays}\label{sec:PropagationDerivation}
 
 We will now delve deeper in the diffraction from the SLM hologram, limiting ourselves to producing spot arrays.
-First consider plane of the SLM, denoted in \cref{fig:SLMLens} by the Cartesian coordinates $(x',y',z=0)$. 
+First consider the plane of the SLM, denoted in \cref{fig:SLMLens} by the Cartesian coordinates $(x',y',z=0)$. 
 If we label the pixels of the SLM with the letter $j$, the phase retardance of this pixel is thus $\phi_j(x'_j,y'_j)$.
 Now, consider a laser with intensity distribution $|E_i(x',y')|^2$ reflecting off of the SLM: it will pick up a phase factor such that after the SLM, the field is described as $E_i e^{i\phi(x',y')}$, as shown in \cref{fig:SLMLens}. 
 The light field will interfere with itself, until at infinity (or approximately in the focal (Fourier) plane $z'=f$, $z=0$ of a lens) the distribution evolves to $|E_f(x,y,z)|^2$, where $(x,y,z)$ are Cartesian coordinates with the origin in the focus point of the lens as denoted in \cref{fig:SLMLens}.
 
 To see how this works, consider the focal plane or Fourier plane of a lens after the SLM\footnote{In reality, the distance between the SLM and the microscope objective is not the focal length $f$ of the objective, but this will lead to an additional phase factor which can be neglected in practice \cite{Bijnen2013}.}.
 In the Fourier plane, the spots in the array will be labeled as $m$, which in general have coordinates $(x_m, y_m, z_m)$ in the Fourier plane, see \cref{fig:SLMgeometry}.
-As result of traveling from the pixel $j$ to the trap $m$, under paraxial approximation it can be derived the light field will experience a phase shift $\Delta_j^m$ \cite{DiLeonardo2007}
+As result of traveling from the pixel $j$ to the trap $m$, under paraxial approximation it can be derived that the light field will experience a phase shift $\Delta_j^m$ \cite{DiLeonardo2007}
 
 \begin{figure}
 	\centering
@@ -94,7 +96,7 @@ As result of traveling from the pixel $j$ to the trap $m$, under paraxial approx
     \frac{2\pi z_m}{\lambdaup f^2} ({x'}_{j}^{2} + {y'}_{j}^{2}) 
     + \frac{2\pi}{\lambdaup f}(x'_j x_m + y'_j y_m).
 \end{equation}
-The SLM imprints a phase $\phi(x',y') = \phi_j$, leading to a complex SLM plane for pixel $j$ of
+The SLM imprints a phase $\phi(x',y') = \phi_j$, leading to a complex electric field vector in the SLM plane for pixel $j$ of
 
 \begin{equation}\label{eq:SLMassumption}
     E_j(x',y') = E_j e^{i \phi_j}.
@@ -110,8 +112,8 @@ which is essentially using a discrete version of the Fresnel diffraction integra
 In \cref{eq:DiffractionFormula}, we can assume uniform illumination of the SLM such that the amplitude is the same everywhere on the SLM or $|E_i| = 1$.
 This assumption cannot possibly be valid: we illuminate the SLM with a Gaussian beam from an optical fiber.
 However, as will become clear in a moment, the input intensity on the SLM will have no influence on the intensities in the focal plane and this assumption can in fact be used without loss of generality.
-In addition, we are really only interested in the intensity $I_m =|V|^2$ of each spot, not the phase.
-Omitting the pre-factors in \cref{eq:DiffractionFormula} thus yields
+In addition, we are really only interested in the intensity $I_m \propto |V|^2$ of each spot, not the phase.
+Omitting the pre-factors in \cref{eq:DiffractionFormula} thus yields the dimensionless quantity \cite{DiLeonardo2007}
 
 \begin{equation}\label{eq:Vm}
     V_m \propto \sum_{j} e^{i(\phi_j - \Delta_j^m)}.
@@ -125,24 +127,25 @@ Substituting the latter term of \cref{eq:PropagationPhase} in \cref{eq:Vm} yield
     - i 2\pi \left[
     \frac{x_m}{\lambdaup f} x_j + \frac{y_m}{\lambdaup f} y_j
     \right]
-    \right)},
+    \right)}.
 \end{equation}
-Which is the 2D \ac{DFT} of $e^{i\phi}$ evaluated at spatial frequencies $x_m/\lambdaup f$ and $y_m/\lambdaup f$ in $x$ and $y$ respectively \cite{Bijnen2015,DiLeonardo2007}, similar to \cref{eq:FraunhoferDiffractionIntegral}.
-Using \cref{eq:2Dcase} has the advantage that the DFT is much faster to evaluate than the general case of the diffraction formula \cref{eq:Vm} using the \ac{FFT}.
+This is the 2D \ac{DFT} of the phase array $e^{i\phi_j}$ evaluated at spatial frequencies $x_m/\lambdaup f$ and $y_m/\lambdaup f$ in $x$ and $y$ respectively \cite{Bijnen2015,DiLeonardo2007}, similar to \cref{eq:FraunhoferDiffractionIntegral}.
+The DFT is commonly used in signal processing and image analysis and can be easily computed on a computer using \ac{FFT} algorithms. 
+FFTs have the advantage that they are way faster to evaluate than the general case of the diffraction formula \cref{eq:Vm}.
 In this work, we only use 2D arrays and could in principle use \cref{eq:2Dcase} to speed up calculations.
 Because we only computed a small number of holograms, we simply used \cref{eq:Vm}.
 
 \subsection{Computing the Hologram}\label{sec:GSW}
 
 \Cref{eq:Vm} gives the amplitudes of an array of spots given an array of phases $\phi_j$, but we are interested in the reverse problem: what is the hologram $\phi_j$ to be applied, such that we get the spot array of intensities $|V_m|^2$? 
-As the equations describing light propagation are time-symmetric, this phase will be the result of $M$ coherent light sources radiating with $w_m e^{i \theta_m}$, picking up a propagation phase described by \cref{eq:PropagationPhase}, leading to a complex amplitude in the \ac{SLM} plane of \cite{DiLeonardo2007,Leseleuc2018}
+As the equations describing light propagation are time-symmetric, this phase will be the result of $M$ coherent light sources radiating with $w_m e^{i \theta_m}$, picking up a propagation phase described by \cref{eq:PropagationPhase}, leading to a complex amplitude in the \ac{SLM} plane of \cite{Leseleuc2018,DiLeonardo2007}
 
 \begin{equation}\label{eq:InterferencePattern}
     E_j (x',y') = \sum_m w_m \exp{
     i\left(\Delta_j^m + \theta_j\right)
     }.
 \end{equation}
-But producing the the light field in \cref{eq:InterferencePattern} requires doing phase as well as amplitude modulation, which is not possible: the SLM can only do phase modulation.
+But producing the light field in \cref{eq:InterferencePattern} requires doing phase as well as amplitude modulation, which is not possible: the SLM can only do phase modulation.
 So in this step in the algorithm, we take the argument of  \cref{eq:InterferencePattern} yielding the following hologram
 
 \begin{equation}\label{eq:Argument}
@@ -157,7 +160,7 @@ The solution to this problem was solved by \cite{Gerschberg1972}, who pioneered 
 The core idea of the algorithm is to virtually propagate light between SLM and focal planes, using (inverse) Fourier transforms like \cref{eq:2Dcase}.
 In each propagation step, the hologram in the SLM plane and the computed pattern in the Fourier plane are updated in an iterative fashion, until a solution (the desired pattern and the corresponding hologram) are obtained.
 For a more detailed description of an implementation of IFTA algorithms the reader is referred to \cite{Bijnen2015,Bijnen2013}.
-A key advantage of using these kind of algorithms is that \cref{eq:Vm}: each pixel contributes to individual spot.
+A key advantage of using these kinds of algorithms is from \cref{eq:Vm}: each pixel contributes to each individual spot.
 As a result, using this algorithm, no knowledge about the laser input field is needed, which can be hard to determine exactly in practice.
 
 For 3D spot arrays, Fourier transforms cannot be used, and the algorithm was extended using \cref{eq:Vm,eq:Argument} by \cite{DiLeonardo2007}. 
@@ -177,7 +180,7 @@ This algorithm is called the \ac{GSW} algorithm, which is sketched in \cref{fig:
 		\caption{}
 		\label{fig:GSWalgorithm}
 	\end{subfigure}
-	\caption{\textsf{\textbf{a)}}SLM plane with phases $\phi_j(x,',y',z=0)$ for pixel $j$, as well as the focal plane or Fourier plane with trap coordinates for trap $m$ of $(x_m,y_m,z_m)$. 
+	\caption{\textsf{\textbf{a)}}SLM plane with phases $\phi_j(x,',y',0)$ for pixel $j$, as well as the focal plane or Fourier plane with trap coordinates for trap $m$ of $(x_m,y_m,z_m)$. 
 		Figure from \cite{DiLeonardo2007}. 
 		\textsf{\textbf{b)}} The \ac{GSW} algorithm visualized.
 		The light field is virtually propagated between the SLM and focal planes using \cref{eq:Vm,eq:Argument}, continuously updating the weight factors $w_m^k$ as well as the hologram $\phi_m^k$.}
@@ -186,21 +189,23 @@ This algorithm is called the \ac{GSW} algorithm, which is sketched in \cref{fig:
 
 \subsubsection*{The GSW Algorithm}
 
-\begin{itemize}
+\begin{enumerate}
     \item Starting with hologram $\phi_j^k$ diffraction equation \cref{eq:Vm} is used to compute the complex amplitudes of the spot array $V_m^{k+1}$. 
     
-    \item From the amplitudes, the new weight factors $w_m^k$ and phases $\theta_m^k$ are computed, which are used to compute a new hologram using the interference equation \cref{eq:Argument}.
+    \item From the amplitudes $V_m^{k+1}$, the new weight factors $w_m^{k+1}$ and phases $\theta_m^{k+1}$ are computed.
     
-    \item The iteration counter $k$ is increased, the hologram is updated and the steps above are repeated.
-\end{itemize}
-The algorithm starts with a hologram hologram, $\phi_j^{k=0}$ is computed by using \cref{eq:Argument} for an array of traps of uniform intensities $w_m^{k=0} = 1$ and random phases $\theta_m^{k=0}$.
+    \item From the weight factors $w_m^{k+1}$ and phases $\theta_m^{k+1}$, the interference equation \cref{eq:Argument} tells us what the resulting phase on the SLM pixel array $\phi_j^{k+1}$ would be, by assuming an array of point sources radiating with amplitudes $w_m$ and phases $\theta_m$.
+    
+    \item The iteration counter $k$ is increased to $k+1$, the hologram is updated and the steps above are repeated.
+\end{enumerate}
+As a initial ansatz for the algorithm, we start with a hologram $\phi_j^{k=0}$ which is computed by using \cref{eq:Argument} for an array of traps of uniform intensities $w_m^{k=0} = 1$ and random phases $\theta_m^{k=0} \in (0, 2\pi)$.
 After each iteration, the diffraction efficiency $e$ (the real part of the complex interference pattern) and the uniformity $u$ of the array $V_m$ should increase until convergence, yielding a set of target amplitudes $V_m$ as well as a hologram $\phi_j$ that produces this set of amplitudes.
 The definitions of the diffraction efficiency $e$ and uniformity $u$ are 
 
 \begin{equation}\label{eq:EfficiencyUniformity}
-    e = \frac{1}{M}\sum_m I_m = \frac{1}{M}\sum_m |V_m|^2, 
+    e = \frac{1}{M}\sum_m |V_m|^2, 
     \quad 
-    u = 1-\frac{\text{max}(I_m)-\text{min}(I_m)}{\text{max}(I_m)+\text{min}(I_m)},
+    u = 1-\frac{\text{max}(|V_m|^2)-\text{min}(|V_m|^2)}{\text{max}(|V_m|^2)+\text{min}(|V_m|^2)},
 \end{equation}
 and are evaluated after each iteration $k$. 
 The algorithm stops if the user-defined minimum criteria for diffraction efficiency or uniformity are met.
@@ -208,9 +213,9 @@ The algorithm stops if the user-defined minimum criteria for diffraction efficie
 \subsubsection*{Implementation}
 
 The algorithm was implemented in Python by Ivo Knottnerus as part of his PhD research.
-Because the SLM has $\sim 2$ million pixels, converting to and from the SLM plane, so performing equations \cref{eq:Vm,eq:Argument} can be time consuming depending on the desired pattern.
+Because the SLM has $\sim 2$ million pixels, converting to and from the SLM plane, so performing equations \cref{eq:Vm,eq:Argument}, can be time consuming depending on the desired pattern.
 Therefore, these computations are performed on a graphics card using the \textit{PyOpenCL} library. 
-After a couple tens of iteration steps, we typically see the diffraction efficiency convergence to $e \sim 0.93$.
+After a couple tens of iteration steps, we typically see the diffraction efficiency converging to $e \sim 0.92$.
 The theoretically computed uniformity will continue to increase indefinitely, but is typically already on the order $u \sim 0.999$ after $\sim 10^2$ iterations.
 A typical hologram using the algorithm is shown in \ref{fig:SLMphase}a as well as \ref{fig:HologramPattern}.
 
@@ -253,76 +258,99 @@ Furthermore, it is wavelength specific, which is why we performed it for the wav
 Measuring the electro-optical response directly is impossible because the light field oscillates with frequencies in the THz regime.
 There are a variety of methods to measure it indirectly for a phase-only \ac{SLM}, however \cite{Li2019}.
 We chose the diffractive calibration method, originally proposed by \cite{Zhang1994}.
-
 The method works by applying a variety of Ronchi gratings onto the SLM, see \cref{fig:LUTCalibrationSetup}.
-This is a pattern consisting of $M$ periods $w=8$ pixels in the horizontal direction and a vertical height $H$ of alternating gray values $L_1$ and $L_2$.
-Gray values are 8 bit number representing the degree of modulation where 0 (white) mean no voltage while 255 (black) is maximum voltage. 
+This is a pattern consisting of $M$ periods of width $w=8$ pixels in the horizontal direction and a vertical height $H$ of gray values $L$ alternating between $L=L_1$ and $L=L_2=0$.
+Gray values are 8 bit numbers representing the degree of modulation where 0 (black) means no modulation or $V=0$ while 255 (white) is maximum modulation: $V=5$V.
 Assuming amplitude modulation between different gray levels is negligible (a fair assumption for phase-only SLMs), the electric field just after the SLM is proportional to the phase transmittance given by summing over the gratings $m$ \cite{Zhang1994}
 
 \begin{figure}
-	\begin{subfigure}{.49\linewidth}
+	\begin{subfigure}{.51\linewidth}
 		\flushleft
-		\includegraphics[height=5.1cm]{figures/LUTcalibrationSetup.pdf}
+		\includegraphics[height=5cm]{figures/LUTcalibrationSetup.pdf}
 		\caption{}
 		\label{fig:LUTCalibrationSetup}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}{.49\linewidth}
+	\begin{subfigure}{.48\linewidth}
 		\flushright
-		\includegraphics[height=5.1cm]{figures/LUTplot.pdf}
+		\includegraphics[height=5cm]{figures/LUTplot.pdf}
 		\caption{}
 		\label{fig:LUTcalibration}
 	\end{subfigure}
 	\caption{\textsf{\textbf{a)}} Ronchi grating on the SLM with gray values $L_1$ and $L_2$. 
-	The diffraction order are separated using a $f=400$ mm lens. 
+	The diffraction orders are separated using a $f=400$ mm lens. 
 	Other diffraction orders than $+1$ are blocked using an iris. 
 	\textsf{\textbf{b)}} Normalized power in the first order as a (\textcolor{red}{red}) and the fitted voltage response (\textcolor{blue}{blue}) as a function of the applied gray level $L_1 \in (0-255)$.}
 \end{figure}
 
 \begin{equation}\label{eq:FieldAfterSLM}
-    f(x',y') = \sum_{m=0}^{M-1} \left\{
-    \operatorname{rect}\left(\frac{x'-m w - w/4}{w/2}\right) + e^{i \phi(L)} \operatorname{rect}\left(\frac{x'- m w - 3 w/4}{w/2}\right)
-    \right\},
+    f(x',y') = \sum_{m=0}^{M-1} \left[
+    e^{i \phi(L_1)} \operatorname{rect}\left\{\frac{x'-m w - w/4}{w/2}\right\} + 
+    e^{i \phi(L_2)}\operatorname{rect}\left\{\frac{x'- m w - 3 w/4}{w/2}\right\}
+    \right],
 \end{equation}
-where $\operatorname{rect}(\cdot)$ is the rectangular function. 
-According to Fourier optics, if we place a lens after the SLM, the field in the \textit{Fourier} plane of the lens is the Fourier transform of the field after the SLM, as derived in \cref{eq:FraunhoferDiffractionIntegral} as well as in \cref{eq:2Dcase}.
-The intensity is thus for $y=0$ (we separate the different orders in the $x$-direction around $y=0$) the 2D Fourier transform $F = \mathcal{F}(f)$ \cite{Zhang1994}
+where $\operatorname{rect}\{(x'-a)/b\}$ is the rectangular function, which is unity for a width $b$ centered around $x'=a$ and zero elsewhere.
+As an example, consider a single grating: $M=1$ and set $L_2=0$.
+In this case, \cref{eq:FieldAfterSLM} reduces to 
+
+\begin{equation}
+    f(x',y') = e^{i\phi(L_1)} \operatorname{rect} \left\{ 
+    \frac{x-w/4}{w/2}\right\} +
+    \operatorname{rect}\left\{ \frac{x-3w/4}{w/2}\right\}.
+\end{equation}
+The resulting Ronchi grating is thus one phase modulated section with width $w/2$ centered around $w/4$, as well as a black section centered around $3w/4$, which is sketched in \cref{fig:OneGrating}. For $M>1$, this pattern is simply repeated an additional $M-1$ times.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{figures/OneGrating.pdf}
+    \caption{Ronchi grating for a single grating $M=1$ as well as $L_2=0$.}
+    \label{fig:OneGrating}
+\end{figure}
+
+\noindent According to Fourier optics, if we place a lens after the SLM, the field in the \textit{Fourier} plane of the lens is the 2D spatial Fourier transform of the field after the SLM, as derived in \cref{eq:FraunhoferDiffractionIntegral} as well as in \cref{eq:2Dcase}.
+The field is thus for $y=0$ (we separate the different orders in the $x$-direction around $y=0$) proportional to the spatial Fourier transform $F = \mathcal{F}(f)$, and the intensity $I\propto |F|^2|$ as \cite{Zhang1994}
 
 \begin{equation}\label{eq:FourierIntensity}
-    |F(p,0)|^2=
+    |F(p,0)|^2\propto
     \frac{M^2 w^2}{2}\operatorname{sinc}^2\left(\frac{M p w}{2}\right) \times
     \frac{1 + \cos{\left[\phi(L)+p w/2\right]}}{\cos^2(p w/4)}.
 \end{equation}
 In \cref{eq:FourierIntensity} $p=2\pi x/\lambdaup f$ is the Fourier transformed spatial coordinate. The intensity in the first order ($p=\pm 2\pi/w$) is
 
 \begin{equation}\label{eq:IntensityFirstOrder}
-    I_1(\phi) =
-    \frac{8M^2w^2}{\pi^2} \left( 
-    1-\cos{\phi(L)}
-    \right),
+    I_1(\phi(L_1)) \propto
+    \frac{w^2}{\pi^2} \left[ 
+    1-\cos{\phi(L_1)}
+    \right],
 \end{equation}
-which we will use to fit the measurement data. Experimentally, we load a sequence of Ronchi gratings onto the SLM, looping $L_1$ from the minimum to the maximum gray value, while keeping $L_2$ constant. 
+which we will use to fit the measurement data. Experimentally, we load a sequence of Ronchi gratings onto the SLM, looping $L_1$ from the minimum $L_1=0$ to the maximum gray value $L_1=255$, while keeping $L_2 =0$ the whole time.
 For our 8-bit SLM, this amounts to looping over 255 gray values, which we did with the help of an edited \textit{labVIEW} script from the manufacturer.
 For each hologram, separate the multiple diffraction orders using a $f=400$ mm lens (such that the spacing between the various orders is sufficient) and an aperture and record the power in the first order using a power meter.
 
 The results are shown in \cref{fig:LUTcalibration}. 
-Also shown is the result of fitting \cref{eq:IntensityFirstOrder}: the voltage response as a function of gray level. 
-This fit was done with a software program provided by the manufacturer.
+In red we show the normalized power in the first order $P/P_0$ as a function of the applied gray level $L_1$, where $P_0$ is the maximum recorded power in the first order.
+In blue we show the result of fitting the data using a program provided by the manufacturer.
 This is also called the gamma curve or \ac{LUT}.
 The LUT is what the SLM uses to connect the 8-bit gray level to 10-bit voltage levels in a linear fashion, ensuring the gray level range corresponds to $2\pi$ phase retardation.
-As can be seen from \cref{fig:LUTcalibration}, the obtained LUT is rather non-linear, meaning the electro-optic for a linear LUT would be non-linear, as expected. 
+As can be seen from \cref{fig:LUTcalibration}, the obtained LUT is rather non-linear, meaning the electro-optical response for a linear LUT would be non-linear, as expected. 
 
 Using our newly acquired LUT, we measured a diffraction efficiency in agreement with the specifications in \cref{table:SLMspecs}. 
 The exact diffraction efficiency depends on the 'smoothness' of the pattern applied to the SLM: because of the pixelated nature the SLM can only approximate continuous patterns. 
-More rapidly-varying patterns equals lower diffraction efficiency \cite{Labuhn2016}.
+More rapidly-varying patterns equal lower diffraction efficiency \cite{Labuhn2016}.
 
-\subsection{Finite Aperture Size}\label{subsec:ApertureSize}
+\subsection{Rectangular SLM Aperture}\label{subsec:ApertureSize}
 
 In order to make use of the maximum amount of degrees of freedom (pixels) the SLM has to offer, the active area should be fully illuminated.
 However, because the incident beam is described by a Gaussian, this will lead to power loss as a result of light falling outside of the chip area.
 The ideal incident waist size is thus a compromise between power efficiency on the one and amount of pixels used on the other hand.
-We estimate this power loss by reflecting a Gaussian beam $G(x,y)$ having waist $w(z)$ and power $P_0$ off of a rectangular aperture of dimensions $(2S_x, 2S_y)$ where $S_{x,y}$ are the semi-widths of the aperture. 
+We estimate this power loss by reflecting a Gaussian beam $G(x,y)$ having waist $w(z)$ and power $P_0$ off of a rectangular aperture of dimensions $(2S_x, 2S_y)$ where $S_{x,y}$ are the semi-widths of the aperture, see \cref{fig:Rectangular}.
 The relative power transmission $P/P_0$ can be found by integrating the intensity of the beam \cref{eq:GaussianBeamIntensity} in Cartesian coordinates over the aperture
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.32\textwidth]{figures/RectangularAperture.pdf}
+    \caption{Laser beam with waist $w(z)$ reflecting off the SLM with rectangular semi-widths $S_x$ and $S_y$.}
+    \label{fig:Rectangular}
+\end{figure}
 
 \begin{equation}\label{eq:RectAperturePower}
 	\frac{P}{P_0} =
@@ -330,40 +358,42 @@ The relative power transmission $P/P_0$ can be found by integrating the intensit
 	\text{erf}\left(\frac{\sqrt{2}S_x}{w(z)}\right) \text{erf}\left(\frac{\sqrt{2}S_y}{w(z)}\right),
 \end{equation}
 If we use a beam with $1/e^2$ radius equal to the short semi-width SLM and using the aspect ratio from \cref{table:SLMspecs}, the power transmission is $\sim 95$\%.
-So we barely use any power, while still almost using all of the pixels.
+So we barely lose any power, while still using as much pixels as possible.
+The pixels outside of the beam waist radius contribute less, but are unused when focusing the SLM beam onto the circular objective pupil (see \cref{sec:Demagnification}).
 To obtain this waist, we direct the beam on the SLM from the Schäfter fiber collimator (\cref{sec:MeasuringTweezer}).
-This collimator yields a beam with waist $w(z) = 4.8$ mm, about the size of the short semi-width $S_y = 4.9$ mm of the rectangular SLM.
+This collimator yields a beam with waist $w(z)$ mm, about the size of the short semi-width $S_y = 4.8$ mm of the rectangular SLM.
 
 
-\subsection{Diffraction Efficiency}\label{subsec:Diffraction}
 
-Because the SLM has individual pixels with constant pitch $d$, the device acts effectively as a diffraction grating.
-As a result, there will be light diverted to higher diffraction orders in both horizontal and vertical directions.
-The SLM is calibrated to direct the most power a single the diffraction order (we call this the first order), but a fraction of light will be sent to higher diffraction orders as well.
+
+\subsection{Diffraction Orders}\label{subsec:Diffraction}
+
+Because the SLM is a periodic structure with constant pixel pitch $d$, multiple diffraction orders will reflect off of the device, lowering the amount of power in the main diffraction order.
+The power in the higher diffraction orders is unused. 
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{figures/hologram.png}
+	\includegraphics[width=0.95\textwidth]{figures/hologram.png}
 	\caption{
 		Total phase mask applied on the SLM: \textsf{\textbf{a)}} Hologram obtained from the \ac{GSW} algorithm to generate the spot array.
 		\textsf{\textbf{b)}} Lens phase applied to use the SLM as the first lens of a telescope with magnification $M=0.42$.
-		\textsf{\textbf{c}} Optical flatness correction pattern as provided by the manufacturer.
-		\textsf{\textbf{d)}} Blazed grating, used to move the diffraction pattern away from the optical axis (zoomed in).
+		\textsf{\textbf{c)}} Optical flatness correction pattern as provided by the manufacturer.
+		\textsf{\textbf{d)}} Linear phase ramp, used to move the diffraction pattern away from the optical axis (zoomed in).
 		\textsf{\textbf{e)}} Aberration correction phase applied onto the SLM, which is a fourth-order polynomial in the distance from the center.
 		\textsf{\textbf{f)}} Cylindrical lens phase to account for aberration introduced by the SLM itself.
 	}
 	\label{fig:SLMphase}
 \end{figure}
 
-In addition, apart from higher diffraction orders, there will always be a fraction of light that is not modulated.
-This light originates from surface reflections, back reflections and unused space between the pixels and is focused to a single spot in the glass cell by the objective \cite{Bijnen2013}.
+In addition, there will always be a fraction of light that is not modulated.
+This light originates from reflection off of the glass cover on top of the birefringence layer or from the unused space between the pixels and is focused to a single spot in the glass cell by the objective \cite{Bijnen2013}.
 To get rid of this undesired light, typically a linear phase is superimposed on top of the hologram (tilt aberration) which translates the desired pattern away from the undiffracted light.
-The type of linear phase used is shown in \cref{fig:SLMphase}d, as well as the hologram producing the spot array in \cref{fig:SLMphase}a.
-Subsequently, in an intermediary focus point, the light can be spatially filtered to remove unwanted light using an iris. 
-The Fresnel lens phase applied onto the SLM is shown in \cref{fig:SLMbeampath}b.
+The type of linear phase used is shown in \cref{fig:SLMphase}b, as well as the hologram producing the spot array in \cref{fig:SLMphase}a.
+The sum of the total hologram is computed modulo $2\pi$, which equals exactly one wave retardation.
+After translating away the diffraction pattern from the zeroth order beam, the latter can be spatially filtered out in an intermediary focus point and an iris. 
 It is worth noting that this method comes at the cost of a slightly lower diffraction efficiency, because the phase ramp applied can only be approximated by the pixelated SLM.
 
-\subsection{Beam size decrease}
+\subsection{Beam size decrease}\label{sec:Demagnification}
 
 To prevent excess loss of power, the $w = 4.8$ mm beam needs to be adapted to the $R = 2.0$ mm radius of the microscope objective. 
 Thus the beam should be magnified by a factor $M=0.42$ (demagnified).
@@ -379,15 +409,14 @@ Moreover, apart from adapting the beam size, the telescope serves two more funct
 \end{itemize}
 To accommodate room for the objective holder, (dichroic) mirrors, a polarizing beam splitter cube leave room for additional optics in the future, we estimate from a CAD drawing we need $\sim 45$ cm of room between the last relay lens of the telescope and the objective. 
 Using a Keplerian telescope, this distance will be equal to $f_2$ (\cref{fig:SLMbeampath}).
-
 Also knowing that $f_1=f_2/M$ and the total length of the telescope is $2f_1+2f_2$, this is already $\sim 305$ cm of beam path on the optical table. 
-Instead, we borrowed a trick from our collaborators at the University of Amsterdam, where we use the SLM as the first lens of the system. 
-In terms of the ABCD matrix formalism, the transfer matrix $\mathbf{M}$ for the latter is:
+To reduce this, we borrowed a trick from our collaborators at the University of Amsterdam, where we use the SLM as the first lens of the system with focal length $f_s$ in conjunction with another relay lens $f_r$ (see \cref{fig:SLMbeampath}, to not confuse ourselves with $f_1$ and $f_2$ of the equivalent Keplerian telescope we renamed the variables). 
+In terms of the ABCD matrix formalism, the transfer matrix $\mathbf{M}$ for the system in \cref{fig:SLMbeampath}b is
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.9\textwidth]{figures/beampathSLM.pdf}
-	\caption{\textsf{\textbf{a)}}: Keplerian telescope with total length $2f_1+2f_2$. \textsf{\textbf{b)}} Using the SLM as a lens, the total beam path has length $x+y$. In the latter case, $y>f_r$.}
+	\includegraphics[width=0.95\textwidth]{figures/beampathSLM.pdf}
+	\caption{\textsf{\textbf{a)}}: Keplerian telescope with total length $2f_1+2f_2$. \textsf{\textbf{b)}} Using the SLM as a lens $f_s$ in conjunction with a relay lens $f_r$, the total beam path has length $x+y$. In the latter case, $y>f_r$.}
 	\label{fig:SLMbeampath}
 \end{figure}
 
@@ -400,7 +429,7 @@ In terms of the ABCD matrix formalism, the transfer matrix $\mathbf{M}$ for the 
 	%
 	\begin{pmatrix}
 		1 & 0 \\
-		-1/f_2 & 1
+		-1/f_r & 1
 	\end{pmatrix}
 	%
 	\begin{pmatrix}
@@ -410,23 +439,40 @@ In terms of the ABCD matrix formalism, the transfer matrix $\mathbf{M}$ for the 
 	%
 	\begin{pmatrix}
 		1 & 0 \\
-		-1/f_1 & 1
+		-1/f_s & 1
 	\end{pmatrix}.
 \end{equation}
-For substituting $x= f_2(1+f_1/f_2)$ and $y=f_2(1+f_2/f_1)$, \cref{ABCD} reduces to
+Substituting $x= f_r(1+f_s/f_r)$ and $y=f_r(1+f_r/f_s)$, \cref{ABCD} reduces to
 
 \begin{equation}
 	\mathbf{M}=
 	\begin{pmatrix}
-		-f_1/f_2 & 0\\
-		0 & -f_2/f_1
+		-f_s/f_r & 0\\
+		0 & -f_r/f_s
 	\end{pmatrix}.
 \end{equation}
-Which is the ABCD matrix for a beam expander. The total length is $x+y = 102 + 42.5 = 145$ cm for $f_2 = 300$ mm and $f_2/f_1=0.42$.
-The Fresnel lens hologram used on the SLM (which is a quadratic polynomial) is shown in \ref{fig:SLMbeampath}b.
-This pattern is superimposed on the spot array hologram in \ref{fig:SLMphase}a along with the other holograms described in this section. 
-The sum of the hologram is computed modulo $2\pi$, which equals exactly one wave retardation.
+This is the ABCD matrix for a beam expander. The total length is $x+y = 102 + 42.5 = 145$ cm for $f_r = 300$ mm and $f_r/f_s=0.42$, which is significantly shorter than when using a conventional telescope.
+We will now explain how we computed the hologram to produce a focal length $f_s = 30 / 0.42 = 69$ cm on the SLM.
+The Fresnel lens hologram is essentially to a defocus 'aberration'.
+It is common to quantify aberrations in terms of Zernike's functions, a set of polynomials orthogonal on the unit disk. 
+The SLM is not circular, but the part of the SLM that is conjugated with the microscope objective is, so we consider the SLM as a circle for now, with the radius equal to the short semi-width $S_y$
+Now, the coordinates on the unit disk can be denoted as $\rho = r/S_y$ and $\theta \in (0, 2\pi)$, such that the wavefront $\phi(\rho,\theta)$ can be expanded in terms $R_n^m(\rho)\cos{m\theta}$ and $R_n^m\sin{m\theta}$ where 
 
+\begin{equation}\label{eq:ZernikeRadial}
+    R_{n}^{m}(\rho)=
+    \sum_{s=0}^{(n-m) / 2}
+    \frac{(-1)^{s}(n-s) !}{s !\left((n+m)/2-s\right) !\left((n-m)/2-s\right) !} \rho^{n-2 s}
+\end{equation}
+is the radial Zernike polynomial set \cite{Mahajan94}.
+In this work, we only consider radially symmetric polynomials so we only use \cref{eq:ZernikeRadial}, without the $\theta$ dependence.
+The defocus aberration in terms of the defocus coefficient $S_2$ is $S_2 R_2^2 = S_2\rho^2$.
+We want to find this coefficient $S_2$, which we do by equating the defocus aberration to the exponent an equivalent Fresnel lens with focus $f_s$ (\cref{eq:Transfer}):
+
+\begin{equation}
+    \frac{i k }{2 f_{s}}r'^2=i 2\pi S_2 \rho^2, \quad \rho = \frac{r'}{S_y}.
+\end{equation}
+Solving for $S_2$ yields $S_0 = k S_y^2/(4\pi f_s)= 20.4$ for $f_{s} = 69$ cm, $S_y = 4.8$ mm.
+The Fresnel lens hologram used on the SLM to make the beam expander (which is a quadratic polynomial) is shown in \ref{fig:SLMbeampath}c.
 
 
 \subsection{Optical Flatness}\label{subsec:Flatness}
@@ -442,36 +488,26 @@ This mask is shown in \ref{fig:SLMphase}c.
 
 Now that the SLM has been introduced, we will explain more thoroughly how exactly we corrected for spherical aberration as introduced by the incorrect glass thickness (\cref{sec:Tweezer3D}).
 We left off at \cref{eq:SphericalFocus}.
-For paraxial rays ($\alpha_0 \rightarrow 0$), \cref{eq:SphericalFocus} reduces to $d(1-n_r)$. 
+For paraxial rays ($\alpha_0 \rightarrow 0$), \cref{eq:SphericalFocus} reduces to $d(1-1/n)$. 
 Subtracting this paraxial result from the case for general ray angles, which may contain large angles from \cref{eq:SphericalFocus} and Taylor expanding up to fourth order in $\alpha_0$ yields the difference in focus shift between the general and paraxial case of \cite{Iwaniuk2011}
 
 \begin{equation}\label{eq:FocusDifference}
-    \delta f_{\text{general}} - \delta f_{\text{paraxial}} \approx
-    -\frac{d \tan^2{\alpha_0}}{2n} (1-n_r^2) 
-    +\frac{3d \tan^4{\alpha_0}}{8n}(1-n_r^2)^2+\mathcal{O}(\tan\alpha_0^6).
+    \delta f= \Delta f_{\text{general}} - \Delta f_{\text{paraxial}} \approx
+    d\left(\frac{n^2-1}{2n^3}\right)\alpha_0^2 - d\left(\frac{9-10n^2+n^4}{24n^5}\right)\alpha_0^4+\mathcal{O}(\alpha_0^6).
 \end{equation}
-Multiplying \cref{eq:FocusDifference} with $2\pi(n-n_0)/\lambdaup$ and converting to a radial dependence as $\tan{\alpha_0}= \text{NA} \times r/R$ yields 
+Multiplying \cref{eq:FocusDifference} with $(n-1)/\lambdaup$ converts the path length difference to a phase difference $\phi(\theta)/2\pi$.
+This phase difference is plotted in \cref{fig:AberrationTerm}a as a function of the incident angle $\alpha_0$.
+This is a very substantial error, the SLM will not have sufficient pixels to correct for this. 
+Luckily, we use this microscope objective because it is already supposed to be corrected for $d_o=3.5$ mm of $n_o=1.510$. 
+We subtract this contribution from \cref{eq:FocusDifference}, which was filled in for $d_g=4.0$ mm of $n_g=1.453$, leaving only a small error in the refractive index and thickness mismatch.
+Again, we multiply with $(n-1)/\lambdaup$, finding the error in the correction in terms of waves $\delta \phi$
 
-\begin{equation}\label{eq:ConversionRadial}
-    \phi(r) \approx \frac{\pi d}{\lambdaup}(1-n_r)\left[
-    -\left(\text{NA}\frac{r}{R}\right)^2(1-n_r^2)+\frac{3}{4}\left(\text{NA}\frac{r}{ R}\right)^4(1-n_r^2)^2
-    \right].
+\begin{equation}\label{eq:Mismatch}
+    \delta \phi=
+    \frac{n_o-1}{\lambdaup}\cdot
+    \left[\delta f(d_g,n_g)-\delta f(d_o,n_o)\right].
 \end{equation}
-This is a function that can be decomposed in Zernike polynomials.
-The Zernike polynomials are a set of orthogonal polynomials on the unit disk, related to optical aberrations. 
-The coordinates on the unit disk can be denoted as $\rho = r/R$ and $\theta \in (0, 2\pi)$, such that the wavefront $\phi(\rho,\theta)$ can be expanded in terms $R_n^m(\rho)\cos{m\theta}$ and $R_n^m\sin{m\theta}$ where 
-
-\begin{equation}\label{eq:ZernikeRadial}
-    R_{n}^{m}(\rho)=
-    \sum_{s=0}^{(n-m) / 2}
-    \frac{(-1)^{s}(n-s) !}{s !\left((n+m)/2-s\right) !\left((n-m)/2-s\right) !} \rho^{n-2 s}
-\end{equation}
-is the radial Zernike polynomial set \cite{Mahajan94}. 
-Expanding \cref{eq:ZernikeRadial} in radial Zernike terms yields
-
-\begin{equation}\label{eq:ZernikeExpansion}
-    \phi(\rho) \approx 0.254 \cdot Z_0^0 - 12.9 \cdot Z_2^2 + 0.254\cdot Z_4^0.
-\end{equation}
+The result of \cref{eq:Mismatch} is plotted in \cref{fig:AberrationTerm}b.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/SphericalAberrationTerms.pdf}
@@ -483,13 +519,26 @@ Expanding \cref{eq:ZernikeRadial} in radial Zernike terms yields
     }
     \label{fig:AberrationTerm}
 \end{figure}
-Which is plotted in \cref{fig:AberrationTerm}a.
-But we do not need to correct for the full wave error: the $Z_0^0$ is a constant offset phase term. 
-Adding a constant has no effect so we can omit it. 
-The $Z_2^2 = \rho^2$ term is a defocus aberration, which we can also omit: it is unnecessary to correct for the shift in focus of the glass, we can do this by moving the objective. 
-That leaves the $Z_4^0 = 1 - 6\rho^2+6\rho^4$ term (primary spherical aberration) plotted in \cref{fig:AberrationTerm}b \footnote{Because the pupil of the microscope objective is conjugated with the short axis of the SLM, the radial coordinate $\rho =r/R$ also happens to apply on the SLM surface, if one substitutes $R=S_y$ (the short axis of the rectangular aperture).}.
+But we need to convert the angular dependence on a radial dependence in the objective plane. 
+Because the SLM plane is conjugated with the objective plane, this is equivalent to a radial dependence on the SLM. We convert from angles to radial distance in the objective plane $r'$ as
+
+\begin{equation}\label{eq:RadialCoordinate}
+    \alpha_0 = \operatorname{arcsin}\left(\frac{r'\text{NA}}{R}\right)
+    =\operatorname{arcsin}\left(\rho \text{NA}\right)
+\end{equation}
+Where we again used $\rho=r'/R$, hinting at the use of Zernike's polynomials again.
+In terms of Zernike functions.
+Substituting \cref{eq:RadialCoordinate} in the \cref{eq:Mismatch} and expanding in Zernike polynomials only the following terms remain:
+
+\begin{equation}
+    \delta \phi(\rho) = S_0 R_0^0(\rho) + S_2 R_2^2(\rho) + S_4 R_4^0(\rho).
+\end{equation}
+The first term $S_0$ is simply a constant having no effect on the diffraction and can thus be omitted. 
+The $S_2$ term we already used in \cref{sec:Demagnification}.
+In this case , it is the result of the changing focus distance of placing additional glass in the beam path.
+We fix this term by adjusting the focus of the objective and can thus be omitted as well.
+This leaves only the $Z_4^0 = 1 - 6 \rho^2 + 6 \rho^4$ term, which we plotted for $\rho=r'/R$ in \cref{fig:AberrationTerm}c.
 This primary spherical aberration was applied onto the SLM, its corresponding hologram is shown in \cref{fig:SLMphase}e.
-Note: the primary spherical aberration term can again be expanded if one wishes to do so: only its $\rho^4$ term is relevant for us, which is plotted in \cref{fig:AberrationTerm}c. 
 
 
 Even after the spherical aberration correction, we still noted unsatisfactory performance in the axial direction as discussed in \cref{sec:Tweezer3D}. 
@@ -550,12 +599,6 @@ To prevent marking noisy pixels as a peak, the array is convolved with a Gaussia
 The spots found by the algorithm are marked in \ref{fig:CameraLoG}b by red crosses. 
 If the detected number of spots is too little or too high, the detection threshold can be adjusted, which we did not find to be necessary in practice. 
 
-In \cref{fig:SpotsRoI}, the extracted \ac{RoI} by the \ac{LoG} algorithm is shown for the first 3 peaks. 
-Subsequently, the center of the peaks as found by the 2D fit $(x_{0,m},y_{0,m})$ is marked with the red dot, where the $1/e^2$ radii are marked by circles. 
-Subsequently, the extracted fit parameters can be used to perform some statistics.
-Histograms of the obtained waist (left) as well as trap depths (right) for the same $7\times7$ array are presented in \cref{fig:Histograms}.
-We fitted the data in the histograms to a normal distribution, yielding a waist of $w_0 = (0.89 \pm 0.03)$ $\mu$m, where the error denotes the standard deviation, and not the uncertainty in the calibration of the magnification. 
-
 \begin{figure}
     \centering
     \includegraphics[width=0.6\textwidth]{figures/SpotsCropped_range12.pdf}
@@ -565,17 +608,23 @@ We fitted the data in the histograms to a normal distribution, yielding a waist 
     \label{fig:SpotsRoI}
 \end{figure}
 
+In \cref{fig:SpotsRoI}, the extracted \ac{RoI} by the \ac{LoG} algorithm is shown for the first 3 peaks. 
+Subsequently, the center of the peaks as found by the 2D fit $(x_{0,m},y_{0,m})$ is marked with the red dot, where the $1/e^2$ radii are marked by circles. 
+Subsequently, the extracted fit parameters can be used to perform some statistics.
+Histograms of the obtained waist as well as trap depths for the same $7\times7$ array are presented in \cref{fig:WaistHistogram,fig:DepthHistogram}.
+We fitted the data in the histograms to a normal distribution, yielding a waist of $w_0 = (0.89 \pm 0.03)$ $\mu$m, where the error denotes the standard deviation, and not the uncertainty in the calibration of the magnification. 
+
 \begin{figure}
 	\begin{subfigure}{.49\linewidth}
 		\centering
-		\includegraphics[height=5.8cm]{figures/WaistHistogram.pdf}
+		\includegraphics[height=5.9cm]{figures/WaistHistogram.pdf}
 		\caption{}
 		\label{fig:WaistHistogram}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{.49\linewidth}
 		\centering
-		\includegraphics[height=5.8cm]{figures/DepthHistogram.pdf}
+		\includegraphics[height=5.9cm]{figures/DepthHistogram.pdf}
 		\caption{}
 		\label{fig:DepthHistogram}
 	\end{subfigure}
@@ -595,7 +644,7 @@ For example, the diffraction efficiency of the SLM increases as one gets closer 
 \pi/2 (\theta_{\text{m}}/\theta_{\text{m,max}})\}$ where $\theta$ is the deflection angle from the zeroth order \cite{Ebadi2021}.
 We neglected this effect for now: because quite a strong separation phase ramp was used, this variation will be small.
 
-The spread in trap depths is shown in \cref{fig:Histograms}.
+The spread in trap depths is shown in \cref{fig:DepthHistogram}.
 Because we only care about the spread and not about the magnitude of the intensity (the former is dependent on camera sensitivity, dichroic filters and laser power used), we normalize by the average trap depth $\left\langle U_0 \right\rangle$, yielding for this array a spread of $\sim 10$\%, which we found to be fairly typical irrespective of the amount of spots in the array.
 To our knowledge, there is no literature result of the measurement method used here to compare to, because in a cold atom experiment it is usually measured by an imaging system of similar \ac{NA} by
 

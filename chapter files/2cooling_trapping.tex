@@ -45,7 +45,7 @@ The force will not have a contribution for positive velocities $F^+$ as well as 
 	\left[1 + s_0 + 4\frac{(\delta + kv)^2}{\gamma^2}\right]^{-1}
 	\right\}.
 \end{equation}
-We have plotted the result of \cref{eq:OpticalMolasses} in \cref{fig:SpatialDependencePlots} as a function of velocity in units of $\gamma / k$, yielding a result that is dimensionless. Contributions of both beams, as well as their total force, are shown in units of $\hbar k \gamma$.
+We have plotted the result of \cref{eq:OpticalMolasses} in \cref{fig:VelocityDependence} as a function of velocity in units of $\gamma / k$, yielding a result that is dimensionless. Contributions of both beams, as well as their total force, are shown in units of $\hbar k \gamma$.
 Doing a series expansion to first order around $v = 0$, it can be shown the force can be linearized as \cite{Metcalf1999}
 
 \begin{equation}\label{eq:ForceLinearized}
@@ -122,13 +122,23 @@ Expanding \cref{eq:MOTfull} around $(v,z) = (0,0)$, keeping only first order ter
 Where $\beta$ is the same we found in \cref{eq:ForceLinearized} and $\kappa \equiv \mu' \beta /\hbar k \cdot \partial B/\partial z$. 
 Apart from the dampening force, we now also have a restoring force. 
 When applied in 3 dimensions this can be used to make clouds of ultracold atoms.
-The behavior of \cref{eq:ForceMOT} is shown in \cref{fig:SpatialDependencePlots}.
+The behavior of \cref{eq:ForceMOT} is shown in \cref{fig:VelocityDependence,fig:SpatialDependence}.
 
 \begin{figure}
-    \centering
-    \includegraphics[width=0.92\linewidth]{figures/SpatialVelocityDependence.pdf}
-    \caption{\textsf{\textbf{a)}} Optical molasses: contributions from the lasers in both directions $F^{+}$ and $F^{-}$ are shown, as well as the total force. \textbf{\textsf{b)}} Spatial force of the MOT beams and magnetic field gradient. Forces are dimensionless by dividing by $\hbar k \gamma$.}
-    \label{fig:SpatialDependencePlots}
+\centering
+	\begin{subfigure}{.49\textwidth}
+		\centering
+		\includegraphics[height=6.5cm]{figures/VelocityDependence.pdf}
+		\caption{}
+		\label{fig:VelocityDependence}
+	\end{subfigure}
+	\begin{subfigure}{.49\textwidth}
+		\centering
+		\includegraphics[height=6.5cm]{figures/SpatialDependence.pdf}
+		\caption{}
+		\label{fig:SpatialDependence}
+	\end{subfigure}
+	\caption{\textsf{\textbf{a)}} Optical molasses: contributions from the lasers in both directions $F^{+}$ and $F^{-}$ are shown, as well as the total force. \textbf{\textsf{b)}} Spatial force of the MOT beams and magnetic field gradient. Forces are dimensionless by dividing by $\hbar k \gamma$.}
 \end{figure}
 
 \section{Optical Dipole Traps}\label{sec:ODT}
@@ -171,7 +181,7 @@ Another quantity of interest is the scattering rate.
 The scattering rate from the ODT can be found by averaging over the product of the temporal derivative of the dipole moment with the electric field \cite{Grimm2000}
 
 \begin{equation}\label{eq:ScatteringRate}
-	\Gamma_{\text{sc}}(\mathbf{r}) = \frac{\left\langle \mathbf{\dot{p}} \cdot \mathbf{E} \right\rangle}{\hbar \omega}
+	\Gamma_{\text{sc}}(\mathbf{r}) = \frac{\left\langle \dot{\mathbf{p}} \cdot \mathbf{E} \right\rangle}{\hbar \omega}
 	 = \frac{\operatorname{Im}(\alpha)}{\hbar \epsilon_0 c} I(\mathbf{r}).
 \end{equation}
 \Cref{eq:DipoleForce,eq:ScatteringRate} are expressions that are valid for arbitrary light fields $I(\mathbf{r})$ and polarizabilities $\alpha$.
@@ -302,7 +312,7 @@ In \cref{ch:implementation} we elaborate more on how the MOT was realized experi
 
 \subsection{Magnetic Field}
 
-As is clear from \cref{fig:SpatialDependencePlots}, a magnetic field gradient is needed.
+As is clear from \cref{fig:SpatialDependence}, a magnetic field gradient is needed.
 To produce this gradient in 3 dimensions, typically an Anti-Helmholtz configuration is used. 
 This consists of two concentric coils with radius $R$, spaced a distance $R$ from each other. 
 The current that is run in the coils is opposite in direction, such that the magnetic fields cancel but their gradients are additive.
