@@ -339,6 +339,7 @@ Hence, we use a piece of glass with the same thickness and material (quartz glas
 
 The optical setup used for the measurements of this section is shown in \cref{fig:TiSandSLMsetup}. The lower right corner of the figure shows the two objectives and the glass plate. 
 The second objective\footnote{Newport M-60X 0.85 NA.} will produce an image onto a linear \ac{CCD} camera\footnote{Point Grey FLEA2 FL2-08S2M.}. 
+To prevent aberrations as a result of the protective glass on the CCD, we removed the cover glass.
 Because alignment of the Mitutoyo objective with the incident beam, as well as alignment of the two objectives with respect to each other is crucial, both objectives are mounted on 5 axis translation stages.
 
 \begin{figure}
@@ -471,7 +472,7 @@ This is confirmed by the coefficient of determination $R^2 > 0.99$.
 		\label{fig:3Dwaistfit}
 	\end{subfigure}
 	\caption{\textsf{\textbf{a)}} Measured tweezer potential on the CCD camera, as well as the 2D Gaussian fit.
-	\textsf{\textbf{b)}} Region of interest around the maximum that was used to extract the waist. For both plots: $R^2>0.99$, but it is higher for the fit in \textsf{\textbf{(b))}}}
+	\textsf{\textbf{b)}} Region of interest around the maximum that was used to extract the waist. For both plots: $R^2>0.99$, but it is higher for the fit in \textsf{\textbf{(b)}}}
 	\label{fig:3Dfits}
 \end{figure}
 
@@ -575,7 +576,7 @@ After some geometry for the line segment $\delta f$ and applying \cref{eq:Snell}
    d\left(1-\frac{\cos{\alpha_0}}{\sqrt{n^2-\cos^2{\alpha_0}}}\right),
 \end{equation}
 So \cref{eq:SphericalFocus} is a function of the angle $\alpha$ and will not be the same for paraxial rays compared to rays having a larger incident angle (marginal rays). 
-The $n$ and $d$ the objective is corrected for are slightly different, meaning $\delta f$ will be nonzero. 
+Because $d$ and $n$ the objective is corrected for are not matching, the corrected $\delta f$ will be different, leading to an aberration. 
 In \cref{subsec:AberrationCorrection} we explain how we computed the corresponding phase error of \cref{eq:SphericalFocus}, which we corrected using the \ac{SLM}.
 After correction, we measured a reduced Rayleigh range of $z_R \sim 5.2$ $\mu$m, which is still significantly larger than the result from theory. 
 Subsequently, we applied an extra cylindrical lens to the SLM to correct astigmatism, which is also explained in \cref{subsec:AberrationCorrection}, yielding a fit of $z_R \sim (3.6 \pm 0.5)$ $\mu$m which is much closer to the $\sim 3.0$ $\mu$m theoretically possible.

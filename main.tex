@@ -44,7 +44,7 @@
 \usepackage[bf, sf]{titlesec}
 \usepackage{microtype}
 \renewcommand{\figurename}{Fig.}
-\setstretch{1.05}
+\setstretch{1.04}
 \usepackage{blindtext, color}
 \setlength{\parskip}{0pt}
 
@@ -52,9 +52,11 @@
 \usepackage{enumitem}
 
 % font
+\usepackage[scaled=0.93]{helvet}
 \usepackage[T1]{fontenc}
-\usepackage[scaled=1.02]{XCharter}%serif
-\usepackage[scaled=0.96]{helvet} % sans serif
+\usepackage[scaled=1.03]{XCharter}%serif
+
+%\usepackage[scaled=0.96]{helvet} % sans serif
 \usepackage[]{newtxmath} % math font, options in []. Leave.
 \usepackage[scaled=0.9]{DejaVuSansMono} % mono
 
@@ -115,7 +117,7 @@
             \thispagestyle{plain}
             \vspace*{0.5cm}
             \normalsize
-           % \input{chapter files/front matter/abstract.tex}
+            \input{chapter files/front matter/abstract.tex}
         \end{abstract}
     \vfill
     \vspace{100pt}
@@ -128,7 +130,7 @@
             \thispagestyle{plain}
             \vspace*{0.5cm}
             \normalsize
-            %\input{chapter files/front matter/acknowledgments.tex}
+           % \input{chapter files/front matter/acknowledgments.tex}
         \end{abstract}
     \vfill
     \vspace{100pt}
