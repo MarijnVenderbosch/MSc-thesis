@@ -161,16 +161,16 @@ To image the MOT we position a CCD cameras\footnote{UEye UI-2230SE} looking at t
 The camera is positioned in an $X-Y-Z$ translation stage and features a 780 nm band-pass filter. 
 This camera has a magnification of $0.5$ and has a $f=100$ mm lens. 
 Having camera images from two perpendicular axes allows for spatial overlapping in three dimensional space, more about this in \cref{subsec:Overlap}.
-
 The top windows of the glass cell is used by the identical Mitutoyo microscope objective. 
 The objective is brought in focus with the tweezers and the MOT is overlapped with both microscope objectives, ensuring we are in focus.
 
 
 A picture showing the laser-induced fluorescence from the MOT as imaged through the camera on the side is shown in \cref{fig:LiF}.
-A Lorentzian fit of the spatial profile in $x$ and $y$-directions is shown in \cref{fig:LiF}.
+A Gaussian fit of the spatial profile in $x$ and $y$-directions is shown in \cref{fig:LiF}.
 When moving the MOT with the compensation coils, we see the MOT seem to change shape. 
 Probably, this is due to the compensation coils not being perfectly Helmholtz (their spacing is unequal to their radius). 
 As a result, the Helmholtz pair that makes a field in the $y$-direction could also have $x$ and $z$ components, for example. We think that for us this is not really a problem, however.
+For the image in \cref{fig:LiF}, we find a 
 
 \begin{figure}
     \centering
@@ -194,8 +194,15 @@ The camera sensitivity constant $C$ for this particular camera was determined to
 In \cref{eq:AtomNumber} $\gamma = 2\pi \cdot 6.0 \cdot 10^6$ is the aforementioned linewidth of the D2 transition of Rb-85, $\beta \sim 0.6$ is a parameter taking into account photon loss of the glass cell and band-pass filter, $l = 20$ cm is the distance from the MOT to the collection lens and $R = 25$ mm is its radius. 
 An additional factor of 2 comes in to account for the atoms occupying the excited state half of the time on average. 
 We typically find a an atom number $\sim 10^5$.
-This is a relatively small number of atoms for a Rb magneto-optical trap, but still orders of magnitude more than we need for loading them in arrays of optical tweezers. 
+This is a relatively small number of atoms for a Rb magneto-optical trap.
 A possible explanation for the rather small number of atoms is that the unbalance in the various MOT beams: as a result of the rather large angle the vertical MOT beams make with the glass cell to make room for the microscope objective(s), there is significant loss of power in the retro-reflected beam, which has to pass the glass cell twice. 
+From the atom number, we can estimate the peak atom density in the MOT $n_0$ as \cite{Townsend1995}
+
+\begin{equation}
+    n_0 = \frac{N}{(\sqrt{2\pi}\sigma)^3}.
+\end{equation}
+
+Which yields $n_0 \sim 10^9$.
 In a next iteration of this Rb machine or a Sr equivalent, it would be useful to have 6 independent laser beams instead of 3 retro-reflected ones, though this comes at a cost of requiring more power. 
 But the quantity that is of more relevance for optical tweezers is the MOT temperature, which was measured by Rik van Herk to be $200$ $\mu$K \cite{Herk2022}, which is slightly above the Doppler temperature. 
  
@@ -229,9 +236,11 @@ The holder is shown in \cref{fig:Coils}.
 		\label{fig:Coils2}
 	\end{subfigure}
 	\caption{
-	\textsf{\textbf{a)}} and  Housing for the magnetic field coils. The glass cell is moved into the coils. 
-    The hole on the right is for the horizontal MOT beam, while th angled beams travel into the section with the large holes. The microscope objectives are positioned on 5-axis piezo controlled stages using a custom aluminum mount. 
-    \textsf{\textbf{b)}} Picture from another angle, showing the piezo stage for the top objective on top and the vacuum vessel in the background as well. 
+	\textsf{\textbf{a)}} and  Housing for the magnetic field coils. 
+	The glass cell slides into the magnetic field coils enclosure.
+    The microscope objectives are positioned on 5-axis piezo controlled stages using a custom aluminum mount. 
+    \textsf{\textbf{b)}} Different angled picture, showing the vacuum vessel in the background as well. 
+    The large holes in the enclosure for the coils is for the angled MOT beams.
     }
     \label{fig:Coils}
 \end{figure}
@@ -296,14 +305,14 @@ The fraction $\eta$ of fluorescence that can be captured by our imaging system i
     \eta = \frac{\Omega}{4\pi} = 
     \frac{1}{2}\left(1-\sqrt{1-\frac{\text{NA}^2}{n^2}}\right)
 \end{equation}
-For $\textsf{NA}=0.5$ and $n=1$, this collection fraction is $\eta =6.7$\%. 
+For $\textsf{NA}=0.5$ and $n=1$, this collection fraction is $\eta =0.067$. 
 Because the amount of photons that can be collected from an atom in a tweezer is limited, it is important to maximize \cref{eq:Collection}.
 We collect the laser-induced fluorescence using the same microscope objective as used for producing the tweezer, separating it from the tweezer beam using a \ac{DM} \footnote{Thorlabs DMLP805, 1 inch}.
 This is shown in \cref{fig:GlassCellTop}.
 This dichroic mirror has a 805 cut-off, which is why 820 nm was chosen for the dipole traps.
 We could collect the fluorescence from the top objective as well, but this has the disadvantage that the top objective is looking directly in the dipole laser, which we found near impossible to fully separate from the relatively weak fluorescence signal. 
 
-The fluorescence is steered onto the Andor Zyla 5.5 sCMOS camera chip covered by a 780 band-pass filte, see \cref{fig:GlassCellTop,fig:GlassCellSide}.
+The fluorescence is steered onto the Andor Zyla 5.5 sCMOS camera chip covered by a 780 band-pass filter, see \cref{fig:GlassCellTop,fig:GlassCellSide}.
 The pixel size is 6.5 $\mu$m, or 19.5 $\mu$m using $3\times3$ pixel binning. 
 It is focused onto the chip using a $f= 55$ mm lens\footnote{Nikon Micro-NIKKOR 55 mm f/2.8}.
 Using \cref{eq:InfinityMagnification} this comes down to a magnification factor of $13.75$.
@@ -325,7 +334,7 @@ As shown in \cref{fig:RbLaserSetup}, we split off a tiny amount of power to a se
 The probe is recombined with the MOT beams in \cref{fig:GlassCellTop}, but we have full control over which beam it will go because of the $\lambdaup/2$ plate.
 We typically run the probe with a blue detuning of $\delta \sim +3\gamma$ (the transition is Stark shifted to the blue) and intensity $I = 0.5 I_{\text{sat}}$, which for our beam diameters comes down to $\sim0.$5 mW per beam. 
 
-\subsection{Experimental Sequence}
+\subsubsection*{Experimental Sequence}
 
 After letting the MOT build up for about 800 ms, we overlap the tweezer with it for about 150 ms.
 This is done by a mechanical shutter, positioned on the \ac{Ti:S} laser table.
@@ -338,41 +347,68 @@ The imaging consists of triggering the probe beam as well as triggering the sCMO
 The triggering sequences are fed to the hardware using a programmable pattern generator custom built in our group. 
 The imaging sequence is shown in \cref{fig:Sequence}.
 
+\begin{figure}
+    \centering
+    \includegraphics{figures/Sequence.pdf}
+    \caption{Experimental sequence used to record laser-induced fluorescence from atoms trapped in an array of optical tweezers. }
+    \label{fig:Sequence}
+\end{figure}
+
 For the atomic fluorescence pictures shown, the magnetic field was left on, but in the future it should be turned off. 
 The reason is that the probe light is circularly polarized, which will cause Zeeman energy shifts in the array (\cref{eq:DetuningFull}).  
 Due to Eddy currents, the magnetic field cannot be instantly switched off. 
 Rik van measured measured a $1/e$ decay time of 8 ms when turning off the field \cite{Herk2022}, which in our case is definitely useable 
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.76\textwidth]{figures/Sequence.pdf}
-    \caption{Experimental sequence used to image the tweezer arrays. The entire sequence takes about 1.7 seconds. 
-    The optical dipole trap overlapped for 150 ms with the magneto optical trap. 
-    The probe and camera shutter start 10 ms after shutting off the MOT beams.}
-    \label{fig:Sequence}
-\end{figure}
 
-\subsection{Fluorescence Images}
+\subsubsection*{Images}
 
 Below we show several images of atoms in our tweezer. 
 These images were recorded using the aforementioned experimental sequence. 
 We also performed exactly the same experimental sequence, but without turning no the dipole trap laser. 
 The latter should only yield background as a result of atoms remaining from the expanding MOT or scattered photons from the probe beam. 
-We subtracted the two images from each other, yielding the image in ...
+We subtracted the two images from each other, yielding the image in \cref{fig:fluorescence}
+
+
+\begin{figure}
+    \centering
+	\begin{subfigure}{.49\linewidth}
+		\centering
+		\includegraphics[height=5.5cm]{figures/2x2fluorescence.pdf}
+		\caption{}
+		\label{fig:fluor2x2}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{.49\linewidth}
+		\centering
+		\includegraphics[height=5.5cm]{figures/2x3fluorescence.pdf}
+		\caption{}
+		\label{fig:fluor2x3}
+	\end{subfigure}
+	\caption{
+	Fluorescence imaged onto the sCMOS camera when \textsf{\textbf{a)}} applying a $2\times2$ array pattern to the SLM and \textsf{\textbf{b)}} a $2\times 3$ array.
+	Averaged over 50 runs.
+    }
+    \label{fig:fluorescence}
+\end{figure}
+
 This procedure was averaged a number of times as the signal to noise ratio was too low when not averaging. 
-It is unclear why this is the case but we think these are some of the most important ones
+It is unclear why this is the case, most most likely it is not because too little atoms are loaded into the tweezer.
+The reason is that our atom density of $\sim 10^9$ is comparable to the values mentioned in \cite{Schlosser2002} and are of similar order of magnitude to our collaborators at the University of Amsterdam.
+Also, we have a relatively high atom temperature for loading optical tweezers, which should mean we have an even larger loading rate $R$ (\cref{eq:LoadingTweezer}).
+This can be described by the following model \cite{Kuppens2000}
 
-\begin{enumerate}
-    \item Low tweezer loading rate. 
-    \item Camera has high amount of noise. 
-\end{enumerate}
+\begin{equation}
+    R \propto n_0 \bar{v} A\propto n_0 T^{1/2} w_0^2.
+\end{equation}
 
-Starting with 1. The MOT has 
+Here, $A$ is the area of the dipole trap as seen by the atom approaching with velocity $\bar{v}$. In our case $A \propto w_0^2$.
+This model, which is only applicable in initial loading of the tweezer would thus predict that it is unlikely we have a loading rate that is too low. 
 
-
-
-
-Because the quantum-efficiency and readout noise of this camera is sub-optimal for single-atom detection, we will upgrade to the Andor iXon Ultra 888 in the future. 
+Rather, it is possible that the signal to noise ratio of the detection is too low. 
+We also see that for more averages, the signal to noise significantly improves. 
+Possible causes are that at the moment, we do not have a physical shutter in front of the camera. 
+The camera should clear its array prior to beginning imaging, but we noticed that it does not do this. 
+Also, the amount of photons we collect is quite small. Apart from the 0.069 collection fraction, 
 
 
 
