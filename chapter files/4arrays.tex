@@ -594,14 +594,6 @@ To do this, we performed 2D Gaussian least-square fits (\cref{eq:2DGaussian}) as
 The fit is similar to the one shown in \cref{fig:3Dshowing}.
 Each fit of spot $m$ has 5 fit parameters: the amplitude (optical trap depth) of the Gaussian: $U_{0,m}$, the center of the potential $(x_{0,m}, y_{0,m})$ and lastly the spread of the Gaussian in Cartesian coordinates $\{\sigma_{x,m},\sigma_{y,m}\}$.
 Similar to the single tweezer of the previous chapter, the waist is obtained as $w_{0,m} = \sigma_{x,m}+\sigma_{y,m}$, a assumption valid for $\sigma_x\sim\sigma_y$.
-
-In order to routinely perform each fit, a starting guess for the center of each potential is needed, after which a \ac{RoI} can be extracted similar to \cref{fig:3Dwaistfit}.
-To reliably detect the expected number of spots, we used the \ac{LoG} edge detection algorithm \cite{Haralick1992}. 
-This methods works by computing the second spatial derivative in $x$ and $y$ (Laplacian) of a 2D-array. 
-If this second derivative crosses a zero with a slope above a certain user-defined threshold, a feature is marked as an edge (spot).
-To prevent noisy pixels from being marked as an edge, the image is first convolved with a Gaussian, smoothing out these pixels. 
-We set the Gaussian to have a $\sigma$ roughly the same dimensions as the feature one wishes to detect. 
-If the detected number of spots is too little or too high, the detection threshold can be adjusted, which we did not find to be necessary in practice. 
 \begin{figure}
     \centering
     \includegraphics[width=0.62\textwidth]{figures/SpotsCropped_range12.pdf}
@@ -611,6 +603,13 @@ If the detected number of spots is too little or too high, the detection thresho
     \label{fig:SpotsRoI}
 \end{figure}
 
+In order to routinely perform each fit, a starting guess for the center of each potential is needed, after which a \ac{RoI} can be extracted similar to \cref{fig:3Dwaistfit}.
+To reliably detect the expected number of spots, we used the \ac{LoG} edge detection algorithm \cite{Haralick1992}. 
+This methods works by computing the second spatial derivative in $x$ and $y$ (Laplacian) of a 2D-array. 
+If this second derivative crosses a zero with a slope above a certain user-defined threshold, a feature is marked as an edge (spot).
+To prevent noisy pixels from being marked as an edge, the image is first convolved with a Gaussian, smoothing out these pixels. 
+We set the Gaussian to have a $\sigma$ roughly the same dimensions as the feature one wishes to detect. 
+If the detected number of spots is too little or too high, the detection threshold can be adjusted, which we did not find to be necessary in practice. 
 The spots found by the algorithm are marked in \ref{fig:CameraLoG}b by red crosses. 
 In \cref{fig:SpotsRoI}, the extracted \ac{RoI} by the \ac{LoG} algorithm is shown for the first 3 peaks. 
 Subsequently, the center of the peaks as found by the 2D fit $(x_{0,m},y_{0,m})$ is marked with the red dot, where the $1/e^2$ radii are marked by circles. 
@@ -671,7 +670,7 @@ In both cases, the light travels twice through the high-NA lens and vacuum glass
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.6\textwidth]{figures/UniformityAmountsSpots.pdf}
+    \includegraphics[width=0.65\textwidth]{figures/UniformityAmountsSpots.pdf}
     \caption{Standard deviation of normal distribution fit plotted against the array dimension $\sqrt{n\times n}$ where $n \times n$ is the amount of spots. }
     \label{fig:Uniformity}
 \end{figure}
