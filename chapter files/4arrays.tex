@@ -210,8 +210,6 @@ The definitions of the diffraction efficiency $e$ and uniformity $u$ are
 and are evaluated after each iteration $k$. 
 The algorithm stops if the user-defined minimum criteria for diffraction efficiency or uniformity are met.
 
-\subsubsection*{Implementation}
-
 The algorithm was implemented in Python by Ivo Knottnerus as part of his PhD research.
 Because the SLM has $\sim 2$ million pixels, converting to and from the SLM plane, so performing equations \cref{eq:Vm,eq:Argument}, can be time consuming depending on the desired pattern.
 Therefore, these computations are performed on a graphics card using the \textit{PyOpenCL} library. 
@@ -230,11 +228,11 @@ In the next section, we will elaborate upon some other practical considerations 
     \centering
     \caption{Key specifications of the Meadowlark SLM.}
     \label{table:SLMspecs}
-    \begin{tabular}{l | l}
-        \textbf{Specification}              & \textbf{Value}        \\ \hline 
-        Array size                          & 15.4 x 9.6 mm         \\ \hline
-        Resolution                          & 1920 x 1200 pixels    \\ \hline
-        Bit depth                           & 8 bit                 \\ \hline
+    \begin{tabular}{l l}
+        \textbf{Specification}              & \textbf{Value}        \\ \hline \hline
+        Array size                          & 15.4 x 9.6 mm         \\ 
+        Resolution                          & 1920 x 1200 pixels    \\ 
+        Bit depth                           & 8 bit                 \\ 
         Diffraction efficiency (785 nm)  & 76-79\%   
     \end{tabular}
 \end{table}
@@ -253,40 +251,17 @@ This calibration serves two purposes:
     
     \item Linearize this electro-optical response curve. 
 \end{enumerate}
-The calibration has to be performed because each individual SLM has a slightly different electro-optical response. 
-Furthermore, it is wavelength specific, which is why we performed it for the wavelength relevant for Rb experiments at 820 nm. 
+For each individual SLM, the electro-optical response is slightly different, which is why we calibrated it.
+In doing this, we used the specific wavelengths to be used in our experiment.
 Measuring the electro-optical response directly is impossible because the light field oscillates with frequencies in the THz regime.
 There are a variety of methods to measure it indirectly for a phase-only \ac{SLM}, however \cite{Li2019}.
 We chose the diffractive calibration method, originally proposed by \cite{Zhang1994}.
 The method works by applying a variety of Ronchi gratings onto the SLM, see \cref{fig:LUTCalibrationSetup}.
-This is a pattern consisting of $M$ periods of width $w=8$ pixels in the horizontal direction and a vertical height $H$ of gray values $L$ alternating between $L=L_1$ and $L=L_2=0$.
-Gray values are 8 bit numbers representing the degree of modulation where 0 (black) means no modulation or $V=0$ while 255 (white) is maximum modulation: $V=5$V. As an example, we first consider a Ronchi grating with ones period $M=1$, shown in \cref{fig:OneGrating}.
+This is a pattern consisting of $M$ periods of width $w=8$ pixels in the horizontal direction and a vertical height $H$ of gray values $L$ alternating between $L=L_1$ and $L=L_2=0$, see \cref{fig:LUTCalibrationSetup}.
+Gray values are 8 bit numbers representing the degree of modulation where 0 (black) means no modulation or $V=0$ while 255 (white) is maximum modulation: $V=5$V. 
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.42\textwidth]{figures/OneGrating.pdf}
-    \caption{Ronchi grating for a single grating $M=1$ as well as $L_2=0$.}
-    \label{fig:OneGrating}
-\end{figure}
-
-\noindent Assuming amplitude modulation between different gray levels is negligible (a fair assumption for phase-only SLMs), after applying the Ronchi graing of \cref{fig:OneGrating} the electric field just after the SLM will be
-
-\begin{equation}\label{eq:Single}
-    f(x,y) = e^{i\phi(L_1)} \operatorname{rect} \left\{ 
-    \frac{x'-w/4}{w/2}\right\} +
-    \operatorname{rect}\left\{ \frac{x'-3w/4}{w/2}\right\}.
-\end{equation}
-In \cref{eq:Single} $\operatorname{rect}\{(x'-a)/b\}$ is the rectangular function, which is unity for a width $b$ centered around $x'=a$ and zero elsewhere.
-In the case of the single grating, $\{a=1/4, 3/4\}$ and $b=w/2$.
-For $M>1$, this pattern is simply repeated an additional $M-1$ times \cite{Zhang1994}
-
-\begin{equation}\label{eq:FieldAfterSLM}
-    f(x,y) = \sum_{m=0}^{M-1} \left[
-    e^{i \phi(L_1)} \operatorname{rect}\left\{\frac{x'-m w - w/4}{w/2}\right\} + 
-    e^{i \phi(L_2)}\operatorname{rect}\left\{\frac{x'- m w - 3 w/4}{w/2}\right\}
-    \right].
-\end{equation}
-
+When applying a binary grating like this Ronchi grating, the diffracted light will end up in the zeroth or first diffraction orders, depending on the gray level $L_1$.
+In \cref{ch:ElectroOptical}, we derive the that this dependency relation between the gray level $L_1$ and the power in the first order $I_1$ is
 \begin{figure}
 	\begin{subfigure}{.51\linewidth}
 		\flushleft
@@ -307,23 +282,13 @@ For $M>1$, this pattern is simply repeated an additional $M-1$ times \cite{Zhang
 	\textsf{\textbf{b)}} Normalized power in the first order as a (\textcolor{red}{red}) and the fitted voltage response (\textcolor{blue}{blue}) as a function of the applied gray level $L_1 \in (0-255)$.}
 \end{figure}
 
-\noindent According to Fourier optics, if we place a lens after the SLM, the field in the \textit{Fourier} plane of the lens is the 2D spatial Fourier transform of the field after the SLM, as derived in \cref{eq:FraunhoferDiffractionIntegral} as well as in \cref{eq:2Dcase}.
-The field is thus for $y=0$ (we separate the different orders in the $x$-direction around $y=0$) proportional to the spatial Fourier transform $F = \mathcal{F}(f)$, and the intensity $I\propto |F|^2|$ as \cite{Zhang1994}
-
-\begin{equation}\label{eq:FourierIntensity}
-    |F(p,0)|^2\propto
-    \frac{M^2 w^2}{2}\operatorname{sinc}^2\left(\frac{M p w}{2}\right) \times
-    \frac{1 + \cos{\left[\phi(L)+p w/2\right]}}{\cos^2(p w/4)}.
-\end{equation}
-In \cref{eq:FourierIntensity} $p=2\pi x/\lambdaup f$ is the Fourier transformed spatial coordinate. The intensity in the first order ($p=\pm 2\pi/w$) is
-
 \begin{equation}\label{eq:IntensityFirstOrder}
     I_1(\phi(L_1)) \propto
     \frac{w^2}{\pi^2} \left[ 
     1-\cos{\phi(L_1)}
     \right],
 \end{equation}
-which is a useful expression as it gives a relation between the power in the first order (which we can measure) as a function of the applied gray level $L_1$.
+Because the power in the first order is a measurable quantity, we can use this to find the relation with the gray levels from this.
 Experimentally, we load a sequence of Ronchi gratings onto the SLM, looping $L_1$ from the minimum $L_1=0$ to the maximum gray value $L_1=255$, while keeping $L_2 =0$ the whole time.
 For our 8-bit SLM, this amounts to looping over 255 gray values, which we did with the help of an edited \textit{labVIEW} script from the manufacturer.
 For each hologram, separate the multiple diffraction orders using a $f=400$ mm lens (such that the spacing between the various orders is sufficient) and an aperture and record the power in the first order using a power meter.
@@ -345,7 +310,7 @@ In order to make use of the maximum amount of degrees of freedom (pixels) the SL
 However, because the incident beam is described by a Gaussian, this will lead to power loss as a result of light falling outside of the chip area.
 The ideal incident waist size is thus a compromise between power efficiency on the one and amount of pixels used on the other hand.
 We estimate this power loss by reflecting a Gaussian beam $G(x,y)$ having waist $w(z)$ and power $P_0$ off of a rectangular aperture of dimensions $(2S_x, 2S_y)$ where $S_{x,y}$ are the semi-widths of the aperture, see \cref{fig:Rectangular}.
-\begin{figure}[h]
+\begin{figure}[]
     \centering
     \includegraphics[width=0.31\textwidth]{figures/RectangularAperture.pdf}
     \caption{Laser beam with waist $w(z)$ reflecting off the SLM with rectangular semi-widths $S_x$ and $S_y$.}
@@ -412,7 +377,7 @@ Moreover, apart from adapting the beam size, the telescope serves two more funct
 To accommodate room for the objective holder, (dichroic) mirrors, a polarizing beam splitter cube leave room for additional optics in the future, we estimate from a CAD drawing we need $\sim 45$ cm of room between the last relay lens of the telescope and the objective. 
 Using a Keplerian telescope, this distance will be equal to $f_2$ (\cref{fig:SLMbeampath}).
 Also knowing that $f_1=f_2/M$ and the total length of the telescope is $2f_1+2f_2$, this is already $\sim 305$ cm of beam path on the optical table. 
-To reduce this, we borrowed a trick from our collaborators at the University of Amsterdam, where we use the SLM as the first lens of the system with focal length $f_s$ in conjunction with another relay lens $f_r$ (see \cref{fig:SLMbeampath}, to not confuse ourselves with $f_1$ and $f_2$ of the equivalent Keplerian telescope we renamed the variables). 
+To reduce this, we borrowed a trick from our collaborators at the University of Amsterdam \cite{Urech2022}, where we use the SLM as the first lens of the system with focal length $f_s$ in conjunction with another relay lens $f_r$ (see \cref{fig:SLMbeampath}, to not confuse ourselves with $f_1$ and $f_2$ of the equivalent Keplerian telescope we renamed the variables). 
 In terms of the ABCD matrix formalism, the transfer matrix $\mathbf{M}$ for the system in \cref{fig:SLMbeampath}b is
 
 \begin{figure}

@@ -1,0 +1,56 @@
+To conclude, in this work we described progress towards a neutral-atom based quantum co-processor. 
+We focused on a small part of this bigger project, which is the design and implementation in a cold atom experiment of a holographic optical tweezer setup. \\
+
+\noindent To test the performance of the setup, we first tested it outside of the machine.
+We studied the light distribution from the glass-compensated microscope objective when using an input beam $\lambdaup = 820$ from a titanium sapphire laser with Gaussian waist equal to the aperture radius of the microscope objective, finding a near diffraction-limited waist of the optical tweezer of $0.79 \pm 0.05$ $\mu$m after deconvolution with the 0.85 NA imaging objective. 
+From diffraction theory, we know that the ideal result would be a 9\% broader waist than the $0.689$ $\mu$m Abbe limit because of the Gaussian input beam used, which is $\approx 0.75$ $\mu$m.
+We studied the axial direction by scanning the microscope objective along the optical axis, finding a Rayleigh range of $6.2\pm0.5$ $\mu$m, which is much larger than the result from diffraction theory at $\sim 3.0$ $\mu$m for our parameters (beam diameter, numerical aperture). 
+After aberration correction using the SLM we find a Rayleigh range of $3.6 \pm 0.5$ $\mu$m.
+The aberrations originated from the incorrect cover glass thickness, which is effectively a spherical aberration as well as astigmatism caused by the SLM.
+Most likely, the latter is caused by reflecting from the SLM under an angle.
+These aberrations did not significantly affect the intensity distribution in the beam waist (radial direction).
+The trap depths of the tweezer array showed a non-homogeneity of $\sim$ 7-12 \%.
+Larger arrays are typically less uniform, probably because the SLM patterns contain higher spatial frequencies for more complicated patterns, introducing deviations. 
+
+Subsequently, we implemented the setup in the experiment.
+To load the tweezer array with cold atoms, we constructed a magneto-optical trap inside a glass cell. 
+The MOT produces roughly $\sim10^5$ atoms at a temperature of $(2.2 \pm 0.2) \cdot 10^2$ $\mu$K.
+Because the temperature is relatively high, we need large trap depths of $U_0/h \sim 80$ MHz to reliable trap atoms in tweezers, requiring $\sim 3.5$ mW of power per tweezer.
+At the moment, this laser power limits us to about 6 traps, after accounting for all the power losses in the setup. 
+After averaging over several tens of runs, we can detect a fluorescence signal from atoms trapped in $2\times 2$ or $2\times 3$ arrays of tweezers. 
+We have to average over multiple runs because the signal to noise ratio is low.
+Even after blocking the camera, we still see a noise floor orders or magnitude higher than the atomic signal. \\
+
+\noindent To improve the signal to noise, ratio of the detection of atoms in tweezers, we bought a new camera: the Andor iXon Ultra 888.
+This is a electron-multiplying \ac{CCD}, which has higher sensitivity, making them ideal for imaging single atoms in tweezer arrays.
+Additionally, this new camera should also significantly increase our quantum efficiency.
+    
+When the signal to noise is improved and we no longer have to average a large number of images, we can study the average number loaded in our tweezer array in a quantitative fashion.
+To see whether we indeed load single atoms, as a function of time the photon count from a tweezer site should show behavior that is 'binary'. A count number above a certain threshold would correspond to a single atom, where counts below this threshold means the tweezer is empty or zero atoms. 
+    
+If we indeed have single atoms and the average amount of atoms in a tweezer is $\simeq 0.5$, this would still mean that on average the array will only be half-filled.
+To combat this, an additional sorting beam could be used. 
+This sorting beam is a single optical tweezer potential, overlapped with the array. 
+The sorting beam can be moved quickly using a set of two \ac{AOD}s in crossed configuration.
+Because its potential is deeper than the tweezer potential, it can be used to re-arrange single atoms one by one into defect-free arrays on the fly as shown by \cite{Barredo2016}.
+
+The tweezer array shows a non-homogeneity in trap depths of 7-12\%. This is fairly high and will lower achievable qubit operation fidelities.
+It can be improved by dynamically adapting the weight factors in the \ac{GSW} in a feedback loop, where as input for the loop we can use either the measured light intensities or the trap depths as measured by Stark shifted atomic fluorescence from atoms in tweezers. \\
+
+    
+\noindent To scale to a higher number of tweezer (qubits), the amount of optical power available could be increased by using the titanium sapphire laser power more efficiently. 
+For example, this could be done by omitting the fiber coupling step and moving the laser to the main optical table. 
+Alternatively, the amount of power required per trap could be reduced by lowering the temperature of the atoms in the MOT. 
+For Rb, sub-Doppler cooling techniques exist such as polarization-gradient cooling. 
+Sr, on the other hand, has the advantage that we can use the narrow-linewidth red MOT, which would open up the road to cooling to 1 $\mu$K temperatures.
+This opens up the road to higher fidelities, less noise and larger neutral atom arrays. 
+Also, with its meta-stable 'second ground state', Sr is more suitable for quantum computation applications.
+    
+To induce interactions between neutral atoms, a laser that excites to Rydberg states will have to be implemented. 
+Our group has done this on Rb before \cite{Bijnen2013}, but for Sr the implementation is entirely different. 
+The exact Rydberg level we want to use has not been decided upon yet. 
+
+Finishing up, to realize a quantum co-processor using a variational quantum eigensolver type of algorithm, a new apparatus has to be constructed. 
+The holographic optical tweezers setup that was described in this work can be left almost unchanged with minor adjustments such at changing the far off-resonant dipole trap laser to the for Sr magic 813 nm line. 
+
+

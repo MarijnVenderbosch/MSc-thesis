@@ -343,7 +343,7 @@ and only taking into account the $J=1/2 \rightarrow J'=1/2$ (D$_1$) and $J=1/2 \
 \end{equation}
 where the subscripts 1 and 2 denote the contributions from the D$_1$ and D$_2$ lines. 
 To effectively load atoms from the MOT in the bottom of the tweezer, the tweezer trap depth $U_0$ should be larger than the temperature of the atoms. 
-The temperature was measured by Rik van Herk \cite{Herk2022} and is roughly 220 $\mu$K.
+The temperature was measured by Rik van Herk \cite{Herk2022} and is $(2.2\pm0.2) \cdot 10^2$ $\mu$K.
 Because we want the atoms to occupy the bottom of the tweezer, we used a trap depth of $U_{\text{dip}} /k_b \sim 3.5$ mK for the tweezer, here $k_b$ denotes Boltzmann's constant, or $U_{\text{dip}} / h \sim 80$ MHz.
 Using \cref{eq:RbTrapDepth} and the relation between light intensity and power $P$ of a Gaussian beam $I = 2P/\pi w^2$, we find we can estimate the amount of power needed given the wavelength and waist of the laser beam. 
 
@@ -366,7 +366,7 @@ Initially, we plan to run the machine in Eindhoven on \textsuperscript{88}Sr.
 Because of the lack of hyper-fine structure, this isotope is a bit easier to work with.
 Though, in principle, one can use all isotopes in the same machine as the energy splitting between the isotopes is in the hundreds of MHz regime, easily covered by AODs and EOMs \cite{Stellmer2013}.
 
-\subsection{Relevant Transitions}
+\subsection{Relevant Transitions}\label{subsec:Transitions}
 
 A simplified version of the level diagram of \textsuperscript{88}Sr is shown in \cref{fig:SrLevel}. 
 \begin{figure}
@@ -389,6 +389,7 @@ This level scheme shows 7 out of 8 lasers to be used in this experiment:
 	This is useful to slow down the hot atomic beam coming from the oven, as well as catching the atoms in a so-called blue \ac{MOT} with 'hot' temperatures of $\sim$ 1 mK.
 	
 	\item 689 nm. Because it is much narrower than the blue transition, its Doppler temperature \cref{eq:DopplerTemperature} is much lower at $179$ nK, although in practice cooling is limited by the recoil limit to some $\sim 1$ $\mu$K \cite{Stellmer2013,Boyd2007}.
+	This transition is used in what is typically the red MOT, following after the blue MOT. 
 	
 	\item 698 nm. The ultra-narrow clock transition ($\gamma = 1$ mHz). 
 	Used in atomic clocks because of its spectroscopic accuracy \cite{Bloom2014}.
