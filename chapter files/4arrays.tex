@@ -1,7 +1,7 @@
 \section{Introduction}
 
-For a quantum computer, multiple qubits are needed that are capable of interacting with each other. 
-Thus, we need to make an array of the tweezers described in \cref{ch:tweezer}, spaced from each other in the order of micrometers. 
+To make a working quantum computer using the optical tweezers described in the previous \cref{ch:tweezer}, 
+we need an array of tweezers with several microns of space between them. 
 This can be done by sending several laser beams to the objective, each under slightly different angles. 
 Experimentally, this could be realized using an \ac{AOD}: a device that diffracts light off of a sound wave in a crystal, where the degree of diffraction is controlled by a \ac{RF} signal. 
 By using 2 AODs in an orthogonal configuration, each supplied by a superposition of RF signals (see \cref{fig:CrossAOD}), 2D arrays of optical tweezer were successfully realized \cite{Manuel2016}. 
@@ -209,7 +209,6 @@ The definitions of the diffraction efficiency $e$ and uniformity $u$ are
 \end{equation}
 and are evaluated after each iteration $k$. 
 The algorithm stops if the user-defined minimum criteria for diffraction efficiency or uniformity are met.
-
 The algorithm was implemented in Python by Ivo Knottnerus as part of his PhD research.
 Because the SLM has $\sim 2$ million pixels, converting to and from the SLM plane, so performing equations \cref{eq:Vm,eq:Argument}, can be time consuming depending on the desired pattern.
 Therefore, these computations are performed on a graphics card using the \textit{PyOpenCL} library. 
@@ -284,9 +283,7 @@ In \cref{ch:ElectroOptical}, we derive the that this dependency relation between
 
 \begin{equation}\label{eq:IntensityFirstOrder}
     I_1(\phi(L_1)) \propto
-    \frac{w^2}{\pi^2} \left[ 
-    1-\cos{\phi(L_1)}
-    \right],
+    w^2 \left[1-\cos{\phi(L_1)}\right],
 \end{equation}
 Because the power in the first order is a measurable quantity, we can use this to find the relation with the gray levels from this.
 Experimentally, we load a sequence of Ronchi gratings onto the SLM, looping $L_1$ from the minimum $L_1=0$ to the maximum gray value $L_1=255$, while keeping $L_2 =0$ the whole time.
@@ -300,7 +297,7 @@ This is also called the gamma curve or \ac{LUT}.
 The LUT is what the SLM uses to connect the 8-bit gray level to 10-bit voltage levels in a linear fashion, ensuring the gray level range corresponds to $2\pi$ phase retardation.
 As can be seen from \cref{fig:LUTcalibration}, the obtained LUT is rather non-linear, meaning the electro-optical response for a linear LUT would be non-linear, as expected. 
 
-Using our newly acquired LUT, we measured a diffraction efficiency in agreement with the specifications in \cref{table:SLMspecs}. 
+Using our newly acquired LUT, when only applying a linear phase ramp (\cref{fig:HologramPattern}b) as well as the wavefront correction pattern \cref{fig:HologramPattern}d, we measured a diffraction efficiency in agreement with the specifications in \cref{table:SLMspecs}. 
 The exact diffraction efficiency depends on the 'smoothness' of the pattern applied to the SLM: because of the pixelated nature the SLM can only approximate continuous patterns. 
 More rapidly-varying patterns equal lower diffraction efficiency \cite{Labuhn2016}.
 
@@ -316,7 +313,6 @@ We estimate this power loss by reflecting a Gaussian beam $G(x,y)$ having waist 
     \caption{Laser beam with waist $w(z)$ reflecting off the SLM with rectangular semi-widths $S_x$ and $S_y$.}
     \label{fig:Rectangular}
 \end{figure}
-
 \noindent The relative power transmission $P/P_0$ can be found by integrating the intensity of the beam \cref{eq:GaussianBeamIntensity} in Cartesian coordinates over the aperture
 
 \begin{equation}\label{eq:RectAperturePower}
@@ -326,8 +322,7 @@ We estimate this power loss by reflecting a Gaussian beam $G(x,y)$ having waist 
 \end{equation}
 If we use a beam with $1/e^2$ radius equal to the short semi-width SLM and using the aspect ratio from \cref{table:SLMspecs}, the power transmission is $\sim 95$\%.
 So we barely lose any power, while still using as much pixels as possible.
-The pixels outside of the beam waist radius contribute less, but are unused when focusing the SLM beam onto the circular objective pupil (see \cref{sec:Demagnification}).
-To obtain this waist, we direct the beam on the SLM from the Schäfter fiber collimator (\cref{sec:MeasuringTweezer}).
+To obtain this large beam waist, we direct the beam on the SLM from the Schäfter fiber collimator (\cref{sec:MeasuringTweezer}).
 This collimator yields a beam with waist $w(z)$ mm, about the size of the short semi-width $S_y = 4.8$ mm of the rectangular SLM.
 
 
@@ -343,9 +338,9 @@ The power in the higher diffraction orders is unused.
 	\includegraphics[width=\textwidth]{figures/hologram.png}
 	\caption{
 		Total phase mask applied on the SLM: \textsf{\textbf{a)}} Hologram obtained from the \ac{GSW} algorithm to generate the spot array.
-		\textsf{\textbf{b)}} Lens phase applied to use the SLM as the first lens of a telescope with magnification $M=0.42$.
-		\textsf{\textbf{c)}} Optical flatness correction pattern as provided by the manufacturer.
-		\textsf{\textbf{d)}} Linear phase ramp, used to move the diffraction pattern away from the optical axis (zoomed in).
+		\textsf{\textbf{b)}} Linear phase ramp, used to move the diffraction pattern away from the optical axis (zoomed in).
+		\textsf{\textbf{c)}} Lens phase applied to use the SLM as the first lens of a telescope with magnification $M=0.42$.
+		\textsf{\textbf{d)}} Optical flatness correction pattern as provided by the manufacturer.
 		\textsf{\textbf{e)}} Aberration correction phase applied onto the SLM, which is a fourth-order polynomial in the distance from the center.
 		\textsf{\textbf{f)}} Cylindrical lens phase to account for aberration introduced by the SLM itself.
 	}
@@ -379,13 +374,6 @@ Using a Keplerian telescope, this distance will be equal to $f_2$ (\cref{fig:SLM
 Also knowing that $f_1=f_2/M$ and the total length of the telescope is $2f_1+2f_2$, this is already $\sim 305$ cm of beam path on the optical table. 
 To reduce this, we borrowed a trick from our collaborators at the University of Amsterdam \cite{Urech2022}, where we use the SLM as the first lens of the system with focal length $f_s$ in conjunction with another relay lens $f_r$ (see \cref{fig:SLMbeampath}, to not confuse ourselves with $f_1$ and $f_2$ of the equivalent Keplerian telescope we renamed the variables). 
 In terms of the ABCD matrix formalism, the transfer matrix $\mathbf{M}$ for the system in \cref{fig:SLMbeampath}b is
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.95\textwidth]{figures/beampathSLM.pdf}
-	\caption{\textsf{\textbf{a)}}: Keplerian telescope with total length $2f_1+2f_2$. \textsf{\textbf{b)}} Using the SLM as a lens $f_s$ in conjunction with a relay lens $f_r$, the total beam path has length $x+y$. In the latter case, $y>f_r$.}
-	\label{fig:SLMbeampath}
-\end{figure}
 
 \begin{equation}\label{ABCD}
 	\mathbf{M}=
@@ -424,7 +412,13 @@ We will now explain how we computed the hologram to produce a focal length $f_s 
 The Fresnel lens hologram is essentially to a defocus 'aberration'.
 It is common to quantify aberrations in terms of Zernike's functions, a set of polynomials orthogonal on the unit disk. 
 The SLM is not circular, but the part of the SLM that is conjugated with the microscope objective is, so we consider the SLM as a circle for now, with the radius equal to the short semi-width $S_y$.
-Now, the coordinates on the unit disk can be denoted as $\rho = r/S_y$ and $\theta \in (0, 2\pi)$, such that the wavefront $\phi(\rho,\theta)$ can be expanded in terms $R_n^m(\rho)\cos{m\theta}$ and $R_n^m\sin{m\theta}$ where 
+Now, the coordinates on the unit disk can be denoted as $\rho = r/S_y$ and $\theta \in (0, 2\pi)$, such that the wavefront $\phi(\rho,\theta)$ can be expanded in terms $R_n^m(\rho)\cos{m\theta}$ and $R_n^m\sin{m\theta}$ where
+\begin{figure}
+	\centering
+	\includegraphics[width=0.95\textwidth]{figures/beampathSLM.pdf}
+	\caption{\textsf{\textbf{a)}}: Keplerian telescope with total length $2f_1+2f_2$. \textsf{\textbf{b)}} Using the SLM as a lens $f_s$ in conjunction with a relay lens $f_r$, the total beam path has length $x+y$. In the latter case, $y>f_r$.}
+	\label{fig:SLMbeampath}
+\end{figure}
 
 \begin{equation}\label{eq:ZernikeRadial}
     R_{n}^{m}(\rho)=
@@ -449,7 +443,7 @@ Because of manufacturing imperfections, the SLM chip will not be perfectly flat 
 The exact shape of the chip area is slightly different between individual SLM units.
 The flatness of our chip was measured by manufacturer Meadowlark to have a RMS flatness of $\sim 0.18\lambdaup$ (785 nm).
 The shape of the flatness was measured as well and provided to us by the manufacturer, so we can correct for it by subtracting a phase mask corresponding to the same non-flatness.
-This mask is shown in \ref{fig:SLMphase}c.
+This mask is shown in \ref{fig:SLMphase}d.
 
 
 \subsection{Aberration Correction}\label{subsec:AberrationCorrection}
@@ -465,8 +459,10 @@ Subtracting this paraxial result from the case for general ray angles, which may
 \end{equation}
 Multiplying \cref{eq:FocusDifference} with $(n-1)/\lambdaup$ converts the path length difference to a phase difference $\phi(\theta)/2\pi$.
 This phase difference is plotted in \cref{fig:AberrationTerm}a as a function of the incident angle $\alpha_0$.
-This is a very substantial error, most likely not enough to fully correct using the SLM. 
-Luckily, we use a microscope objective that is already corrected for $d_o=3.5$ mm of $n_o=1.510$. 
+This is the aberration resulting from sending the (large) angles of the tweezer beam through a flat window.
+The aberration 
+It is not needed to correct for the full aberration however.
+The reason is we use a microscope objective that is already corrected for $d_o=3.5$ mm of $n_o=1.510$. 
 We subtract this contribution from \cref{eq:FocusDifference}, which was filled in for $d_g=4.0$ mm of $n_g=1.453$, leaving only a small error in the refractive index and thickness mismatch.
 Again, we multiply with $(n-1)/\lambdaup$, finding the mismatch in the correction in terms of waves $\delta \phi$
 
@@ -482,19 +478,18 @@ The result of \cref{eq:Mismatch} is plotted in \cref{fig:AberrationTerm}b.
     \caption{
     \textsf{\textbf{a)}} Total phase error from \cref{eq:FocusDifference} without subtracting the correction of the Mitutoyo objective.
     \textsf{\textbf{b)}} Aberration remaining after subtracting the Mituotoyo correction.
-    \textsf{\textbf{c)}} Only the $Z_0^4$ (spherical aberration) term. This we actually apply on the SLM.
+    \textsf{\textbf{c)}} Only the $R_0^4$ (spherical aberration) term. This we actually apply on the SLM.
     }
     \label{fig:AberrationTerm}
 \end{figure}
-We still need to convert the angular dependence on a radial dependence in the objective plane. 
+We still need to convert the angular dependence to a radial dependence in the objective plane. 
 Because the SLM plane is conjugated with the objective plane, this is equivalent to a radial dependence on the SLM. We convert from angles to radial distance in the objective plane $r'$ as
 
 \begin{equation}\label{eq:RadialCoordinate}
     \alpha_0 = \operatorname{arcsin}\left(\frac{r'\text{NA}}{R}\right)
     =\operatorname{arcsin}\left(\rho \text{NA}\right).
 \end{equation}
-Here, we again used $\rho=r'/R$, hinting at the use of Zernike's polynomials again.
-In terms of Zernike functions.
+Here, we again used the normalized radial coordinate $\rho=r'/R$, hinting that we will again use Zernike's functions.
 Substituting \cref{eq:RadialCoordinate} in the \cref{eq:Mismatch} and expanding in Zernike polynomials only the following terms remain:
 
 \begin{equation}
@@ -506,7 +501,6 @@ In this case , it is the result of the changing focus distance of placing additi
 We fix this term by adjusting the focus of the objective and can thus be discarded as well.
 This leaves only the $Z_4^0 = 1 - 6 \rho^2 + 6 \rho^4$ term, which we plotted for $\rho=r'/R$ in \cref{fig:AberrationTerm}c.
 This primary spherical aberration was applied onto the SLM, its corresponding hologram is shown in \cref{fig:SLMphase}e.
-
 
 Even after the spherical aberration correction, we still noted unsatisfactory performance in the axial direction as discussed in \cref{sec:Tweezer3D}. 
 We think this is due to the lens phase on the SLM (\cref{fig:SLMLens}b): because the laser reflects off of the device, it effectively travels through a biconvex lens under this same angle (astigmatism aberration). 
