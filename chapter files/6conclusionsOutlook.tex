@@ -4,6 +4,7 @@ We focused on a small part of this bigger project, which is the design and imple
 \noindent To test the performance of the setup, we first tested it outside of the machine.
 We studied the light distribution from the glass-compensated microscope objective when using an input beam $\lambdaup = 820$ from a titanium sapphire laser with Gaussian waist equal to the aperture radius of the microscope objective, finding a near diffraction-limited waist of the optical tweezer of $0.79 \pm 0.05$ $\mu$m after deconvolution with the 0.85 NA imaging objective. 
 From diffraction theory, we know that the ideal result would be a 9\% broader waist than the $0.689$ $\mu$m Abbe limit because of the Gaussian input beam used, which is $\approx 0.75$ $\mu$m.
+
 We studied the axial direction by scanning the microscope objective along the optical axis, finding a Rayleigh range of $6.2\pm0.5$ $\mu$m, which is much larger than the result from diffraction theory at $\sim 3.0$ $\mu$m for our parameters (beam diameter, numerical aperture). 
 After aberration correction using the SLM we find a Rayleigh range of $3.6 \pm 0.5$ $\mu$m.
 The aberrations originated from the incorrect cover glass thickness, which is effectively a spherical aberration as well as astigmatism caused by the SLM.
@@ -21,7 +22,8 @@ After averaging over several tens of runs, we can detect a fluorescence signal f
 We have to average over multiple runs because the signal to noise ratio is low.
 Even after blocking the camera, we still see a noise floor orders or magnitude higher than the atomic signal. \\
 
-\noindent To improve the signal to noise, ratio of the detection of atoms in tweezers, we bought a new camera: the Andor iXon Ultra 888.
+\noindent To improve the signal to noise, ratio of the detection of atoms in tweezers, the MOT light not reach the camera prior to imaging, which can be achieved using a mechanical shutter. 
+Still, the camera used for this work has a rather high noise floor as well as low quantum efficiency, therefore we bought a new camera: the Andor iXon Ultra 888.
 This is a electron-multiplying \ac{CCD}, which has higher sensitivity, making them ideal for imaging single atoms in tweezer arrays.
 Additionally, this new camera should also significantly increase our quantum efficiency.
     
@@ -35,22 +37,29 @@ The sorting beam can be moved quickly using a set of two \ac{AOD}s in crossed co
 Because its potential is deeper than the tweezer potential, it can be used to re-arrange single atoms one by one into defect-free arrays on the fly as shown by \cite{Barredo2016}.
 
 The tweezer array shows a non-homogeneity in trap depths of 7-12\%. This is fairly high and will lower achievable qubit operation fidelities.
-It can be improved by dynamically adapting the weight factors in the \ac{GSW} in a feedback loop, where as input for the loop we can use either the measured light intensities or the trap depths as measured by Stark shifted atomic fluorescence from atoms in tweezers. \\
+It can be improved by dynamically adapting the weight factors in the \ac{GSW} in a feedback loop, where as input for the loop we can use either the measured light intensities or the trap depths as measured by Stark shifted atomic fluorescence from atoms in tweezers.
 
-    
-\noindent To scale to a higher number of tweezer (qubits), the amount of optical power available could be increased by using the titanium sapphire laser power more efficiently. 
+To scale to a higher number of tweezers (qubits), the amount of optical power available could be increased by using the power from the titanium sapphire laser power more efficiently. 
 For example, this could be done by omitting the fiber coupling step and moving the laser to the main optical table. 
 Alternatively, the amount of power required per trap could be reduced by lowering the temperature of the atoms in the MOT. 
-For Rb, sub-Doppler cooling techniques exist such as polarization-gradient cooling. 
-Sr, on the other hand, has the advantage that we can use the narrow-linewidth red MOT, which would open up the road to cooling to 1 $\mu$K temperatures.
+These are all mostly independent of the atomic species used and will apply to Rb as well as Sr. \\
+
+\noindent Apart from the Rb machine we constructed in this work, we want to construct a new Sr machine.
+Sr has the two transitions that can be used for cooling, the blue and subsequently the narrow-linewidth red transition.
+This enables cooling to 1 $\mu$K temperatures \cite{Stellmer2013}.
 This opens up the road to higher fidelities, less noise and larger neutral atom arrays. 
-Also, with its meta-stable 'second ground state', Sr is more suitable for quantum computation applications.
-    
-To induce interactions between neutral atoms, a laser that excites to Rydberg states will have to be implemented. 
-Our group has done this on Rb before \cite{Bijnen2013}, but for Sr the implementation is entirely different. 
+Also, with its meta-stable 'second ground state' and ultra-narrow clock transition, Sr is more suitable for quantum computation applications.
+
+The Sr tweezer machine requires different lasers as well as a Zeeman slowed atomic beam. 
+The construction of the vacuum and atom source part of the Sr machine (see \cref{fig:SrLoading}) is in the manufacturing stage, and assembly will start in the next couple of months. 
+As for the laser system, we purchased the FC1500-Quantum laser system from Menlo Sytems, featuring 7 wavelengths used in the experiment stabilized using an ultra-low-noise optical frequency comb.
+This system is set to arrive in the coming months.
+
+The only laser missing from this ensemble is the Rydberg laser, responsible for inducing interactions between the neutral atoms.
 The exact Rydberg level we want to use has not been decided upon yet. 
 
-Finishing up, to realize a quantum co-processor using a variational quantum eigensolver type of algorithm, a new apparatus has to be constructed. 
-The holographic optical tweezers setup that was described in this work can be left almost unchanged with minor adjustments such at changing the far off-resonant dipole trap laser to the for Sr magic 813 nm line. 
+Combining all of these ingredients, we hope to perform experiments on single Sr atoms trapped in tweezers in the future.
+Possible examples could be demonstrations of variational quantum eigensolver type of algorithms as well as experiments on quantum error correction. 
+
 
 

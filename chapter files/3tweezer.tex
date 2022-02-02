@@ -43,7 +43,7 @@ We describe the diffraction of the light in the plane after the lens $E(x,y,z)$ 
 
 \begin{equation}\label{eq:FresnelDiffractionGeneral}
     E(x,y,z) = 
-    \frac{e^{ikz}}{i \lambda z} \iint_{-\infty}^{\infty} E_l(x',y') \exp{\left[\frac{ik}{2z}\left((x-x')^2+(y-y')^2\right)\right]} dx'dy'.
+    \frac{e^{ikz}}{i \lambda z} \iint_{-\infty}^{\infty} E_l(x',y') \exp{\left[\frac{ik}{2z}\left((x-x')^2+(y-y')^2\right)\right]} \textrm{d}x'\textrm{d}y'.
 \end{equation}
 In \cref{eq:FresnelDiffractionGeneral}, $\lambdaup$ is the wavelength and $k=2\pi/\lambdaup$ the wavenumber.
 The field after the lens follows from the lens transfer function in terms of the field just before the lens $E_i(x',y')$ as \cite{Goodman2005}
@@ -62,7 +62,7 @@ Inserting \cref{eq:Transfer} in \cref{eq:FresnelDiffractionGeneral} yields after
 	\exp{\left[
 		\frac{ik}{2}(x'^2+y'^2)\left(\frac{1}{z}-\frac{1}{f}\right)
 	\right]}
-	\exp{\left[\frac{-ik}{z}\left(xx'+y'y'\right)\right]} dx'dy'.
+	\exp{\left[\frac{-ik}{z}\left(xx'+y'y'\right)\right]} \textrm{d}x'\textrm{d}y'.
 \end{equation}
 This might look like an impossible integral to solve, which it is usually.
 However, in the next sections it will become clear that for specific cases the integral simplifies greatly.  
@@ -74,7 +74,7 @@ The tweezer arrays shown in this work are all in the focusing plane of a lens, w
 Doing this, the integral reduces to 
 
 \begin{equation}\label{eq:FraunhoferDiffractionIntegral}
-    E(x, y, z=f)=\iint_{-\infty}^{\infty} E_i(x', y') \exp \left[\frac{-ik}{f}(x x'+y y')\right] dx' dy'.
+    E(x, y, z=f)=\iint_{-\infty}^{\infty} E_i(x', y') \exp \left[\frac{-ik}{f}(x x'+y y')\right] \textrm{d}x' \textrm{d}y'.
 \end{equation}
 which is the Fraunhofer diffraction integral. 
 It is the 2D spatial Fourier transform of the 'input' field $E_i$ in $x$ and $y$, with spatial frequencies $f_x = x/\lambdaup f$ and $f_y = y/\lambdaup f$ respectively.
@@ -82,7 +82,7 @@ For circular apertures, a description in cylindrical coordinates is more natural
 Using the standard definitions for cylindrical coordinates and assuming spherical symmetry (independence of $\theta$), \cref{eq:FraunhoferDiffractionIntegral} can be written as 
 
 \begin{equation}\label{eq:FourierBessel}
-	E(r,z=f) \propto 2\pi \int_0^{\infty} E(r') J_0\left( \frac{k r r'}{f}\right) r'dr',
+	E(r,z=f) \propto 2\pi \int_0^{\infty} E(r') J_0\left( \frac{k r r'}{f}\right) r'\textrm{d}r',
 \end{equation}
 where we used the definition of the  Bessel function of the first kind of order zero\footnote{$J_0(x) = \frac{1}{2\pi} \int_0^{2\pi} \exp{(i x \cos{\alpha})} d\alpha$, where  $\alpha=\theta-\theta'$.} $J_0(x)$. 
 This is the Fourier-Bessel or Hankel transform of the function $E(r')$.
@@ -98,7 +98,7 @@ Assuming the beam is Gaussian with 'input' waist $w_i$, the input light field is
 Substituting \cref{eq:GaussianAperture} in \cref{eq:FourierBessel} yields
 
 \begin{equation}\label{eq:FourierBesselAperture}
-    E(r) \propto \int_0^R e^{-r'^2/w_i^2} J_0\left(\frac{k r r'}{f}\right)r'dr'.
+    E(r) \propto \int_0^R e^{-r'^2/w_i^2} J_0\left(\frac{k r r'}{f}\right)r'\textrm{d}r'.
 \end{equation}
 \Cref{eq:FourierBesselAperture} is analytically solvable only for specific cases.
 Letting $w_i/R$ go to infinity \cite{Madjarov2020}, which is to treat the incident Gaussian beam as a plane wave, we can neglect the exponential term in \cref{eq:FourierBesselAperture}. 
@@ -239,7 +239,7 @@ To compare the obtained results to diffraction theory, we have to return to the 
 \begin{equation}\label{eq:FresnelCylindrical}
 	E(r,z) \propto 2\pi
 	\int_0^\infty E(r')\exp{\left[\frac{i k r'^2}{2}\left(\frac{1}{f}-\frac{1}{z}\right)\right]}
-	J_0\left(\frac{k r'r}{z}\right)r' dr'.
+	J_0\left(\frac{k r'r}{z}\right)r' \textrm{d}r'.
 \end{equation}
 For plane wave illumination, or $E(r')$ equal to a constant, \cref{eq:FresnelCylindrical} yields the \ac{PSF}.
 When using the lens to image light (so light traveling in the reverse direction), the PSF is the response of the imaging system when imaging a point source. 
@@ -255,7 +255,7 @@ Plugging in \cref{eq:FresnelCylindrical} along with \cref{eq:GaussianAperture,eq
 \begin{equation}
 	E(r=0,z) \propto \int_0^R e^{-r'^2/w_i^2} \exp{\left(
 		\frac{i k \delta z}{2f^2}r'^2
-		\right)} r'dr'.
+		\right)} r'\textrm{d}r'.
 \end{equation}
 Evaluating the integral and taking the absolute value squared yields the axial intensity distribution $I$:
 

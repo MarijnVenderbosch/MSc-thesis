@@ -6,11 +6,11 @@ As an example, we first consider a Ronchi grating with ones period $M=1$, shown 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.42\textwidth]{figures/OneGrating.pdf}
-    \caption{Ronchi grating for a single grating $M=1$ as well as $L_2=0$.}
+    \caption{Ronchi grating for a single grating $M=1$ as well as $L_2=0$. The grating period $w$ is 8 pixels.}
     \label{fig:OneGrating}
 \end{figure}
 
-\noindent Assuming amplitude modulation between different gray levels is negligible (a fair assumption for phase-only SLMs), after applying the Ronchi graing of \cref{fig:OneGrating} the electric field just after the SLM will be
+\noindent Assuming amplitude modulation between different gray levels is negligible (our new SLM has extremely low phase flicker), after applying the Ronchi grating of \cref{fig:OneGrating} the electric field just after the SLM will be
 
 \begin{equation}\label{eq:Single}
     f(x,y) = e^{i\phi(L_1)} \operatorname{rect} \left\{ 
@@ -18,8 +18,8 @@ As an example, we first consider a Ronchi grating with ones period $M=1$, shown 
     \operatorname{rect}\left\{ \frac{x'-3w/4}{w/2}\right\}.
 \end{equation}
 In \cref{eq:Single} $\operatorname{rect}\{(x'-a)/b\}$ is the rectangular function, which is unity for a width $b$ centered around $x'=a$ and zero elsewhere.
-In the case of the single grating, $\{a=1/4, 3/4\}$ and $b=w/2$.
-For $M>1$, this pattern is simply repeated an additional $M-1$ times \cite{Zhang1994}
+In the case of the single grating, $\{a=w/4, 3w/4\}$ and $b=w/2$.
+For $M>1$, this pattern is simply repeated an additional $M-1$ times: \cite{Zhang1994}
 
 \begin{equation}\label{eq:FieldAfterSLM}
     f(x,y) = \sum_{m=0}^{M-1} \left[
@@ -41,7 +41,7 @@ The intensity in the first order ($p=\pm 2\pi/w$) is
 
 \begin{equation}\label{eq:IntensityFirstOrderAppendix}
     I_1(\phi(L_1)) \propto
-    \frac{w^2}{\pi^2} \left[ 
+   w^2 \left[ 
     1-\cos{\phi(L_1)}
     \right].
 \end{equation}
