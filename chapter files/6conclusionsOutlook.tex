@@ -16,7 +16,7 @@ Larger arrays are typically less uniform, probably because the SLM patterns cont
 Subsequently, we implemented the setup in the experiment.
 To load the tweezer array with cold atoms, we constructed a magneto-optical trap inside a glass cell. 
 The MOT produces roughly $\sim10^5$ atoms at a temperature of $(2.2 \pm 0.2) \cdot 10^2$ $\mu$K.
-Because the temperature is relatively high, we need large trap depths of $U_0/h \sim 80$ MHz to reliable trap atoms in tweezers, requiring $\sim 3.5$ mW of power per tweezer.
+Because the temperature is relatively high, we need large trap depths of $U_0/h \sim 80$ MHz to reliable trap atoms in tweezers, requiring $\sim 4.5$ mW of power per tweezer.
 At the moment, this laser power limits us to about 6 traps, after accounting for all the power losses in the setup. 
 After averaging over several tens of runs, we can detect a fluorescence signal from atoms trapped in $2\times 2$ or $2\times 3$ arrays of tweezers. 
 We have to average over multiple runs because the signal to noise ratio is low.
@@ -39,26 +39,29 @@ Because its potential is deeper than the tweezer potential, it can be used to re
 The tweezer array shows a non-homogeneity in trap depths of 7-12\%. This is fairly high and will lower achievable qubit operation fidelities.
 It can be improved by dynamically adapting the weight factors in the \ac{GSW} in a feedback loop, where as input for the loop we can use either the measured light intensities or the trap depths as measured by Stark shifted atomic fluorescence from atoms in tweezers.
 
+To perform aberration in a more structured way, when the new 25 cm outer thickness glass cell arrives, we can position the second microscope objective in focus with the tweezer light while imaging at infinity. 
+We could position a Shack-Hartmann wavefront sensor after the second objective, which enables directly measuring the wavefront error.
+It would be interesting to compare the measured trap depths before and after correcting for this wavefront error using the SLM \cite{Labuhn2016}.
+
 To scale to a higher number of tweezers (qubits), the amount of optical power available could be increased by using the power from the titanium sapphire laser power more efficiently. 
 For example, this could be done by omitting the fiber coupling step and moving the laser to the main optical table. 
 Alternatively, the amount of power required per trap could be reduced by lowering the temperature of the atoms in the MOT. 
 These are all mostly independent of the atomic species used and will apply to Rb as well as Sr. \\
 
-\noindent Apart from the Rb machine we constructed in this work, we want to construct a new Sr machine.
-Sr has the two transitions that can be used for cooling, the blue and subsequently the narrow-linewidth red transition.
+\noindent There are also atomic-species dependent considerations: apart from the Rb machine we constructed in this work, we want to construct a new Sr machine.
+Sr has the two transitions that can be used for cooling, the blue and subsequently the narrow-linewidth red transition (\cref{subsec:Transitions}).
 This enables cooling to 1 $\mu$K temperatures \cite{Stellmer2013}.
 This opens up the road to higher fidelities, less noise and larger neutral atom arrays. 
 Also, with its meta-stable 'second ground state' and ultra-narrow clock transition, Sr is more suitable for quantum computation applications.
 
 The Sr tweezer machine requires different lasers as well as a Zeeman slowed atomic beam. 
 The construction of the vacuum and atom source part of the Sr machine (see \cref{fig:SrLoading}) is in the manufacturing stage, and assembly will start in the next couple of months. 
-As for the laser system, we purchased the FC1500-Quantum laser system from Menlo Sytems, featuring 7 wavelengths used in the experiment stabilized using an ultra-low-noise optical frequency comb.
+As for the laser system, we purchased the FC1500-Quantum laser system from Menlo Sytems, featuring 7 wavelengths (\cref{subsec:Transitions}) used in the experiment frequency stabilized using an ultra-low-noise optical frequency comb.
 This system is set to arrive in the coming months.
-
 The only laser missing from this ensemble is the Rydberg laser, responsible for inducing interactions between the neutral atoms.
 The exact Rydberg level we want to use has not been decided upon yet. 
 
-Combining all of these ingredients, we hope to perform experiments on single Sr atoms trapped in tweezers in the future.
+Combining all of these ingredients, we hope to perform experiments on single Sr atoms trapped in optical tweezers in the future.
 Possible examples could be demonstrations of variational quantum eigensolver type of algorithms as well as experiments on quantum error correction. 
 
 

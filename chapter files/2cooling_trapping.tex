@@ -23,7 +23,7 @@ The laser will output at an angular frequency $\omega$ that is near-resonant, bu
 \end{equation}
 It will turn out that detuning is one of the most important parameters in laser cooling. 
 In this work we will nearly always use $\delta <0$. 
-Because of the Doppler effect, the atom 'sees' a slightly higher frequency $\delta'$ when moving towards the light with a velocity $v$: $\delta'=\delta+k v$ and the laser may become resonant, causing the atom to absorb a photon absorbing momentum $\hbar k$ and promoting an electron to the excited state $\ket{e}$.
+Because of the Doppler effect, the atom \lq sees' a slightly higher frequency $\delta'$ when moving towards the light with a velocity $v$: $\delta'=\delta+k v$ and the laser may become resonant, causing the atom to absorb a photon absorbing momentum $\hbar k$ and promoting an electron to the excited state $\ket{e}$.
 When spontaneous emission causes the atom to fall back in a time $\tau = 1/\gamma$ where $\gamma$ is the linewidth of the transition, the electron decays back to the ground state, but the emitted photon is emitted in a random direction. 
 This can be repeated many times per second at a scattering rate $\Gamma_{\text{sc}}$, described by the Lorentzian \cite{Metcalf1999}
 
@@ -37,7 +37,7 @@ Because the absorption occurs in a fixed direction and the corresponding emissio
 
 We can reflect the laser beam using a mirror, such that the force works in both directions of the spatial coordinate.
 We will only consider one spatial coordinate which we will denote as $z$, but the treatment can be easily extended to 3 dimensions.
-The force will not have a contribution for positive velocities $F^+$ as well as for negative $F^-$, making the total force $F^+ + F^-$ from both contributions \cref{eq:ScatteringFrequency} is \cite{Kowalski2010}
+The force will have a contribution for positive velocities $F^+$ as well as for negative velocities $F^-$, making the total force $F^+ + F^-$ from both contributions of \cref{eq:ScatteringFrequency} \cite{Kowalski2010}
 
 \begin{equation}\label{eq:OpticalMolasses}
 	F = F^+ + F^- = \frac{\hbar k \gamma s_0}{2}\left\{\
@@ -101,9 +101,9 @@ The magnetic field is tuned in such a way that it is linear in all 3 dimensions 
 Because of the Zeeman splitting, the chance of the atomic transition being resonant with the the detuning of the laser varies with the position from the origin and the detuning as \cite{Kowalski2010}
 
 \begin{equation}\label{eq:DetuningFull}
-	\delta' = \delta + k v + \frac{\mu'B}{\hbar}
+	\delta' = \delta + k v + \frac{\mu'B}{\hbar}.
 \end{equation}
-Where $\mu' = (g_e m_e-g_g m_g)\mu_B$ is the effective magnetic moment for the transition \cite{Kowalski2010}. 
+Here, $\mu' = (g_e m_e-g_g m_g)\mu_B$ is the effective magnetic moment for the transition \cite{Kowalski2010}. 
 To ensure that atoms only absorb momentum kicks opposite to their displacement from the center of the trap, the laser beams are circularly polarized: $\sigma^+$ from the left and $\sigma^-$ from the right. 
 Because the sign of the Zeeman shift is dependent on the magnetic quantum number $m_j$, selection rules prescribe that atoms displaced by $z>0$ are only resonant with $\sigma^-$-light and vice versa.
 This is sketched in \cref{fig:MOTPlots}. Inserting \cref{eq:DetuningFull} in \cref{eq:OpticalMolasses} yields
@@ -112,7 +112,7 @@ This is sketched in \cref{fig:MOTPlots}. Inserting \cref{eq:DetuningFull} in \cr
 	\frac{F}{\hbar k \gamma s_0} = \frac{1}{2}\left\{\
 	\left[1 + s_0 + 4\frac{(\delta - k v - \mu'B / \hbar)^2}{\gamma^2}\right]^{-1}-
 	\left[1 + s_0 + 4\frac{(\delta + k v + \mu'B / \hbar)^2}{\gamma^2}\right]^{-1}
-	\right\}     
+	\right\}.     
 \end{equation}                          
 Expanding \cref{eq:MOTfull} around $(v,z) = (0,0)$, keeping only first order terms finally leaves us with \cite{Kowalski2010}
 
@@ -170,7 +170,7 @@ The gradient of \cref{eq:DipolePotential} gives rise to the dipole force:
 \begin{equation}\label{eq:DipoleForce}
 	\mathbf{F}_{\text{dip}}(\mathbf{r}) 
 	= - \nabla U_{\text{dip}}
-	= - \frac{\operatorname{Re}(\alpha)}{2\epsilon_0c}\nabla I(\mathbf{r})
+	= - \frac{\operatorname{Re}(\alpha)}{2\epsilon_0c}\nabla I(\mathbf{r}).
 \end{equation}
 The dipole force can be used to coherently trap our qubits. 
 To maximize the dipole force \cref{eq:DipoleForce}, 
@@ -200,7 +200,7 @@ In the next section, we will derive a useful expression for the dipole potential
 In the semi-classical treatment, a quantized energy level is considered, along with a classical light field. 
 We can write down a general expression for the the light field propagating in the $z$-direction polarized in the $\bm{\hat{\epsilon}}$ direction perpendicular to it:
 \begin{equation}\label{eq:ClassicalField}
-	\mathbf{E}(z,t) = \mathbf{E}_0 \cos{(k z - \omega t)} 	\bm{\hat{\epsilon}}
+	\mathbf{E}(z,t) = \mathbf{E}_0 \cos{(k z - \omega t)} 	\bm{\hat{\epsilon}}.
 \end{equation}
 We will consider an atom with two eigenstates: $\ket{g}$ (ground) with energy $\hbar \omega_g$ and $\ket{e}$ (excited) with $\hbar \omega_e$.
 Thus this is a two-level atom, see \cref{fig:2LevelAtom}. 
@@ -208,7 +208,7 @@ Then the atomic Hamiltonian in this basis reduces to \cite{Loudon2000}
 
 
 \begin{equation}\label{eq:AtomHamiltonianMain}
-	\mathcal{H}_A = \hbar \omega_g \ket{g}\bra{g} + \hbar \omega_e \ket{e}\bra{e}
+	\mathcal{H}_A = \hbar \omega_g \ket{g}\bra{g} + \hbar \omega_e \ket{e}\bra{e}.
 \end{equation}
 The radiation field is modeled as a time-dependent perturbation, leading to the Hamiltonian \cite{Leeuwen2017}
 
@@ -269,7 +269,7 @@ This is called the light shift or AC Stark shift \cite{Metcalf1999}, sketched in
 \Cref{eq:Stark} is the main take-away from this section.
 The light shift is proportional to the light intensity over the detuning: $\Omega^2 / \delta \propto I / \delta$.
 Because scattering is kept to a minimum, atoms in practice only occupy the ground state.
-For $\delta <0$ ('red detuned'), the ground state light state is negative. 
+For $\delta <0$ (\lq red detuned'), the ground state light state is negative. 
 So for a spatially varying detuning, the light shift will also vary locally.
 This behavior of \cref{eq:Stark} is shown in \cref{fig:DipoleForce}. 
 
@@ -364,7 +364,7 @@ To start off, Sr has 4 stable isotopes.
 Three of them are bosonic, with ${}^{88}$Sr being the most abundant at $\sim82.6\%$. There is one stable fermionic isotope: ${}^{87}$Sr has a nuclear spin of $I=9/2$ and an abundance of $\sim7.0\%$ \cite{Coursey1999}.
 Initially, we plan to run the machine in Eindhoven on \textsuperscript{88}Sr. 
 Because of the lack of hyper-fine structure, this isotope is a bit easier to work with.
-Though, in principle, one can use all isotopes in the same machine as the energy splitting between the isotopes is in the hundreds of MHz regime, easily covered by AODs and EOMs \cite{Stellmer2013}.
+Though, in principle, one can use all isotopes in the same machine as the energy splitting between the isotopes is in the hundreds of MHz regime, easily covered by AOMs and EOMs \cite{Stellmer2013}.
 
 \subsection{Relevant Transitions}\label{subsec:Transitions}
 
@@ -386,14 +386,14 @@ This level scheme shows 7 out of 8 lasers to be used in this experiment:
 
 \begin{itemize}
 	\item 461 nm. Broad transition, meaning a strong scattering force (\cref{eq:ScatteringFrequency} and high absorption-emission cycling frequency.
-	This is useful to slow down the hot atomic beam coming from the oven, as well as catching the atoms in a so-called blue \ac{MOT} with 'hot' temperatures of $\sim$ 1 mK.
+	This is useful to slow down the hot atomic beam coming from the oven, as well as catching the atoms in a so-called blue \ac{MOT} with \lq hot' temperatures of $\sim$ 1 mK.
 	
 	\item 689 nm. Because it is much narrower than the blue transition, its Doppler temperature \cref{eq:DopplerTemperature} is much lower at $179$ nK, although in practice cooling is limited by the recoil limit to some $\sim 1$ $\mu$K \cite{Stellmer2013,Boyd2007}.
 	This transition is used in what is typically the red MOT, following after the blue MOT. 
 	
 	\item 698 nm. The ultra-narrow clock transition ($\gamma = 1$ mHz). 
 	Used in atomic clocks because of its spectroscopic accuracy \cite{Bloom2014}.
-	It will turn out that this feature can be put to good use in quantum computers as well, and we will use it to coherently 'drive' the qubits between the qubit basis states using this clock transition. 
+	It will turn out that this feature can be put to good use in quantum computers as well, and we will use it to coherently \lq drive' the qubits between the qubit basis states using this clock transition. 
 	More about this in \cref{sec:QubitScheme}.
 	
 	\item 679, 688, and 707 nm. 
@@ -455,11 +455,11 @@ So we have two long-lifetime states connected by an extremely narrow linewidth c
 To entangle the qubits, Rydberg dressing can be used \cite{Wu2021} where a small part of a Rydberg state $\ket{r}$ is admixed in the higher energy ground state:
 
 \begin{equation}\label{eq:RydbergDressing}
-	\ket{\psi} \sim \ket{g_2} + \epsilon \ket{r}
+	\ket{\psi} \sim \ket{g_2} + \epsilon \ket{r}.
 \end{equation}
 The amount of dressing is tuned by the (small) dressing parameter $\epsilon \propto \Omega / 2\delta$ where $\Omega$ is the Rabi frequency of the laser and $\delta$ the usual detuning. 
 A Rydberg state is an electronic state with a very high principal quantum number $n$. Rydberg atoms are physically larger, as the electron orbit radius scales $\propto n^2$ \cite{Gallagher1994}. 
-As a result of these exaggerated electron orbit sizes, neighboring atoms can 'feel' each other.
+As a result of these exaggerated electron orbit sizes, neighboring atoms can \lq feel' each other.
 For example, the van der Waals interaction coefficient has one of the highest scaling coefficients, scaling as $\propto n^{11}$ \cite{Gallagher1994}. 
 
 Other qubit implementations than the one above are possible as well.
@@ -471,11 +471,13 @@ To use the states in \cref{eq:QubitManifold}, they should both be trapped by exa
 Because the trapping potential is wavelength dependent, in general, the trapping potential will not be the same for both qubit states when using the same trapping wavelength, because the polarizability in \cref{eq:DipoleForce}: is wavelength dependent: $\alpha = \alpha(\omega) = \alpha(\lambdaup)$.
 Instead, \cite{Katori2003} proposed to use a wavelength where the polarizability $\alpha(\lambdaup)$ is identical for both clock states, causing the differential stark shift $\hbar \times \delta \nu$ to vanish.
 Using \cref{eq:DipolePotential}:
-
 \begin{equation}\label{eq:DifferentialStarkShift}
     \hbar \times \delta \nu = U_{\text{dip},1} - U_{\text{dip},0} = 
     \operatorname{Re}\left\{\alpha_1(\lambdaup)-\alpha_0(\lambdaup)\right\} \frac{I}{2 \epsilon_0 c}.
 \end{equation}
+The calculation is described in \cite{Madjarov2020,Boyd2007} and was experimentally verified by \cite{Takamoto2005}.
+For Sr, the wavelength where the magic condition occurs is roughly 813 nm. 
+
 \begin{figure}
     \centering
     \includegraphics[width=0.68\linewidth]{figures/MagicTrapping.pdf}
@@ -484,9 +486,6 @@ Using \cref{eq:DipolePotential}:
     Figure adapted from \cite{Lundblad2010}.}
     \label{fig:MagicTrapping}
 \end{figure}
-
-The calculation is described in \cite{Madjarov2020,Boyd2007} and was experimentally verified by \cite{Takamoto2005}.
-For Sr, the wavelength where the magic condition occurs is roughly 813 nm. 
 
 
 

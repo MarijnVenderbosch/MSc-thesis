@@ -9,7 +9,7 @@ If this would be possible, we can simulate new molecules and chemical reaction m
 \subsection{Superposition}\label{sub:Superposition}
 
 The first reason why quantum computation is fundamentally different from its classical equivalent is superposition.
-Consider a single two-level quantum system, quantum bit or 'qubit' represented by the normalized wave function $\ket{\psi}$, for example, the spin of an electron, which we can define as a basis with basis states $\ket{0}$ (spin-up) and $\ket{1}$ (spin-down). 
+Consider a single two-level quantum system, quantum bit or \lq qubit' represented by the normalized wave function $\ket{\psi}$, for example, the spin of an electron, which we can define as a basis with basis states $\ket{0}$ (spin-up) and $\ket{1}$ (spin-down). 
 According to quantum mechanics, this qubit can be in a superposition state \cite{Griffiths2004}:
 
 \begin{equation}\label{eq:SuperPositionBasic}
@@ -20,7 +20,7 @@ Without loss of generality, we can let the variable $\theta$ keep track of the p
 
 \begin{equation}\label{eq:BlochSphere}
 	\ket{\psi} = 
-	\cos{\frac{\theta}{2}} \ket{0} + e^{i \phi} \sin{\frac{\theta}{2}} \ket{1}
+	\cos{\frac{\theta}{2}} \ket{0} + e^{i \phi} \sin{\frac{\theta}{2}} \ket{1}.
 \end{equation}
 This is powerful because we can plot the Hilbert space of the qubit on a unit sphere called the Bloch sphere representation \cite{Nielsen2011}.
 This Bloch sphere is shown in \cref{fig:BlochSphere}.
@@ -57,7 +57,7 @@ These are an inherent quantum feature, having no classical analog.
 One of the most instructive examples of an entangled state is 
 
 \begin{equation}\label{eq:Entangled}
-	\ket{\Phi^+} = \frac{1}{\sqrt{2}} \ket{00}+ \frac{1}{\sqrt{2}} \ket{11}
+	\ket{\Phi^+} = \frac{1}{\sqrt{2}} \ket{00}+ \frac{1}{\sqrt{2}} \ket{11}.
 \end{equation}
 This is one of the so-called Bell states \cite{Nielsen2011} and it is said to be entangled: upon measuring just one of the qubits we immediately know the state of the other qubit as well.
 This implies the qubits are correlated and cannot be described as a product of independent single qubits.
@@ -158,11 +158,12 @@ To to this the work is organized in the following way:
 	\setlength\itemsep{-1pt}
 	\item Background information about laser cooling and trapping techniques, as well as for Rb and Sr specifically is presented in \cref{ch:coolingtrapping}. 
 
-	\item Chapter \cref{ch:tweezer} is about focusing a laser beam to the smallest possible spot inside of a vacuum chamber, to realize an optical tweezer.
+	\item Chapter \ref{ch:tweezer} is about focusing a laser beam to the smallest possible spot inside of a vacuum chamber, to realize an optical tweezer.
 
-	\item Chapter \ref{ch:arrays} elaborates on how to make arrays of tweezers in arbitrary geometries by using holography techniques.
+	\item Next, chapter \ref{ch:arrays} elaborates on how to make arrays of tweezers in arbitrary geometries by using holography techniques.
 
-	\item Finally, in \cref{ch:implementation} we describe how the optics used in the previous chapters is implemented in an ultracold experiment. The atom source used for this is Rb, but the platform should work with Sr as well. 
+	\item Finally, in \cref{ch:implementation} we describe how the optics used in the previous chapters is implemented in a cold atom experiment. 
+	The atom source used for this is Rb, but the platform should work with Sr as well. 
 \end{itemize}
 
 

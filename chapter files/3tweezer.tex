@@ -74,7 +74,7 @@ The tweezer arrays shown in this work are all in the focusing plane of a lens, w
 Doing this, the integral reduces to 
 
 \begin{equation}\label{eq:FraunhoferDiffractionIntegral}
-    E(x, y, z=f)=\iint_{-\infty}^{\infty} E_i(x', y') \exp \left[\frac{-ik}{f}(x x'+y y')\right] \textrm{d}x' \textrm{d}y'.
+    E(x, y, z=f)=\iint_{-\infty}^{\infty} E_i(x', y') \exp \left[\frac{-ik}{f}(x x'+y y')\right] \textrm{d}x' \textrm{d}y',
 \end{equation}
 which is the Fraunhofer diffraction integral. 
 It is the 2D spatial Fourier transform of the 'input' field $E_i$ in $x$ and $y$, with spatial frequencies $f_x = x/\lambdaup f$ and $f_y = y/\lambdaup f$ respectively.
@@ -131,9 +131,9 @@ Solving for the first zero of \cref{eq:NormalizedPSF}, and introducing the defin
 This result is the Abbe or diffraction limit \cite{Abbe1882} and it is the smallest feature a lens can produce.
 To minimize $d_1$ in \cref{eq:Abbe} we can thus increase the \ac{NA} of our imaging system\footnote{For high NA imaging systems however, the paraxial approximation which was used to simplify the diffraction integral is no longer a priori applicable. 
 Though, \cite{Chon2007} present a derivation of \cref{eq:Abbe} using a different diffraction theory that does not require paraxial approximation and showed that for collimated laser beams \cref{eq:Abbe} has negligible error even for $\text{NA} = 1$. 
-We will assume we can still apply \cref{eq:Abbe} for $\text{NA} = 0.5$.}
-In this work we will use $\text{NA} = 0.5$
-In practice, it is not convenient to use \cref{eq:FourierBesselAperture} to fit data and it is more convenient to use a simpler function. 
+We will assume we can still apply \cref{eq:Abbe} for $\text{NA} = 0.5$.}.
+In this work we will use $\text{NA} = 0.5$.
+In practice, it is not practical to use \cref{eq:FourierBesselAperture} to fit data and it is more convenient to use a simpler function. 
 A Gaussian function is commonly used, and can sometimes even fit better than \cref{eq:FourierBesselAperture} because the rings of the Airy disk are easily deformed because of aberrations \cite{Knottnerus2018}.
 Fitting this Gaussian as closely as possible to an Airy function using a least-squares optimization, it can be shown that the equivalent Gaussian waist is \cite{Zhang2007}
 
@@ -228,8 +228,8 @@ For this harmonic oscillator potential, one can compute the harmonic oscillation
 	\omega_z= \left(\frac{2 U_0}{m z_R^2}\right)^{1/2}.
 \end{equation}
 Because $z_R > w_0$, the longitudinal oscillation frequency is lower than the radial frequency. 
-Optimizing for maximum trap frequencies is useful because from \cref{eq:TrapFrequencies}, higher trap frequencies translate to deeper as well as physically smaller optical dipole potentials.
-The optimum $w_i/R$ ratio in terms of maximizing \cref{eq:TrapFrequencies} was found by \cite{Madjarov2021} to be $w_i\simeq R$, which we will use for the remainder of this work\footnote{Because trap frequencies can be probed experimentally, they can be used to perform post-corrections on tweezer arrays as well as shown by \cite{Ebadi2021}.}.
+Optimizing for maximum trap frequencies is useful because from \cref{eq:TrapFrequencies}, higher trap frequencies translate to deeper as well as physically smaller optical dipole potentials\footnote{Trap frequencies can also be measured experimentally to perform aberration correction on tweezer arrays \cite{Ebadi2021}.}.
+The optimum $w_i/R$ ratio in terms of maximizing \cref{eq:TrapFrequencies} was found by \cite{Madjarov2021} to be $w_i\simeq R$, which we will use for the remainder of this work. 
 
 \subsection{Outside the Focus Plane}
 
@@ -241,7 +241,7 @@ To compare the obtained results to diffraction theory, we have to return to the 
 	\int_0^\infty E(r')\exp{\left[\frac{i k r'^2}{2}\left(\frac{1}{f}-\frac{1}{z}\right)\right]}
 	J_0\left(\frac{k r'r}{z}\right)r' \textrm{d}r'.
 \end{equation}
-For plane wave illumination, or $E(r')$ equal to a constant, \cref{eq:FresnelCylindrical} yields the \ac{PSF}.
+For plane wave illumination, or $E(r')$ equal to a constant, \cref{eq:FresnelCylindrical} yields the \ac{PSF} of a perfect lens.
 When using the lens to image light (so light traveling in the reverse direction), the PSF is the response of the imaging system when imaging a point source. 
 Returning back to our problem: if the amount of defocus is $z=f+\delta z$, and $\delta z \ll f$ (the former is on the order of microns while the latter is millimeters), it holds that
 
@@ -340,7 +340,7 @@ Hence, we use a piece of glass with the same thickness and material (quartz glas
 \subsection{Optical Setup}
 
 The optical setup used for the measurements of this section is shown in \cref{fig:TiSandSLMsetup}. The lower right corner of the figure shows the two objectives and the glass plate. 
-The second objective\footnote{Newport M-60X 0.85 NA.} will produce an image onto a linear \ac{CCD} camera\footnote{Point Grey FLEA2 FL2-08S2M.}. 
+The second objective\footnote{Newport M-60X 0.85 NA} will produce an image onto a linear \ac{CCD} camera\footnote{Point Grey FLEA2 FL2-08S2M}. 
 To prevent aberrations as a result of the protective glass on the CCD, we removed the cover glass.
 Because alignment of the Mitutoyo objective with the incident beam, as well as alignment of the two objectives with respect to each other is crucial, both objectives are mounted on 5 axis translation stages.
 
@@ -367,7 +367,7 @@ The exact wavelength range for Rb is not that important, as long as it is far re
 The laser output is brought to the main table using a \ac{PM} optical fiber.
 By rotating the $\lambdaup/2$ plate before the PM fiber and aligning the slow/fast axes of the fiber correctly, a constant linear polarization is obtained at the output of the fiber, which is necessary for the \ac{SLM}.
 Should the polarization out of the fiber be incorrect however, the incorrect component will be filtered out by a polarizing beam splitter cube, such that the beam to the SLM will always be vertically polarized.
-To fully illuminate the SLM, which has dimensions of $\sim 15.4 \times 9.6$ mm (\cref{table:SLMspecs}), a fiber collimator\footnote{\textit{Schäfter + Kirchhoff} 60FC-L-0-M60-10.} with a clear aperture of 17 mm was used ($f=60$ mm, $M^2 < 1.05$, $1/e^2$ beam radius 4.9 mm).
+To fully illuminate the SLM, which has dimensions of $\sim 15.4 \times 9.6$ mm (\cref{table:SLMspecs}), a fiber collimator\footnote{\textit{Schäfter + Kirchhoff} 60FC-L-0-M60-10.} with a clear aperture of 17 mm was used ($f=60$ mm, $M^2 < 1.05$, $1/e^2$ beam radius 4.8 mm).
 The collimation setting was adjusted for 820 nm by adjusting the lens position in the collimator.
 
 The SLM is more elaborately explained in \cref{ch:arrays}, but a feature worth mentioning here is that the SLM acts as one of the lenses of a telescope, such that the beam traveling to the microscope objective is demagnified by a factor $f_2/f_1$.
@@ -583,8 +583,8 @@ In \cref{subsec:AberrationCorrection} we explain how we computed the correspondi
 After correction, we measured a reduced Rayleigh range of $z_R \sim 5.2$ $\mu$m, which is still significantly larger than the result from theory. 
 Subsequently, we applied an extra cylindrical lens to the SLM to correct astigmatism, which is also explained in \cref{subsec:AberrationCorrection}, yielding a fit of $z_R \sim (3.6 \pm 0.5)$ $\mu$m which is much closer to the $\sim 3.0$ $\mu$m theoretically possible.
 This measurement is shown in \cref{fig:AxialZernike}.
-The axial intensity distribution is thus not diffraction-limited, but not far from it. 
-Most likely, this is caused by an aberration, e.g. a slight tilt in the glass plate or another optical component.
+The axial intensity distribution is thus not diffraction-limited, though it is fairly close.
+Most likely, the discrepancy is caused by an aberration, for example a slight tilt in one of the optical components. 
 
 
 

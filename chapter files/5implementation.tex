@@ -1,4 +1,4 @@
-Now, we elaborate on how we trap actual neutral atoms in our tweezer array. 
+In this chapter we explain how we trap actual neutral atoms in our tweezer array. 
 The optical dipole traps are in the order of mK deep and thus need to be loaded with cold atoms from a magneto-optical trap. 
 The construction of the vacuum and atom source of the magneto-optical trap are elaborated upon in \cref{sec:VacuumAtom}.
 The laser system used for the MOT is explained in \cref{sec:LaserSystem} and fluorescence images from the MOT are shown in \cref{sec:MOTresult}.
@@ -57,7 +57,7 @@ When turning on the dispensers, the pressure temporarily jumps the $10^{-9}$ mba
 		\label{fig:Chamber}
 	\end{subfigure}
 	\caption{\textsf{\textbf{a)}} CAD drawing of the vacuum vessel connected to the glass cell on the right. 
-	Around the glass cell, 4 out of 6 MOT beams are shown along with the magnetic field coils and a single microscope objective on the bottom. 
+	Around the glass cell, the MOT beams are shown along with the magnetic field coils and a single microscope objective on the bottom. 
 	CAD drawing by Eddy Rietman.
     \textsf{\textbf{b)}} Picture of the vacuum components: top: ion/getter pump. Right: glass cell. Also connected to the chamber from left to right: valve for turbo pump, triplet of Rb dispensers and pressure gauge.}
 \end{figure}
@@ -80,8 +80,8 @@ For the laser cooling and trapping beams we used a Toptica DLX110 diode laser. T
 \end{figure}
 The laser is shown in \cref{fig:RbLaserSetup}.
 The laser frequency is stabilized using the modulation transfer spectroscopy method \cite{Reijnders2010,McCarron2008}.
-A fraction of power is split off to the section where this method is implemented  (bottom-left, \cref{fig:RbLaserSetup}) after being offset-locked using the lock \ac{AOM} (right) set to $84.5$ MHz\footnote{All frequencies are angular and have an additional $2\pi$ pre-factor.}.
-The majority of power is set to the MOT (glass cell) after first passing the MOT AOM (\cref{fig:RbLaserSetup}, top).
+A fraction of power is split off to the section where this method is implemented  (bottom-left, \cref{fig:RbLaserSetup}) after being offset-locked using the lock \acf{AOM} (right) set to $84.5$ MHz\footnote{All frequencies are angular and have an additional $2\pi$ pre-factor.}.
+The majority of power is sent to the MOT (glass cell) after first passing the MOT AOM (\cref{fig:RbLaserSetup}, top).
 This AOM is set to 80 MHz, which is $2 \times (80 - 84.5) = -9$ MHz from the resonance frequency, which is roughly equivalent to a detuning of $\delta = -1.5 \gamma$.
 We typically use about $80$ mW of power for the MOT beams as measured after the \ac{AOM} in \cref{fig:RbLaserSetup}.
 We have another AOM, which we use to make probe light, the light to induce fluorescence of the atoms when they are trapped in the optical tweezers.
@@ -104,11 +104,11 @@ This is explained in \cref{sec:TweezerImaging}.
 
 Apart from the main cooling and trapping laser, a repump laser is required to re-introduce atoms excited to the wrong excited state into the cooling cycle (\cref{sec:PracticeRb}).
 Contrary to the previous setup, we do not use a separate repump laser. 
-Instead we use an \ac{EOM}.
+Instead we use an \acf{EOM}.
 We drive the EOM\footnote{7Qubig EO-Rb85-3K} with a modulation frequency $\Omega= 2915$ MHz signal provided by a harmonic synthesizer RF\footnote{DS instruments SG6000PRO} providing a signal that has $-6.9$dbm of power.
 This $\Omega$ corresponds to the $F=2 \rightarrow F'=3$ repump frequency in \cref{fig:D2line}.
 This signal is amplified by a 45 dB amplifier\footnote{Minicircuits ZHL-16W-43+}.
-After the EOM, apart from the main 'carrier' laser frequency $\omega_c$, a part of the power is transferred to the first-order sidebands at $\omega = \omega_c \pm 
+After the EOM, apart from the main \lq carrier' laser frequency $\omega_c$, a fraction of the power is transferred to the first-order sidebands at $\omega = \omega_c \pm 
 \Omega$.
 The parameters used by us should translate to $\sim 15$\% of the carrier power in the first sidebands \cite{Rens2014}, which we estimate should yield a sufficient amount of repump power. 
 While both sidebands will have an equal amount of power, we only use one of them for the repump, the other side-band is unused. 
@@ -183,7 +183,8 @@ An additional factor of 2 comes in to account for the atoms occupying the excite
 We typically find a an atom number $\sim 10^5$.
 This is a relatively small number of atoms for a Rb magneto-optical trap.
 Possibly, this is again due to the unbalanced power in the angled beams. In a next iteration of this Rb machine or a Sr equivalent, it would be useful to have 6 independent laser beams instead of 3 retro-reflected ones, though this comes at a cost of requiring more power. 
-If desired, the number could be more accurately estimated using absorption spectroscopy.
+
+If desired, the atom number could be more accurately estimated using absorption spectroscopy.
 From the atom number $N$, we can estimate the peak atom density in the MOT $n_0$ as \cite{Townsend1995}
 
 \begin{equation}
@@ -203,7 +204,7 @@ A polarizing beam splitter cube is added which can be used to add additional las
 At the moment, this cube is unused, but we added it because it will change the optical path length of the SLM-objective path.
 
 The microscope objective is again positioned on the same 5-axis piezo stage as used in \cref{fig:TiSandSLMsetup,fig:ZScanSetup} using a custom aluminum holder.
-To allow for arbitrary positioning of the stage with respect to the glass cell, it is not mounted directly into the vertical breadboard but in a set of base-plates that in turn screw into the table.
+To allow for arbitrary positioning of the stage with respect to the glass cell, it is not mounted directly into the vertical breadboard but on a set of base plates that can slide with respect to the table.
 The holder is shown in \cref{fig:Coils}.
 \begin{figure}
 	\begin{subfigure}{.49\linewidth}
@@ -252,7 +253,7 @@ Lastly, directly measuring the light potentials allows for dynamic adaption of t
 Contrary to the method in \cref{ch:tweezer}, loss of information about the tweezer array is unavoidable because the imaging resolution will be similar to the feature size one is looking at.
 To directly see our dipole potentials, we use a second, identical long-working distance positioned at the opposite end of the glass cell, because the glass cell outer thickness is 30 mm. 
 The microscope objective has a working distance when imaging through 3.5 mm N-BK7 glass of 15.08 mm, but we know that the glass cell has 4 mm thick quartz glass.
-Consequently, there is a slight increase in the optical thickness of $n d_{\text{ex}}$ where $d_{\text{ex}}$ is the physical thickness of the extra glass.
+Consequently, there is a slight increase in the optical thickness of $n d_{\text{ex}}= 0.5$ mm where $d_{\text{ex}}$ is the physical thickness of the extra glass.
 As a result, the paraxial rays focus a distance $d_{\text{ex}}(1-1/n)$ further.
 Thus, in conjunction with this glass thickness $d_{ex} = 0.5/n$ mm we estimate the new working distance to be $15.08 + d_{\text{ex}}(1-1/n) \approx 15.18$ mm.
 Consequently, it should be possible to get a second objective in infinity conjugate configuration, but this requires positioning the objective less than $0.2$ mm from to the glass cell.
@@ -283,7 +284,7 @@ The fraction $\eta$ of fluorescence that can be captured by our imaging system i
     \frac{1}{2}\left(1-\sqrt{1-\frac{\text{NA}^2}{n^2}}\right).
 \end{equation}
 For $\text{NA}=0.5$ and $n=1$ we find $\eta =0.067$. 
-We collect the laser-induced fluorescence using the same microscope objective as used for producing the tweezer, separating it from the tweezer beam using a \ac{DM}\footnote{Thorlabs DMLP805, 1 inch}.
+We collect the laser-induced fluorescence using the same microscope objective as used for producing the tweezer, separating it from the tweezer beam using a \acf{DM}\footnote{Thorlabs DMLP805, 1 inch}.
 This is shown in \cref{fig:GlassCellTop}.
 This dichroic mirror has a 805 cut-off, which is why 820 nm was chosen for the dipole traps.
 The top objective could also be used to collect fluorescence, but it will contain aberration as it cannot be brought close enough. 
@@ -322,7 +323,7 @@ The imaging sequence is shown in \cref{fig:Sequence}.
 \end{figure}
 For now, we do not turn off the magnetic field of the MOT.
 The currents producing the field can be shut off, but the speed at which this can be done is limited by Eddy currents in the aluminum enclosure of the coils. 
-Rik van Herk measured a $1/e$ decay time of 8 ms.
+Rik van Herk measured a $1/e$ decay time of 8 ms when disabling the magnetic field.
 If we switch off the field prior to imaging, we can perform spectroscopy and measure the AC stark shift as a function of probe detuning. 
 With the fields on however, there will also be Zeeman energy shifts in the array according to \cref{eq:DetuningFull}. 
 
@@ -364,7 +365,7 @@ We tried lowering the trap depth of the optical tweezers, which would lower the 
 \end{figure}
 \Cref{fig:fluorescence} would suggest the signal to noise ratio is low. 
 This is confirmed by performing different number of averages.
-In \cref{fig:Averaging} we show the same result averaged 10, 30 and 50 times. 
+In \cref{fig:Averaging} we show the same result without averaging, as well as for performing 10 or 100 averages.
 The signal to noise increases for higher number of averages.
 One cause could be that we are loading a very low number of atoms in our tweezer array, for instance less than 0.5 on average per tweezer site as predicted by the collisional blockade mechanism (\cref{sec:LoadingAtoms}).
 We think this is unlikely however: while estimating the loading rate $R$ is non-trivial, we can use a simple model to see what this loading rate $R$ depends on. 
@@ -386,31 +387,34 @@ The issue of the charge not clearing could be solved by installing a mechanical 
 This would have to be quite a large shutter.
 Alternatively, the light could be focused to an smaller spot using a beam expander, shuttering in the intermediary focus point of the telescope. 
 The latter approach has the advantage that it allows for spatial filtering at the same time: which is to filter out light not originating from the focus of the tweezer. 
+
+If the signal to noise could be improved, it would be possible to study the collisional blockade mechanism and see if it is possible to load single atoms into the tweezer. 
+
  
 
 \begin{figure}
     \centering
 	\begin{subfigure}{.31\linewidth}
 		\centering
-		\includegraphics[height=4.5cm]{figures/10avg.pdf}
+		\includegraphics[height=4.5cm]{figures/2x2fluoresence1avg.pdf}
 		\caption{}
 		\label{fig:10avg}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{.31\linewidth}
 		\centering
-		\includegraphics[height=4.5cm]{figures/30avg.pdf}
+		\includegraphics[height=4.5cm]{figures/2x2fluoresence10avg.pdf}
 		\caption{}
 		\label{fig:30avg}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{.33\linewidth}
 		\centering
-		\includegraphics[height=4.5cm]{figures/50avg.pdf}
+		\includegraphics[height=4.5cm]{figures/2x2fluoresence100avg.pdf}
 		\caption{}
 		\label{fig:50avg}
 	\end{subfigure}
-	\caption{Evolution of the signal to noise with the number of averages for a $2\times 2$ array for \textsf{\textbf{a)}} 10 \textsf{\textbf{b)}} 30 and \textsf{\textbf{c)}} 50 averages.
+	\caption{Evolution of the signal to noise with the number of averages for a $2\times 2$ array for \textsf{\textbf{a)}} no averaging \textsf{\textbf{b)}} 10 averages and \textsf{\textbf{c)}} 100 averages.
     }
     \label{fig:Averaging}
 \end{figure}
